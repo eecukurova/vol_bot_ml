@@ -1,0 +1,30 @@
+{
+  "timeframe": "15m",
+  "atr_period": 10,
+  "key_value": 3,
+  "factor": 1.5,
+  "check_interval": 900,
+  "working_hours": {
+    "start": "08:00",
+    "end": "20:00",
+    "timezone": "Europe/Istanbul"
+  },
+  "telegram": {
+    "bot_token": "8201024131:AAHBrq7n2K9CVCKPzQUAB3CO_uiX9tRL3Po",
+    "chat_id": "-1002650655802"
+  },
+  "symbols": [
+    "THYAO.IS",
+    "TUPRS.IS", 
+    "AKBNK.IS",
+    "ISCTR.IS",
+    "GARAN.IS",
+    "SAHOL.IS",
+    "KRDMD.IS",
+    "PETKM.IS",
+    "VAKBN.IS",
+    "BIMAS.IS",
+    "HALKB.IS",
+    "YKBNK.IS"
+  ]
+}

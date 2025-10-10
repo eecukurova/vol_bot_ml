@@ -1,0 +1,518 @@
+2025-10-07 20:21:40,986 - INFO - 📋 CONFIG_YÜKLENDİ - Dosya: nasdaq_config.json
+2025-10-07 20:21:40,987 - INFO - 📋 TELEGRAM_CHAT_ID: -1003038204085
+2025-10-07 20:21:40,987 - INFO - 📋 TELEGRAM_BOT_TOKEN: 8006591828:AAH4tfgCC...
+2025-10-07 20:21:40,987 - INFO - 📋 TELEGRAM_BASE_URL: https://api.telegram.org/bot8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0/sendMessage
+2025-10-07 20:21:40,987 - INFO - 📋 FINAL_CHAT_ID: -1003038204085
+2025-10-07 20:21:40,987 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-07 20:21:40,987 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-07 20:21:40,987 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-07 20:21:40,987 - INFO - 📈 Timeframe: 15m
+2025-10-07 20:21:40,988 - INFO - 📊 Signal state dosyası bulunamadı, yeni başlatılıyor
+2025-10-07 20:21:40,988 - INFO - 🔄 NASDAQ_CYCLE_START: 20:21:40
+2025-10-07 20:21:40,988 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-07 20:21:42,119 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - KPLTW
+2025-10-07 20:21:42,120 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 20:21:42,120 - INFO - 🔍 SON_SİNYAL_TİPİ: None
+2025-10-07 20:21:42,120 - INFO - 🔍 SON_SİNYAL_ZAMANI: None
+2025-10-07 20:21:42,120 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 20:21:42.119671
+2025-10-07 20:21:42,120 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 20:21:42,121 - INFO - 🔍 YENİ_SİNYAL_Mİ: True
+2025-10-07 20:21:42,121 - INFO - 🎯 YENİ NASDAQ SİNYALİ! KPLTW: BUY
+2025-10-07 20:21:42,121 - INFO - 🎯 TELEGRAM_MESAJI_HAZIRLANIYOR - Chat ID: -1003038204085
+2025-10-07 20:21:42,121 - INFO - 📱 TELEGRAM_GÖNDERME_BAŞLADI - Chat ID: -1003038204085
+2025-10-07 20:21:42,121 - INFO - 📱 TELEGRAM_MESAJ_İÇERİĞİ: 
+🇺🇸 NASDAQ BUY SİNYALİ
+
+📊 Hisse: KPLTW
+💰 Fiyat: $0.01
+📈 EMA(1): $0.01
+🛡️ Trailing Stop: $0.01
+📊 ATR:...
+2025-10-07 20:21:42,122 - INFO - 📱 TELEGRAM_API_URL: https://api.telegram.org/bot8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0/sendMessage
+2025-10-07 20:21:42,122 - INFO - 📱 TELEGRAM_DATA: {'chat_id': '-1003038204085', 'text': '\n🇺🇸 NASDAQ BUY SİNYALİ\n\n📊 Hisse: KPLTW\n💰 Fiyat: $0.01\n📈 EMA(1): $0.01\n🛡️ Trailing Stop: $0.01\n📊 ATR: $0.00\n⏰ Zaman: 20:21:42 UTC\n\n🚀 ALIM SİNYALİ!\n', 'parse_mode': 'HTML'}
+2025-10-07 20:21:42,251 - INFO - 📱 TELEGRAM_RESPONSE_STATUS: 200
+2025-10-07 20:21:42,252 - INFO - 📱 TELEGRAM_RESPONSE_TEXT: {"ok":true,"result":{"message_id":59,"sender_chat":{"id":-1003038204085,"title":"Volensy Nasdaq","type":"channel"},"chat":{"id":-1003038204085,"title":"Volensy Nasdaq","type":"channel"},"date":1759868502,"text":"\ud83c\uddfa\ud83c\uddf8 NASDAQ BUY S\u0130NYAL\u0130\n\n\ud83d\udcca Hisse: KPLTW\n\ud83d\udcb0 Fiyat: $0.01\n\ud83d\udcc8 EMA(1): $0.01\n\ud83d\udee1\ufe0f Trailing Stop: $0.01\n\ud83d\udcca ATR: $0.00\n\u23f0 Zaman: 20:21:42 UTC\n\n\ud83d\ude80 ALIM S\u0130NYAL\u0130!"}}
+2025-10-07 20:21:42,252 - INFO - ✅ NASDAQ Telegram mesajı başarıyla gönderildi - Chat ID: -1003038204085
+2025-10-07 20:21:42,255 - INFO - 💾 SİNYAL_STATE_GÜNCELLENİYOR - KPLTW: BUY
+2025-10-07 20:21:42,257 - INFO - 💾 Signal state kaydedildi: 1 hisse
+2025-10-07 20:21:42,257 - INFO - 💾 SİNYAL_STATE_GÜNCELLENDİ - KPLTW
+2025-10-07 20:21:42,341 - INFO - ✅ MNYWW: HOLD
+2025-10-07 20:21:42,437 - INFO - ✅ EPWK: HOLD
+2025-10-07 20:21:42,565 - INFO - ✅ CYCU: HOLD
+2025-10-07 20:21:42,642 - INFO - ✅ AEVAW: HOLD
+2025-10-07 20:21:42,717 - INFO - ✅ WCT: HOLD
+2025-10-07 20:21:42,781 - INFO - ✅ ZPTA: HOLD
+2025-10-07 20:21:42,854 - INFO - ✅ EGLXF: HOLD
+2025-10-07 20:21:42,933 - INFO - ✅ VEEA: HOLD
+2025-10-07 20:21:43,024 - INFO - ✅ ILLR: HOLD
+2025-10-07 20:21:43,097 - INFO - ✅ SELX: HOLD
+2025-10-07 20:21:43,181 - INFO - ✅ TDTH: HOLD
+2025-10-07 20:21:43,260 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - ZSPC
+2025-10-07 20:21:43,261 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 20:21:43,261 - INFO - 🔍 SON_SİNYAL_TİPİ: None
+2025-10-07 20:21:43,261 - INFO - 🔍 SON_SİNYAL_ZAMANI: None
+2025-10-07 20:21:43,261 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 20:21:43.260740
+2025-10-07 20:21:43,261 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 20:21:43,261 - INFO - 🔍 YENİ_SİNYAL_Mİ: True
+2025-10-07 20:21:43,262 - INFO - 🎯 YENİ NASDAQ SİNYALİ! ZSPC: BUY
+2025-10-07 20:21:43,262 - INFO - 🎯 TELEGRAM_MESAJI_HAZIRLANIYOR - Chat ID: -1003038204085
+2025-10-07 20:21:43,262 - INFO - 📱 TELEGRAM_GÖNDERME_BAŞLADI - Chat ID: -1003038204085
+2025-10-07 20:21:43,262 - INFO - 📱 TELEGRAM_MESAJ_İÇERİĞİ: 
+🇺🇸 NASDAQ BUY SİNYALİ
+
+📊 Hisse: ZSPC
+💰 Fiyat: $1.01
+📈 EMA(1): $1.01
+🛡️ Trailing Stop: $0.97
+📊 ATR: ...
+2025-10-07 20:21:43,262 - INFO - 📱 TELEGRAM_API_URL: https://api.telegram.org/bot8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0/sendMessage
+2025-10-07 20:21:43,262 - INFO - 📱 TELEGRAM_DATA: {'chat_id': '-1003038204085', 'text': '\n🇺🇸 NASDAQ BUY SİNYALİ\n\n📊 Hisse: ZSPC\n💰 Fiyat: $1.01\n📈 EMA(1): $1.01\n🛡️ Trailing Stop: $0.97\n📊 ATR: $0.01\n⏰ Zaman: 20:21:43 UTC\n\n🚀 ALIM SİNYALİ!\n', 'parse_mode': 'HTML'}
+2025-10-07 20:21:43,400 - INFO - 📱 TELEGRAM_RESPONSE_STATUS: 200
+2025-10-07 20:21:43,400 - INFO - 📱 TELEGRAM_RESPONSE_TEXT: {"ok":true,"result":{"message_id":60,"sender_chat":{"id":-1003038204085,"title":"Volensy Nasdaq","type":"channel"},"chat":{"id":-1003038204085,"title":"Volensy Nasdaq","type":"channel"},"date":1759868503,"text":"\ud83c\uddfa\ud83c\uddf8 NASDAQ BUY S\u0130NYAL\u0130\n\n\ud83d\udcca Hisse: ZSPC\n\ud83d\udcb0 Fiyat: $1.01\n\ud83d\udcc8 EMA(1): $1.01\n\ud83d\udee1\ufe0f Trailing Stop: $0.97\n\ud83d\udcca ATR: $0.01\n\u23f0 Zaman: 20:21:43 UTC\n\n\ud83d\ude80 ALIM S\u0130NYAL\u0130!"}}
+2025-10-07 20:21:43,400 - INFO - ✅ NASDAQ Telegram mesajı başarıyla gönderildi - Chat ID: -1003038204085
+2025-10-07 20:21:43,402 - INFO - 💾 SİNYAL_STATE_GÜNCELLENİYOR - ZSPC: BUY
+2025-10-07 20:21:43,403 - INFO - 💾 Signal state kaydedildi: 2 hisse
+2025-10-07 20:21:43,403 - INFO - 💾 SİNYAL_STATE_GÜNCELLENDİ - ZSPC
+2025-10-07 20:21:43,463 - INFO - ✅ CLPS: HOLD
+2025-10-07 20:21:43,463 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-07 20:21:43,463 - INFO - ⏰ Bir sonraki kontrol: 20:30:00 (497 saniye sonra)
+2025-10-07 20:40:03,650 - INFO - 📋 CONFIG_YÜKLENDİ - Dosya: nasdaq_config.json
+2025-10-07 20:40:03,651 - INFO - 📋 TELEGRAM_CHAT_ID: -1003038204085
+2025-10-07 20:40:03,651 - INFO - 📋 TELEGRAM_BOT_TOKEN: 8006591828:AAH4tfgCC...
+2025-10-07 20:40:03,652 - INFO - 📋 TELEGRAM_BASE_URL: https://api.telegram.org/bot8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0/sendMessage
+2025-10-07 20:40:03,653 - INFO - 📋 FINAL_CHAT_ID: -1003038204085
+2025-10-07 20:40:03,653 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-07 20:40:03,653 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-07 20:40:03,653 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-07 20:40:03,653 - INFO - 📈 Timeframe: 15m
+2025-10-07 20:40:03,653 - INFO - 📊 Signal state yüklendi: 2 hisse
+2025-10-07 20:40:03,653 - INFO - 🔄 NASDAQ_CYCLE_START: 20:40:03
+2025-10-07 20:40:03,653 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-07 20:40:04,074 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - KPLTW
+2025-10-07 20:40:04,074 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 20:40:04,074 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 20:40:04,074 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:42.119671
+2025-10-07 20:40:04,074 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 20:40:04.074180
+2025-10-07 20:40:04,074 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 20:40:04,074 - INFO - 🔍 KPLTW: Son sinyal 1102 saniye önce, cooldown: 7200 saniye
+2025-10-07 20:40:04,075 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 1102 > 7200 = False
+2025-10-07 20:40:04,075 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 20:40:04,075 - INFO - ⏭️ KPLTW: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 20:40:04,151 - INFO - ✅ MNYWW: HOLD
+2025-10-07 20:40:04,232 - INFO - ✅ EPWK: HOLD
+2025-10-07 20:40:04,320 - INFO - ✅ CYCU: HOLD
+2025-10-07 20:40:04,465 - INFO - ✅ AEVAW: HOLD
+2025-10-07 20:40:04,594 - INFO - ✅ WCT: HOLD
+2025-10-07 20:40:04,762 - INFO - ✅ ZPTA: HOLD
+2025-10-07 20:40:04,828 - INFO - ✅ EGLXF: HOLD
+2025-10-07 20:40:04,894 - INFO - ✅ VEEA: HOLD
+2025-10-07 20:40:05,012 - INFO - ✅ ILLR: HOLD
+2025-10-07 20:40:05,071 - INFO - ✅ SELX: HOLD
+2025-10-07 20:40:05,176 - INFO - ✅ TDTH: HOLD
+2025-10-07 20:40:05,272 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - ZSPC
+2025-10-07 20:40:05,273 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 20:40:05,273 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 20:40:05,273 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:43.260740
+2025-10-07 20:40:05,273 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 20:40:05.272720
+2025-10-07 20:40:05,273 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 20:40:05,274 - INFO - 🔍 ZSPC: Son sinyal 1102 saniye önce, cooldown: 7200 saniye
+2025-10-07 20:40:05,274 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 1102 > 7200 = False
+2025-10-07 20:40:05,274 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 20:40:05,274 - INFO - ⏭️ ZSPC: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 20:40:05,483 - INFO - ✅ CLPS: HOLD
+2025-10-07 20:40:05,483 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-07 20:40:05,484 - INFO - ⏰ Bir sonraki kontrol: 20:45:00 (295 saniye sonra)
+2025-10-07 20:45:00,001 - INFO - 🔄 NASDAQ_CYCLE_START: 20:45:00
+2025-10-07 20:45:00,001 - INFO - ⏰ 15 dakikalık mum kapanışı için 60 saniye bekleniyor...
+2025-10-07 20:46:00,001 - INFO - 🔄 NASDAQ_CYCLE_CONTINUE: 20:46:00
+2025-10-07 20:46:00,001 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-07 20:46:00,101 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - KPLTW
+2025-10-07 20:46:00,101 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 20:46:00,101 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 20:46:00,101 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:42.119671
+2025-10-07 20:46:00,101 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 20:46:00.100974
+2025-10-07 20:46:00,101 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 20:46:00,101 - INFO - 🔍 KPLTW: Son sinyal 1458 saniye önce, cooldown: 7200 saniye
+2025-10-07 20:46:00,101 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 1458 > 7200 = False
+2025-10-07 20:46:00,101 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 20:46:00,101 - INFO - ⏭️ KPLTW: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 20:46:00,212 - INFO - ✅ MNYWW: HOLD
+2025-10-07 20:46:00,293 - INFO - ✅ EPWK: HOLD
+2025-10-07 20:46:00,373 - INFO - ✅ CYCU: HOLD
+2025-10-07 20:46:00,435 - INFO - ✅ AEVAW: HOLD
+2025-10-07 20:46:00,520 - INFO - ✅ WCT: HOLD
+2025-10-07 20:46:00,589 - INFO - ✅ ZPTA: HOLD
+2025-10-07 20:46:00,663 - INFO - ✅ EGLXF: HOLD
+2025-10-07 20:46:00,734 - INFO - ✅ VEEA: HOLD
+2025-10-07 20:46:00,823 - INFO - ✅ ILLR: HOLD
+2025-10-07 20:46:00,920 - INFO - ✅ SELX: HOLD
+2025-10-07 20:46:01,001 - INFO - ✅ TDTH: HOLD
+2025-10-07 20:46:01,082 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - ZSPC
+2025-10-07 20:46:01,083 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 20:46:01,083 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 20:46:01,083 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:43.260740
+2025-10-07 20:46:01,083 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 20:46:01.082068
+2025-10-07 20:46:01,083 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 20:46:01,083 - INFO - 🔍 ZSPC: Son sinyal 1458 saniye önce, cooldown: 7200 saniye
+2025-10-07 20:46:01,084 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 1458 > 7200 = False
+2025-10-07 20:46:01,084 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 20:46:01,084 - INFO - ⏭️ ZSPC: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 20:46:01,151 - INFO - ✅ CLPS: HOLD
+2025-10-07 20:46:01,152 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-07 20:46:01,152 - INFO - ⏰ Bir sonraki kontrol: 21:00:00 (839 saniye sonra)
+2025-10-07 20:49:24,073 - INFO - 📋 CONFIG_YÜKLENDİ - Dosya: nasdaq_config.json
+2025-10-07 20:49:24,074 - INFO - 📋 TELEGRAM_CHAT_ID: -1003038204085
+2025-10-07 20:49:24,074 - INFO - 📋 TELEGRAM_BOT_TOKEN: 8006591828:AAH4tfgCC...
+2025-10-07 20:49:24,076 - INFO - 📋 TELEGRAM_BASE_URL: https://api.telegram.org/bot8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0/sendMessage
+2025-10-07 20:49:24,076 - INFO - 📋 FINAL_CHAT_ID: -1003038204085
+2025-10-07 20:49:24,076 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-07 20:49:24,076 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-07 20:49:24,076 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-07 20:49:24,076 - INFO - 📈 Timeframe: 15m
+2025-10-07 20:49:24,076 - INFO - 📊 Signal state yüklendi: 2 hisse
+2025-10-07 20:49:24,076 - INFO - 🔄 NASDAQ_CYCLE_START: 20:49:24
+2025-10-07 20:49:24,076 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-07 20:49:24,333 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - KPLTW
+2025-10-07 20:49:24,333 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 20:49:24,334 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 20:49:24,334 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:42.119671
+2025-10-07 20:49:24,334 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 20:49:24.333361
+2025-10-07 20:49:24,334 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 20:49:24,334 - INFO - 🔍 KPLTW: Son sinyal 1662 saniye önce, cooldown: 7200 saniye
+2025-10-07 20:49:24,334 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 1662 > 7200 = False
+2025-10-07 20:49:24,334 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 20:49:24,334 - INFO - ⏭️ KPLTW: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 20:49:24,400 - INFO - ✅ MNYWW: HOLD
+2025-10-07 20:49:24,486 - INFO - ✅ EPWK: HOLD
+2025-10-07 20:49:24,592 - INFO - ✅ CYCU: HOLD
+2025-10-07 20:49:24,712 - INFO - ✅ AEVAW: HOLD
+2025-10-07 20:49:24,819 - INFO - ✅ WCT: HOLD
+2025-10-07 20:49:24,898 - INFO - ✅ ZPTA: HOLD
+2025-10-07 20:49:24,976 - INFO - ✅ EGLXF: HOLD
+2025-10-07 20:49:25,062 - INFO - ✅ VEEA: HOLD
+2025-10-07 20:49:25,153 - INFO - ✅ ILLR: HOLD
+2025-10-07 20:49:25,215 - INFO - ✅ SELX: HOLD
+2025-10-07 20:49:25,309 - INFO - ✅ TDTH: HOLD
+2025-10-07 20:49:25,443 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - ZSPC
+2025-10-07 20:49:25,443 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 20:49:25,443 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 20:49:25,443 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:43.260740
+2025-10-07 20:49:25,443 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 20:49:25.443137
+2025-10-07 20:49:25,444 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 20:49:25,444 - INFO - 🔍 ZSPC: Son sinyal 1662 saniye önce, cooldown: 7200 saniye
+2025-10-07 20:49:25,444 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 1662 > 7200 = False
+2025-10-07 20:49:25,444 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 20:49:25,444 - INFO - ⏭️ ZSPC: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 20:49:25,507 - INFO - ✅ CLPS: HOLD
+2025-10-07 20:49:25,508 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-07 20:49:25,508 - INFO - ⏰ Bir sonraki kontrol: 21:00:00 (634 saniye sonra)
+2025-10-07 21:00:00,001 - INFO - 🔄 NASDAQ_CYCLE_START: 21:00:00
+2025-10-07 21:00:00,001 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-07 21:00:00,099 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - KPLTW
+2025-10-07 21:00:00,100 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 21:00:00,100 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 21:00:00,100 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:42.119671
+2025-10-07 21:00:00,100 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 21:00:00.099735
+2025-10-07 21:00:00,100 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 21:00:00,100 - INFO - 🔍 KPLTW: Son sinyal 2298 saniye önce, cooldown: 7200 saniye
+2025-10-07 21:00:00,100 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 2298 > 7200 = False
+2025-10-07 21:00:00,100 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 21:00:00,100 - INFO - ⏭️ KPLTW: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 21:00:00,171 - INFO - ✅ MNYWW: HOLD
+2025-10-07 21:00:00,269 - INFO - ✅ EPWK: HOLD
+2025-10-07 21:00:00,357 - INFO - ✅ CYCU: HOLD
+2025-10-07 21:00:00,448 - INFO - ✅ AEVAW: HOLD
+2025-10-07 21:00:00,529 - INFO - ✅ WCT: HOLD
+2025-10-07 21:00:00,644 - INFO - ✅ ZPTA: HOLD
+2025-10-07 21:00:00,707 - INFO - ✅ EGLXF: HOLD
+2025-10-07 21:00:00,776 - INFO - ✅ VEEA: HOLD
+2025-10-07 21:00:00,845 - INFO - ✅ ILLR: HOLD
+2025-10-07 21:00:00,902 - INFO - ✅ SELX: HOLD
+2025-10-07 21:00:00,974 - INFO - ✅ TDTH: HOLD
+2025-10-07 21:00:01,060 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - ZSPC
+2025-10-07 21:00:01,061 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 21:00:01,061 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 21:00:01,061 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:43.260740
+2025-10-07 21:00:01,061 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 21:00:01.060325
+2025-10-07 21:00:01,061 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 21:00:01,061 - INFO - 🔍 ZSPC: Son sinyal 2298 saniye önce, cooldown: 7200 saniye
+2025-10-07 21:00:01,061 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 2298 > 7200 = False
+2025-10-07 21:00:01,061 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 21:00:01,061 - INFO - ⏭️ ZSPC: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 21:00:01,124 - INFO - ✅ CLPS: HOLD
+2025-10-07 21:00:01,124 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-07 21:00:01,125 - INFO - ⏰ Bir sonraki kontrol: 21:15:00 (899 saniye sonra)
+2025-10-07 21:15:00,001 - INFO - 🔄 NASDAQ_CYCLE_START: 21:15:00
+2025-10-07 21:15:00,001 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-07 21:15:00,094 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - KPLTW
+2025-10-07 21:15:00,094 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 21:15:00,095 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 21:15:00,095 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:42.119671
+2025-10-07 21:15:00,095 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 21:15:00.094446
+2025-10-07 21:15:00,095 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 21:15:00,095 - INFO - 🔍 KPLTW: Son sinyal 3198 saniye önce, cooldown: 7200 saniye
+2025-10-07 21:15:00,095 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 3198 > 7200 = False
+2025-10-07 21:15:00,095 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 21:15:00,095 - INFO - ⏭️ KPLTW: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 21:15:00,176 - INFO - ✅ MNYWW: HOLD
+2025-10-07 21:15:00,270 - INFO - ✅ EPWK: HOLD
+2025-10-07 21:15:00,364 - INFO - ✅ CYCU: HOLD
+2025-10-07 21:15:00,443 - INFO - ✅ AEVAW: HOLD
+2025-10-07 21:15:00,564 - INFO - ✅ WCT: HOLD
+2025-10-07 21:15:00,632 - INFO - ✅ ZPTA: HOLD
+2025-10-07 21:15:00,699 - INFO - ✅ EGLXF: HOLD
+2025-10-07 21:15:00,783 - INFO - ✅ VEEA: HOLD
+2025-10-07 21:15:00,876 - INFO - ✅ ILLR: HOLD
+2025-10-07 21:15:00,961 - INFO - ✅ SELX: HOLD
+2025-10-07 21:15:01,038 - INFO - ✅ TDTH: HOLD
+2025-10-07 21:15:01,132 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - ZSPC
+2025-10-07 21:15:01,133 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-07 21:15:01,133 - INFO - 🔍 SON_SİNYAL_TİPİ: BUY
+2025-10-07 21:15:01,133 - INFO - 🔍 SON_SİNYAL_ZAMANI: 2025-10-07 20:21:43.260740
+2025-10-07 21:15:01,133 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-07 21:15:01.132547
+2025-10-07 21:15:01,133 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-07 21:15:01,133 - INFO - 🔍 ZSPC: Son sinyal 3198 saniye önce, cooldown: 7200 saniye
+2025-10-07 21:15:01,133 - INFO - 🔍 ZAMAN_FARKI_KONTROLÜ: 3198 > 7200 = False
+2025-10-07 21:15:01,133 - INFO - 🔍 YENİ_SİNYAL_Mİ: False
+2025-10-07 21:15:01,133 - INFO - ⏭️ ZSPC: Aynı sinyal devam ediyor, mesaj gönderilmiyor
+2025-10-07 21:15:01,230 - INFO - ✅ CLPS: HOLD
+2025-10-07 21:15:01,230 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-07 21:15:01,230 - INFO - ⏰ Bir sonraki kontrol: 21:30:00 (899 saniye sonra)
+2025-10-08 07:03:38,759 - INFO - 📋 CONFIG_YÜKLENDİ - Dosya: nasdaq_config.json
+2025-10-08 07:03:38,760 - INFO - 📋 TELEGRAM_CHAT_ID: -1003038204085
+2025-10-08 07:03:38,761 - INFO - 📋 TELEGRAM_BOT_TOKEN: 8006591828:AAH4tfgCC...
+2025-10-08 07:03:38,762 - INFO - 📋 TELEGRAM_BASE_URL: https://api.telegram.org/bot8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0/sendMessage
+2025-10-08 07:03:38,762 - INFO - 📋 FINAL_CHAT_ID: -1003038204085
+2025-10-08 07:03:38,762 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 07:03:38,762 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-08 07:03:38,763 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-08 07:03:38,763 - INFO - 📈 Timeframe: 15m
+2025-10-08 07:03:38,764 - INFO - 📊 Signal state yüklendi: 2 hisse
+2025-10-08 07:03:38,764 - INFO - 🔄 NASDAQ_CYCLE_START: 07:03:38
+2025-10-08 07:03:38,764 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 07:18:38,764 - INFO - 🔄 NASDAQ_CYCLE_START: 07:18:38
+2025-10-08 07:18:38,765 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 07:33:38,765 - INFO - 🔄 NASDAQ_CYCLE_START: 07:33:38
+2025-10-08 07:33:38,766 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 07:48:38,766 - INFO - 🔄 NASDAQ_CYCLE_START: 07:48:38
+2025-10-08 07:48:38,767 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 08:03:38,767 - INFO - 🔄 NASDAQ_CYCLE_START: 08:03:38
+2025-10-08 08:03:38,767 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 08:18:38,768 - INFO - 🔄 NASDAQ_CYCLE_START: 08:18:38
+2025-10-08 08:18:38,768 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 08:33:38,769 - INFO - 🔄 NASDAQ_CYCLE_START: 08:33:38
+2025-10-08 08:33:38,769 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 08:48:38,769 - INFO - 🔄 NASDAQ_CYCLE_START: 08:48:38
+2025-10-08 08:48:38,770 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 09:03:38,770 - INFO - 🔄 NASDAQ_CYCLE_START: 09:03:38
+2025-10-08 09:03:38,770 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 09:18:38,771 - INFO - 🔄 NASDAQ_CYCLE_START: 09:18:38
+2025-10-08 09:18:38,772 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 09:33:38,772 - INFO - 🔄 NASDAQ_CYCLE_START: 09:33:38
+2025-10-08 09:33:38,773 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 09:48:38,774 - INFO - 🔄 NASDAQ_CYCLE_START: 09:48:38
+2025-10-08 09:48:38,774 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 10:03:38,774 - INFO - 🔄 NASDAQ_CYCLE_START: 10:03:38
+2025-10-08 10:03:38,775 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 10:18:38,775 - INFO - 🔄 NASDAQ_CYCLE_START: 10:18:38
+2025-10-08 10:18:38,776 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 10:33:38,776 - INFO - 🔄 NASDAQ_CYCLE_START: 10:33:38
+2025-10-08 10:33:38,776 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 10:48:38,777 - INFO - 🔄 NASDAQ_CYCLE_START: 10:48:38
+2025-10-08 10:48:38,777 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 11:03:38,778 - INFO - 🔄 NASDAQ_CYCLE_START: 11:03:38
+2025-10-08 11:03:38,778 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 11:18:38,778 - INFO - 🔄 NASDAQ_CYCLE_START: 11:18:38
+2025-10-08 11:18:38,779 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 11:33:38,779 - INFO - 🔄 NASDAQ_CYCLE_START: 11:33:38
+2025-10-08 11:33:38,780 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 11:48:38,780 - INFO - 🔄 NASDAQ_CYCLE_START: 11:48:38
+2025-10-08 11:48:38,780 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 12:03:38,781 - INFO - 🔄 NASDAQ_CYCLE_START: 12:03:38
+2025-10-08 12:03:38,781 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 12:18:38,782 - INFO - 🔄 NASDAQ_CYCLE_START: 12:18:38
+2025-10-08 12:18:38,782 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 12:33:38,784 - INFO - 🔄 NASDAQ_CYCLE_START: 12:33:38
+2025-10-08 12:33:38,784 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 12:48:38,785 - INFO - 🔄 NASDAQ_CYCLE_START: 12:48:38
+2025-10-08 12:48:38,785 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 13:03:38,785 - INFO - 🔄 NASDAQ_CYCLE_START: 13:03:38
+2025-10-08 13:03:38,786 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 13:18:38,786 - INFO - 🔄 NASDAQ_CYCLE_START: 13:18:38
+2025-10-08 13:18:38,787 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 13:33:38,787 - INFO - 🔄 NASDAQ_CYCLE_START: 13:33:38
+2025-10-08 13:33:38,788 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 13:48:38,788 - INFO - 🔄 NASDAQ_CYCLE_START: 13:48:38
+2025-10-08 13:48:38,788 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 14:03:38,789 - INFO - 🔄 NASDAQ_CYCLE_START: 14:03:38
+2025-10-08 14:03:38,789 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 14:18:38,790 - INFO - 🔄 NASDAQ_CYCLE_START: 14:18:38
+2025-10-08 14:18:38,790 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 14:33:38,791 - INFO - 🔄 NASDAQ_CYCLE_START: 14:33:38
+2025-10-08 14:33:38,791 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 14:48:38,791 - INFO - 🔄 NASDAQ_CYCLE_START: 14:48:38
+2025-10-08 14:48:38,792 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 15:03:38,792 - INFO - 🔄 NASDAQ_CYCLE_START: 15:03:38
+2025-10-08 15:03:38,793 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 15:18:38,793 - INFO - 🔄 NASDAQ_CYCLE_START: 15:18:38
+2025-10-08 15:18:38,793 - INFO - 😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...
+2025-10-08 15:33:38,794 - INFO - 🔄 NASDAQ_CYCLE_START: 15:33:38
+2025-10-08 15:33:38,794 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-08 15:33:39,060 - INFO - ✅ KPLTW: HOLD
+2025-10-08 15:33:39,166 - INFO - ✅ MNYWW: HOLD
+2025-10-08 15:33:39,251 - INFO - ✅ EPWK: HOLD
+2025-10-08 15:33:39,406 - INFO - ✅ CYCU: HOLD
+2025-10-08 15:33:39,511 - INFO - ✅ AEVAW: HOLD
+2025-10-08 15:33:39,602 - INFO - ✅ WCT: HOLD
+2025-10-08 15:33:39,668 - INFO - ✅ ZPTA: HOLD
+2025-10-08 15:33:39,749 - ERROR - ❌ EGLXF için sinyal kontrol hatası: single positional indexer is out-of-bounds
+2025-10-08 15:33:39,850 - INFO - ✅ VEEA: HOLD
+2025-10-08 15:33:39,950 - INFO - ✅ ILLR: HOLD
+2025-10-08 15:33:40,028 - INFO - ✅ SELX: HOLD
+2025-10-08 15:33:40,101 - INFO - ✅ TDTH: HOLD
+2025-10-08 15:33:40,183 - INFO - ✅ ZSPC: HOLD
+2025-10-08 15:33:40,246 - INFO - ✅ CLPS: HOLD
+2025-10-08 15:33:40,247 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-08 15:33:40,247 - INFO - ⏰ Bir sonraki kontrol: 15:45:00 (680 saniye sonra)
+2025-10-08 15:45:00,001 - INFO - 🔄 NASDAQ_CYCLE_START: 15:45:00
+2025-10-08 15:45:00,002 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-08 15:45:00,132 - INFO - ✅ KPLTW: HOLD
+2025-10-08 15:45:00,194 - INFO - ✅ MNYWW: HOLD
+2025-10-08 15:45:00,270 - INFO - ✅ EPWK: HOLD
+2025-10-08 15:45:00,402 - INFO - ✅ CYCU: HOLD
+2025-10-08 15:45:00,474 - INFO - ✅ AEVAW: HOLD
+2025-10-08 15:45:00,579 - INFO - ✅ WCT: HOLD
+2025-10-08 15:45:00,650 - INFO - ✅ ZPTA: HOLD
+2025-10-08 15:45:00,732 - ERROR - ❌ EGLXF için sinyal kontrol hatası: single positional indexer is out-of-bounds
+2025-10-08 15:45:00,853 - INFO - ✅ VEEA: HOLD
+2025-10-08 15:45:00,955 - INFO - ✅ ILLR: HOLD
+2025-10-08 15:45:01,076 - INFO - ✅ SELX: HOLD
+2025-10-08 15:45:01,198 - INFO - ✅ TDTH: HOLD
+2025-10-08 15:45:01,298 - INFO - ✅ ZSPC: HOLD
+2025-10-08 15:45:01,366 - INFO - ✅ CLPS: HOLD
+2025-10-08 15:45:01,366 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-08 15:45:01,367 - INFO - ⏰ Bir sonraki kontrol: 16:00:00 (899 saniye sonra)
+2025-10-08 16:00:00,000 - INFO - 🔄 NASDAQ_CYCLE_START: 16:00:00
+2025-10-08 16:00:00,000 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-08 16:00:00,227 - INFO - ✅ KPLTW: HOLD
+2025-10-08 16:00:00,327 - INFO - ✅ MNYWW: HOLD
+2025-10-08 16:00:00,456 - INFO - ✅ EPWK: HOLD
+2025-10-08 16:00:00,580 - INFO - ✅ CYCU: HOLD
+2025-10-08 16:00:00,735 - INFO - ✅ AEVAW: HOLD
+2025-10-08 16:00:00,835 - INFO - ✅ WCT: HOLD
+2025-10-08 16:00:00,932 - INFO - ✅ ZPTA: HOLD
+2025-10-08 16:00:00,997 - ERROR - ❌ EGLXF için sinyal kontrol hatası: single positional indexer is out-of-bounds
+2025-10-08 16:00:01,107 - INFO - 🔍 SİNYAL_STATE_KONTROLÜ - VEEA
+2025-10-08 16:00:01,107 - INFO - 🔍 MEVCUT_SİNYAL: BUY
+2025-10-08 16:00:01,108 - INFO - 🔍 SON_SİNYAL_TİPİ: None
+2025-10-08 16:00:01,108 - INFO - 🔍 SON_SİNYAL_ZAMANI: None
+2025-10-08 16:00:01,108 - INFO - 🔍 MEVCUT_ZAMAN: 2025-10-08 16:00:01.106996
+2025-10-08 16:00:01,108 - INFO - 🔍 COOLDOWN_SÜRESİ: 7200 saniye
+2025-10-08 16:00:01,108 - INFO - 🔍 YENİ_SİNYAL_Mİ: True
+2025-10-08 16:00:01,108 - INFO - 🎯 YENİ NASDAQ SİNYALİ! VEEA: BUY
+2025-10-08 16:00:01,108 - INFO - 🎯 TELEGRAM_MESAJI_HAZIRLANIYOR - Chat ID: -1003038204085
+2025-10-08 16:00:01,109 - INFO - 📱 TELEGRAM_GÖNDERME_BAŞLADI - Chat ID: -1003038204085
+2025-10-08 16:00:01,109 - INFO - 📱 TELEGRAM_MESAJ_İÇERİĞİ: 
+🇺🇸 NASDAQ BUY SİNYALİ
+
+📊 Hisse: VEEA
+💰 Fiyat: $0.81
+📈 EMA(1): $0.81
+🛡️ Trailing Stop: $0.76
+📊 ATR: ...
+2025-10-08 16:00:01,109 - INFO - 📱 TELEGRAM_API_URL: https://api.telegram.org/bot8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0/sendMessage
+2025-10-08 16:00:01,109 - INFO - 📱 TELEGRAM_DATA: {'chat_id': '-1003038204085', 'text': '\n🇺🇸 NASDAQ BUY SİNYALİ\n\n📊 Hisse: VEEA\n💰 Fiyat: $0.81\n📈 EMA(1): $0.81\n🛡️ Trailing Stop: $0.76\n📊 ATR: $0.02\n⏰ Zaman: 16:00:01 UTC\n\n🚀 ALIM SİNYALİ!\n', 'parse_mode': 'HTML'}
+2025-10-08 16:00:01,158 - INFO - 📱 TELEGRAM_RESPONSE_STATUS: 403
+2025-10-08 16:00:01,159 - INFO - 📱 TELEGRAM_RESPONSE_TEXT: {"ok":false,"error_code":403,"description":"Forbidden: bot is not a member of the channel chat"}
+2025-10-08 16:00:01,159 - ERROR - ❌ NASDAQ Telegram hatası: 403 - {"ok":false,"error_code":403,"description":"Forbidden: bot is not a member of the channel chat"}
+2025-10-08 16:00:01,161 - INFO - 💾 SİNYAL_STATE_GÜNCELLENİYOR - VEEA: BUY
+2025-10-08 16:00:01,163 - INFO - 💾 Signal state kaydedildi: 3 hisse
+2025-10-08 16:00:01,163 - INFO - 💾 SİNYAL_STATE_GÜNCELLENDİ - VEEA
+2025-10-08 16:00:01,300 - INFO - ✅ ILLR: HOLD
+2025-10-08 16:00:01,460 - INFO - ✅ SELX: HOLD
+2025-10-08 16:00:01,599 - INFO - ✅ TDTH: HOLD
+2025-10-08 16:00:01,799 - INFO - ✅ ZSPC: HOLD
+2025-10-08 16:00:01,890 - INFO - ✅ CLPS: HOLD
+2025-10-08 16:00:01,890 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-08 16:00:01,891 - INFO - ⏰ Bir sonraki kontrol: 16:15:00 (898 saniye sonra)
+2025-10-08 16:01:42,039 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:01:42,039 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-08 16:01:42,039 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-08 16:01:42,039 - INFO - 📈 Timeframe: 15m
+2025-10-08 16:01:42,039 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:01:42,039 - INFO - 🔄 NASDAQ_CYCLE_START: 16:01:42
+2025-10-08 16:01:42,040 - INFO - ⏰ 15 dakikalık mum kapanışı için 60 saniye bekleniyor...
+2025-10-08 16:02:32,079 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:02:32,079 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-08 16:02:32,080 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-08 16:02:32,080 - INFO - 📈 Timeframe: 15m
+2025-10-08 16:02:32,080 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:02:32,080 - INFO - 🔄 NASDAQ_CYCLE_START: 16:02:32
+2025-10-08 16:02:32,080 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-08 16:02:32,372 - WARNING - ⚠️ KPLTW için yeterli veri yok (24 mum)
+2025-10-08 16:02:32,499 - WARNING - ⚠️ MNYWW için yeterli veri yok (18 mum)
+2025-10-08 16:02:32,813 - WARNING - ⚠️ AEVAW için yeterli veri yok (29 mum)
+2025-10-08 16:02:32,973 - WARNING - ⚠️ ZPTA için yeterli veri yok (17 mum)
+2025-10-08 16:02:33,032 - WARNING - ⚠️ EGLXF için yeterli veri yok (1 mum)
+2025-10-08 16:02:33,247 - WARNING - ⚠️ SELX için yeterli veri yok (34 mum)
+2025-10-08 16:02:33,519 - WARNING - ⚠️ CLPS için yeterli veri yok (26 mum)
+2025-10-08 16:02:33,520 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-08 16:02:33,520 - INFO - ⏰ Bir sonraki kontrol: 16:15:00 (746 saniye sonra)
+2025-10-08 16:05:58,820 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:05:58,821 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-08 16:05:58,821 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-08 16:05:58,821 - INFO - 📈 Timeframe: 15m
+2025-10-08 16:06:04,230 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:06:04,230 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-08 16:06:04,231 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-08 16:06:04,231 - INFO - 📈 Timeframe: 15m
+2025-10-08 16:06:04,231 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 14 hisse
+2025-10-08 16:06:04,479 - WARNING - ⚠️ KPLTW için yeterli veri yok (24 mum)
+2025-10-08 16:06:04,544 - WARNING - ⚠️ MNYWW için yeterli veri yok (18 mum)
+2025-10-08 16:06:04,824 - WARNING - ⚠️ AEVAW için yeterli veri yok (29 mum)
+2025-10-08 16:06:04,956 - WARNING - ⚠️ ZPTA için yeterli veri yok (17 mum)
+2025-10-08 16:06:05,025 - WARNING - ⚠️ EGLXF için yeterli veri yok (1 mum)
+2025-10-08 16:06:05,279 - WARNING - ⚠️ SELX için yeterli veri yok (34 mum)
+2025-10-08 16:06:05,667 - WARNING - ⚠️ CLPS için yeterli veri yok (26 mum)
+2025-10-08 16:06:05,668 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-08 16:06:18,231 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:06:18,232 - INFO - 📊 14 teknoloji hissesi takip ediliyor
+2025-10-08 16:06:18,232 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-08 16:06:18,232 - INFO - 📈 Timeframe: 15m
+2025-10-08 16:08:19,575 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:08:19,576 - INFO - 📊 13 teknoloji hissesi takip ediliyor
+2025-10-08 16:08:19,576 - INFO - ⏰ Çalışma saatleri: 15:30-22:00 UTC
+2025-10-08 16:08:19,576 - INFO - 📈 Timeframe: 15m
+2025-10-08 16:08:19,577 - INFO - 🚀 NASDAQ Signal Generator başlatıldı
+2025-10-08 16:08:19,577 - INFO - 🔄 NASDAQ_CYCLE_START: 16:08:19
+2025-10-08 16:08:19,578 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 13 hisse
+2025-10-08 16:08:19,826 - WARNING - ⚠️ KPLTW için yeterli veri yok (24 mum)
+2025-10-08 16:08:19,894 - WARNING - ⚠️ MNYWW için yeterli veri yok (18 mum)
+2025-10-08 16:08:20,129 - WARNING - ⚠️ AEVAW için yeterli veri yok (29 mum)
+2025-10-08 16:08:20,355 - INFO - 🎯 YYAI SELL sinyali!
+2025-10-08 16:08:20,513 - INFO - 📱 NASDAQ Telegram mesajı gönderildi
+2025-10-08 16:08:20,674 - WARNING - ⚠️ ZPTA için yeterli veri yok (17 mum)
+2025-10-08 16:08:20,726 - WARNING - ⚠️ EGLXF için yeterli veri yok (1 mum)
+2025-10-08 16:08:20,990 - WARNING - ⚠️ SELX için yeterli veri yok (34 mum)
+2025-10-08 16:08:21,089 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-08 16:08:21,090 - INFO - ⏰ Bir sonraki kontrol: 16:15:00 (399 saniye sonra)
+2025-10-08 16:15:00,001 - INFO - 🔄 NASDAQ_CYCLE_START: 16:15:00
+2025-10-08 16:15:00,002 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 13 hisse
+2025-10-08 16:15:00,172 - WARNING - ⚠️ KPLTW için yeterli veri yok (24 mum)
+2025-10-08 16:15:00,273 - WARNING - ⚠️ MNYWW için yeterli veri yok (18 mum)
+2025-10-08 16:15:00,565 - WARNING - ⚠️ AEVAW için yeterli veri yok (29 mum)
+2025-10-08 16:15:00,783 - WARNING - ⚠️ ZPTA için yeterli veri yok (17 mum)
+2025-10-08 16:15:00,871 - WARNING - ⚠️ EGLXF için yeterli veri yok (1 mum)
+2025-10-08 16:15:01,139 - WARNING - ⚠️ SELX için yeterli veri yok (34 mum)
+2025-10-08 16:15:01,242 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-08 16:15:01,243 - INFO - ⏰ Bir sonraki kontrol: 16:30:00 (899 saniye sonra)
+2025-10-08 16:30:00,001 - INFO - 🔄 NASDAQ_CYCLE_START: 16:30:00
+2025-10-08 16:30:00,002 - INFO - 🔍 NASDAQ sinyal kontrolü başlatılıyor - 13 hisse
+2025-10-08 16:30:00,143 - WARNING - ⚠️ KPLTW için yeterli veri yok (24 mum)
+2025-10-08 16:30:00,215 - WARNING - ⚠️ MNYWW için yeterli veri yok (18 mum)
+2025-10-08 16:30:00,495 - WARNING - ⚠️ AEVAW için yeterli veri yok (29 mum)
+2025-10-08 16:30:00,766 - WARNING - ⚠️ ZPTA için yeterli veri yok (17 mum)
+2025-10-08 16:30:00,848 - WARNING - ⚠️ EGLXF için yeterli veri yok (1 mum)
+2025-10-08 16:30:01,182 - WARNING - ⚠️ SELX için yeterli veri yok (34 mum)
+2025-10-08 16:30:01,272 - INFO - ✅ NASDAQ sinyal kontrolü tamamlandı
+2025-10-08 16:30:01,274 - INFO - ⏰ Bir sonraki kontrol: 16:45:00 (899 saniye sonra)

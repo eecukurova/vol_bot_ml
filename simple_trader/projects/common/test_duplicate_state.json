@@ -1,0 +1,32 @@
+{
+  "orders": {
+    "vlsy-entry-478ce1501430162e": {
+      "status": "SENT",
+      "symbol": "BTC/USDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001,
+      "price": null,
+      "params": {
+        "newClientOrderId": "vlsy-entry-478ce1501430162e"
+      },
+      "ts": 1759819697848
+    },
+    "vlsy-sl-716ca223b99f3f79": {
+      "status": "SENT",
+      "symbol": "BTC/USDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 50000,
+      "params": {
+        "newClientOrderId": "vlsy-sl-716ca223b99f3f79",
+        "stopPrice": 50000,
+        "reduceOnly": true,
+        "closePosition": true,
+        "workingType": "MARK_PRICE"
+      },
+      "ts": 1759819697849
+    }
+  }
+}

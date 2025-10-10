@@ -1,0 +1,416 @@
+"""
+Grid search optimization module for ATR + SuperTrend strategy.
+
+This module implements comprehensive grid search optimization across multiple
+symbols, timeframes, and parameter combinations.
+"""
+
+import pandas as pd
+import numpy as np
+from typing import Dict, Any, List, Optional, Tuple, Callable
+import logging
+from datetime import datetime, timedelta
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from tqdm import tqdm
+import json
+import os
+from pathlib import Path
+
+from config import get_config, get_param_combinations
+from data.loader import create_data_loader
+from strategy.atr_st_core import create_strategy, validate_strategy_params
+from strategy.backtester import run_backtest
+
+logger = logging.getLogger(__name__)
+
+
+class GridSearchOptimizer:
+    """
+    Grid search optimizer for ATR + SuperTrend strategy.
+    """
+    
+    def __init__(self, cache_dir: Optional[str] = None, use_cache: bool = True):
+        """
+        Initialize grid search optimizer.
+        
+        Args:
+            cache_dir: Cache directory path
+            use_cache: Whether to use caching
+        """
+        self.config = get_config()
+        self.data_loader = create_data_loader(cache_dir, use_cache)
+        self.results = []
+        
+    def optimize_single_combination(self, symbol: str, timeframe: str, 
+                                 params: Dict[str, Any], data: pd.DataFrame) -> Dict[str, Any]:
+        """
+        Optimize a single parameter combination.
+        
+        Args:
+            symbol: Trading pair symbol
+            timeframe: Timeframe
+            params: Parameter combination
+            data: OHLCV data
+            
+        Returns:
+            Optimization result
+        """
+        try:
+            # Validate parameters
+            if not validate_strategy_params(params):
+                return {
+                    'symbol': symbol,
+                    'timeframe': timeframe,
+                    'params': params,
+                    'error': 'Invalid parameters',
+                    'success': False
+                }
+            
+            # Create strategy
+            strategy = create_strategy(params)
+            
+            # Run strategy
+            signals = strategy.run_strategy(data)
+            
+            if signals.empty:
+                return {
+                    'symbol': symbol,
+                    'timeframe': timeframe,
+                    'params': params,
+                    'error': 'No signals generated',
+                    'success': False
+                }
+            
+            # Run backtest
+            result = run_backtest(
+                data=data,
+                signals=signals,
+                initial_capital=self.config.strategy.default_jobs * 1000,  # Scale capital with jobs
+                fee_bps=self.config.strategy.fee_bps,
+                slippage_bps=self.config.strategy.slippage_bps
+            )
+            
+            # Add metadata
+            result.symbol = symbol
+            result.timeframe = timeframe
+            result.parameters = params
+            
+            return {
+                'symbol': symbol,
+                'timeframe': timeframe,
+                'params': params,
+                'metrics': result.metrics,
+                'num_trades': len(result.trades),
+                'success': True
+            }
+            
+        except Exception as e:
+            logger.error(f"Error optimizing {symbol} {timeframe} with params {params}: {e}")
+            return {
+                'symbol': symbol,
+                'timeframe': timeframe,
+                'params': params,
+                'error': str(e),
+                'success': False
+            }
+    
+    def optimize_symbol_timeframe(self, symbol: str, timeframe: str, 
+                                param_combinations: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Optimize all parameter combinations for a single symbol/timeframe.
+        
+        Args:
+            symbol: Trading pair symbol
+            timeframe: Timeframe
+            param_combinations: List of parameter combinations
+            
+        Returns:
+            List of optimization results
+        """
+        logger.info(f"Optimizing {symbol} {timeframe} with {len(param_combinations)} combinations")
+        
+        # Load data
+        try:
+            data = self.data_loader.get_ohlcv(symbol, timeframe)
+            if data.empty:
+                logger.error(f"No data available for {symbol} {timeframe}")
+                return []
+        except Exception as e:
+            logger.error(f"Failed to load data for {symbol} {timeframe}: {e}")
+            return []
+        
+        results = []
+        
+        # Optimize each parameter combination
+        for params in tqdm(param_combinations, desc=f"{symbol} {timeframe}"):
+            result = self.optimize_single_combination(symbol, timeframe, params, data)
+            results.append(result)
+        
+        return results
+    
+    def optimize_parallel(self, symbols: List[str], timeframes: List[str], 
+                        param_combinations: List[Dict[str, Any]], 
+                        max_workers: int = 4) -> List[Dict[str, Any]]:
+        """
+        Run parallel optimization across symbols and timeframes.
+        
+        Args:
+            symbols: List of trading pair symbols
+            timeframes: List of timeframes
+            param_combinations: List of parameter combinations
+            max_workers: Maximum number of parallel workers
+            
+        Returns:
+            List of all optimization results
+        """
+        logger.info(f"Starting parallel optimization: {len(symbols)} symbols, {len(timeframes)} timeframes, {len(param_combinations)} combinations")
+        
+        all_results = []
+        
+        # Create tasks
+        tasks = []
+        for symbol in symbols:
+            for timeframe in timeframes:
+                tasks.append((symbol, timeframe, param_combinations))
+        
+        # Run parallel optimization
+        with ProcessPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all tasks
+            future_to_task = {
+                executor.submit(self.optimize_symbol_timeframe, symbol, timeframe, param_combinations): (symbol, timeframe)
+                for symbol, timeframe, param_combinations in tasks
+            }
+            
+            # Collect results
+            for future in tqdm(as_completed(future_to_task), total=len(tasks), desc="Optimization Progress"):
+                symbol, timeframe = future_to_task[future]
+                try:
+                    results = future.result()
+                    all_results.extend(results)
+                    logger.info(f"Completed {symbol} {timeframe}: {len(results)} results")
+                except Exception as e:
+                    logger.error(f"Error processing {symbol} {timeframe}: {e}")
+        
+        return all_results
+    
+    def optimize_sequential(self, symbols: List[str], timeframes: List[str], 
+                          param_combinations: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Run sequential optimization across symbols and timeframes.
+        
+        Args:
+            symbols: List of trading pair symbols
+            timeframes: List of timeframes
+            param_combinations: List of parameter combinations
+            
+        Returns:
+            List of all optimization results
+        """
+        logger.info(f"Starting sequential optimization: {len(symbols)} symbols, {len(timeframes)} timeframes, {len(param_combinations)} combinations")
+        
+        all_results = []
+        
+        for symbol in symbols:
+            for timeframe in timeframes:
+                results = self.optimize_symbol_timeframe(symbol, timeframe, param_combinations)
+                all_results.extend(results)
+        
+        return all_results
+    
+    def run_optimization(self, symbols: List[str], timeframes: List[str], 
+                         param_combinations: Optional[List[Dict[str, Any]]] = None,
+                         max_workers: int = 4, parallel: bool = True) -> List[Dict[str, Any]]:
+        """
+        Run complete optimization.
+        
+        Args:
+            symbols: List of trading pair symbols
+            timeframes: List of timeframes
+            param_combinations: Parameter combinations (uses config if None)
+            max_workers: Maximum number of parallel workers
+            parallel: Whether to use parallel processing
+            
+        Returns:
+            List of all optimization results
+        """
+        if param_combinations is None:
+            param_combinations = get_param_combinations()
+        
+        logger.info(f"Starting optimization with {len(param_combinations)} parameter combinations")
+        
+        if parallel and max_workers > 1:
+            results = self.optimize_parallel(symbols, timeframes, param_combinations, max_workers)
+        else:
+            results = self.optimize_sequential(symbols, timeframes, param_combinations)
+        
+        # Filter successful results
+        successful_results = [r for r in results if r.get('success', False)]
+        failed_results = [r for r in results if not r.get('success', False)]
+        
+        logger.info(f"Optimization completed: {len(successful_results)} successful, {len(failed_results)} failed")
+        
+        if failed_results:
+            logger.warning(f"Failed optimizations: {len(failed_results)}")
+            for result in failed_results[:5]:  # Log first 5 failures
+                logger.warning(f"Failed: {result['symbol']} {result['timeframe']} - {result.get('error', 'Unknown error')}")
+        
+        self.results = successful_results
+        return successful_results
+    
+    def get_top_results(self, n: int = 10, metric: str = 'profit_factor') -> List[Dict[str, Any]]:
+        """
+        Get top N results sorted by metric.
+        
+        Args:
+            n: Number of top results
+            metric: Metric to sort by
+            
+        Returns:
+            List of top results
+        """
+        if not self.results:
+            return []
+        
+        # Filter results with valid metrics
+        valid_results = [r for r in self.results if metric in r.get('metrics', {})]
+        
+        if not valid_results:
+            return []
+        
+        # Sort by metric (descending)
+        sorted_results = sorted(valid_results, key=lambda x: x['metrics'][metric], reverse=True)
+        
+        return sorted_results[:n]
+    
+    def get_results_by_symbol_timeframe(self) -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
+        """
+        Group results by symbol and timeframe.
+        
+        Returns:
+            Nested dictionary: {symbol: {timeframe: [results]}}
+        """
+        grouped = {}
+        
+        for result in self.results:
+            symbol = result['symbol']
+            timeframe = result['timeframe']
+            
+            if symbol not in grouped:
+                grouped[symbol] = {}
+            
+            if timeframe not in grouped[symbol]:
+                grouped[symbol][timeframe] = []
+            
+            grouped[symbol][timeframe].append(result)
+        
+        return grouped
+    
+    def save_results(self, output_dir: str, filename_prefix: str = "grid_search"):
+        """
+        Save optimization results to files.
+        
+        Args:
+            output_dir: Output directory
+            filename_prefix: Filename prefix
+        """
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+        
+        # Save all results as JSON
+        json_file = output_path / f"{filename_prefix}_results.json"
+        with open(json_file, 'w') as f:
+            json.dump(self.results, f, indent=2, default=str)
+        
+        # Save as CSV
+        csv_file = output_path / f"{filename_prefix}_results.csv"
+        self._save_results_csv(csv_file)
+        
+        # Save top results
+        top_results = self.get_top_results(n=100)
+        top_file = output_path / f"{filename_prefix}_top_results.json"
+        with open(top_file, 'w') as f:
+            json.dump(top_results, f, indent=2, default=str)
+        
+        # Save summary by symbol/timeframe
+        summary_file = output_path / f"{filename_prefix}_summary.json"
+        self._save_summary(summary_file)
+        
+        logger.info(f"Results saved to {output_path}")
+    
+    def _save_results_csv(self, csv_file: Path):
+        """Save results as CSV."""
+        if not self.results:
+            return
+        
+        # Flatten results for CSV
+        flattened = []
+        for result in self.results:
+            row = {
+                'symbol': result['symbol'],
+                'timeframe': result['timeframe'],
+                'num_trades': result['num_trades'],
+            }
+            
+            # Add parameters
+            for key, value in result['params'].items():
+                row[f'param_{key}'] = value
+            
+            # Add metrics
+            for key, value in result['metrics'].items():
+                row[f'metric_{key}'] = value
+            
+            flattened.append(row)
+        
+        df = pd.DataFrame(flattened)
+        df.to_csv(csv_file, index=False)
+    
+    def _save_summary(self, summary_file: Path):
+        """Save optimization summary."""
+        summary = {
+            'total_combinations': len(self.results),
+            'symbols': list(set(r['symbol'] for r in self.results)),
+            'timeframes': list(set(r['timeframe'] for r in self.results)),
+            'best_results': {}
+        }
+        
+        # Get best result for each symbol/timeframe
+        grouped = self.get_results_by_symbol_timeframe()
+        for symbol, timeframes in grouped.items():
+            summary['best_results'][symbol] = {}
+            for timeframe, results in timeframes.items():
+                if results:
+                    best = max(results, key=lambda x: x['metrics'].get('profit_factor', 0))
+                    summary['best_results'][symbol][timeframe] = {
+                        'params': best['params'],
+                        'profit_factor': best['metrics'].get('profit_factor', 0),
+                        'total_return': best['metrics'].get('total_return_pct', 0),
+                        'max_drawdown': best['metrics'].get('max_drawdown_pct', 0),
+                        'num_trades': best['num_trades'],
+                    }
+        
+        with open(summary_file, 'w') as f:
+            json.dump(summary, f, indent=2, default=str)
+
+
+def run_grid_search(symbols: List[str], timeframes: List[str], 
+                   param_combinations: Optional[List[Dict[str, Any]]] = None,
+                   max_workers: int = 4, parallel: bool = True,
+                   output_dir: str = "./reports/grid") -> List[Dict[str, Any]]:
+    """
+    Convenience function to run grid search optimization.
+    
+    Args:
+        symbols: List of trading pair symbols
+        timeframes: List of timeframes
+        param_combinations: Parameter combinations
+        max_workers: Maximum number of parallel workers
+        parallel: Whether to use parallel processing
+        output_dir: Output directory
+        
+    Returns:
+        List of optimization results
+    """
+    optimizer = GridSearchOptimizer()
+    results = optimizer.run_optimization(symbols, timeframes, param_combinations, max_workers, parallel)
+    optimizer.save_results(output_dir)
+    return results

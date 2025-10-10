@@ -1,0 +1,28 @@
+{
+  "scan_interval": 1800,
+  "working_hours": {
+    "start": "15:30",
+    "end": "22:00",
+    "timezone": "UTC"
+  },
+  "telegram": {
+    "bot_token": "8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0",
+    "chat_id": "-1003038204085"
+  },
+  "filters": {
+    "max_price": 10.00,
+    "min_volume": 50000,
+    "min_market_cap": 5000000,
+    "max_market_cap": 2000000000,
+    "sector": "Technology",
+    "exchange": "NASDAQ",
+    "ipo_date_min": "2023-01-01",
+    "ipo_date_max": "2025-12-31"
+  },
+  "strategy_params": {
+    "timeframe": "15m",
+    "atr_period": 10,
+    "key_value": 3,
+    "factor": 1.5
+  }
+}

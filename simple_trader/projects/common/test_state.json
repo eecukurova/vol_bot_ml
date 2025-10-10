@@ -1,0 +1,51 @@
+{
+  "orders": {
+    "vlsy-entry-7ce7ce6997de26e0": {
+      "status": "SENT",
+      "symbol": "BTC/USDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001,
+      "price": null,
+      "params": {
+        "newClientOrderId": "vlsy-entry-7ce7ce6997de26e0"
+      },
+      "ts": 1759819689211,
+      "exchange_id": "mock_1000"
+    },
+    "vlsy-sl-aa2873258700c003": {
+      "status": "SENT",
+      "symbol": "BTC/USDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 50000,
+      "params": {
+        "newClientOrderId": "vlsy-sl-aa2873258700c003",
+        "stopPrice": 50000,
+        "reduceOnly": true,
+        "closePosition": true,
+        "workingType": "MARK_PRICE"
+      },
+      "ts": 1759819689739,
+      "exchange_id": "mock_1001"
+    },
+    "vlsy-tp-c31139f25d88dae4": {
+      "status": "SENT",
+      "symbol": "BTC/USDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 55000,
+      "params": {
+        "newClientOrderId": "vlsy-tp-c31139f25d88dae4",
+        "stopPrice": 55000,
+        "reduceOnly": true,
+        "closePosition": true,
+        "workingType": "MARK_PRICE"
+      },
+      "ts": 1759819689741,
+      "exchange_id": "mock_1002"
+    }
+  }
+}

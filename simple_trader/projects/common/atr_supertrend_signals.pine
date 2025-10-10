@@ -1,0 +1,88 @@
+//@version=5
+indicator("ATR SuperTrend Signals", shorttitle="ATR-ST", overlay=true)
+
+// Input parametreleri
+atr_length = input.int(14, title="ATR Length", minval=1)
+atr_multiplier = input.float(1.5, title="ATR Multiplier", minval=0.1, step=0.1)
+ema_length = input.int(1, title="EMA Length", minval=1)
+
+// Renk ayarları
+long_color = input.color(color.green, title="Long Signal Color")
+short_color = input.color(color.red, title="Short Signal Color")
+supertrend_color = input.color(color.blue, title="SuperTrend Color")
+
+// ATR hesaplama
+atr_value = ta.atr(atr_length)
+
+// SuperTrend hesaplama
+hl2 = (high + low) / 2
+upper_band = hl2 + (atr_multiplier * atr_value)
+lower_band = hl2 - (atr_multiplier * atr_value)
+
+// SuperTrend değeri
+var float supertrend = na
+var int supertrend_direction = na
+
+if barstate.isfirst
+    supertrend := lower_band
+    supertrend_direction := 1
+else
+    if close > supertrend[1]
+        supertrend := math.max(lower_band, supertrend[1])
+        supertrend_direction := 1
+    else
+        supertrend := math.min(upper_band, supertrend[1])
+        supertrend_direction := -1
+
+// EMA hesaplama
+ema_value = ta.ema(close, ema_length)
+
+// Sinyal kuralları
+long_signal = close > supertrend and ema_value > supertrend and ema_value[1] <= supertrend[1]
+short_signal = close < supertrend and ema_value < supertrend and ema_value[1] >= supertrend[1]
+
+// Sinyal gücü hesaplama
+signal_strength = math.abs(close - supertrend) / close * 100
+
+// Çizimler
+plot(supertrend, color=supertrend_color, linewidth=2, title="SuperTrend")
+plot(ema_value, color=color.yellow, linewidth=1, title="EMA(1)")
+
+// Sinyal işaretçileri
+plotshape(long_signal, style=shape.triangleup, location=location.belowbar, 
+          color=long_color, size=size.normal, title="Long Signal")
+plotshape(short_signal, style=shape.triangledown, location=location.abovebar, 
+          color=short_color, size=size.normal, title="Short Signal")
+
+// Sinyal etiketleri
+if long_signal
+    label.new(bar_index, low, text="LONG\n" + str.tostring(signal_strength, "#.##") + "%", 
+              style=label.style_label_up, color=long_color, textcolor=color.white, size=size.normal)
+
+if short_signal
+    label.new(bar_index, high, text="SHORT\n" + str.tostring(signal_strength, "#.##") + "%", 
+              style=label.style_label_down, color=short_color, textcolor=color.white, size=size.normal)
+
+// Alarmlar
+alertcondition(long_signal, title="Long Signal Alert", message="🎯 YENİ LONG SİNYALİ! {{ticker}} - Fiyat: {{close}} - Güç: {{plot_0}}%")
+alertcondition(short_signal, title="Short Signal Alert", message="🎯 YENİ SHORT SİNYALİ! {{ticker}} - Fiyat: {{close}} - Güç: {{plot_0}}%")
+
+// Tablo bilgileri
+if barstate.islast
+    var table info_table = table.new(position.top_right, 2, 6, bgcolor=color.white, border_width=1)
+    table.cell(info_table, 0, 0, "Gösterge", text_color=color.black, bgcolor=color.gray)
+    table.cell(info_table, 1, 0, "Değer", text_color=color.black, bgcolor=color.gray)
+    table.cell(info_table, 0, 1, "SuperTrend", text_color=color.black)
+    table.cell(info_table, 1, 1, str.tostring(supertrend, "#.####"), text_color=color.black)
+    table.cell(info_table, 0, 2, "EMA(1)", text_color=color.black)
+    table.cell(info_table, 1, 2, str.tostring(ema_value, "#.####"), text_color=color.black)
+    table.cell(info_table, 0, 3, "ATR", text_color=color.black)
+    table.cell(info_table, 1, 3, str.tostring(atr_value, "#.####"), text_color=color.black)
+    table.cell(info_table, 0, 4, "Sinyal Gücü", text_color=color.black)
+    table.cell(info_table, 1, 4, str.tostring(signal_strength, "#.##") + "%", text_color=color.black)
+    table.cell(info_table, 0, 5, "Durum", text_color=color.black)
+    table.cell(info_table, 1, 5, supertrend_direction == 1 ? "YUKARI" : "AŞAĞI", 
+               text_color=supertrend_direction == 1 ? color.green : color.red)
+
+// Arka plan renklendirme
+bgcolor(supertrend_direction == 1 ? color.new(color.green, 95) : color.new(color.red, 95), title="Trend Background")

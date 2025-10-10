@@ -1,0 +1,1458 @@
+2025-10-08 16:19:32,845 - INFO - 🚀 NASDAQ Dynamic Scanner başlatıldı
+2025-10-08 16:19:32,845 - INFO - 💰 Max fiyat: $5.0
+2025-10-08 16:19:32,846 - INFO - 📊 Min volume: 100,000
+2025-10-08 16:19:32,846 - INFO - 🏢 Market cap: $10,000,000 - $1,000,000,000
+2025-10-08 16:19:32,846 - INFO - 🚀 NASDAQ Dynamic Scanner başlatıldı
+2025-10-08 16:19:32,846 - INFO - 🔄 DYNAMIC_SCAN_START: 16:19:32
+2025-10-08 16:19:32,846 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 16:19:32,846 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 16:19:46,832 - INFO - ✅ CYCU: $0.29 | Vol: 10,367,626 | Cap: $20,340,676
+2025-10-08 16:19:47,759 - INFO - ✅ WCT: $0.37 | Vol: 320,340 | Cap: $56,692,720
+2025-10-08 16:19:48,751 - INFO - ✅ VEEA: $0.83 | Vol: 139,381 | Cap: $41,601,608
+2025-10-08 16:19:48,852 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 16:19:49,133 - INFO - ✅ ILLR: $0.90 | Vol: 176,920 | Cap: $136,014,672
+2025-10-08 16:19:49,784 - INFO - ✅ TDTH: $0.94 | Vol: 158,985 | Cap: $108,258,944
+2025-10-08 16:19:50,330 - INFO - ✅ ZSPC: $1.03 | Vol: 337,380 | Cap: $24,735,310
+2025-10-08 16:19:53,746 - INFO - ✅ DKI: $0.84 | Vol: 428,151 | Cap: $14,889,000
+2025-10-08 16:20:08,730 - INFO - 🎯 7 hisse filtrelendi
+2025-10-08 16:20:08,731 - INFO - 🔍 7 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 16:20:09,413 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 16:20:09,414 - INFO - ⏰ Bir sonraki tarama: 16:30:00 (591 saniye sonra)
+2025-10-08 16:20:50,135 - INFO - 🚀 NASDAQ Dynamic Scanner başlatıldı
+2025-10-08 16:20:50,136 - INFO - 💰 Max fiyat: $5.0
+2025-10-08 16:20:50,136 - INFO - 📊 Min volume: 100,000
+2025-10-08 16:20:50,136 - INFO - 🏢 Market cap: $10,000,000 - $1,000,000,000
+2025-10-08 16:20:50,136 - INFO - 🚀 NASDAQ Dynamic Scanner başlatıldı
+2025-10-08 16:20:50,137 - INFO - 🔄 DYNAMIC_SCAN_START: 16:20:50
+2025-10-08 16:20:50,138 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 16:20:50,138 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 16:21:04,512 - INFO - ✅ CYCU: $0.29 | Vol: 10,371,747 | Cap: $20,397,276
+2025-10-08 16:21:05,557 - INFO - ✅ WCT: $0.37 | Vol: 320,340 | Cap: $56,692,720
+2025-10-08 16:21:06,628 - INFO - ✅ VEEA: $0.83 | Vol: 139,902 | Cap: $41,676,884
+2025-10-08 16:21:06,729 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 16:21:07,024 - INFO - ✅ ILLR: $0.90 | Vol: 176,920 | Cap: $136,014,672
+2025-10-08 16:21:07,950 - INFO - ✅ TDTH: $0.94 | Vol: 158,985 | Cap: $108,258,944
+2025-10-08 16:21:08,528 - INFO - ✅ ZSPC: $1.03 | Vol: 355,405 | Cap: $24,756,944
+2025-10-08 16:21:12,186 - INFO - ✅ DKI: $0.84 | Vol: 428,151 | Cap: $14,889,000
+2025-10-08 16:21:26,241 - INFO - 🎯 7 hisse filtrelendi
+2025-10-08 16:21:26,241 - INFO - 🔍 7 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 16:21:26,879 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 16:21:26,880 - INFO - ⏰ Bir sonraki tarama: 16:30:00 (513 saniye sonra)
+2025-10-08 16:30:00,003 - INFO - 🔄 DYNAMIC_SCAN_START: 16:30:00
+2025-10-08 16:30:00,004 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 16:30:00,004 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 16:30:12,055 - INFO - ✅ CYCU: $0.29 | Vol: 10,448,903 | Cap: $20,807,626
+2025-10-08 16:30:13,213 - INFO - ✅ WCT: $0.37 | Vol: 320,340 | Cap: $56,692,720
+2025-10-08 16:30:14,241 - INFO - ✅ VEEA: $0.83 | Vol: 142,759 | Cap: $41,636,736
+2025-10-08 16:30:14,342 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 16:30:14,697 - INFO - ✅ ILLR: $0.92 | Vol: 178,689 | Cap: $139,289,568
+2025-10-08 16:30:15,348 - INFO - ✅ TDTH: $0.93 | Vol: 161,987 | Cap: $107,038,928
+2025-10-08 16:30:15,760 - INFO - ✅ ZSPC: $1.03 | Vol: 367,601 | Cap: $24,826,648
+2025-10-08 16:30:19,352 - INFO - ✅ DKI: $0.84 | Vol: 435,072 | Cap: $14,860,640
+2025-10-08 16:30:35,500 - INFO - 🎯 7 hisse filtrelendi
+2025-10-08 16:30:35,501 - INFO - 🔍 7 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 16:30:36,144 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 16:30:36,144 - INFO - ⏰ Bir sonraki tarama: 16:45:00 (864 saniye sonra)
+2025-10-08 16:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 16:45:00
+2025-10-08 16:45:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 16:45:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 16:45:10,962 - INFO - ✅ CYCU: $0.29 | Vol: 10,764,581 | Cap: $20,729,802
+2025-10-08 16:45:11,941 - INFO - ✅ WCT: $0.37 | Vol: 350,973 | Cap: $56,784,680
+2025-10-08 16:45:13,095 - INFO - ✅ VEEA: $0.83 | Vol: 142,986 | Cap: $41,636,736
+2025-10-08 16:45:13,196 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 16:45:13,744 - INFO - ✅ ILLR: $0.91 | Vol: 181,568 | Cap: $137,470,192
+2025-10-08 16:45:14,407 - INFO - ✅ TDTH: $0.93 | Vol: 162,099 | Cap: $107,038,928
+2025-10-08 16:45:14,851 - INFO - ✅ ZSPC: $1.05 | Vol: 408,562 | Cap: $25,235,260
+2025-10-08 16:45:18,394 - INFO - ✅ DKI: $0.83 | Vol: 449,884 | Cap: $14,685,162
+2025-10-08 16:45:34,194 - INFO - 🎯 7 hisse filtrelendi
+2025-10-08 16:45:34,194 - INFO - 🔍 7 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 16:45:34,780 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 16:45:34,781 - INFO - ⏰ Bir sonraki tarama: 17:00:00 (865 saniye sonra)
+2025-10-08 17:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 17:00:00
+2025-10-08 17:00:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 17:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 17:00:12,765 - INFO - ✅ CYCU: $0.29 | Vol: 10,870,973 | Cap: $20,651,978
+2025-10-08 17:00:13,982 - INFO - ✅ WCT: $0.38 | Vol: 386,692 | Cap: $58,256,024
+2025-10-08 17:00:15,022 - INFO - ✅ VEEA: $0.84 | Vol: 159,201 | Cap: $41,993,032
+2025-10-08 17:00:15,123 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 17:00:15,386 - INFO - ✅ ILLR: $0.92 | Vol: 184,766 | Cap: $138,971,184
+2025-10-08 17:00:16,041 - INFO - ✅ TDTH: $0.93 | Vol: 162,099 | Cap: $107,038,928
+2025-10-08 17:00:16,399 - INFO - ✅ ZSPC: $1.06 | Vol: 429,829 | Cap: $25,475,618
+2025-10-08 17:00:19,877 - INFO - ✅ DKI: $0.85 | Vol: 454,226 | Cap: $15,066,250
+2025-10-08 17:00:20,276 - INFO - ✅ MYPS: $0.96 | Vol: 100,104 | Cap: $120,344,512
+2025-10-08 17:00:36,373 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 17:00:36,374 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 17:00:37,091 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 17:00:37,092 - INFO - ⏰ Bir sonraki tarama: 17:15:00 (863 saniye sonra)
+2025-10-08 17:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 17:15:00
+2025-10-08 17:15:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 17:15:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 17:15:11,661 - INFO - ✅ CYCU: $0.29 | Vol: 11,099,472 | Cap: $20,871,300
+2025-10-08 17:15:12,688 - INFO - ✅ WCT: $0.38 | Vol: 458,152 | Cap: $58,869,080
+2025-10-08 17:15:13,722 - INFO - ✅ VEEA: $0.84 | Vol: 167,000 | Cap: $42,359,368
+2025-10-08 17:15:13,824 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 17:15:14,216 - INFO - ✅ ILLR: $0.92 | Vol: 187,005 | Cap: $138,880,208
+2025-10-08 17:15:14,876 - INFO - ✅ TDTH: $0.94 | Vol: 167,623 | Cap: $108,719,328
+2025-10-08 17:15:15,243 - INFO - ✅ ZSPC: $1.05 | Vol: 445,167 | Cap: $25,237,660
+2025-10-08 17:15:18,655 - INFO - ✅ DKI: $0.83 | Vol: 462,636 | Cap: $14,713,522
+2025-10-08 17:15:19,233 - INFO - ✅ MYPS: $0.96 | Vol: 100,774 | Cap: $120,482,392
+2025-10-08 17:15:34,700 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 17:15:34,701 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 17:15:34,914 - INFO - 🎯 WCT BUY sinyali!
+2025-10-08 17:15:35,091 - INFO - 📱 NASDAQ Dynamic Telegram mesajı gönderildi
+2025-10-08 17:15:35,604 - INFO - ✅ Tarama tamamlandı - 1 sinyal bulundu
+2025-10-08 17:15:35,604 - INFO - ⏰ Bir sonraki tarama: 17:30:00 (864 saniye sonra)
+2025-10-08 17:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 17:30:00
+2025-10-08 17:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 17:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 17:30:12,437 - INFO - ✅ CYCU: $0.30 | Vol: 11,427,449 | Cap: $21,175,526
+2025-10-08 17:30:13,465 - INFO - ✅ WCT: $0.38 | Vol: 459,840 | Cap: $58,869,080
+2025-10-08 17:30:14,665 - INFO - ✅ VEEA: $0.84 | Vol: 167,001 | Cap: $42,359,368
+2025-10-08 17:30:14,765 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 17:30:15,101 - INFO - ✅ ILLR: $0.90 | Vol: 190,544 | Cap: $136,909,200
+2025-10-08 17:30:15,973 - INFO - ✅ TDTH: $0.94 | Vol: 182,881 | Cap: $107,741,016
+2025-10-08 17:30:16,378 - INFO - ✅ ZSPC: $1.06 | Vol: 450,564 | Cap: $25,381,876
+2025-10-08 17:30:20,193 - INFO - ✅ DKI: $0.84 | Vol: 474,152 | Cap: $14,947,492
+2025-10-08 17:30:20,585 - INFO - ✅ MYPS: $0.96 | Vol: 111,007 | Cap: $119,780,456
+2025-10-08 17:30:35,551 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 17:30:35,551 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 17:30:36,316 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 17:30:36,316 - INFO - ⏰ Bir sonraki tarama: 17:45:00 (864 saniye sonra)
+2025-10-08 17:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 17:45:00
+2025-10-08 17:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 17:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 17:45:11,147 - INFO - ✅ CYCU: $0.31 | Vol: 12,161,258 | Cap: $22,236,780
+2025-10-08 17:45:12,047 - INFO - ✅ WCT: $0.39 | Vol: 460,112 | Cap: $59,144,960
+2025-10-08 17:45:13,031 - INFO - ✅ VEEA: $0.82 | Vol: 171,274 | Cap: $41,320,584
+2025-10-08 17:45:13,131 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 17:45:13,422 - INFO - ✅ ILLR: $0.90 | Vol: 196,692 | Cap: $137,015,328
+2025-10-08 17:45:14,295 - INFO - ✅ TDTH: $0.96 | Vol: 183,524 | Cap: $110,238,584
+2025-10-08 17:45:14,703 - INFO - ✅ ZSPC: $1.05 | Vol: 482,503 | Cap: $25,237,660
+2025-10-08 17:45:18,457 - INFO - ✅ DKI: $0.84 | Vol: 478,759 | Cap: $14,890,772
+2025-10-08 17:45:18,825 - INFO - ✅ MYPS: $0.95 | Vol: 112,400 | Cap: $119,554,832
+2025-10-08 17:45:34,388 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 17:45:34,389 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 17:45:35,010 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 17:45:35,011 - INFO - ⏰ Bir sonraki tarama: 18:00:00 (865 saniye sonra)
+2025-10-08 18:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 18:00:00
+2025-10-08 18:00:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 18:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 18:00:12,355 - INFO - ✅ CYCU: $0.31 | Vol: 12,590,278 | Cap: $21,833,504
+2025-10-08 18:00:13,293 - INFO - ✅ WCT: $0.39 | Vol: 463,156 | Cap: $59,972,592
+2025-10-08 18:00:14,496 - INFO - ✅ VEEA: $0.84 | Vol: 171,385 | Cap: $42,153,616
+2025-10-08 18:00:14,597 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 18:00:14,882 - INFO - ✅ ILLR: $0.91 | Vol: 203,192 | Cap: $137,500,512
+2025-10-08 18:00:15,566 - INFO - ✅ TDTH: $0.96 | Vol: 184,564 | Cap: $110,227,080
+2025-10-08 18:00:15,958 - INFO - ✅ ZSPC: $1.05 | Vol: 511,039 | Cap: $25,237,660
+2025-10-08 18:00:19,706 - INFO - ✅ DKI: $0.84 | Vol: 479,250 | Cap: $14,894,318
+2025-10-08 18:00:20,075 - INFO - ✅ MYPS: $0.96 | Vol: 113,871 | Cap: $119,905,800
+2025-10-08 18:00:36,541 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 18:00:36,541 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 18:00:37,289 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 18:00:37,290 - INFO - ⏰ Bir sonraki tarama: 18:15:00 (863 saniye sonra)
+2025-10-08 18:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 18:15:00
+2025-10-08 18:15:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 18:15:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 18:15:11,187 - INFO - ✅ CYCU: $0.31 | Vol: 12,885,738 | Cap: $21,953,780
+2025-10-08 18:15:12,235 - INFO - ✅ WCT: $0.39 | Vol: 463,156 | Cap: $59,972,592
+2025-10-08 18:15:13,390 - INFO - ✅ VEEA: $0.83 | Vol: 175,785 | Cap: $41,636,736
+2025-10-08 18:15:13,490 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 18:15:13,858 - INFO - ✅ ILLR: $0.91 | Vol: 205,171 | Cap: $137,439,856
+2025-10-08 18:15:14,884 - INFO - ✅ TDTH: $0.93 | Vol: 197,329 | Cap: $107,119,496
+2025-10-08 18:15:15,444 - INFO - ✅ ZSPC: $1.04 | Vol: 543,581 | Cap: $25,117,482
+2025-10-08 18:15:19,244 - INFO - ✅ DKI: $0.86 | Vol: 489,709 | Cap: $15,225,775
+2025-10-08 18:15:19,625 - INFO - ✅ MYPS: $0.96 | Vol: 114,375 | Cap: $120,056,208
+2025-10-08 18:15:35,222 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 18:15:35,222 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 18:15:36,038 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 18:15:36,039 - INFO - ⏰ Bir sonraki tarama: 18:30:00 (864 saniye sonra)
+2025-10-08 18:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 18:30:00
+2025-10-08 18:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 18:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 18:30:11,835 - INFO - ✅ CYCU: $0.31 | Vol: 13,888,393 | Cap: $21,607,104
+2025-10-08 18:30:12,829 - INFO - ✅ WCT: $0.39 | Vol: 490,420 | Cap: $59,911,284
+2025-10-08 18:30:13,938 - INFO - ✅ VEEA: $0.84 | Vol: 178,202 | Cap: $42,133,548
+2025-10-08 18:30:14,039 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 18:30:14,344 - INFO - ✅ ILLR: $0.91 | Vol: 218,371 | Cap: $137,485,344
+2025-10-08 18:30:15,265 - INFO - ✅ TDTH: $0.92 | Vol: 226,516 | Cap: $105,899,480
+2025-10-08 18:30:15,691 - INFO - ✅ ZSPC: $1.08 | Vol: 651,898 | Cap: $25,994,792
+2025-10-08 18:30:19,329 - INFO - ✅ DKI: $0.86 | Vol: 500,984 | Cap: $15,172,600
+2025-10-08 18:30:19,717 - INFO - ✅ MYPS: $0.96 | Vol: 114,489 | Cap: $120,056,208
+2025-10-08 18:30:34,750 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 18:30:34,751 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 18:30:35,443 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 18:30:35,444 - INFO - ⏰ Bir sonraki tarama: 18:45:00 (865 saniye sonra)
+2025-10-08 18:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 18:45:00
+2025-10-08 18:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 18:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 18:45:10,987 - INFO - ✅ CYCU: $0.31 | Vol: 14,163,204 | Cap: $21,642,480
+2025-10-08 18:45:12,356 - INFO - ✅ WCT: $0.38 | Vol: 490,520 | Cap: $58,271,348
+2025-10-08 18:45:13,378 - INFO - ✅ VEEA: $0.83 | Vol: 178,841 | Cap: $41,661,828
+2025-10-08 18:45:13,479 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 18:45:13,766 - INFO - ✅ ILLR: $0.90 | Vol: 222,061 | Cap: $137,060,816
+2025-10-08 18:45:14,456 - INFO - ✅ TDTH: $0.91 | Vol: 249,346 | Cap: $104,737,024
+2025-10-08 18:45:14,854 - INFO - ✅ ZSPC: $1.08 | Vol: 682,790 | Cap: $25,958,738
+2025-10-08 18:45:18,363 - INFO - ✅ DKI: $0.85 | Vol: 510,514 | Cap: $15,101,700
+2025-10-08 18:45:18,756 - INFO - ✅ MYPS: $0.96 | Vol: 114,897 | Cap: $120,056,208
+2025-10-08 18:45:33,442 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 18:45:33,443 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 18:45:33,599 - INFO - 🎯 WCT SELL sinyali!
+2025-10-08 18:45:33,764 - INFO - 📱 NASDAQ Dynamic Telegram mesajı gönderildi
+2025-10-08 18:45:34,343 - INFO - ✅ Tarama tamamlandı - 1 sinyal bulundu
+2025-10-08 18:45:34,344 - INFO - ⏰ Bir sonraki tarama: 19:00:00 (866 saniye sonra)
+2025-10-08 19:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 19:00:00
+2025-10-08 19:00:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 19:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 19:00:12,834 - INFO - ✅ CYCU: $0.31 | Vol: 14,332,401 | Cap: $21,656,630
+2025-10-08 19:00:13,970 - INFO - ✅ WCT: $0.39 | Vol: 577,528 | Cap: $59,589,428
+2025-10-08 19:00:15,294 - INFO - ✅ VEEA: $0.83 | Vol: 179,157 | Cap: $41,892,668
+2025-10-08 19:00:15,394 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 19:00:15,706 - INFO - ✅ ILLR: $0.91 | Vol: 229,847 | Cap: $137,500,512
+2025-10-08 19:00:16,655 - INFO - ✅ TDTH: $0.91 | Vol: 258,218 | Cap: $104,737,024
+2025-10-08 19:00:17,132 - INFO - ✅ ZSPC: $1.06 | Vol: 724,732 | Cap: $25,598,200
+2025-10-08 19:00:21,034 - INFO - ✅ DKI: $0.86 | Vol: 524,449 | Cap: $15,199,188
+2025-10-08 19:00:21,461 - INFO - ✅ MYPS: $0.96 | Vol: 115,554 | Cap: $120,056,208
+2025-10-08 19:00:36,792 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 19:00:36,792 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 19:00:37,508 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 19:00:37,509 - INFO - ⏰ Bir sonraki tarama: 19:15:00 (862 saniye sonra)
+2025-10-08 19:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 19:15:00
+2025-10-08 19:15:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 19:15:00,000 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 19:15:11,171 - INFO - ✅ CYCU: $0.31 | Vol: 14,629,157 | Cap: $22,102,356
+2025-10-08 19:15:12,243 - INFO - ✅ WCT: $0.38 | Vol: 585,018 | Cap: $58,547,228
+2025-10-08 19:15:13,286 - INFO - ✅ VEEA: $0.83 | Vol: 180,552 | Cap: $41,892,668
+2025-10-08 19:15:13,387 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 19:15:13,673 - INFO - ✅ ILLR: $0.89 | Vol: 242,447 | Cap: $134,377,216
+2025-10-08 19:15:14,386 - INFO - ✅ TDTH: $0.92 | Vol: 259,419 | Cap: $105,358,536
+2025-10-08 19:15:14,759 - INFO - ✅ ZSPC: $1.06 | Vol: 758,488 | Cap: $25,598,200
+2025-10-08 19:15:18,237 - INFO - ✅ DKI: $0.87 | Vol: 536,070 | Cap: $15,420,750
+2025-10-08 19:15:18,622 - INFO - ✅ MYPS: $0.96 | Vol: 116,600 | Cap: $120,294,368
+2025-10-08 19:15:33,605 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 19:15:33,605 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 19:15:34,401 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 19:15:34,401 - INFO - ⏰ Bir sonraki tarama: 19:30:00 (866 saniye sonra)
+2025-10-08 19:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 19:30:00
+2025-10-08 19:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 19:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 19:30:10,976 - INFO - ✅ CYCU: $0.31 | Vol: 14,906,170 | Cap: $21,996,230
+2025-10-08 19:30:11,933 - INFO - ✅ WCT: $0.38 | Vol: 587,218 | Cap: $58,148,740
+2025-10-08 19:30:12,865 - INFO - ✅ VEEA: $0.83 | Vol: 181,129 | Cap: $41,661,828
+2025-10-08 19:30:12,966 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 19:30:13,330 - INFO - ✅ ILLR: $0.90 | Vol: 256,465 | Cap: $136,636,288
+2025-10-08 19:30:13,988 - INFO - ✅ TDTH: $0.92 | Vol: 259,594 | Cap: $105,358,536
+2025-10-08 19:30:14,359 - INFO - ✅ ZSPC: $1.06 | Vol: 788,644 | Cap: $25,598,200
+2025-10-08 19:30:17,855 - INFO - ✅ DKI: $0.86 | Vol: 543,411 | Cap: $15,332,125
+2025-10-08 19:30:18,224 - INFO - ✅ MYPS: $0.96 | Vol: 120,929 | Cap: $120,331,976
+2025-10-08 19:30:32,611 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 19:30:32,612 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 19:30:33,311 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 19:30:33,311 - INFO - ⏰ Bir sonraki tarama: 19:45:00 (867 saniye sonra)
+2025-10-08 19:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 19:45:00
+2025-10-08 19:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 19:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 19:45:11,398 - INFO - ✅ CYCU: $0.32 | Vol: 15,816,901 | Cap: $22,937,208
+2025-10-08 19:45:12,424 - INFO - ✅ WCT: $0.38 | Vol: 587,624 | Cap: $58,026,128
+2025-10-08 19:45:13,431 - INFO - ✅ VEEA: $0.83 | Vol: 185,044 | Cap: $41,651,788
+2025-10-08 19:45:13,532 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 19:45:13,844 - INFO - ✅ ILLR: $0.90 | Vol: 259,514 | Cap: $136,742,432
+2025-10-08 19:45:14,705 - INFO - ✅ TDTH: $0.93 | Vol: 260,716 | Cap: $106,590,056
+2025-10-08 19:45:15,107 - INFO - ✅ ZSPC: $1.07 | Vol: 804,204 | Cap: $25,718,380
+2025-10-08 19:45:18,684 - INFO - ✅ DKI: $0.86 | Vol: 548,510 | Cap: $15,291,357
+2025-10-08 19:45:19,070 - INFO - ✅ MYPS: $0.96 | Vol: 124,276 | Cap: $119,955,944
+2025-10-08 19:45:34,063 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 19:45:34,064 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 19:45:34,759 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 19:45:34,759 - INFO - ⏰ Bir sonraki tarama: 20:00:00 (865 saniye sonra)
+2025-10-08 20:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 20:00:00
+2025-10-08 20:00:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 20:00:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 20:00:13,555 - INFO - ✅ CYCU: $0.33 | Vol: 16,926,745 | Cap: $23,227,282
+2025-10-08 20:00:14,783 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 20:00:15,826 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 20:00:15,927 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 20:00:16,312 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 20:00:17,593 - INFO - ✅ TDTH: $0.93 | Vol: 263,486 | Cap: $107,027,416
+2025-10-08 20:00:18,082 - INFO - ✅ ZSPC: $1.07 | Vol: 827,632 | Cap: $25,718,380
+2025-10-08 20:00:22,102 - INFO - ✅ DKI: $0.86 | Vol: 587,930 | Cap: $15,176,145
+2025-10-08 20:00:22,510 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 20:00:39,461 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 20:00:39,462 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 20:00:40,136 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 20:00:40,136 - INFO - ⏰ Bir sonraki tarama: 20:15:00 (860 saniye sonra)
+2025-10-08 20:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 20:15:00
+2025-10-08 20:15:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 20:15:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 20:15:10,857 - INFO - ✅ CYCU: $0.33 | Vol: 17,701,658 | Cap: $23,227,282
+2025-10-08 20:15:11,839 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 20:15:12,762 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 20:15:12,863 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 20:15:13,140 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 20:15:13,772 - INFO - ✅ TDTH: $0.93 | Vol: 263,486 | Cap: $107,027,416
+2025-10-08 20:15:14,155 - INFO - ✅ ZSPC: $1.07 | Vol: 827,632 | Cap: $25,718,380
+2025-10-08 20:15:17,512 - INFO - ✅ DKI: $0.86 | Vol: 587,930 | Cap: $15,176,145
+2025-10-08 20:15:17,936 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 20:15:32,976 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 20:15:32,976 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 20:15:33,632 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 20:15:33,632 - INFO - ⏰ Bir sonraki tarama: 20:30:00 (866 saniye sonra)
+2025-10-08 20:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 20:30:00
+2025-10-08 20:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 20:30:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 20:30:11,144 - INFO - ✅ CYCU: $0.33 | Vol: 17,701,658 | Cap: $23,227,282
+2025-10-08 20:30:12,066 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 20:30:12,977 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 20:30:13,078 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 20:30:13,355 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 20:30:13,994 - INFO - ✅ TDTH: $0.93 | Vol: 263,486 | Cap: $107,027,416
+2025-10-08 20:30:14,732 - INFO - ✅ ZSPC: $1.07 | Vol: 827,632 | Cap: $25,718,380
+2025-10-08 20:30:17,899 - INFO - ✅ DKI: $0.86 | Vol: 587,930 | Cap: $15,176,145
+2025-10-08 20:30:18,484 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 20:30:54,970 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 20:30:54,970 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 20:30:55,617 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 20:30:55,618 - INFO - ⏰ Bir sonraki tarama: 20:45:00 (844 saniye sonra)
+2025-10-08 20:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 20:45:00
+2025-10-08 20:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 20:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 20:45:11,170 - INFO - ✅ CYCU: $0.33 | Vol: 17,701,658 | Cap: $23,227,282
+2025-10-08 20:45:12,077 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 20:45:12,982 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 20:45:13,083 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 20:45:13,394 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 20:45:14,229 - INFO - ✅ TDTH: $0.93 | Vol: 263,486 | Cap: $107,027,416
+2025-10-08 20:45:14,600 - INFO - ✅ ZSPC: $1.07 | Vol: 827,632 | Cap: $25,718,380
+2025-10-08 20:45:18,073 - INFO - ✅ DKI: $0.86 | Vol: 587,930 | Cap: $15,176,145
+2025-10-08 20:45:18,464 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 20:45:33,459 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 20:45:33,459 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 20:45:34,109 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 20:45:34,109 - INFO - ⏰ Bir sonraki tarama: 21:00:00 (866 saniye sonra)
+2025-10-08 21:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 21:00:00
+2025-10-08 21:00:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 21:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 21:00:12,264 - INFO - ✅ CYCU: $0.33 | Vol: 17,701,658 | Cap: $23,227,282
+2025-10-08 21:00:13,319 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 21:00:14,350 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 21:00:14,450 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 21:00:14,813 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 21:00:15,548 - INFO - ✅ TDTH: $0.93 | Vol: 263,499 | Cap: $107,027,416
+2025-10-08 21:00:15,937 - INFO - ✅ ZSPC: $1.07 | Vol: 844,915 | Cap: $25,718,380
+2025-10-08 21:00:19,463 - INFO - ✅ DKI: $0.86 | Vol: 592,415 | Cap: $15,176,145
+2025-10-08 21:00:19,871 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 21:00:34,531 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 21:00:34,532 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 21:00:35,135 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 21:00:35,136 - INFO - ⏰ Bir sonraki tarama: 21:15:00 (865 saniye sonra)
+2025-10-08 21:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 21:15:00
+2025-10-08 21:15:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 21:15:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 21:15:10,483 - INFO - ✅ CYCU: $0.33 | Vol: 17,701,658 | Cap: $23,227,282
+2025-10-08 21:15:11,446 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 21:15:12,571 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 21:15:12,671 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 21:15:12,940 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 21:15:13,557 - INFO - ✅ TDTH: $0.93 | Vol: 263,499 | Cap: $107,027,416
+2025-10-08 21:15:13,953 - INFO - ✅ ZSPC: $1.07 | Vol: 844,915 | Cap: $25,718,380
+2025-10-08 21:15:17,081 - INFO - ✅ DKI: $0.86 | Vol: 592,415 | Cap: $15,176,145
+2025-10-08 21:15:17,476 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 21:15:31,776 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 21:15:31,777 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 21:15:32,383 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 21:15:32,384 - INFO - ⏰ Bir sonraki tarama: 21:30:00 (868 saniye sonra)
+2025-10-08 21:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 21:30:00
+2025-10-08 21:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 21:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 21:30:10,850 - INFO - ✅ CYCU: $0.33 | Vol: 17,701,658 | Cap: $23,227,282
+2025-10-08 21:30:11,814 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 21:30:12,798 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 21:30:12,899 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 21:30:13,191 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 21:30:13,863 - INFO - ✅ TDTH: $0.93 | Vol: 263,499 | Cap: $107,027,416
+2025-10-08 21:30:14,240 - INFO - ✅ ZSPC: $1.07 | Vol: 844,915 | Cap: $25,718,380
+2025-10-08 21:30:17,598 - INFO - ✅ DKI: $0.86 | Vol: 592,415 | Cap: $15,176,145
+2025-10-08 21:30:17,971 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 21:30:32,672 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 21:30:32,673 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 21:30:33,258 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 21:30:33,258 - INFO - ⏰ Bir sonraki tarama: 21:45:00 (867 saniye sonra)
+2025-10-08 21:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 21:45:00
+2025-10-08 21:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 21:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 21:45:10,086 - INFO - ✅ CYCU: $0.33 | Vol: 17,701,658 | Cap: $23,227,282
+2025-10-08 21:45:11,202 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 21:45:12,201 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 21:45:12,301 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 21:45:12,595 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 21:45:13,246 - INFO - ✅ TDTH: $0.93 | Vol: 263,499 | Cap: $107,027,416
+2025-10-08 21:45:13,618 - INFO - ✅ ZSPC: $1.07 | Vol: 844,915 | Cap: $25,718,380
+2025-10-08 21:45:16,963 - INFO - ✅ DKI: $0.86 | Vol: 592,415 | Cap: $15,176,145
+2025-10-08 21:45:17,361 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 21:45:30,852 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 21:45:30,853 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 21:45:31,458 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 21:45:31,459 - INFO - ⏰ Bir sonraki tarama: 22:00:00 (869 saniye sonra)
+2025-10-08 22:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 22:00:00
+2025-10-08 22:00:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-08 22:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-08 22:00:11,040 - INFO - ✅ CYCU: $0.33 | Vol: 17,701,658 | Cap: $23,227,282
+2025-10-08 22:00:12,023 - INFO - ✅ WCT: $0.38 | Vol: 595,417 | Cap: $58,240,696
+2025-10-08 22:00:12,905 - INFO - ✅ VEEA: $0.82 | Vol: 192,310 | Cap: $41,144,944
+2025-10-08 22:00:13,007 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-08 22:00:13,276 - INFO - ✅ ILLR: $0.90 | Vol: 330,197 | Cap: $136,499,840
+2025-10-08 22:00:13,933 - INFO - ✅ TDTH: $0.93 | Vol: 263,499 | Cap: $107,027,416
+2025-10-08 22:00:14,327 - INFO - ✅ ZSPC: $1.07 | Vol: 844,915 | Cap: $25,718,380
+2025-10-08 22:00:17,600 - INFO - ✅ DKI: $0.86 | Vol: 592,415 | Cap: $15,176,145
+2025-10-08 22:00:17,979 - INFO - ✅ MYPS: $0.96 | Vol: 131,315 | Cap: $119,792,984
+2025-10-08 22:00:32,110 - INFO - 🎯 8 hisse filtrelendi
+2025-10-08 22:00:32,110 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-08 22:00:32,694 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-08 22:00:32,695 - INFO - ⏰ Bir sonraki tarama: 22:15:00 (867 saniye sonra)
+2025-10-08 22:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 22:15:00
+2025-10-08 22:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 22:15:00,001 - INFO - ⏰ Bir sonraki tarama: 22:30:00 (900 saniye sonra)
+2025-10-08 22:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 22:30:00
+2025-10-08 22:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 22:30:00,001 - INFO - ⏰ Bir sonraki tarama: 22:45:00 (900 saniye sonra)
+2025-10-08 22:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 22:45:00
+2025-10-08 22:45:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 22:45:00,001 - INFO - ⏰ Bir sonraki tarama: 23:00:00 (900 saniye sonra)
+2025-10-08 23:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 23:00:00
+2025-10-08 23:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:00:00,001 - INFO - ⏰ Bir sonraki tarama: 23:15:00 (900 saniye sonra)
+2025-10-08 23:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 23:15:00
+2025-10-08 23:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:15:00,001 - INFO - ⏰ Bir sonraki tarama: 23:30:00 (900 saniye sonra)
+2025-10-08 23:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 23:30:00
+2025-10-08 23:30:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:30:00,001 - INFO - ⏰ Bir sonraki tarama: 23:45:00 (900 saniye sonra)
+2025-10-08 23:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 23:45:00
+2025-10-08 23:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:45:00,001 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:46:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 23:46:00
+2025-10-08 23:46:00,001 - INFO - ⏰ 15 dakikalık mum kapanışı için 60 saniye bekleniyor...
+2025-10-08 23:47:00,002 - INFO - 🔄 DYNAMIC_SCAN_CONTINUE: 23:47:00
+2025-10-08 23:47:00,003 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:47:00,003 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:48:00,003 - INFO - 🔄 DYNAMIC_SCAN_START: 23:48:00
+2025-10-08 23:48:00,004 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:48:00,004 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:49:00,004 - INFO - 🔄 DYNAMIC_SCAN_START: 23:49:00
+2025-10-08 23:49:00,005 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:49:00,005 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:50:00,005 - INFO - 🔄 DYNAMIC_SCAN_START: 23:50:00
+2025-10-08 23:50:00,006 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:50:00,006 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:51:00,006 - INFO - 🔄 DYNAMIC_SCAN_START: 23:51:00
+2025-10-08 23:51:00,007 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:51:00,007 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:52:00,007 - INFO - 🔄 DYNAMIC_SCAN_START: 23:52:00
+2025-10-08 23:52:00,008 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:52:00,008 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:53:00,008 - INFO - 🔄 DYNAMIC_SCAN_START: 23:53:00
+2025-10-08 23:53:00,009 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:53:00,009 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:54:00,009 - INFO - 🔄 DYNAMIC_SCAN_START: 23:54:00
+2025-10-08 23:54:00,011 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:54:00,011 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:55:00,011 - INFO - 🔄 DYNAMIC_SCAN_START: 23:55:00
+2025-10-08 23:55:00,012 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:55:00,012 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:56:00,012 - INFO - 🔄 DYNAMIC_SCAN_START: 23:56:00
+2025-10-08 23:56:00,013 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:56:00,013 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:57:00,013 - INFO - 🔄 DYNAMIC_SCAN_START: 23:57:00
+2025-10-08 23:57:00,013 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:57:00,014 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:58:00,014 - INFO - 🔄 DYNAMIC_SCAN_START: 23:58:00
+2025-10-08 23:58:00,014 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:58:00,014 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-08 23:59:00,015 - INFO - 🔄 DYNAMIC_SCAN_START: 23:59:00
+2025-10-08 23:59:00,015 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-08 23:59:00,016 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 00:00:00,017 - INFO - 🔄 DYNAMIC_SCAN_START: 00:00:00
+2025-10-09 00:00:00,017 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 00:00:00,018 - INFO - ⏰ Bir sonraki tarama: 00:15:00 (900 saniye sonra)
+2025-10-09 00:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 00:15:00
+2025-10-09 00:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 00:15:00,001 - INFO - ⏰ Bir sonraki tarama: 00:30:00 (900 saniye sonra)
+2025-10-09 00:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 00:30:00
+2025-10-09 00:30:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 00:30:00,001 - INFO - ⏰ Bir sonraki tarama: 00:45:00 (900 saniye sonra)
+2025-10-09 00:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 00:45:00
+2025-10-09 00:45:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 00:45:00,001 - INFO - ⏰ Bir sonraki tarama: 01:00:00 (900 saniye sonra)
+2025-10-09 01:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 01:00:00
+2025-10-09 01:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 01:00:00,001 - INFO - ⏰ Bir sonraki tarama: 01:15:00 (900 saniye sonra)
+2025-10-09 01:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 01:15:00
+2025-10-09 01:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 01:15:00,001 - INFO - ⏰ Bir sonraki tarama: 01:30:00 (900 saniye sonra)
+2025-10-09 01:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 01:30:00
+2025-10-09 01:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 01:30:00,000 - INFO - ⏰ Bir sonraki tarama: 01:45:00 (900 saniye sonra)
+2025-10-09 01:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 01:45:00
+2025-10-09 01:45:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 01:45:00,001 - INFO - ⏰ Bir sonraki tarama: 02:00:00 (900 saniye sonra)
+2025-10-09 02:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 02:00:00
+2025-10-09 02:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 02:00:00,000 - INFO - ⏰ Bir sonraki tarama: 02:15:00 (900 saniye sonra)
+2025-10-09 02:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 02:15:00
+2025-10-09 02:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 02:15:00,001 - INFO - ⏰ Bir sonraki tarama: 02:30:00 (900 saniye sonra)
+2025-10-09 02:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 02:30:00
+2025-10-09 02:30:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 02:30:00,001 - INFO - ⏰ Bir sonraki tarama: 02:45:00 (900 saniye sonra)
+2025-10-09 02:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 02:45:00
+2025-10-09 02:45:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 02:45:00,001 - INFO - ⏰ Bir sonraki tarama: 03:00:00 (900 saniye sonra)
+2025-10-09 03:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 03:00:00
+2025-10-09 03:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 03:00:00,001 - INFO - ⏰ Bir sonraki tarama: 03:15:00 (900 saniye sonra)
+2025-10-09 03:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 03:15:00
+2025-10-09 03:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 03:15:00,001 - INFO - ⏰ Bir sonraki tarama: 03:30:00 (900 saniye sonra)
+2025-10-09 03:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 03:30:00
+2025-10-09 03:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 03:30:00,001 - INFO - ⏰ Bir sonraki tarama: 03:45:00 (900 saniye sonra)
+2025-10-09 03:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 03:45:00
+2025-10-09 03:45:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 03:45:00,001 - INFO - ⏰ Bir sonraki tarama: 04:00:00 (900 saniye sonra)
+2025-10-09 04:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 04:00:00
+2025-10-09 04:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 04:00:00,000 - INFO - ⏰ Bir sonraki tarama: 04:15:00 (900 saniye sonra)
+2025-10-09 04:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 04:15:00
+2025-10-09 04:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 04:15:00,000 - INFO - ⏰ Bir sonraki tarama: 04:30:00 (900 saniye sonra)
+2025-10-09 04:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 04:30:00
+2025-10-09 04:30:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 04:30:00,001 - INFO - ⏰ Bir sonraki tarama: 04:45:00 (900 saniye sonra)
+2025-10-09 04:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 04:45:00
+2025-10-09 04:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 04:45:00,001 - INFO - ⏰ Bir sonraki tarama: 05:00:00 (900 saniye sonra)
+2025-10-09 05:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 05:00:00
+2025-10-09 05:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 05:00:00,002 - INFO - ⏰ Bir sonraki tarama: 05:15:00 (900 saniye sonra)
+2025-10-09 05:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 05:15:00
+2025-10-09 05:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 05:15:00,001 - INFO - ⏰ Bir sonraki tarama: 05:30:00 (900 saniye sonra)
+2025-10-09 05:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 05:30:00
+2025-10-09 05:30:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 05:30:00,002 - INFO - ⏰ Bir sonraki tarama: 05:45:00 (900 saniye sonra)
+2025-10-09 05:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 05:45:00
+2025-10-09 05:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 05:45:00,001 - INFO - ⏰ Bir sonraki tarama: 06:00:00 (900 saniye sonra)
+2025-10-09 06:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 06:00:00
+2025-10-09 06:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 06:00:00,002 - INFO - ⏰ Bir sonraki tarama: 06:15:00 (900 saniye sonra)
+2025-10-09 06:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 06:15:00
+2025-10-09 06:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 06:15:00,001 - INFO - ⏰ Bir sonraki tarama: 06:30:00 (900 saniye sonra)
+2025-10-09 06:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 06:30:00
+2025-10-09 06:30:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 06:30:00,002 - INFO - ⏰ Bir sonraki tarama: 06:45:00 (900 saniye sonra)
+2025-10-09 06:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 06:45:00
+2025-10-09 06:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 06:45:00,000 - INFO - ⏰ Bir sonraki tarama: 07:00:00 (900 saniye sonra)
+2025-10-09 07:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 07:00:00
+2025-10-09 07:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 07:00:00,000 - INFO - ⏰ Bir sonraki tarama: 07:15:00 (900 saniye sonra)
+2025-10-09 07:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 07:15:00
+2025-10-09 07:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 07:15:00,001 - INFO - ⏰ Bir sonraki tarama: 07:30:00 (900 saniye sonra)
+2025-10-09 07:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 07:30:00
+2025-10-09 07:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 07:30:00,000 - INFO - ⏰ Bir sonraki tarama: 07:45:00 (900 saniye sonra)
+2025-10-09 07:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 07:45:00
+2025-10-09 07:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 07:45:00,001 - INFO - ⏰ Bir sonraki tarama: 08:00:00 (900 saniye sonra)
+2025-10-09 08:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 08:00:00
+2025-10-09 08:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 08:00:00,002 - INFO - ⏰ Bir sonraki tarama: 08:15:00 (900 saniye sonra)
+2025-10-09 08:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 08:15:00
+2025-10-09 08:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 08:15:00,002 - INFO - ⏰ Bir sonraki tarama: 08:30:00 (900 saniye sonra)
+2025-10-09 08:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 08:30:00
+2025-10-09 08:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 08:30:00,001 - INFO - ⏰ Bir sonraki tarama: 08:45:00 (900 saniye sonra)
+2025-10-09 08:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 08:45:00
+2025-10-09 08:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 08:45:00,001 - INFO - ⏰ Bir sonraki tarama: 09:00:00 (900 saniye sonra)
+2025-10-09 09:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 09:00:00
+2025-10-09 09:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 09:00:00,000 - INFO - ⏰ Bir sonraki tarama: 09:15:00 (900 saniye sonra)
+2025-10-09 09:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 09:15:00
+2025-10-09 09:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 09:15:00,002 - INFO - ⏰ Bir sonraki tarama: 09:30:00 (900 saniye sonra)
+2025-10-09 09:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 09:30:00
+2025-10-09 09:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 09:30:00,000 - INFO - ⏰ Bir sonraki tarama: 09:45:00 (900 saniye sonra)
+2025-10-09 09:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 09:45:00
+2025-10-09 09:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 09:45:00,002 - INFO - ⏰ Bir sonraki tarama: 10:00:00 (900 saniye sonra)
+2025-10-09 10:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 10:00:00
+2025-10-09 10:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 10:00:00,002 - INFO - ⏰ Bir sonraki tarama: 10:15:00 (900 saniye sonra)
+2025-10-09 10:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 10:15:00
+2025-10-09 10:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 10:15:00,001 - INFO - ⏰ Bir sonraki tarama: 10:30:00 (900 saniye sonra)
+2025-10-09 10:30:00,002 - INFO - 🔄 DYNAMIC_SCAN_START: 10:30:00
+2025-10-09 10:30:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 10:30:00,002 - INFO - ⏰ Bir sonraki tarama: 10:45:00 (900 saniye sonra)
+2025-10-09 10:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 10:45:00
+2025-10-09 10:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 10:45:00,001 - INFO - ⏰ Bir sonraki tarama: 11:00:00 (900 saniye sonra)
+2025-10-09 11:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 11:00:00
+2025-10-09 11:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 11:00:00,002 - INFO - ⏰ Bir sonraki tarama: 11:15:00 (900 saniye sonra)
+2025-10-09 11:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 11:15:00
+2025-10-09 11:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 11:15:00,002 - INFO - ⏰ Bir sonraki tarama: 11:30:00 (900 saniye sonra)
+2025-10-09 11:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 11:30:00
+2025-10-09 11:30:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 11:30:00,002 - INFO - ⏰ Bir sonraki tarama: 11:45:00 (900 saniye sonra)
+2025-10-09 11:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 11:45:00
+2025-10-09 11:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 11:45:00,001 - INFO - ⏰ Bir sonraki tarama: 12:00:00 (900 saniye sonra)
+2025-10-09 12:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 12:00:00
+2025-10-09 12:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 12:00:00,000 - INFO - ⏰ Bir sonraki tarama: 12:15:00 (900 saniye sonra)
+2025-10-09 12:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 12:15:00
+2025-10-09 12:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 12:15:00,002 - INFO - ⏰ Bir sonraki tarama: 12:30:00 (900 saniye sonra)
+2025-10-09 12:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 12:30:00
+2025-10-09 12:30:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 12:30:00,001 - INFO - ⏰ Bir sonraki tarama: 12:45:00 (900 saniye sonra)
+2025-10-09 12:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 12:45:00
+2025-10-09 12:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 12:45:00,002 - INFO - ⏰ Bir sonraki tarama: 13:00:00 (900 saniye sonra)
+2025-10-09 13:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 13:00:00
+2025-10-09 13:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 13:00:00,001 - INFO - ⏰ Bir sonraki tarama: 13:15:00 (900 saniye sonra)
+2025-10-09 13:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 13:15:00
+2025-10-09 13:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 13:15:00,002 - INFO - ⏰ Bir sonraki tarama: 13:30:00 (900 saniye sonra)
+2025-10-09 13:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 13:30:00
+2025-10-09 13:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 13:30:00,001 - INFO - ⏰ Bir sonraki tarama: 13:45:00 (900 saniye sonra)
+2025-10-09 13:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 13:45:00
+2025-10-09 13:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 13:45:00,002 - INFO - ⏰ Bir sonraki tarama: 14:00:00 (900 saniye sonra)
+2025-10-09 14:00:00,002 - INFO - 🔄 DYNAMIC_SCAN_START: 14:00:00
+2025-10-09 14:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 14:00:00,002 - INFO - ⏰ Bir sonraki tarama: 14:15:00 (900 saniye sonra)
+2025-10-09 14:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 14:15:00
+2025-10-09 14:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 14:15:00,001 - INFO - ⏰ Bir sonraki tarama: 14:30:00 (900 saniye sonra)
+2025-10-09 14:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 14:30:00
+2025-10-09 14:30:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 14:30:00,002 - INFO - ⏰ Bir sonraki tarama: 14:45:00 (900 saniye sonra)
+2025-10-09 14:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 14:45:00
+2025-10-09 14:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 14:45:00,002 - INFO - ⏰ Bir sonraki tarama: 15:00:00 (900 saniye sonra)
+2025-10-09 15:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 15:00:00
+2025-10-09 15:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 15:00:00,001 - INFO - ⏰ Bir sonraki tarama: 15:15:00 (900 saniye sonra)
+2025-10-09 15:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 15:15:00
+2025-10-09 15:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 15:15:00,002 - INFO - ⏰ Bir sonraki tarama: 15:30:00 (900 saniye sonra)
+2025-10-09 15:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 15:30:00
+2025-10-09 15:30:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 15:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 15:30:18,619 - INFO - ✅ CYCU: $0.30 | Vol: 6,672,903 | Cap: $21,168,452
+2025-10-09 15:30:19,819 - INFO - ✅ WCT: $0.41 | Vol: 358,653 | Cap: $62,164,284
+2025-10-09 15:30:22,166 - INFO - ✅ TDTH: $0.93 | Vol: 179,204 | Cap: $106,923,840
+2025-10-09 15:30:22,647 - INFO - ✅ ZSPC: $1.40 | Vol: 5,600,942 | Cap: $33,650,216
+2025-10-09 15:30:27,027 - INFO - ✅ DKI: $0.82 | Vol: 408,719 | Cap: $14,532,727
+2025-10-09 15:30:43,321 - INFO - 🎯 5 hisse filtrelendi
+2025-10-09 15:30:43,322 - INFO - 🔍 5 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 15:30:43,766 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 15:30:43,767 - INFO - ⏰ Bir sonraki tarama: 15:45:00 (856 saniye sonra)
+2025-10-09 15:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 15:45:00
+2025-10-09 15:45:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 15:45:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 15:45:17,591 - INFO - ✅ CYCU: $0.29 | Vol: 6,884,908 | Cap: $20,828,852
+2025-10-09 15:45:19,051 - INFO - ✅ WCT: $0.40 | Vol: 360,315 | Cap: $61,566,544
+2025-10-09 15:45:20,679 - INFO - ✅ VEEA: $0.80 | Vol: 105,370 | Cap: $40,101,140
+2025-10-09 15:45:20,780 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 15:45:22,484 - INFO - ✅ TDTH: $0.93 | Vol: 180,564 | Cap: $106,774,208
+2025-10-09 15:45:22,945 - INFO - ✅ ZSPC: $1.42 | Vol: 6,139,396 | Cap: $34,130,932
+2025-10-09 15:45:27,724 - INFO - ✅ DKI: $0.82 | Vol: 423,071 | Cap: $14,451,192
+2025-10-09 15:45:47,447 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 15:45:47,448 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 15:45:47,718 - INFO - 🎯 VEEA SELL sinyali!
+2025-10-09 15:45:47,905 - INFO - 📱 NASDAQ Dynamic Telegram mesajı gönderildi
+2025-10-09 15:45:48,204 - INFO - ✅ Tarama tamamlandı - 1 sinyal bulundu
+2025-10-09 15:45:48,205 - INFO - ⏰ Bir sonraki tarama: 16:00:00 (852 saniye sonra)
+2025-10-09 16:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 16:00:00
+2025-10-09 16:00:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 16:00:00,000 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 16:00:14,967 - INFO - ✅ CYCU: $0.30 | Vol: 7,090,051 | Cap: $21,076,476
+2025-10-09 16:00:16,284 - INFO - ✅ WCT: $0.40 | Vol: 364,300 | Cap: $61,137,404
+2025-10-09 16:00:17,750 - INFO - ✅ VEEA: $0.80 | Vol: 105,371 | Cap: $40,101,140
+2025-10-09 16:00:17,850 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 16:00:18,725 - INFO - ✅ TDTH: $0.92 | Vol: 235,542 | Cap: $106,003,072
+2025-10-09 16:00:19,269 - INFO - ✅ ZSPC: $1.44 | Vol: 6,876,930 | Cap: $34,611,652
+2025-10-09 16:00:23,991 - INFO - ✅ DKI: $0.82 | Vol: 428,109 | Cap: $14,589,447
+2025-10-09 16:00:44,492 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 16:00:44,493 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 16:00:45,083 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 16:00:45,084 - INFO - ⏰ Bir sonraki tarama: 16:15:00 (855 saniye sonra)
+2025-10-09 16:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 16:15:00
+2025-10-09 16:15:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 16:15:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 16:15:15,584 - INFO - ✅ CYCU: $0.30 | Vol: 7,231,489 | Cap: $21,076,476
+2025-10-09 16:15:16,585 - INFO - ✅ WCT: $0.40 | Vol: 366,281 | Cap: $61,474,588
+2025-10-09 16:15:17,767 - INFO - ✅ VEEA: $0.80 | Vol: 105,950 | Cap: $40,151,324
+2025-10-09 16:15:17,869 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 16:15:18,741 - INFO - ✅ TDTH: $0.92 | Vol: 238,335 | Cap: $105,980,048
+2025-10-09 16:15:19,169 - INFO - ✅ ZSPC: $1.44 | Vol: 7,139,447 | Cap: $34,491,468
+2025-10-09 16:15:23,022 - INFO - ✅ DKI: $0.82 | Vol: 435,670 | Cap: $14,600,083
+2025-10-09 16:15:46,812 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 16:15:46,812 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 16:15:47,301 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 16:15:47,302 - INFO - ⏰ Bir sonraki tarama: 16:30:00 (853 saniye sonra)
+2025-10-09 16:30:00,002 - INFO - 🔄 DYNAMIC_SCAN_START: 16:30:00
+2025-10-09 16:30:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 16:30:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 16:30:11,830 - INFO - ✅ CYCU: $0.30 | Vol: 7,395,759 | Cap: $21,048,178
+2025-10-09 16:30:13,185 - INFO - ✅ WCT: $0.39 | Vol: 394,000 | Cap: $60,432,388
+2025-10-09 16:30:14,485 - INFO - ✅ VEEA: $0.80 | Vol: 107,268 | Cap: $40,291,836
+2025-10-09 16:30:14,586 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 16:30:15,537 - INFO - ✅ TDTH: $0.92 | Vol: 243,037 | Cap: $106,244,768
+2025-10-09 16:30:16,016 - INFO - ✅ ZSPC: $1.40 | Vol: 7,401,769 | Cap: $33,530,036
+2025-10-09 16:30:22,028 - INFO - ✅ DKI: $0.83 | Vol: 444,529 | Cap: $14,640,850
+2025-10-09 16:30:38,131 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 16:30:38,133 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 16:30:38,729 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 16:30:38,729 - INFO - ⏰ Bir sonraki tarama: 16:45:00 (861 saniye sonra)
+2025-10-09 16:45:00,002 - INFO - 🔄 DYNAMIC_SCAN_START: 16:45:00
+2025-10-09 16:45:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 16:45:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 16:45:12,487 - INFO - ✅ CYCU: $0.29 | Vol: 7,637,084 | Cap: $20,772,252
+2025-10-09 16:45:13,531 - INFO - ✅ WCT: $0.39 | Vol: 394,430 | Cap: $59,788,672
+2025-10-09 16:45:14,680 - INFO - ✅ VEEA: $0.80 | Vol: 107,310 | Cap: $40,291,836
+2025-10-09 16:45:14,781 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 16:45:15,670 - INFO - ✅ TDTH: $0.92 | Vol: 243,140 | Cap: $106,244,768
+2025-10-09 16:45:16,193 - INFO - ✅ ZSPC: $1.38 | Vol: 7,456,536 | Cap: $33,169,498
+2025-10-09 16:45:20,601 - INFO - ✅ DKI: $0.83 | Vol: 455,606 | Cap: $14,635,532
+2025-10-09 16:45:42,669 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 16:45:42,669 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 16:45:43,646 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 16:45:43,647 - INFO - ⏰ Bir sonraki tarama: 17:00:00 (856 saniye sonra)
+2025-10-09 17:00:00,002 - INFO - 🔄 DYNAMIC_SCAN_START: 17:00:00
+2025-10-09 17:00:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 17:00:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 17:00:13,163 - INFO - ✅ CYCU: $0.29 | Vol: 7,959,700 | Cap: $20,835,926
+2025-10-09 17:00:14,142 - INFO - ✅ WCT: $0.39 | Vol: 407,420 | Cap: $59,987,920
+2025-10-09 17:00:15,087 - INFO - ✅ VEEA: $0.80 | Vol: 113,710 | Cap: $40,146,304
+2025-10-09 17:00:15,187 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 17:00:16,030 - INFO - ✅ TDTH: $0.92 | Vol: 244,476 | Cap: $105,887,976
+2025-10-09 17:00:16,393 - INFO - ✅ ZSPC: $1.43 | Vol: 7,695,527 | Cap: $34,347,256
+2025-10-09 17:00:19,946 - INFO - ✅ DKI: $0.83 | Vol: 462,937 | Cap: $14,640,850
+2025-10-09 17:00:37,649 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 17:00:37,650 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 17:00:38,160 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 17:00:38,161 - INFO - ⏰ Bir sonraki tarama: 17:15:00 (862 saniye sonra)
+2025-10-09 17:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 17:15:00
+2025-10-09 17:15:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 17:15:00,000 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 17:15:10,914 - INFO - ✅ CYCU: $0.29 | Vol: 8,418,007 | Cap: $20,701,502
+2025-10-09 17:15:11,943 - INFO - ✅ WCT: $0.39 | Vol: 422,431 | Cap: $59,328,880
+2025-10-09 17:15:12,972 - INFO - ✅ VEEA: $0.81 | Vol: 123,467 | Cap: $40,397,220
+2025-10-09 17:15:13,072 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 17:15:14,174 - INFO - ✅ TDTH: $0.92 | Vol: 245,103 | Cap: $105,887,976
+2025-10-09 17:15:14,566 - INFO - ✅ ZSPC: $1.43 | Vol: 7,819,716 | Cap: $34,371,288
+2025-10-09 17:15:18,191 - INFO - ✅ DKI: $0.83 | Vol: 471,170 | Cap: $14,647,940
+2025-10-09 17:15:33,539 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 17:15:33,540 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 17:15:34,174 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 17:15:34,175 - INFO - ⏰ Bir sonraki tarama: 17:30:00 (866 saniye sonra)
+2025-10-09 17:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 17:30:00
+2025-10-09 17:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 17:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 17:30:17,809 - INFO - ✅ CYCU: $0.29 | Vol: 8,673,827 | Cap: $20,637,826
+2025-10-09 17:30:20,625 - INFO - ✅ WCT: $0.39 | Vol: 423,659 | Cap: $59,451,488
+2025-10-09 17:30:21,677 - INFO - ✅ VEEA: $0.79 | Vol: 126,474 | Cap: $39,689,640
+2025-10-09 17:30:21,778 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 17:30:22,712 - INFO - ✅ TDTH: $0.92 | Vol: 248,665 | Cap: $105,887,976
+2025-10-09 17:30:23,270 - INFO - ✅ ZSPC: $1.43 | Vol: 7,865,325 | Cap: $34,383,308
+2025-10-09 17:30:26,671 - INFO - ✅ DKI: $0.83 | Vol: 483,661 | Cap: $14,630,215
+2025-10-09 17:31:19,990 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 17:31:19,991 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 17:31:20,267 - INFO - 🎯 VEEA SELL sinyali!
+2025-10-09 17:31:20,465 - INFO - 📱 NASDAQ Dynamic Telegram mesajı gönderildi
+2025-10-09 17:31:20,768 - INFO - ✅ Tarama tamamlandı - 1 sinyal bulundu
+2025-10-09 17:31:20,770 - INFO - ⏰ Bir sonraki tarama: 17:45:00 (819 saniye sonra)
+2025-10-09 17:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 17:45:00
+2025-10-09 17:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 17:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 17:45:11,738 - INFO - ✅ CYCU: $0.29 | Vol: 8,860,614 | Cap: $20,694,426
+2025-10-09 17:45:12,940 - INFO - ✅ WCT: $0.39 | Vol: 437,122 | Cap: $59,267,572
+2025-10-09 17:45:14,126 - INFO - ✅ VEEA: $0.79 | Vol: 126,724 | Cap: $39,754,880
+2025-10-09 17:45:14,227 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 17:45:15,201 - INFO - ✅ TDTH: $0.92 | Vol: 249,254 | Cap: $105,887,976
+2025-10-09 17:45:15,626 - INFO - ✅ ZSPC: $1.47 | Vol: 8,113,446 | Cap: $35,332,728
+2025-10-09 17:45:19,081 - INFO - ✅ DKI: $0.83 | Vol: 513,949 | Cap: $14,624,898
+2025-10-09 17:45:36,914 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 17:45:36,915 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 17:45:37,355 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 17:45:37,355 - INFO - ⏰ Bir sonraki tarama: 18:00:00 (863 saniye sonra)
+2025-10-09 18:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 18:00:00
+2025-10-09 18:00:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 18:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 18:00:11,779 - INFO - ✅ CYCU: $0.29 | Vol: 9,052,758 | Cap: $20,666,128
+2025-10-09 18:00:12,791 - INFO - ✅ WCT: $0.39 | Vol: 445,416 | Cap: $59,941,936
+2025-10-09 18:00:13,878 - INFO - ✅ VEEA: $0.79 | Vol: 129,126 | Cap: $39,739,820
+2025-10-09 18:00:13,979 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 18:00:14,961 - INFO - ✅ TDTH: $0.92 | Vol: 253,682 | Cap: $106,118,168
+2025-10-09 18:00:15,499 - INFO - ✅ ZSPC: $1.47 | Vol: 8,386,746 | Cap: $35,332,728
+2025-10-09 18:00:18,980 - INFO - ✅ DKI: $0.83 | Vol: 520,007 | Cap: $14,624,898
+2025-10-09 18:00:34,113 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 18:00:34,114 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 18:00:34,645 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 18:00:34,645 - INFO - ⏰ Bir sonraki tarama: 18:15:00 (865 saniye sonra)
+2025-10-09 18:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 18:15:00
+2025-10-09 18:15:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 18:15:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 18:15:12,519 - INFO - ✅ CYCU: $0.29 | Vol: 9,294,048 | Cap: $20,637,826
+2025-10-09 18:15:13,524 - INFO - ✅ WCT: $0.39 | Vol: 452,626 | Cap: $60,463,036
+2025-10-09 18:15:14,759 - INFO - ✅ VEEA: $0.79 | Vol: 130,216 | Cap: $39,734,804
+2025-10-09 18:15:14,860 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 18:15:15,940 - INFO - ✅ TDTH: $0.92 | Vol: 255,728 | Cap: $106,095,152
+2025-10-09 18:15:16,351 - INFO - ✅ ZSPC: $1.55 | Vol: 9,209,317 | Cap: $37,270,020
+2025-10-09 18:15:20,139 - INFO - ✅ DKI: $0.82 | Vol: 544,695 | Cap: $14,569,950
+2025-10-09 18:15:37,129 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 18:15:37,130 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 18:15:37,583 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 18:15:37,584 - INFO - ⏰ Bir sonraki tarama: 18:30:00 (862 saniye sonra)
+2025-10-09 18:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 18:30:00
+2025-10-09 18:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 18:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 18:30:12,754 - INFO - ✅ CYCU: $0.29 | Vol: 9,501,540 | Cap: $20,482,176
+2025-10-09 18:30:13,734 - INFO - ✅ WCT: $0.39 | Vol: 461,259 | Cap: $60,355,752
+2025-10-09 18:30:15,469 - INFO - ✅ VEEA: $0.80 | Vol: 132,538 | Cap: $40,126,232
+2025-10-09 18:30:15,569 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 18:30:16,554 - INFO - ✅ TDTH: $0.92 | Vol: 319,317 | Cap: $105,887,976
+2025-10-09 18:30:16,927 - INFO - ✅ ZSPC: $1.74 | Vol: 11,765,984 | Cap: $41,702,232
+2025-10-09 18:30:20,414 - INFO - ✅ DKI: $0.82 | Vol: 567,644 | Cap: $14,534,500
+2025-10-09 18:30:36,724 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 18:30:36,724 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 18:30:37,212 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 18:30:37,213 - INFO - ⏰ Bir sonraki tarama: 18:45:00 (863 saniye sonra)
+2025-10-09 18:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 18:45:00
+2025-10-09 18:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 18:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 18:45:13,559 - INFO - ✅ CYCU: $0.29 | Vol: 9,883,150 | Cap: $20,277,000
+2025-10-09 18:45:14,524 - INFO - ✅ WCT: $0.39 | Vol: 461,259 | Cap: $60,355,752
+2025-10-09 18:45:15,500 - INFO - ✅ VEEA: $0.80 | Vol: 132,988 | Cap: $40,091,104
+2025-10-09 18:45:15,601 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 18:45:16,659 - INFO - ✅ TDTH: $0.92 | Vol: 380,442 | Cap: $105,910,992
+2025-10-09 18:45:17,019 - INFO - ✅ ZSPC: $1.62 | Vol: 14,344,433 | Cap: $38,940,512
+2025-10-09 18:45:20,511 - INFO - ✅ DKI: $0.82 | Vol: 600,299 | Cap: $14,534,500
+2025-10-09 18:45:34,990 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 18:45:34,990 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 18:45:35,425 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 18:45:35,425 - INFO - ⏰ Bir sonraki tarama: 19:00:00 (865 saniye sonra)
+2025-10-09 19:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 19:00:00
+2025-10-09 19:00:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 19:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 19:00:12,126 - INFO - ✅ CYCU: $0.28 | Vol: 10,040,592 | Cap: $20,015,226
+2025-10-09 19:00:13,173 - INFO - ✅ WCT: $0.39 | Vol: 462,819 | Cap: $60,386,404
+2025-10-09 19:00:14,170 - INFO - ✅ VEEA: $0.80 | Vol: 135,061 | Cap: $39,895,392
+2025-10-09 19:00:14,270 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 19:00:15,128 - INFO - ✅ TDTH: $0.90 | Vol: 416,870 | Cap: $103,747,200
+2025-10-09 19:00:15,617 - INFO - ✅ ZSPC: $1.60 | Vol: 15,354,444 | Cap: $38,471,812
+2025-10-09 19:00:21,736 - INFO - ✅ DKI: $0.83 | Vol: 636,892 | Cap: $14,711,750
+2025-10-09 19:00:38,525 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 19:00:38,526 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 19:00:39,045 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 19:00:39,046 - INFO - ⏰ Bir sonraki tarama: 19:15:00 (861 saniye sonra)
+2025-10-09 19:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 19:15:00
+2025-10-09 19:15:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 19:15:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 19:15:10,699 - INFO - ✅ CYCU: $0.29 | Vol: 10,400,117 | Cap: $20,560,002
+2025-10-09 19:15:11,827 - INFO - ✅ WCT: $0.40 | Vol: 473,141 | Cap: $60,861,528
+2025-10-09 19:15:13,016 - INFO - ✅ VEEA: $0.80 | Vol: 135,961 | Cap: $39,895,392
+2025-10-09 19:15:13,116 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 19:15:13,981 - INFO - ✅ TDTH: $0.91 | Vol: 417,498 | Cap: $104,598,904
+2025-10-09 19:15:14,378 - INFO - ✅ ZSPC: $1.58 | Vol: 16,025,943 | Cap: $37,976,672
+2025-10-09 19:15:17,732 - INFO - ✅ DKI: $0.82 | Vol: 638,743 | Cap: $14,534,500
+2025-10-09 19:15:32,368 - INFO - 🎯 6 hisse filtrelendi
+2025-10-09 19:15:32,368 - INFO - 🔍 6 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 19:15:32,867 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 19:15:32,868 - INFO - ⏰ Bir sonraki tarama: 19:30:00 (867 saniye sonra)
+2025-10-09 19:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 19:30:00
+2025-10-09 19:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 19:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 19:30:11,003 - INFO - ✅ CYCU: $0.29 | Vol: 10,865,094 | Cap: $20,772,252
+2025-10-09 19:30:12,062 - INFO - ✅ WCT: $0.40 | Vol: 499,751 | Cap: $61,367,304
+2025-10-09 19:30:13,248 - INFO - ✅ VEEA: $0.80 | Vol: 136,065 | Cap: $39,895,392
+2025-10-09 19:30:13,349 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 19:30:13,620 - INFO - ✅ ILLR: $0.93 | Vol: 198,224 | Cap: $141,639,616
+2025-10-09 19:30:14,245 - INFO - ✅ TDTH: $0.91 | Vol: 418,602 | Cap: $104,737,024
+2025-10-09 19:30:14,634 - INFO - ✅ ZSPC: $1.53 | Vol: 16,401,653 | Cap: $36,666,720
+2025-10-09 19:30:18,117 - INFO - ✅ DKI: $0.82 | Vol: 641,131 | Cap: $14,477,780
+2025-10-09 19:30:32,935 - INFO - 🎯 7 hisse filtrelendi
+2025-10-09 19:30:32,936 - INFO - 🔍 7 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 19:30:33,326 - INFO - 🎯 ILLR BUY sinyali!
+2025-10-09 19:30:33,556 - INFO - 📱 NASDAQ Dynamic Telegram mesajı gönderildi
+2025-10-09 19:30:33,797 - INFO - ✅ Tarama tamamlandı - 1 sinyal bulundu
+2025-10-09 19:30:33,798 - INFO - ⏰ Bir sonraki tarama: 19:45:00 (866 saniye sonra)
+2025-10-09 19:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 19:45:00
+2025-10-09 19:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 19:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 19:45:11,383 - INFO - ✅ CYCU: $0.29 | Vol: 11,055,671 | Cap: $20,574,152
+2025-10-09 19:45:12,323 - INFO - ✅ WCT: $0.41 | Vol: 578,009 | Cap: $62,072,320
+2025-10-09 19:45:13,492 - INFO - ✅ VEEA: $0.79 | Vol: 139,816 | Cap: $39,644,476
+2025-10-09 19:45:13,593 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 19:45:13,903 - INFO - ✅ ILLR: $0.93 | Vol: 215,969 | Cap: $141,033,152
+2025-10-09 19:45:14,635 - INFO - ✅ TDTH: $0.91 | Vol: 419,652 | Cap: $105,197,400
+2025-10-09 19:45:15,014 - INFO - ✅ ZSPC: $1.45 | Vol: 16,965,926 | Cap: $34,880,852
+2025-10-09 19:45:18,557 - INFO - ✅ DKI: $0.83 | Vol: 646,594 | Cap: $14,713,522
+2025-10-09 19:45:34,789 - INFO - 🎯 7 hisse filtrelendi
+2025-10-09 19:45:34,790 - INFO - 🔍 7 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 19:45:35,425 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 19:45:35,425 - INFO - ⏰ Bir sonraki tarama: 20:00:00 (865 saniye sonra)
+2025-10-09 20:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 20:00:00
+2025-10-09 20:00:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 20:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 20:00:21,158 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 20:00:22,337 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 20:00:23,447 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 20:00:23,548 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 20:00:23,846 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 20:00:24,581 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 20:00:25,057 - INFO - ✅ ZSPC: $1.47 | Vol: 17,280,961 | Cap: $35,332,728
+2025-10-09 20:00:28,579 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 20:00:29,021 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 20:00:45,851 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 20:00:45,853 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 20:00:45,929 - INFO - 🎯 CYCU BUY sinyali!
+2025-10-09 20:00:46,057 - INFO - 📱 NASDAQ Dynamic Telegram mesajı gönderildi
+2025-10-09 20:00:46,451 - INFO - 🎯 ZSPC SELL sinyali!
+2025-10-09 20:00:46,586 - INFO - 📱 NASDAQ Dynamic Telegram mesajı gönderildi
+2025-10-09 20:00:46,751 - INFO - ✅ Tarama tamamlandı - 2 sinyal bulundu
+2025-10-09 20:00:46,752 - INFO - ⏰ Bir sonraki tarama: 20:15:00 (853 saniye sonra)
+2025-10-09 20:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 20:15:00
+2025-10-09 20:15:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 20:15:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 20:15:11,301 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 20:15:12,390 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 20:15:13,397 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 20:15:13,497 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 20:15:13,780 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 20:15:14,505 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 20:15:14,913 - INFO - ✅ ZSPC: $1.47 | Vol: 17,280,961 | Cap: $35,332,728
+2025-10-09 20:15:18,366 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 20:15:18,742 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 20:15:33,278 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 20:15:33,279 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 20:15:33,909 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 20:15:33,910 - INFO - ⏰ Bir sonraki tarama: 20:30:00 (866 saniye sonra)
+2025-10-09 20:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 20:30:00
+2025-10-09 20:30:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 20:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 20:30:10,196 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 20:30:11,165 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 20:30:12,134 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 20:30:12,235 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 20:30:12,504 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 20:30:13,164 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 20:30:13,527 - INFO - ✅ ZSPC: $1.47 | Vol: 17,280,961 | Cap: $35,332,728
+2025-10-09 20:30:16,923 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 20:30:17,290 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 20:30:35,769 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 20:30:35,770 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 20:30:36,382 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 20:30:36,383 - INFO - ⏰ Bir sonraki tarama: 20:45:00 (864 saniye sonra)
+2025-10-09 20:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 20:45:00
+2025-10-09 20:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 20:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 20:45:10,674 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 20:45:11,588 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 20:45:12,524 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 20:45:12,625 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 20:45:12,902 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 20:45:13,541 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 20:45:13,902 - INFO - ✅ ZSPC: $1.47 | Vol: 17,280,961 | Cap: $35,332,728
+2025-10-09 20:45:17,213 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 20:45:17,617 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 20:45:31,332 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 20:45:31,333 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 20:45:31,964 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 20:45:31,965 - INFO - ⏰ Bir sonraki tarama: 21:00:00 (868 saniye sonra)
+2025-10-09 21:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 21:00:00
+2025-10-09 21:00:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 21:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 21:00:11,331 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 21:00:12,307 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 21:00:13,217 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 21:00:13,318 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 21:00:13,604 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 21:00:14,279 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 21:00:14,661 - INFO - ✅ ZSPC: $1.47 | Vol: 17,698,776 | Cap: $35,332,728
+2025-10-09 21:00:18,485 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 21:00:18,893 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 21:00:33,522 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 21:00:33,523 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 21:00:34,087 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 21:00:34,088 - INFO - ⏰ Bir sonraki tarama: 21:15:00 (866 saniye sonra)
+2025-10-09 21:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 21:15:00
+2025-10-09 21:15:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 21:15:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 21:15:10,316 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 21:15:11,336 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 21:15:17,788 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 21:15:17,890 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 21:15:18,148 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 21:15:18,766 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 21:15:19,133 - INFO - ✅ ZSPC: $1.47 | Vol: 17,698,776 | Cap: $35,332,728
+2025-10-09 21:15:22,244 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 21:15:22,648 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 21:15:36,285 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 21:15:36,286 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 21:15:36,842 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 21:15:36,842 - INFO - ⏰ Bir sonraki tarama: 21:30:00 (863 saniye sonra)
+2025-10-09 21:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 21:30:00
+2025-10-09 21:30:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 21:30:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 21:30:11,528 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 21:30:12,482 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 21:30:13,403 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 21:30:13,504 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 21:30:13,762 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 21:30:14,386 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 21:30:14,752 - INFO - ✅ ZSPC: $1.47 | Vol: 17,698,776 | Cap: $35,332,728
+2025-10-09 21:30:17,798 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 21:30:18,177 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 21:30:36,808 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 21:30:36,809 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 21:30:37,366 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 21:30:37,366 - INFO - ⏰ Bir sonraki tarama: 21:45:00 (863 saniye sonra)
+2025-10-09 21:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 21:45:00
+2025-10-09 21:45:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 21:45:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 21:45:15,365 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 21:45:16,271 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 21:45:17,205 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 21:45:17,306 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 21:45:17,566 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 21:45:18,199 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 21:45:18,593 - INFO - ✅ ZSPC: $1.47 | Vol: 17,698,776 | Cap: $35,332,728
+2025-10-09 21:45:21,752 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 21:45:22,115 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 21:45:37,466 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 21:45:37,466 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 21:45:38,008 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 21:45:38,008 - INFO - ⏰ Bir sonraki tarama: 22:00:00 (862 saniye sonra)
+2025-10-09 22:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 22:00:00
+2025-10-09 22:00:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-09 22:00:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-09 22:00:10,725 - INFO - ✅ CYCU: $0.30 | Vol: 11,290,401 | Cap: $20,906,678
+2025-10-09 22:00:11,672 - INFO - ✅ WCT: $0.40 | Vol: 595,983 | Cap: $61,244,692
+2025-10-09 22:00:12,575 - INFO - ✅ VEEA: $0.79 | Vol: 148,295 | Cap: $39,784,988
+2025-10-09 22:00:12,676 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-09 22:00:12,962 - INFO - ✅ ILLR: $0.90 | Vol: 319,372 | Cap: $136,818,240
+2025-10-09 22:00:13,606 - INFO - ✅ TDTH: $0.91 | Vol: 421,151 | Cap: $105,197,400
+2025-10-09 22:00:13,978 - INFO - ✅ ZSPC: $1.47 | Vol: 17,698,776 | Cap: $35,332,728
+2025-10-09 22:00:17,171 - INFO - ✅ DKI: $0.81 | Vol: 665,539 | Cap: $14,392,700
+2025-10-09 22:00:17,559 - INFO - ✅ MYPS: $0.95 | Vol: 121,476 | Cap: $119,617,504
+2025-10-09 22:00:42,756 - INFO - 🎯 8 hisse filtrelendi
+2025-10-09 22:00:42,757 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-09 22:00:43,309 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-09 22:00:43,310 - INFO - ⏰ Bir sonraki tarama: 22:15:00 (857 saniye sonra)
+2025-10-09 22:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 22:15:00
+2025-10-09 22:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 22:15:00,000 - INFO - ⏰ Bir sonraki tarama: 22:30:00 (900 saniye sonra)
+2025-10-09 22:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 22:30:00
+2025-10-09 22:30:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 22:30:00,001 - INFO - ⏰ Bir sonraki tarama: 22:45:00 (900 saniye sonra)
+2025-10-09 22:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 22:45:00
+2025-10-09 22:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 22:45:00,001 - INFO - ⏰ Bir sonraki tarama: 23:00:00 (900 saniye sonra)
+2025-10-09 23:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 23:00:00
+2025-10-09 23:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:00:00,001 - INFO - ⏰ Bir sonraki tarama: 23:15:00 (900 saniye sonra)
+2025-10-09 23:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 23:15:00
+2025-10-09 23:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:15:00,000 - INFO - ⏰ Bir sonraki tarama: 23:30:00 (900 saniye sonra)
+2025-10-09 23:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 23:30:00
+2025-10-09 23:30:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:30:00,001 - INFO - ⏰ Bir sonraki tarama: 23:45:00 (900 saniye sonra)
+2025-10-09 23:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 23:45:00
+2025-10-09 23:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:45:00,001 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:46:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 23:46:00
+2025-10-09 23:46:00,001 - INFO - ⏰ 15 dakikalık mum kapanışı için 60 saniye bekleniyor...
+2025-10-09 23:47:00,002 - INFO - 🔄 DYNAMIC_SCAN_CONTINUE: 23:47:00
+2025-10-09 23:47:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:47:00,002 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:48:00,003 - INFO - 🔄 DYNAMIC_SCAN_START: 23:48:00
+2025-10-09 23:48:00,003 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:48:00,004 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:49:00,005 - INFO - 🔄 DYNAMIC_SCAN_START: 23:49:00
+2025-10-09 23:49:00,005 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:49:00,006 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:50:00,006 - INFO - 🔄 DYNAMIC_SCAN_START: 23:50:00
+2025-10-09 23:50:00,007 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:50:00,007 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:51:00,007 - INFO - 🔄 DYNAMIC_SCAN_START: 23:51:00
+2025-10-09 23:51:00,007 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:51:00,008 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:52:00,008 - INFO - 🔄 DYNAMIC_SCAN_START: 23:52:00
+2025-10-09 23:52:00,008 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:52:00,009 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:53:00,009 - INFO - 🔄 DYNAMIC_SCAN_START: 23:53:00
+2025-10-09 23:53:00,009 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:53:00,010 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:54:00,010 - INFO - 🔄 DYNAMIC_SCAN_START: 23:54:00
+2025-10-09 23:54:00,010 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:54:00,011 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:55:00,011 - INFO - 🔄 DYNAMIC_SCAN_START: 23:55:00
+2025-10-09 23:55:00,011 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:55:00,011 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:56:00,012 - INFO - 🔄 DYNAMIC_SCAN_START: 23:56:00
+2025-10-09 23:56:00,012 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:56:00,012 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:57:00,013 - INFO - 🔄 DYNAMIC_SCAN_START: 23:57:00
+2025-10-09 23:57:00,013 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:57:00,013 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:58:00,013 - INFO - 🔄 DYNAMIC_SCAN_START: 23:58:00
+2025-10-09 23:58:00,014 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:58:00,014 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-09 23:59:00,014 - INFO - 🔄 DYNAMIC_SCAN_START: 23:59:00
+2025-10-09 23:59:00,015 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-09 23:59:00,015 - ERROR - ❌ Ana döngü hatası: hour must be in 0..23
+2025-10-10 00:00:00,015 - INFO - 🔄 DYNAMIC_SCAN_START: 00:00:00
+2025-10-10 00:00:00,016 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 00:00:00,016 - INFO - ⏰ Bir sonraki tarama: 00:15:00 (900 saniye sonra)
+2025-10-10 00:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 00:15:00
+2025-10-10 00:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 00:15:00,001 - INFO - ⏰ Bir sonraki tarama: 00:30:00 (900 saniye sonra)
+2025-10-10 00:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 00:30:00
+2025-10-10 00:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 00:30:00,000 - INFO - ⏰ Bir sonraki tarama: 00:45:00 (900 saniye sonra)
+2025-10-10 00:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 00:45:00
+2025-10-10 00:45:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 00:45:00,001 - INFO - ⏰ Bir sonraki tarama: 01:00:00 (900 saniye sonra)
+2025-10-10 01:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 01:00:00
+2025-10-10 01:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 01:00:00,001 - INFO - ⏰ Bir sonraki tarama: 01:15:00 (900 saniye sonra)
+2025-10-10 01:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 01:15:00
+2025-10-10 01:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 01:15:00,000 - INFO - ⏰ Bir sonraki tarama: 01:30:00 (900 saniye sonra)
+2025-10-10 01:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 01:30:00
+2025-10-10 01:30:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 01:30:00,001 - INFO - ⏰ Bir sonraki tarama: 01:45:00 (900 saniye sonra)
+2025-10-10 01:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 01:45:00
+2025-10-10 01:45:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 01:45:00,001 - INFO - ⏰ Bir sonraki tarama: 02:00:00 (900 saniye sonra)
+2025-10-10 02:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 02:00:00
+2025-10-10 02:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 02:00:00,000 - INFO - ⏰ Bir sonraki tarama: 02:15:00 (900 saniye sonra)
+2025-10-10 02:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 02:15:00
+2025-10-10 02:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 02:15:00,001 - INFO - ⏰ Bir sonraki tarama: 02:30:00 (900 saniye sonra)
+2025-10-10 02:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 02:30:00
+2025-10-10 02:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 02:30:00,001 - INFO - ⏰ Bir sonraki tarama: 02:45:00 (900 saniye sonra)
+2025-10-10 02:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 02:45:00
+2025-10-10 02:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 02:45:00,001 - INFO - ⏰ Bir sonraki tarama: 03:00:00 (900 saniye sonra)
+2025-10-10 03:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 03:00:00
+2025-10-10 03:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 03:00:00,001 - INFO - ⏰ Bir sonraki tarama: 03:15:00 (900 saniye sonra)
+2025-10-10 03:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 03:15:00
+2025-10-10 03:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 03:15:00,001 - INFO - ⏰ Bir sonraki tarama: 03:30:00 (900 saniye sonra)
+2025-10-10 03:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 03:30:00
+2025-10-10 03:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 03:30:00,000 - INFO - ⏰ Bir sonraki tarama: 03:45:00 (900 saniye sonra)
+2025-10-10 03:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 03:45:00
+2025-10-10 03:45:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 03:45:00,001 - INFO - ⏰ Bir sonraki tarama: 04:00:00 (900 saniye sonra)
+2025-10-10 04:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 04:00:00
+2025-10-10 04:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 04:00:00,001 - INFO - ⏰ Bir sonraki tarama: 04:15:00 (900 saniye sonra)
+2025-10-10 04:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 04:15:00
+2025-10-10 04:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 04:15:00,001 - INFO - ⏰ Bir sonraki tarama: 04:30:00 (900 saniye sonra)
+2025-10-10 04:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 04:30:00
+2025-10-10 04:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 04:30:00,001 - INFO - ⏰ Bir sonraki tarama: 04:45:00 (900 saniye sonra)
+2025-10-10 04:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 04:45:00
+2025-10-10 04:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 04:45:00,000 - INFO - ⏰ Bir sonraki tarama: 05:00:00 (900 saniye sonra)
+2025-10-10 05:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 05:00:00
+2025-10-10 05:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 05:00:00,002 - INFO - ⏰ Bir sonraki tarama: 05:15:00 (900 saniye sonra)
+2025-10-10 05:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 05:15:00
+2025-10-10 05:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 05:15:00,001 - INFO - ⏰ Bir sonraki tarama: 05:30:00 (900 saniye sonra)
+2025-10-10 05:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 05:30:00
+2025-10-10 05:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 05:30:00,000 - INFO - ⏰ Bir sonraki tarama: 05:45:00 (900 saniye sonra)
+2025-10-10 05:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 05:45:00
+2025-10-10 05:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 05:45:00,001 - INFO - ⏰ Bir sonraki tarama: 06:00:00 (900 saniye sonra)
+2025-10-10 06:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 06:00:00
+2025-10-10 06:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 06:00:00,002 - INFO - ⏰ Bir sonraki tarama: 06:15:00 (900 saniye sonra)
+2025-10-10 06:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 06:15:00
+2025-10-10 06:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 06:15:00,001 - INFO - ⏰ Bir sonraki tarama: 06:30:00 (900 saniye sonra)
+2025-10-10 06:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 06:30:00
+2025-10-10 06:30:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 06:30:00,002 - INFO - ⏰ Bir sonraki tarama: 06:45:00 (900 saniye sonra)
+2025-10-10 06:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 06:45:00
+2025-10-10 06:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 06:45:00,001 - INFO - ⏰ Bir sonraki tarama: 07:00:00 (900 saniye sonra)
+2025-10-10 07:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 07:00:00
+2025-10-10 07:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 07:00:00,000 - INFO - ⏰ Bir sonraki tarama: 07:15:00 (900 saniye sonra)
+2025-10-10 07:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 07:15:00
+2025-10-10 07:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 07:15:00,002 - INFO - ⏰ Bir sonraki tarama: 07:30:00 (900 saniye sonra)
+2025-10-10 07:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 07:30:00
+2025-10-10 07:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 07:30:00,001 - INFO - ⏰ Bir sonraki tarama: 07:45:00 (900 saniye sonra)
+2025-10-10 07:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 07:45:00
+2025-10-10 07:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 07:45:00,000 - INFO - ⏰ Bir sonraki tarama: 08:00:00 (900 saniye sonra)
+2025-10-10 08:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 08:00:00
+2025-10-10 08:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 08:00:00,001 - INFO - ⏰ Bir sonraki tarama: 08:15:00 (900 saniye sonra)
+2025-10-10 08:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 08:15:00
+2025-10-10 08:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 08:15:00,002 - INFO - ⏰ Bir sonraki tarama: 08:30:00 (900 saniye sonra)
+2025-10-10 08:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 08:30:00
+2025-10-10 08:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 08:30:00,000 - INFO - ⏰ Bir sonraki tarama: 08:45:00 (900 saniye sonra)
+2025-10-10 08:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 08:45:00
+2025-10-10 08:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 08:45:00,002 - INFO - ⏰ Bir sonraki tarama: 09:00:00 (900 saniye sonra)
+2025-10-10 09:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 09:00:00
+2025-10-10 09:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 09:00:00,001 - INFO - ⏰ Bir sonraki tarama: 09:15:00 (900 saniye sonra)
+2025-10-10 09:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 09:15:00
+2025-10-10 09:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 09:15:00,002 - INFO - ⏰ Bir sonraki tarama: 09:30:00 (900 saniye sonra)
+2025-10-10 09:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 09:30:00
+2025-10-10 09:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 09:30:00,000 - INFO - ⏰ Bir sonraki tarama: 09:45:00 (900 saniye sonra)
+2025-10-10 09:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 09:45:00
+2025-10-10 09:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 09:45:00,002 - INFO - ⏰ Bir sonraki tarama: 10:00:00 (900 saniye sonra)
+2025-10-10 10:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 10:00:00
+2025-10-10 10:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 10:00:00,001 - INFO - ⏰ Bir sonraki tarama: 10:15:00 (900 saniye sonra)
+2025-10-10 10:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 10:15:00
+2025-10-10 10:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 10:15:00,002 - INFO - ⏰ Bir sonraki tarama: 10:30:00 (900 saniye sonra)
+2025-10-10 10:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 10:30:00
+2025-10-10 10:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 10:30:00,001 - INFO - ⏰ Bir sonraki tarama: 10:45:00 (900 saniye sonra)
+2025-10-10 10:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 10:45:00
+2025-10-10 10:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 10:45:00,002 - INFO - ⏰ Bir sonraki tarama: 11:00:00 (900 saniye sonra)
+2025-10-10 11:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 11:00:00
+2025-10-10 11:00:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 11:00:00,002 - INFO - ⏰ Bir sonraki tarama: 11:15:00 (900 saniye sonra)
+2025-10-10 11:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 11:15:00
+2025-10-10 11:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 11:15:00,002 - INFO - ⏰ Bir sonraki tarama: 11:30:00 (900 saniye sonra)
+2025-10-10 11:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 11:30:00
+2025-10-10 11:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 11:30:00,001 - INFO - ⏰ Bir sonraki tarama: 11:45:00 (900 saniye sonra)
+2025-10-10 11:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 11:45:00
+2025-10-10 11:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 11:45:00,002 - INFO - ⏰ Bir sonraki tarama: 12:00:00 (900 saniye sonra)
+2025-10-10 12:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 12:00:00
+2025-10-10 12:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 12:00:00,001 - INFO - ⏰ Bir sonraki tarama: 12:15:00 (900 saniye sonra)
+2025-10-10 12:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 12:15:00
+2025-10-10 12:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 12:15:00,002 - INFO - ⏰ Bir sonraki tarama: 12:30:00 (900 saniye sonra)
+2025-10-10 12:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 12:30:00
+2025-10-10 12:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 12:30:00,001 - INFO - ⏰ Bir sonraki tarama: 12:45:00 (900 saniye sonra)
+2025-10-10 12:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 12:45:00
+2025-10-10 12:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 12:45:00,002 - INFO - ⏰ Bir sonraki tarama: 13:00:00 (900 saniye sonra)
+2025-10-10 13:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 13:00:00
+2025-10-10 13:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 13:00:00,001 - INFO - ⏰ Bir sonraki tarama: 13:15:00 (900 saniye sonra)
+2025-10-10 13:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 13:15:00
+2025-10-10 13:15:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 13:15:00,001 - INFO - ⏰ Bir sonraki tarama: 13:30:00 (900 saniye sonra)
+2025-10-10 13:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 13:30:00
+2025-10-10 13:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 13:30:00,001 - INFO - ⏰ Bir sonraki tarama: 13:45:00 (900 saniye sonra)
+2025-10-10 13:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 13:45:00
+2025-10-10 13:45:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 13:45:00,002 - INFO - ⏰ Bir sonraki tarama: 14:00:00 (900 saniye sonra)
+2025-10-10 14:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 14:00:00
+2025-10-10 14:00:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 14:00:00,001 - INFO - ⏰ Bir sonraki tarama: 14:15:00 (900 saniye sonra)
+2025-10-10 14:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 14:15:00
+2025-10-10 14:15:00,002 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 14:15:00,002 - INFO - ⏰ Bir sonraki tarama: 14:30:00 (900 saniye sonra)
+2025-10-10 14:30:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 14:30:00
+2025-10-10 14:30:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 14:30:00,001 - INFO - ⏰ Bir sonraki tarama: 14:45:00 (900 saniye sonra)
+2025-10-10 14:45:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 14:45:00
+2025-10-10 14:45:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 14:45:00,000 - INFO - ⏰ Bir sonraki tarama: 15:00:00 (900 saniye sonra)
+2025-10-10 15:00:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 15:00:00
+2025-10-10 15:00:00,000 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 15:00:00,000 - INFO - ⏰ Bir sonraki tarama: 15:15:00 (900 saniye sonra)
+2025-10-10 15:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 15:15:00
+2025-10-10 15:15:00,001 - INFO - ⏰ Çalışma saatleri dışında, bekleniyor...
+2025-10-10 15:15:00,001 - INFO - ⏰ Bir sonraki tarama: 15:30:00 (900 saniye sonra)
+2025-10-10 15:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 15:30:00
+2025-10-10 15:30:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-10 15:30:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-10 15:30:21,503 - INFO - ✅ CYCU: $0.27 | Vol: 4,215,265 | Cap: $19,102,548
+2025-10-10 15:30:22,803 - INFO - ✅ WCT: $0.37 | Vol: 285,354 | Cap: $57,244,472
+2025-10-10 15:30:24,177 - INFO - ✅ VEEA: $0.81 | Vol: 313,151 | Cap: $40,442,380
+2025-10-10 15:30:24,277 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-10 15:30:24,692 - INFO - ✅ ILLR: $0.94 | Vol: 197,943 | Cap: $142,837,392
+2025-10-10 15:30:25,121 - INFO - ✅ SELX: $0.93 | Vol: 118,917 | Cap: $34,793,396
+2025-10-10 15:30:26,425 - INFO - ✅ ZSPC: $1.34 | Vol: 1,078,223 | Cap: $32,328,244
+2025-10-10 15:30:32,339 - INFO - ✅ DKI: $0.80 | Vol: 308,882 | Cap: $14,180,000
+2025-10-10 15:30:51,543 - INFO - 🎯 7 hisse filtrelendi
+2025-10-10 15:30:51,544 - INFO - 🔍 7 hisse için sinyal kontrolü başlatılıyor
+2025-10-10 15:30:52,229 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-10 15:30:52,229 - INFO - ⏰ Bir sonraki tarama: 15:45:00 (848 saniye sonra)
+2025-10-10 15:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 15:45:00
+2025-10-10 15:45:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-10 15:45:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-10 15:45:19,978 - INFO - ✅ CYCU: $0.26 | Vol: 5,238,858 | Cap: $18,472,870
+2025-10-10 15:45:21,926 - INFO - ✅ WCT: $0.37 | Vol: 400,009 | Cap: $56,033,680
+2025-10-10 15:45:23,195 - INFO - ✅ VEEA: $0.79 | Vol: 365,781 | Cap: $39,519,020
+2025-10-10 15:45:23,296 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-10 15:45:23,583 - INFO - ✅ ILLR: $0.92 | Vol: 203,188 | Cap: $139,729,264
+2025-10-10 15:45:24,208 - INFO - ✅ SELX: $0.93 | Vol: 118,932 | Cap: $34,793,396
+2025-10-10 15:45:24,729 - INFO - ✅ TDTH: $0.91 | Vol: 125,037 | Cap: $104,863,616
+2025-10-10 15:45:25,611 - INFO - ✅ ZSPC: $1.35 | Vol: 1,211,860 | Cap: $32,544,564
+2025-10-10 15:45:30,084 - INFO - ✅ DKI: $0.78 | Vol: 396,625 | Cap: $13,860,950
+2025-10-10 15:45:51,608 - INFO - 🎯 8 hisse filtrelendi
+2025-10-10 15:45:51,609 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-10 15:45:53,541 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-10 15:45:53,541 - INFO - ⏰ Bir sonraki tarama: 16:00:00 (846 saniye sonra)
+2025-10-10 16:00:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 16:00:00
+2025-10-10 16:00:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-10 16:00:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-10 16:00:15,242 - INFO - ✅ CYCU: $0.26 | Vol: 5,534,319 | Cap: $18,536,546
+2025-10-10 16:00:16,450 - INFO - ✅ WCT: $0.37 | Vol: 420,316 | Cap: $56,217,600
+2025-10-10 16:00:17,806 - INFO - ✅ VEEA: $0.80 | Vol: 385,622 | Cap: $40,015,828
+2025-10-10 16:00:17,907 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-10 16:00:18,231 - INFO - ✅ ILLR: $0.94 | Vol: 210,350 | Cap: $142,594,800
+2025-10-10 16:00:18,711 - INFO - ✅ SELX: $1.00 | Vol: 119,566 | Cap: $37,428,352
+2025-10-10 16:00:19,115 - INFO - ✅ TDTH: $0.91 | Vol: 130,953 | Cap: $104,863,616
+2025-10-10 16:00:19,523 - INFO - ✅ ZSPC: $1.35 | Vol: 1,265,646 | Cap: $32,450,826
+2025-10-10 16:00:23,719 - INFO - ✅ DKI: $0.78 | Vol: 427,018 | Cap: $13,754,600
+2025-10-10 16:00:40,787 - INFO - 🎯 8 hisse filtrelendi
+2025-10-10 16:00:40,788 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-10 16:00:41,527 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-10 16:00:41,527 - INFO - ⏰ Bir sonraki tarama: 16:15:00 (858 saniye sonra)
+2025-10-10 16:15:00,000 - INFO - 🔄 DYNAMIC_SCAN_START: 16:15:00
+2025-10-10 16:15:00,000 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-10 16:15:00,000 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-10 16:15:14,010 - INFO - ✅ CYCU: $0.26 | Vol: 5,656,368 | Cap: $18,600,220
+2025-10-10 16:15:15,267 - INFO - ✅ WCT: $0.37 | Vol: 421,901 | Cap: $56,539,456
+2025-10-10 16:15:16,444 - INFO - ✅ VEEA: $0.80 | Vol: 389,438 | Cap: $40,086,084
+2025-10-10 16:15:16,545 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-10 16:15:16,853 - INFO - ✅ ILLR: $0.93 | Vol: 214,621 | Cap: $141,002,832
+2025-10-10 16:15:17,236 - INFO - ✅ SELX: $0.94 | Vol: 130,260 | Cap: $35,257,508
+2025-10-10 16:15:17,719 - INFO - ✅ TDTH: $0.90 | Vol: 135,337 | Cap: $103,908,336
+2025-10-10 16:15:18,383 - INFO - ✅ ZSPC: $1.33 | Vol: 1,322,247 | Cap: $31,967,706
+2025-10-10 16:15:22,376 - INFO - ✅ DKI: $0.80 | Vol: 430,133 | Cap: $14,091,375
+2025-10-10 16:15:41,237 - INFO - 🎯 8 hisse filtrelendi
+2025-10-10 16:15:41,238 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-10 16:15:42,017 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-10 16:15:42,018 - INFO - ⏰ Bir sonraki tarama: 16:30:00 (858 saniye sonra)
+2025-10-10 16:30:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 16:30:00
+2025-10-10 16:30:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-10 16:30:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-10 16:30:12,792 - INFO - ✅ CYCU: $0.27 | Vol: 5,822,262 | Cap: $18,833,698
+2025-10-10 16:30:14,097 - INFO - ✅ WCT: $0.37 | Vol: 423,457 | Cap: $56,278,904
+2025-10-10 16:30:15,704 - INFO - ✅ VEEA: $0.79 | Vol: 430,653 | Cap: $39,885,352
+2025-10-10 16:30:15,804 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-10 16:30:16,121 - INFO - ✅ ILLR: $0.93 | Vol: 225,243 | Cap: $141,002,832
+2025-10-10 16:30:16,769 - INFO - ✅ SELX: $0.94 | Vol: 131,630 | Cap: $35,261,248
+2025-10-10 16:30:17,338 - INFO - ✅ TDTH: $0.90 | Vol: 135,989 | Cap: $104,011,912
+2025-10-10 16:30:17,872 - INFO - ✅ ZSPC: $1.34 | Vol: 1,372,358 | Cap: $32,208,064
+2025-10-10 16:30:21,552 - INFO - ✅ DKI: $0.78 | Vol: 438,134 | Cap: $13,807,775
+2025-10-10 16:30:39,095 - INFO - 🎯 8 hisse filtrelendi
+2025-10-10 16:30:39,096 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-10 16:30:39,919 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-10 16:30:39,920 - INFO - ⏰ Bir sonraki tarama: 16:45:00 (860 saniye sonra)
+2025-10-10 16:45:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 16:45:00
+2025-10-10 16:45:00,002 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-10 16:45:00,002 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-10 16:45:13,537 - INFO - ✅ CYCU: $0.27 | Vol: 6,119,798 | Cap: $18,784,172
+2025-10-10 16:45:14,667 - INFO - ✅ WCT: $0.37 | Vol: 428,567 | Cap: $56,692,720
+2025-10-10 16:45:15,702 - INFO - ✅ VEEA: $0.80 | Vol: 443,903 | Cap: $40,136,268
+2025-10-10 16:45:15,803 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-10 16:45:16,066 - INFO - ✅ ILLR: $0.92 | Vol: 234,048 | Cap: $139,835,392
+2025-10-10 16:45:16,530 - INFO - ✅ SELX: $0.95 | Vol: 132,335 | Cap: $35,556,932
+2025-10-10 16:45:17,084 - INFO - ✅ TDTH: $0.90 | Vol: 144,385 | Cap: $104,103,992
+2025-10-10 16:45:17,592 - INFO - ✅ ZSPC: $1.34 | Vol: 1,414,087 | Cap: $32,208,064
+2025-10-10 16:45:22,021 - INFO - ✅ DKI: $0.77 | Vol: 469,948 | Cap: $13,735,103
+2025-10-10 16:45:39,666 - INFO - 🎯 8 hisse filtrelendi
+2025-10-10 16:45:39,666 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-10 16:45:40,262 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-10 16:45:40,262 - INFO - ⏰ Bir sonraki tarama: 17:00:00 (860 saniye sonra)
+2025-10-10 16:59:58,497 - INFO - 🚀 NASDAQ IPO Scanner başlatıldı
+2025-10-10 16:59:58,497 - INFO - 💰 Max fiyat: $5.0
+2025-10-10 16:59:58,497 - INFO - 📊 Min volume: 100,000
+2025-10-10 16:59:58,497 - INFO - 🏢 Market cap: $10,000,000 - $1,000,000,000
+2025-10-10 16:59:58,497 - INFO - 🚀 NASDAQ IPO Scanner başlatıldı
+2025-10-10 16:59:58,497 - INFO - 🔄 DYNAMIC_SCAN_START: 16:59:58
+2025-10-10 16:59:58,498 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-10 16:59:58,498 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-10 17:00:15,165 - INFO - ✅ CYCU: $0.27 | Vol: 6,158,362 | Cap: $18,932,748
+2025-10-10 17:00:16,181 - INFO - ✅ WCT: $0.37 | Vol: 437,664 | Cap: $56,110,316
+2025-10-10 17:00:17,326 - INFO - ✅ VEEA: $0.80 | Vol: 459,604 | Cap: $39,895,392
+2025-10-10 17:00:17,427 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-10 17:00:17,818 - INFO - ✅ ILLR: $0.93 | Vol: 236,308 | Cap: $141,351,552
+2025-10-10 17:00:18,194 - INFO - ✅ SELX: $0.95 | Vol: 133,837 | Cap: $35,556,932
+2025-10-10 17:00:18,607 - INFO - ✅ TDTH: $0.91 | Vol: 147,488 | Cap: $104,196,072
+2025-10-10 17:00:19,014 - INFO - ✅ ZSPC: $1.32 | Vol: 1,470,044 | Cap: $31,847,526
+2025-10-10 17:00:22,447 - INFO - ✅ DKI: $0.77 | Vol: 482,044 | Cap: $13,596,847
+2025-10-10 17:00:36,885 - INFO - 🎯 8 hisse filtrelendi
+2025-10-10 17:00:36,885 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-10 17:00:37,016 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:00:37,110 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:00:37,175 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:00:37,242 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:00:37,377 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:00:37,445 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:00:37,512 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:00:37,513 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-10 17:00:37,513 - INFO - ⏰ Bir sonraki tarama: 17:15:00 (862 saniye sonra)
+2025-10-10 17:15:00,001 - INFO - 🔄 DYNAMIC_SCAN_START: 17:15:00
+2025-10-10 17:15:00,001 - INFO - 📊 120 teknoloji hissesi yüklendi
+2025-10-10 17:15:00,001 - INFO - 🔍 120 hisse filtreleniyor...
+2025-10-10 17:15:12,114 - INFO - ✅ CYCU: $0.27 | Vol: 6,227,546 | Cap: $18,840,772
+2025-10-10 17:15:13,030 - INFO - ✅ WCT: $0.37 | Vol: 443,776 | Cap: $56,386,192
+2025-10-10 17:15:14,269 - INFO - ✅ VEEA: $0.78 | Vol: 481,280 | Cap: $39,217,920
+2025-10-10 17:15:14,370 - INFO - 📊 50/120 hisse kontrol edildi
+2025-10-10 17:15:14,995 - INFO - ✅ ILLR: $0.92 | Vol: 244,988 | Cap: $139,486,672
+2025-10-10 17:15:15,550 - INFO - ✅ SELX: $0.95 | Vol: 133,837 | Cap: $35,556,932
+2025-10-10 17:15:16,065 - INFO - ✅ TDTH: $0.90 | Vol: 194,221 | Cap: $103,977,384
+2025-10-10 17:15:16,695 - INFO - ✅ ZSPC: $1.31 | Vol: 1,489,509 | Cap: $31,486,986
+2025-10-10 17:15:20,826 - INFO - ✅ DKI: $0.77 | Vol: 483,469 | Cap: $13,559,625
+2025-10-10 17:15:36,998 - INFO - 🎯 8 hisse filtrelendi
+2025-10-10 17:15:36,999 - INFO - 🔍 8 hisse için sinyal kontrolü başlatılıyor
+2025-10-10 17:15:37,075 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:15:37,133 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:15:37,201 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:15:37,301 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:15:37,445 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:15:37,514 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:15:37,593 - ERROR - ❌ ATR Trailing Stop hesaplama hatası: 'atr_period'
+2025-10-10 17:15:37,593 - INFO - ✅ Tarama tamamlandı - 0 sinyal bulundu
+2025-10-10 17:15:37,594 - INFO - ⏰ Bir sonraki tarama: 17:30:00 (862 saniye sonra)

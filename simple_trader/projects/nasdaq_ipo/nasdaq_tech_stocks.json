@@ -1,0 +1,119 @@
+[
+  {
+    "symbol": "KPLTW",
+    "name": "Katapult Holdings, Inc.",
+    "price": 0.0098,
+    "sector": "technology",
+    "industry": "software - infrastructure",
+    "market_cap": 0,
+    "volume": 52244
+  },
+  {
+    "symbol": "MNYWW",
+    "name": "MoneyHero Limited",
+    "price": 0.0906,
+    "sector": "communication services",
+    "industry": "internet content & information",
+    "market_cap": 0,
+    "volume": 1593
+  },
+  {
+    "symbol": "EPWK",
+    "name": "EPWK Holdings Ltd.",
+    "price": 0.0696,
+    "sector": "technology",
+    "industry": "software - application",
+    "market_cap": 1657867,
+    "volume": 76694961
+  },
+  {
+    "symbol": "CYCU",
+    "name": "Cycurion, Inc.",
+    "price": 0.2908,
+    "sector": "technology",
+    "industry": "information technology services",
+    "market_cap": 20574152,
+    "volume": 10287418
+  },
+  {
+    "symbol": "AEVAW",
+    "name": "Aeva Technologies, Inc.",
+    "price": 0.31,
+    "sector": "technology",
+    "industry": "software - infrastructure",
+    "market_cap": 0,
+    "volume": 5736
+  },
+  {
+    "symbol": "YYAI",
+    "name": "AiRWA Inc.",
+    "price": 0.2121,
+    "sector": "technology",
+    "industry": "software - infrastructure",
+    "market_cap": 3088816,
+    "volume": 680783195
+  },
+  {
+    "symbol": "WCT",
+    "name": "Wellchange Holdings Company Limited",
+    "price": 0.3695,
+    "sector": "technology",
+    "industry": "software - application",
+    "market_cap": 56631416,
+    "volume": 315463
+  },
+  {
+    "symbol": "ZPTA",
+    "name": "Zapata Computing Holdings Inc.",
+    "price": 0.08,
+    "sector": "technology",
+    "industry": "software - infrastructure",
+    "market_cap": 3243574,
+    "volume": 160
+  },
+  {
+    "symbol": "EGLXF",
+    "name": "Enthusiast Gaming Holdings Inc.",
+    "price": 0.048,
+    "sector": "communication services",
+    "industry": "internet content & information",
+    "market_cap": 8559191,
+    "volume": 1000
+  },
+  {
+    "symbol": "VEEA",
+    "name": "Veea Inc.",
+    "price": 0.8289,
+    "sector": "technology",
+    "industry": "information technology services",
+    "market_cap": 41596588,
+    "volume": 118653
+  },
+  {
+    "symbol": "ILLR",
+    "name": "Triller Group Inc.",
+    "price": 0.9148,
+    "sector": "technology",
+    "industry": "software - application",
+    "market_cap": 138698272,
+    "volume": 174511
+  },
+  {
+    "symbol": "SELX",
+    "name": "Semilux International Ltd.",
+    "price": 0.898,
+    "sector": "technology",
+    "industry": "electronic components",
+    "market_cap": 33610660,
+    "volume": 8508
+  },
+  {
+    "symbol": "TDTH",
+    "name": "Trident Digital Tech Holdings Ltd",
+    "price": 0.9579,
+    "sector": "technology",
+    "industry": "information technology services",
+    "market_cap": 110250096,
+    "volume": 129012
+  }
+]

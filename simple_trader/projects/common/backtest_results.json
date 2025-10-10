@@ -1,0 +1,2286 @@
+{
+  "with_c3": {
+    "trades": [
+      {
+        "entry_time": "2025-09-08 02:00:00+00:00",
+        "exit_time": "2025-09-08 03:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.426,
+        "exit_price": 1.439,
+        "pnl": 9.116409537166987,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-08 05:00:00+00:00",
+        "exit_time": "2025-09-08 07:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.419,
+        "exit_price": 1.406,
+        "pnl": 9.169733144748726,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-08 08:00:00+00:00",
+        "exit_time": "2025-09-08 09:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.432,
+        "exit_price": 1.443,
+        "pnl": 7.69561086379206,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-08 19:00:00+00:00",
+        "exit_time": "2025-09-09 01:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.417,
+        "exit_price": 1.395,
+        "pnl": 15.566097288497232,
+        "exit_reason": "Take Profit",
+        "duration_hours": 6.0
+      },
+      {
+        "entry_time": "2025-09-09 06:00:00+00:00",
+        "exit_time": "2025-09-09 07:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.436,
+        "exit_price": 1.445,
+        "pnl": 6.293449210132942,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 14:00:00+00:00",
+        "exit_time": "2025-09-09 15:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.434,
+        "exit_price": 1.401,
+        "pnl": 23.12264734319821,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-10 12:00:00+00:00",
+        "exit_time": "2025-09-10 13:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.413,
+        "exit_price": 1.437,
+        "pnl": 17.105671248216634,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-10 19:00:00+00:00",
+        "exit_time": "2025-09-10 21:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.39,
+        "exit_price": 1.4,
+        "pnl": -7.257604042184002,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-11 01:00:00+00:00",
+        "exit_time": "2025-09-11 02:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.441,
+        "exit_price": 1.463,
+        "pnl": 15.390552694035996,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-11 14:00:00+00:00",
+        "exit_time": "2025-09-11 16:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.445,
+        "exit_price": 1.455,
+        "pnl": -6.9869913960467915,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-11 17:00:00+00:00",
+        "exit_time": "2025-09-11 20:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.453,
+        "exit_price": 1.468,
+        "pnl": -10.415570105875593,
+        "exit_reason": "Signal",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-12 06:00:00+00:00",
+        "exit_time": "2025-09-12 09:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.467,
+        "exit_price": 1.458,
+        "pnl": 6.1833128869851635,
+        "exit_reason": "Take Profit",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-12 16:00:00+00:00",
+        "exit_time": "2025-09-12 17:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.481,
+        "exit_price": 1.504,
+        "pnl": 15.66202676093656,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 03:00:00+00:00",
+        "exit_time": "2025-09-14 04:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.66,
+        "exit_price": 1.63,
+        "pnl": 18.25417833512099,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 20:00:00+00:00",
+        "exit_time": "2025-09-14 23:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.626,
+        "exit_price": 1.604,
+        "pnl": -13.691007965738617,
+        "exit_reason": "Signal",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-15 03:00:00+00:00",
+        "exit_time": "2025-09-15 04:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.621,
+        "exit_price": 1.61,
+        "pnl": -6.857328419113623,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 05:00:00+00:00",
+        "exit_time": "2025-09-15 06:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.655,
+        "exit_price": 1.627,
+        "pnl": -17.084823761132853,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 07:00:00+00:00",
+        "exit_time": "2025-09-15 08:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.597,
+        "exit_price": 1.563,
+        "pnl": 21.462934023993327,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 09:00:00+00:00",
+        "exit_time": "2025-09-15 10:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.63,
+        "exit_price": 1.613,
+        "pnl": -10.536588838036412,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-16 08:00:00+00:00",
+        "exit_time": "2025-09-16 09:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.574,
+        "exit_price": 1.559,
+        "pnl": -9.61771859162209,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-16 15:00:00+00:00",
+        "exit_time": "2025-09-16 16:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.59,
+        "exit_price": 1.576,
+        "pnl": -8.877738985096803,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-16 22:00:00+00:00",
+        "exit_time": "2025-09-16 23:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.56,
+        "exit_price": 1.532,
+        "pnl": 18.08099506631382,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-17 15:00:00+00:00",
+        "exit_time": "2025-09-17 16:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.538,
+        "exit_price": 1.555,
+        "pnl": 11.15476139057672,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 10:00:00+00:00",
+        "exit_time": "2025-09-18 11:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.91,
+        "exit_price": 1.898,
+        "pnl": 6.347392465563692,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 13:00:00+00:00",
+        "exit_time": "2025-09-18 14:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.957,
+        "exit_price": 1.938,
+        "pnl": -9.814835339955826,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 22:00:00+00:00",
+        "exit_time": "2025-09-18 23:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.901,
+        "exit_price": 1.881,
+        "pnl": 10.625424055564952,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 04:00:00+00:00",
+        "exit_time": "2025-09-19 05:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.959,
+        "exit_price": 1.909,
+        "pnl": -25.804213856227797,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 07:00:00+00:00",
+        "exit_time": "2025-09-19 08:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.924,
+        "exit_price": 1.906,
+        "pnl": -9.434363926728107,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-20 06:00:00+00:00",
+        "exit_time": "2025-09-20 07:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.837,
+        "exit_price": 1.886,
+        "pnl": 26.873585636541453,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-20 10:00:00+00:00",
+        "exit_time": "2025-09-20 14:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.83,
+        "exit_price": 1.845,
+        "pnl": -8.280103276002919,
+        "exit_reason": "Signal",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-20 18:00:00+00:00",
+        "exit_time": "2025-09-20 20:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.825,
+        "exit_price": 1.851,
+        "pnl": -14.379703738610326,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-21 07:00:00+00:00",
+        "exit_time": "2025-09-21 09:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.843,
+        "exit_price": 1.808,
+        "pnl": 19.140928737917235,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-22 07:00:00+00:00",
+        "exit_time": "2025-09-22 09:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.709,
+        "exit_price": 1.691,
+        "pnl": -10.635911534935337,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-22 19:00:00+00:00",
+        "exit_time": "2025-09-22 20:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.735,
+        "exit_price": 1.765,
+        "pnl": -17.442486236735324,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 02:00:00+00:00",
+        "exit_time": "2025-09-23 03:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.706,
+        "exit_price": 1.752,
+        "pnl": -27.152750360554652,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 04:00:00+00:00",
+        "exit_time": "2025-09-23 06:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.713,
+        "exit_price": 1.738,
+        "pnl": -14.656999372905238,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-23 12:00:00+00:00",
+        "exit_time": "2025-09-23 13:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.747,
+        "exit_price": 1.72,
+        "pnl": -15.498832983138518,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 15:00:00+00:00",
+        "exit_time": "2025-09-23 16:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.746,
+        "exit_price": 1.77,
+        "pnl": 13.763326650115014,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 17:00:00+00:00",
+        "exit_time": "2025-09-23 18:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.733,
+        "exit_price": 1.711,
+        "pnl": 12.728496031240235,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-24 05:00:00+00:00",
+        "exit_time": "2025-09-24 06:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.736,
+        "exit_price": 1.766,
+        "pnl": 17.34904140663599,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 00:00:00+00:00",
+        "exit_time": "2025-09-25 01:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.769,
+        "exit_price": 1.737,
+        "pnl": 18.19181187481577,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 19:00:00+00:00",
+        "exit_time": "2025-09-25 20:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.793,
+        "exit_price": 1.741,
+        "pnl": -29.218758857998587,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-26 21:00:00+00:00",
+        "exit_time": "2025-09-26 22:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.781,
+        "exit_price": 1.766,
+        "pnl": -8.460668771810843,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-27 08:00:00+00:00",
+        "exit_time": "2025-09-27 10:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.708,
+        "exit_price": 1.728,
+        "pnl": -11.753130428912963,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      }
+    ],
+    "stats": {
+      "total_trades": 44,
+      "wins": 22,
+      "losses": 22,
+      "win_rate": 50.0,
+      "total_pnl": 25.420255862746515,
+      "final_balance": 10025.420255862748,
+      "return_pct": 0.2542025586274758,
+      "avg_win": 14.512653938732258,
+      "avg_loss": -13.357187763152876,
+      "profit_factor": 1.0865051982548941,
+      "max_drawdown": 1.0483292729697324
+    }
+  },
+  "without_c3": {
+    "trades": [
+      {
+        "entry_time": "2025-09-07 07:00:00+00:00",
+        "exit_time": "2025-09-07 08:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.391,
+        "exit_price": 1.4,
+        "pnl": -6.470165348669948,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-07 09:00:00+00:00",
+        "exit_time": "2025-09-07 11:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.378,
+        "exit_price": 1.394,
+        "pnl": -11.60351795024829,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-07 12:00:00+00:00",
+        "exit_time": "2025-09-07 13:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.384,
+        "exit_price": 1.393,
+        "pnl": -6.491137055658304,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-07 14:00:00+00:00",
+        "exit_time": "2025-09-07 19:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.396,
+        "exit_price": 1.411,
+        "pnl": -10.718590809074685,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 5.0
+      },
+      {
+        "entry_time": "2025-09-07 20:00:00+00:00",
+        "exit_time": "2025-09-07 21:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.413,
+        "exit_price": 1.401,
+        "pnl": 8.462604321729392,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-07 22:00:00+00:00",
+        "exit_time": "2025-09-08 00:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.406,
+        "exit_price": 1.387,
+        "pnl": 13.477269179943281,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-08 01:00:00+00:00",
+        "exit_time": "2025-09-08 02:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.41,
+        "exit_price": 1.426,
+        "pnl": -11.33237612747578,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-08 03:00:00+00:00",
+        "exit_time": "2025-09-08 04:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.439,
+        "exit_price": 1.423,
+        "pnl": -11.091395787308468,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-08 05:00:00+00:00",
+        "exit_time": "2025-09-08 07:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.419,
+        "exit_price": 1.406,
+        "pnl": 9.128613458456892,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-08 08:00:00+00:00",
+        "exit_time": "2025-09-08 09:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.432,
+        "exit_price": 1.443,
+        "pnl": 7.6611015602444015,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-08 10:00:00+00:00",
+        "exit_time": "2025-09-08 11:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.488,
+        "exit_price": 1.453,
+        "pnl": -23.47686721710128,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-08 12:00:00+00:00",
+        "exit_time": "2025-09-08 13:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.451,
+        "exit_price": 1.438,
+        "pnl": -8.921301998409655,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-08 14:00:00+00:00",
+        "exit_time": "2025-09-08 17:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.451,
+        "exit_price": 1.436,
+        "pnl": -10.284587425458142,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-08 18:00:00+00:00",
+        "exit_time": "2025-09-08 19:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.44,
+        "exit_price": 1.417,
+        "pnl": -15.873736939057043,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-08 20:00:00+00:00",
+        "exit_time": "2025-09-09 00:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.409,
+        "exit_price": 1.419,
+        "pnl": -7.042204337730251,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-09 01:00:00+00:00",
+        "exit_time": "2025-09-09 02:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.395,
+        "exit_price": 1.385,
+        "pnl": 7.107830614712682,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 03:00:00+00:00",
+        "exit_time": "2025-09-09 04:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.396,
+        "exit_price": 1.406,
+        "pnl": -7.107830614712683,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 05:00:00+00:00",
+        "exit_time": "2025-09-09 06:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.417,
+        "exit_price": 1.436,
+        "pnl": -13.2952046889879,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 07:00:00+00:00",
+        "exit_time": "2025-09-09 08:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.445,
+        "exit_price": 1.496,
+        "pnl": 34.94868883353594,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 09:00:00+00:00",
+        "exit_time": "2025-09-09 10:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.506,
+        "exit_price": 1.48,
+        "pnl": -17.15564455400978,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 11:00:00+00:00",
+        "exit_time": "2025-09-09 13:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.486,
+        "exit_price": 1.469,
+        "pnl": -11.348497059283266,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-09 14:00:00+00:00",
+        "exit_time": "2025-09-09 15:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.434,
+        "exit_price": 1.401,
+        "pnl": 22.802155554520827,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 16:00:00+00:00",
+        "exit_time": "2025-09-09 17:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.402,
+        "exit_price": 1.392,
+        "pnl": 7.083719832817381,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 18:00:00+00:00",
+        "exit_time": "2025-09-09 19:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.4,
+        "exit_price": 1.391,
+        "pnl": 6.389009309213141,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 20:00:00+00:00",
+        "exit_time": "2025-09-09 21:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.397,
+        "exit_price": 1.383,
+        "pnl": 9.966204086365638,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-09 22:00:00+00:00",
+        "exit_time": "2025-09-10 00:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.403,
+        "exit_price": 1.382,
+        "pnl": 14.900292011091,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-10 01:00:00+00:00",
+        "exit_time": "2025-09-10 04:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.396,
+        "exit_price": 1.385,
+        "pnl": 7.855792173305364,
+        "exit_reason": "Take Profit",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-10 05:00:00+00:00",
+        "exit_time": "2025-09-10 09:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.371,
+        "exit_price": 1.383,
+        "pnl": -8.733103039844865,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-10 10:00:00+00:00",
+        "exit_time": "2025-09-10 12:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.381,
+        "exit_price": 1.413,
+        "pnl": -23.099405346810514,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-10 13:00:00+00:00",
+        "exit_time": "2025-09-10 15:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.437,
+        "exit_price": 1.459,
+        "pnl": 15.226599145580671,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-10 16:00:00+00:00",
+        "exit_time": "2025-09-10 17:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.459,
+        "exit_price": 1.435,
+        "pnl": -16.38541079717343,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-10 18:00:00+00:00",
+        "exit_time": "2025-09-10 19:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.426,
+        "exit_price": 1.39,
+        "pnl": -25.105528787338173,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-10 20:00:00+00:00",
+        "exit_time": "2025-09-10 21:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.388,
+        "exit_price": 1.4,
+        "pnl": -8.575913579997554,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-10 22:00:00+00:00",
+        "exit_time": "2025-09-11 01:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.4,
+        "exit_price": 1.441,
+        "pnl": -29.024771134664654,
+        "exit_reason": "Signal",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-11 02:00:00+00:00",
+        "exit_time": "2025-09-11 03:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.463,
+        "exit_price": 1.5,
+        "pnl": 24.991749112156644,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-11 04:00:00+00:00",
+        "exit_time": "2025-09-11 05:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.483,
+        "exit_price": 1.494,
+        "pnl": 7.348314822962927,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-11 06:00:00+00:00",
+        "exit_time": "2025-09-11 07:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.495,
+        "exit_price": 1.486,
+        "pnl": -5.968422393361855,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-11 08:00:00+00:00",
+        "exit_time": "2025-09-11 11:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.499,
+        "exit_price": 1.479,
+        "pnl": -13.219805645129107,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-11 12:00:00+00:00",
+        "exit_time": "2025-09-11 13:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.481,
+        "exit_price": 1.467,
+        "pnl": -9.353838173889798,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-11 14:00:00+00:00",
+        "exit_time": "2025-09-11 16:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.445,
+        "exit_price": 1.455,
+        "pnl": -6.841294593221624,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-11 17:00:00+00:00",
+        "exit_time": "2025-09-11 20:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.453,
+        "exit_price": 1.468,
+        "pnl": -10.19837858838123,
+        "exit_reason": "Signal",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-11 21:00:00+00:00",
+        "exit_time": "2025-09-11 22:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.478,
+        "exit_price": 1.489,
+        "pnl": 7.344718616661786,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-11 23:00:00+00:00",
+        "exit_time": "2025-09-12 01:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.508,
+        "exit_price": 1.484,
+        "pnl": -15.71773326149651,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-12 02:00:00+00:00",
+        "exit_time": "2025-09-12 06:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.484,
+        "exit_price": 1.467,
+        "pnl": -11.295443799827403,
+        "exit_reason": "Signal",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-12 07:00:00+00:00",
+        "exit_time": "2025-09-12 10:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.466,
+        "exit_price": 1.452,
+        "pnl": 9.40555769291308,
+        "exit_reason": "Take Profit",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-12 11:00:00+00:00",
+        "exit_time": "2025-09-12 12:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.448,
+        "exit_price": 1.46,
+        "pnl": -8.169918325915935,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-12 13:00:00+00:00",
+        "exit_time": "2025-09-12 14:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.475,
+        "exit_price": 1.464,
+        "pnl": 7.345910518264873,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-12 15:00:00+00:00",
+        "exit_time": "2025-09-12 16:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.459,
+        "exit_price": 1.481,
+        "pnl": -14.864014415367608,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-12 17:00:00+00:00",
+        "exit_time": "2025-09-12 22:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.504,
+        "exit_price": 1.527,
+        "pnl": 15.051970883917758,
+        "exit_reason": "Take Profit",
+        "duration_hours": 5.0
+      },
+      {
+        "entry_time": "2025-09-12 23:00:00+00:00",
+        "exit_time": "2025-09-13 00:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.534,
+        "exit_price": 1.567,
+        "pnl": 21.206333640402946,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-13 01:00:00+00:00",
+        "exit_time": "2025-09-13 04:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.533,
+        "exit_price": 1.523,
+        "pnl": -6.444186820334769,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-13 05:00:00+00:00",
+        "exit_time": "2025-09-13 08:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.543,
+        "exit_price": 1.559,
+        "pnl": 10.237194254053522,
+        "exit_reason": "Take Profit",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-13 09:00:00+00:00",
+        "exit_time": "2025-09-13 10:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.577,
+        "exit_price": 1.603,
+        "pnl": 16.293659890816734,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-13 11:00:00+00:00",
+        "exit_time": "2025-09-13 13:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.628,
+        "exit_price": 1.61,
+        "pnl": -10.944868005660753,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-13 14:00:00+00:00",
+        "exit_time": "2025-09-13 15:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.631,
+        "exit_price": 1.694,
+        "pnl": 38.19430118198649,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-13 16:00:00+00:00",
+        "exit_time": "2025-09-13 17:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.624,
+        "exit_price": 1.645,
+        "pnl": 12.835699779406044,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-13 18:00:00+00:00",
+        "exit_time": "2025-09-13 20:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.691,
+        "exit_price": 1.754,
+        "pnl": 37.029210073256486,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-13 21:00:00+00:00",
+        "exit_time": "2025-09-13 22:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.735,
+        "exit_price": 1.707,
+        "pnl": -16.099821519651197,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-13 23:00:00+00:00",
+        "exit_time": "2025-09-14 00:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.718,
+        "exit_price": 1.679,
+        "pnl": -22.610101501273267,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 01:00:00+00:00",
+        "exit_time": "2025-09-14 02:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.675,
+        "exit_price": 1.708,
+        "pnl": 19.57821927975464,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 03:00:00+00:00",
+        "exit_time": "2025-09-14 04:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.66,
+        "exit_price": 1.63,
+        "pnl": 17.994592232865458,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 05:00:00+00:00",
+        "exit_time": "2025-09-14 06:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.642,
+        "exit_price": 1.629,
+        "pnl": 7.897383058918291,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 07:00:00+00:00",
+        "exit_time": "2025-09-14 09:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.628,
+        "exit_price": 1.657,
+        "pnl": -17.782806550788937,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-14 10:00:00+00:00",
+        "exit_time": "2025-09-14 11:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.644,
+        "exit_price": 1.596,
+        "pnl": 29.095231739931396,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 12:00:00+00:00",
+        "exit_time": "2025-09-14 14:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.586,
+        "exit_price": 1.574,
+        "pnl": 7.561825046153704,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-14 15:00:00+00:00",
+        "exit_time": "2025-09-14 16:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.575,
+        "exit_price": 1.598,
+        "pnl": -14.605765100786774,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 17:00:00+00:00",
+        "exit_time": "2025-09-14 20:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.601,
+        "exit_price": 1.626,
+        "pnl": -15.59520325204841,
+        "exit_reason": "Signal",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-14 21:00:00+00:00",
+        "exit_time": "2025-09-14 22:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.634,
+        "exit_price": 1.624,
+        "pnl": -6.102553830697415,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-14 23:00:00+00:00",
+        "exit_time": "2025-09-15 01:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.604,
+        "exit_price": 1.588,
+        "pnl": 9.940618858383143,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-15 02:00:00+00:00",
+        "exit_time": "2025-09-15 03:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.581,
+        "exit_price": 1.621,
+        "pnl": -25.238231560752652,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 04:00:00+00:00",
+        "exit_time": "2025-09-15 05:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.61,
+        "exit_price": 1.655,
+        "pnl": -27.811041967528066,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 06:00:00+00:00",
+        "exit_time": "2025-09-15 07:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.627,
+        "exit_price": 1.597,
+        "pnl": -18.295688538769273,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 08:00:00+00:00",
+        "exit_time": "2025-09-15 09:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.563,
+        "exit_price": 1.63,
+        "pnl": -42.45504965933897,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 10:00:00+00:00",
+        "exit_time": "2025-09-15 11:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.613,
+        "exit_price": 1.6,
+        "pnl": 7.947981597308936,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 12:00:00+00:00",
+        "exit_time": "2025-09-15 13:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.589,
+        "exit_price": 1.569,
+        "pnl": 12.42235241568081,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-15 14:00:00+00:00",
+        "exit_time": "2025-09-15 16:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.527,
+        "exit_price": 1.494,
+        "pnl": 21.35595182974746,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-15 17:00:00+00:00",
+        "exit_time": "2025-09-15 20:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.531,
+        "exit_price": 1.547,
+        "pnl": -10.349666673811974,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-15 21:00:00+00:00",
+        "exit_time": "2025-09-16 00:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.559,
+        "exit_price": 1.539,
+        "pnl": 12.691453023515102,
+        "exit_reason": "Take Profit",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-16 01:00:00+00:00",
+        "exit_time": "2025-09-16 03:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.542,
+        "exit_price": 1.52,
+        "pnl": 14.132616074369507,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-16 04:00:00+00:00",
+        "exit_time": "2025-09-16 05:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.529,
+        "exit_price": 1.56,
+        "pnl": -20.112110054203157,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-16 06:00:00+00:00",
+        "exit_time": "2025-09-16 08:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.539,
+        "exit_price": 1.574,
+        "pnl": -22.513936691395763,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-16 09:00:00+00:00",
+        "exit_time": "2025-09-16 13:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.559,
+        "exit_price": 1.542,
+        "pnl": 10.770503920532274,
+        "exit_reason": "Take Profit",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-16 14:00:00+00:00",
+        "exit_time": "2025-09-16 15:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.546,
+        "exit_price": 1.59,
+        "pnl": -28.1416604758425,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-16 16:00:00+00:00",
+        "exit_time": "2025-09-16 17:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.576,
+        "exit_price": 1.586,
+        "pnl": 6.256227473113578,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-16 18:00:00+00:00",
+        "exit_time": "2025-09-16 21:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.577,
+        "exit_price": 1.565,
+        "pnl": -7.507472967736294,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-16 22:00:00+00:00",
+        "exit_time": "2025-09-16 23:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.56,
+        "exit_price": 1.532,
+        "pnl": 17.694857119211957,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-17 00:00:00+00:00",
+        "exit_time": "2025-09-17 02:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.529,
+        "exit_price": 1.541,
+        "pnl": -7.751150903271357,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-17 03:00:00+00:00",
+        "exit_time": "2025-09-17 04:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.535,
+        "exit_price": 1.516,
+        "pnl": 12.215090046163967,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-17 05:00:00+00:00",
+        "exit_time": "2025-09-17 06:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.521,
+        "exit_price": 1.537,
+        "pnl": -10.393921944399189,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-17 07:00:00+00:00",
+        "exit_time": "2025-09-17 08:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.531,
+        "exit_price": 1.514,
+        "pnl": 10.959867939232543,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-17 09:00:00+00:00",
+        "exit_time": "2025-09-17 12:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.505,
+        "exit_price": 1.518,
+        "pnl": -8.535331822396156,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-17 13:00:00+00:00",
+        "exit_time": "2025-09-17 15:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.521,
+        "exit_price": 1.538,
+        "pnl": -11.03463479708341,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-17 16:00:00+00:00",
+        "exit_time": "2025-09-17 17:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.555,
+        "exit_price": 1.543,
+        "pnl": -7.61032902464553,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-17 18:00:00+00:00",
+        "exit_time": "2025-09-17 19:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.593,
+        "exit_price": 1.697,
+        "pnl": 64.33315760637159,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-17 20:00:00+00:00",
+        "exit_time": "2025-09-17 21:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.743,
+        "exit_price": 1.879,
+        "pnl": 77.39001471393057,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-17 22:00:00+00:00",
+        "exit_time": "2025-09-18 00:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.81,
+        "exit_price": 1.822,
+        "pnl": 6.627070190761651,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-18 01:00:00+00:00",
+        "exit_time": "2025-09-18 02:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.801,
+        "exit_price": 1.834,
+        "pnl": 18.327657527010405,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 03:00:00+00:00",
+        "exit_time": "2025-09-18 04:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.942,
+        "exit_price": 2.018,
+        "pnl": 39.216256720263935,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 05:00:00+00:00",
+        "exit_time": "2025-09-18 06:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 2.062,
+        "exit_price": 2.018,
+        "pnl": -21.4665413017534,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 07:00:00+00:00",
+        "exit_time": "2025-09-18 08:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 2.047,
+        "exit_price": 2.019,
+        "pnl": -13.731264718986301,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 09:00:00+00:00",
+        "exit_time": "2025-09-18 10:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.964,
+        "exit_price": 1.91,
+        "pnl": -27.563106857030057,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 11:00:00+00:00",
+        "exit_time": "2025-09-18 12:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.898,
+        "exit_price": 1.912,
+        "pnl": -7.374150326488966,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 13:00:00+00:00",
+        "exit_time": "2025-09-18 14:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.957,
+        "exit_price": 1.938,
+        "pnl": -9.69889979834886,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 15:00:00+00:00",
+        "exit_time": "2025-09-18 16:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.931,
+        "exit_price": 1.944,
+        "pnl": 6.718911579622519,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-18 17:00:00+00:00",
+        "exit_time": "2025-09-18 19:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.944,
+        "exit_price": 1.922,
+        "pnl": -11.30203239144917,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-18 20:00:00+00:00",
+        "exit_time": "2025-09-18 22:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.923,
+        "exit_price": 1.901,
+        "pnl": -11.412525479831512,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-18 23:00:00+00:00",
+        "exit_time": "2025-09-19 00:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.881,
+        "exit_price": 1.905,
+        "pnl": -12.713457411431275,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 01:00:00+00:00",
+        "exit_time": "2025-09-19 03:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.898,
+        "exit_price": 1.917,
+        "pnl": -9.961945046741826,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-19 04:00:00+00:00",
+        "exit_time": "2025-09-19 05:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.959,
+        "exit_price": 1.909,
+        "pnl": -25.373907207123757,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 06:00:00+00:00",
+        "exit_time": "2025-09-19 07:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.9,
+        "exit_price": 1.924,
+        "pnl": -12.525628972476586,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 08:00:00+00:00",
+        "exit_time": "2025-09-19 09:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.906,
+        "exit_price": 1.87,
+        "pnl": 18.705640245150644,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 10:00:00+00:00",
+        "exit_time": "2025-09-19 11:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.897,
+        "exit_price": 1.869,
+        "pnl": 14.645465605633413,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 12:00:00+00:00",
+        "exit_time": "2025-09-19 13:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.853,
+        "exit_price": 1.889,
+        "pnl": -19.30545833152735,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 14:00:00+00:00",
+        "exit_time": "2025-09-19 16:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.874,
+        "exit_price": 1.902,
+        "pnl": -14.818249879537811,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-19 17:00:00+00:00",
+        "exit_time": "2025-09-19 18:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.856,
+        "exit_price": 1.834,
+        "pnl": 11.738262042815006,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-19 19:00:00+00:00",
+        "exit_time": "2025-09-19 23:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.846,
+        "exit_price": 1.819,
+        "pnl": 14.50125677767387,
+        "exit_reason": "Take Profit",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-20 00:00:00+00:00",
+        "exit_time": "2025-09-20 01:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.814,
+        "exit_price": 1.801,
+        "pnl": 7.1156469080712865,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-20 02:00:00+00:00",
+        "exit_time": "2025-09-20 05:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.797,
+        "exit_price": 1.831,
+        "pnl": -18.799672543792543,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-20 06:00:00+00:00",
+        "exit_time": "2025-09-20 07:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.837,
+        "exit_price": 1.886,
+        "pnl": 26.453545439379504,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-20 08:00:00+00:00",
+        "exit_time": "2025-09-20 10:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.862,
+        "exit_price": 1.83,
+        "pnl": -17.089295370715963,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-20 11:00:00+00:00",
+        "exit_time": "2025-09-20 14:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.833,
+        "exit_price": 1.845,
+        "pnl": -6.498687036638058,
+        "exit_reason": "Signal",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-20 15:00:00+00:00",
+        "exit_time": "2025-09-20 18:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.863,
+        "exit_price": 1.825,
+        "pnl": -20.234532417298116,
+        "exit_reason": "Signal",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-20 19:00:00+00:00",
+        "exit_time": "2025-09-20 20:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.831,
+        "exit_price": 1.851,
+        "pnl": -10.813775236494482,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-20 21:00:00+00:00",
+        "exit_time": "2025-09-21 00:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.846,
+        "exit_price": 1.859,
+        "pnl": 6.964223558995858,
+        "exit_reason": "Take Profit",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-21 01:00:00+00:00",
+        "exit_time": "2025-09-21 05:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.879,
+        "exit_price": 1.914,
+        "pnl": 18.433510309029323,
+        "exit_reason": "Take Profit",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-21 06:00:00+00:00",
+        "exit_time": "2025-09-21 07:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.877,
+        "exit_price": 1.843,
+        "pnl": -17.959309343624714,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-21 08:00:00+00:00",
+        "exit_time": "2025-09-21 09:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.839,
+        "exit_price": 1.808,
+        "pnl": 16.682746722526137,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-21 10:00:00+00:00",
+        "exit_time": "2025-09-21 12:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.8,
+        "exit_price": 1.814,
+        "pnl": -7.71035893057199,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-21 13:00:00+00:00",
+        "exit_time": "2025-09-21 14:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.816,
+        "exit_price": 1.795,
+        "pnl": 11.454723215192887,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-21 15:00:00+00:00",
+        "exit_time": "2025-09-21 16:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.791,
+        "exit_price": 1.77,
+        "pnl": 11.628047056137337,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-21 17:00:00+00:00",
+        "exit_time": "2025-09-21 21:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.769,
+        "exit_price": 1.78,
+        "pnl": -6.173861017523002,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-21 22:00:00+00:00",
+        "exit_time": "2025-09-21 23:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.784,
+        "exit_price": 1.758,
+        "pnl": 14.461067632228339,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-22 00:00:00+00:00",
+        "exit_time": "2025-09-22 02:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.707,
+        "exit_price": 1.662,
+        "pnl": 26.195900464788977,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-22 03:00:00+00:00",
+        "exit_time": "2025-09-22 05:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.665,
+        "exit_price": 1.639,
+        "pnl": 15.5581097735421,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-22 06:00:00+00:00",
+        "exit_time": "2025-09-22 07:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.662,
+        "exit_price": 1.709,
+        "pnl": -28.219038261197507,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-22 08:00:00+00:00",
+        "exit_time": "2025-09-22 10:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.699,
+        "exit_price": 1.755,
+        "pnl": 32.797453798552475,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-22 11:00:00+00:00",
+        "exit_time": "2025-09-22 13:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.737,
+        "exit_price": 1.796,
+        "pnl": 33.90992109708598,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-22 14:00:00+00:00",
+        "exit_time": "2025-09-22 16:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.823,
+        "exit_price": 1.788,
+        "pnl": -19.232184346940578,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-22 17:00:00+00:00",
+        "exit_time": "2025-09-22 18:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.78,
+        "exit_price": 1.756,
+        "pnl": -13.480433805171808,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-22 19:00:00+00:00",
+        "exit_time": "2025-09-22 20:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.735,
+        "exit_price": 1.765,
+        "pnl": -17.264278913597426,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-22 21:00:00+00:00",
+        "exit_time": "2025-09-22 23:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.783,
+        "exit_price": 1.813,
+        "pnl": 16.770460503842383,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-23 00:00:00+00:00",
+        "exit_time": "2025-09-23 01:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.787,
+        "exit_price": 1.755,
+        "pnl": -17.878480856474535,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 02:00:00+00:00",
+        "exit_time": "2025-09-23 03:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.706,
+        "exit_price": 1.752,
+        "pnl": -26.872347065171578,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 04:00:00+00:00",
+        "exit_time": "2025-09-23 06:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.713,
+        "exit_price": 1.738,
+        "pnl": -14.5056382448421,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-23 07:00:00+00:00",
+        "exit_time": "2025-09-23 08:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.735,
+        "exit_price": 1.72,
+        "pnl": 8.580482150248775,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 09:00:00+00:00",
+        "exit_time": "2025-09-23 12:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.736,
+        "exit_price": 1.747,
+        "pnl": -6.294165890667335,
+        "exit_reason": "Signal",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-23 13:00:00+00:00",
+        "exit_time": "2025-09-23 15:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.72,
+        "exit_price": 1.746,
+        "pnl": -15.00599674929624,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-23 16:00:00+00:00",
+        "exit_time": "2025-09-23 17:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.77,
+        "exit_price": 1.733,
+        "pnl": -20.720079448890214,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 18:00:00+00:00",
+        "exit_time": "2025-09-23 19:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.711,
+        "exit_price": 1.695,
+        "pnl": 9.24962518029915,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-23 20:00:00+00:00",
+        "exit_time": "2025-09-23 23:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.681,
+        "exit_price": 1.662,
+        "pnl": 11.190409488095922,
+        "exit_reason": "Take Profit",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-24 00:00:00+00:00",
+        "exit_time": "2025-09-24 01:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.687,
+        "exit_price": 1.702,
+        "pnl": -8.81306279951161,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-24 02:00:00+00:00",
+        "exit_time": "2025-09-24 03:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.688,
+        "exit_price": 1.633,
+        "pnl": 32.26670435117415,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-24 04:00:00+00:00",
+        "exit_time": "2025-09-24 05:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.652,
+        "exit_price": 1.736,
+        "pnl": -50.5180251020464,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-24 06:00:00+00:00",
+        "exit_time": "2025-09-24 07:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.766,
+        "exit_price": 1.754,
+        "pnl": -6.7166660781203245,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-24 08:00:00+00:00",
+        "exit_time": "2025-09-24 09:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.763,
+        "exit_price": 1.792,
+        "pnl": 16.248515624188745,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-24 10:00:00+00:00",
+        "exit_time": "2025-09-24 12:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.825,
+        "exit_price": 1.88,
+        "pnl": 29.81821361816742,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-24 13:00:00+00:00",
+        "exit_time": "2025-09-24 14:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.809,
+        "exit_price": 1.824,
+        "pnl": 8.228891908345542,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-24 15:00:00+00:00",
+        "exit_time": "2025-09-24 17:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.802,
+        "exit_price": 1.861,
+        "pnl": 32.519649249112405,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-24 18:00:00+00:00",
+        "exit_time": "2025-09-24 21:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.845,
+        "exit_price": 1.804,
+        "pnl": -22.143982628049066,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-24 22:00:00+00:00",
+        "exit_time": "2025-09-25 00:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.798,
+        "exit_price": 1.769,
+        "pnl": -16.036529354829185,
+        "exit_reason": "Signal",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-25 01:00:00+00:00",
+        "exit_time": "2025-09-25 04:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.737,
+        "exit_price": 1.71,
+        "pnl": 15.429966327418551,
+        "exit_reason": "Take Profit",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-25 05:00:00+00:00",
+        "exit_time": "2025-09-25 06:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.726,
+        "exit_price": 1.687,
+        "pnl": 22.464636375532912,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 07:00:00+00:00",
+        "exit_time": "2025-09-25 08:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.675,
+        "exit_price": 1.703,
+        "pnl": -16.657085113646627,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 09:00:00+00:00",
+        "exit_time": "2025-09-25 11:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.704,
+        "exit_price": 1.682,
+        "pnl": 12.843467261797402,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-25 12:00:00+00:00",
+        "exit_time": "2025-09-25 13:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.709,
+        "exit_price": 1.689,
+        "pnl": 11.656749743113316,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 14:00:00+00:00",
+        "exit_time": "2025-09-25 15:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.705,
+        "exit_price": 1.721,
+        "pnl": -9.35821645065895,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 16:00:00+00:00",
+        "exit_time": "2025-09-25 17:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.673,
+        "exit_price": 1.66,
+        "pnl": 7.741714611726079,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 18:00:00+00:00",
+        "exit_time": "2025-09-25 19:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.738,
+        "exit_price": 1.793,
+        "pnl": -31.552952225931932,
+        "exit_reason": "Signal",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 20:00:00+00:00",
+        "exit_time": "2025-09-25 21:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.741,
+        "exit_price": 1.717,
+        "pnl": 13.701339392765414,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-25 22:00:00+00:00",
+        "exit_time": "2025-09-26 00:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.711,
+        "exit_price": 1.738,
+        "pnl": -15.705890990365585,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-26 01:00:00+00:00",
+        "exit_time": "2025-09-26 03:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.69,
+        "exit_price": 1.702,
+        "pnl": -7.055982532239748,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-26 04:00:00+00:00",
+        "exit_time": "2025-09-26 06:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.697,
+        "exit_price": 1.713,
+        "pnl": -9.362516833978773,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-26 07:00:00+00:00",
+        "exit_time": "2025-09-26 08:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.727,
+        "exit_price": 1.71,
+        "pnl": 9.765655315777764,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-26 09:00:00+00:00",
+        "exit_time": "2025-09-26 10:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.688,
+        "exit_price": 1.677,
+        "pnl": 6.471312091867582,
+        "exit_reason": "Take Profit",
+        "duration_hours": 1.0
+      },
+      {
+        "entry_time": "2025-09-26 11:00:00+00:00",
+        "exit_time": "2025-09-26 13:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.669,
+        "exit_price": 1.701,
+        "pnl": -19.05235492891533,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-26 14:00:00+00:00",
+        "exit_time": "2025-09-26 16:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.676,
+        "exit_price": 1.693,
+        "pnl": -10.059964541504797,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-26 17:00:00+00:00",
+        "exit_time": "2025-09-26 21:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.712,
+        "exit_price": 1.781,
+        "pnl": -39.932466519964706,
+        "exit_reason": "Signal",
+        "duration_hours": 4.0
+      },
+      {
+        "entry_time": "2025-09-26 22:00:00+00:00",
+        "exit_time": "2025-09-27 00:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.766,
+        "exit_price": 1.78,
+        "pnl": 7.822836191546335,
+        "exit_reason": "Take Profit",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-27 01:00:00+00:00",
+        "exit_time": "2025-09-27 03:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.745,
+        "exit_price": 1.734,
+        "pnl": -6.2254149625186415,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      },
+      {
+        "entry_time": "2025-09-27 04:00:00+00:00",
+        "exit_time": "2025-09-27 07:00:00+00:00",
+        "type": "LONG",
+        "entry_price": 1.751,
+        "exit_price": 1.729,
+        "pnl": -12.400343978453503,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 3.0
+      },
+      {
+        "entry_time": "2025-09-27 08:00:00+00:00",
+        "exit_time": "2025-09-27 10:00:00+00:00",
+        "type": "SHORT",
+        "entry_price": 1.708,
+        "exit_price": 1.728,
+        "pnl": -11.542325712965566,
+        "exit_reason": "Stop Loss",
+        "duration_hours": 2.0
+      }
+    ],
+    "stats": {
+      "total_trades": 181,
+      "wins": 81,
+      "losses": 100,
+      "win_rate": 44.751381215469614,
+      "total_pnl": -154.39616684037512,
+      "final_balance": 9845.603833159617,
+      "return_pct": -1.5439616684038264,
+      "avg_win": 16.75849988361707,
+      "avg_loss": -15.118346574133573,
+      "profit_factor": 0.8978749653057063,
+      "max_drawdown": 2.1311926719636443
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "timeframe": "15m",
+  "atr_period": 10,
+  "key_value": 3,
+  "factor": 1.5,
+  "check_interval": 900,
+  "working_hours": {
+    "start": "15:30",
+    "end": "22:00",
+    "timezone": "UTC"
+  },
+  "telegram": {
+    "bot_token": "8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0",
+    "chat_id": "-1003038204085"
+  },
+  "filters": {
+    "max_price": 1.00,
+    "sector": "Technology",
+    "exchange": "NASDAQ"
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "symbol": "KPLTW",
+    "name": "Katapult Holdings, Inc.",
+    "price": 0.0109,
+    "sector": "technology",
+    "industry": "software - infrastructure",
+    "market_cap": 0,
+    "volume": 80000
+  },
+  {
+    "symbol": "MNYWW",
+    "name": "MoneyHero Limited",
+    "price": 0.1026,
+    "sector": "communication services",
+    "industry": "internet content & information",
+    "market_cap": 0,
+    "volume": 9456
+  },
+  {
+    "symbol": "EPWK",
+    "name": "EPWK Holdings Ltd.",
+    "price": 0.1111,
+    "sector": "technology",
+    "industry": "software - application",
+    "market_cap": 2646395,
+    "volume": 43988479
+  },
+  {
+    "symbol": "CYCU",
+    "name": "Cycurion, Inc.",
+    "price": 0.2748,
+    "sector": "technology",
+    "industry": "information technology services",
+    "market_cap": 19442148,
+    "volume": 9822536
+  },
+  {
+    "symbol": "AEVAW",
+    "name": "Aeva Technologies, Inc.",
+    "price": 0.2861,
+    "sector": "technology",
+    "industry": "software - infrastructure",
+    "market_cap": 0,
+    "volume": 4151
+  },
+  {
+    "symbol": "WCT",
+    "name": "Wellchange Holdings Company Limited",
+    "price": 0.3867,
+    "sector": "technology",
+    "industry": "software - application",
+    "market_cap": 59267572,
+    "volume": 405550
+  }
+]

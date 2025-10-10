@@ -1,0 +1,15 @@
+[Unit]
+Description=BIST Signal Generator
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/simple_trader
+ExecStart=/root/simple_trader/venv/bin/python3 /root/simple_trader/bist_signal_generator.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

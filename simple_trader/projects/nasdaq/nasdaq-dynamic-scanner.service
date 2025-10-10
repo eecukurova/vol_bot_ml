@@ -1,0 +1,16 @@
+[Unit]
+Description=NASDAQ Dynamic Scanner - $5 Altı Teknoloji Hisseleri
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/simple_trader/projects/nasdaq
+ExecStart=/root/simple_trader/venv/bin/python3 /root/simple_trader/projects/nasdaq/nasdaq_dynamic_scanner.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

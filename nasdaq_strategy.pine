@@ -1,0 +1,113 @@
+//@version=5
+strategy("NASDAQ ATR Trailing Stop + EMA(1) Strategy", overlay=true, margin_long=100, margin_short=100, initial_capital=10000)
+
+// ======================
+// INPUTS
+// ======================
+atr_period = input.int(10, "ATR Period", minval=1, maxval=50)
+key_value = input.float(3.0, "ATR Multiplier", minval=0.1, maxval=10.0, step=0.1)
+ema_period = input.int(1, "EMA Period", minval=1, maxval=10)
+
+// ======================
+// ATR CALCULATION
+// ======================
+atr = ta.atr(atr_period)
+
+// ======================
+// EMA(1) CALCULATION
+// ======================
+ema1 = ta.ema(close, ema_period)
+
+// ======================
+// ATR TRAILING STOP CALCULATION
+// ======================
+nLoss = key_value * atr
+
+// ATR Trailing Stop calculation
+var float xATRTrailingStop = na
+var int pos = 0
+
+if barstate.isconfirmed
+    src = close
+    prev_src = close[1]
+    prev_xATRTrailingStop = xATRTrailingStop[1]
+    prev_pos = pos[1]
+    
+    if na(prev_xATRTrailingStop)
+        xATRTrailingStop := src - nLoss
+    else
+        if src > prev_xATRTrailingStop and prev_src > prev_xATRTrailingStop
+            xATRTrailingStop := math.max(prev_xATRTrailingStop, src - nLoss)
+        else if src < prev_xATRTrailingStop and prev_src < prev_xATRTrailingStop
+            xATRTrailingStop := math.min(prev_xATRTrailingStop, src + nLoss)
+        else if src > prev_xATRTrailingStop
+            xATRTrailingStop := src - nLoss
+        else
+            xATRTrailingStop := src + nLoss
+    
+    // Position logic
+    if prev_src < prev_xATRTrailingStop and src > prev_xATRTrailingStop
+        pos := 1  // Buy signal
+    else if prev_src > prev_xATRTrailingStop and src < prev_xATRTrailingStop
+        pos := -1  // Sell signal
+    else
+        pos := prev_pos
+
+// ======================
+// SIGNAL CONDITIONS
+// ======================
+// Buy conditions
+buy_cond1 = close > xATRTrailingStop
+buy_cond2 = ema1 > xATRTrailingStop and ema1[1] <= xATRTrailingStop[1]  // EMA crossover
+
+// Sell conditions  
+sell_cond1 = close < xATRTrailingStop
+sell_cond2 = ema1 < xATRTrailingStop and ema1[1] >= xATRTrailingStop[1]  // EMA crossunder
+
+// Final signals
+buy_signal = buy_cond1 and buy_cond2
+sell_signal = sell_cond1 and sell_cond2
+
+// ======================
+// STRATEGY ORDERS
+// ======================
+if buy_signal and strategy.position_size == 0
+    strategy.entry("Long", strategy.long, comment="NASDAQ BUY")
+
+if sell_signal and strategy.position_size == 0
+    strategy.entry("Short", strategy.short, comment="NASDAQ SELL")
+
+// ======================
+// PLOTS
+// ======================
+plot(close, "Close Price", color=color.white, linewidth=2)
+plot(xATRTrailingStop, "ATR Trailing Stop", color=color.red, linewidth=1)
+plot(ema1, "EMA(1)", color=color.blue, linewidth=1)
+
+// Signal markers
+plotshape(buy_signal, "Buy Signal", style=shape.triangleup, location=location.belowbar, size=size.small, color=color.green, text="BUY")
+plotshape(sell_signal, "Sell Signal", style=shape.triangledown, location=location.abovebar, size=size.small, color=color.red, text="SELL")
+
+// ======================
+// ALERTS
+// ======================
+alertcondition(buy_signal, title="NASDAQ BUY Signal", message="NASDAQ BUY Signal: {{ticker}} at {{close}}")
+alertcondition(sell_signal, title="NASDAQ SELL Signal", message="NASDAQ SELL Signal: {{ticker}} at {{close}}")
+
+// ======================
+// TABLE FOR VALUES
+// ======================
+if barstate.islast
+    var table info_table = table.new(position.top_right, 2, 6, bgcolor=color.white, border_width=1)
+    table.cell(info_table, 0, 0, "Parameter", text_color=color.black, bgcolor=color.gray)
+    table.cell(info_table, 1, 0, "Value", text_color=color.black, bgcolor=color.gray)
+    table.cell(info_table, 0, 1, "Close", text_color=color.black)
+    table.cell(info_table, 1, 1, str.tostring(close, "#.##"), text_color=color.black)
+    table.cell(info_table, 0, 2, "ATR", text_color=color.black)
+    table.cell(info_table, 1, 2, str.tostring(atr, "#.####"), text_color=color.black)
+    table.cell(info_table, 0, 3, "Trailing Stop", text_color=color.black)
+    table.cell(info_table, 1, 3, str.tostring(xATRTrailingStop, "#.##"), text_color=color.black)
+    table.cell(info_table, 0, 4, "EMA(1)", text_color=color.black)
+    table.cell(info_table, 1, 4, str.tostring(ema1, "#.##"), text_color=color.black)
+    table.cell(info_table, 0, 5, "Position", text_color=color.black)
+    table.cell(info_table, 1, 5, pos == 1 ? "LONG" : pos == -1 ? "SHORT" : "HOLD", text_color=pos == 1 ? color.green : pos == -1 ? color.red : color.gray)

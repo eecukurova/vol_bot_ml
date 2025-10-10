@@ -1,0 +1,16 @@
+[Unit]
+Description=EMA Crossover Multi-Timeframe Auto Trader
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/simple_trader/projects/eigen_ema
+ExecStart=/root/simple_trader/venv/bin/python3 /root/simple_trader/projects/eigen_ema/eigen_ema_multi_trader.py
+Environment=PATH=/root/simple_trader/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

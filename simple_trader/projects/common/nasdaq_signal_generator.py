@@ -1,0 +1,343 @@
+import yfinance as yf
+import pandas as pd
+import numpy as np
+import json
+import time
+import logging
+import requests
+import os
+from datetime import datetime
+import pytz
+
+class NASDAQSignalGenerator:
+    def __init__(self, config_file='nasdaq_config.json'):
+        # Logging setup
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            handlers=[
+                logging.StreamHandler(),
+                logging.FileHandler('nasdaq_signals.log')
+            ]
+        )
+        self.log = logging.getLogger(__name__)
+
+        # Load configuration
+        with open(config_file, 'r') as f:
+            self.cfg = json.load(f)
+        
+        self.log.info(f"📋 CONFIG_YÜKLENDİ - Dosya: {config_file}")
+        self.log.info(f"📋 TELEGRAM_CHAT_ID: {self.cfg['telegram']['chat_id']}")
+        self.log.info(f"📋 TELEGRAM_BOT_TOKEN: {self.cfg['telegram']['bot_token'][:20]}...")
+
+        # Load tech stocks list
+        with open('nasdaq_tech_stocks.json', 'r') as f:
+            self.tech_stocks = json.load(f)
+
+        self.symbols = [stock['symbol'] for stock in self.tech_stocks]
+        self.timeframe = self.cfg['timeframe']
+        self.atr_period = self.cfg['atr_period']
+        self.key_value = self.cfg['key_value']
+        self.factor = self.cfg['factor']
+        self.check_interval = self.cfg.get('check_interval', 900)  # Default 15 minutes
+        
+        # Working hours
+        self.working_hours_start = datetime.strptime(self.cfg['working_hours']['start'], '%H:%M').time()
+        self.working_hours_end = datetime.strptime(self.cfg['working_hours']['end'], '%H:%M').time()
+        self.timezone = pytz.timezone(self.cfg['working_hours']['timezone'])
+
+        # Telegram bot
+        self.bot_token = self.cfg['telegram']['bot_token']
+        self.chat_id = self.cfg['telegram']['chat_id']
+        self.base_url = f"https://api.telegram.org/bot{self.bot_token}/sendMessage"
+        
+        self.log.info(f"📋 TELEGRAM_BASE_URL: {self.base_url}")
+        self.log.info(f"📋 FINAL_CHAT_ID: {self.chat_id}")
+        
+        self.log.info("🚀 NASDAQ Signal Generator başlatıldı")
+        self.log.info(f"📊 {len(self.symbols)} teknoloji hissesi takip ediliyor")
+        self.log.info(f"⏰ Çalışma saatleri: {self.cfg['working_hours']['start']}-{self.cfg['working_hours']['end']} UTC")
+        self.log.info(f"📈 Timeframe: {self.timeframe}")
+        
+        # Signal state management
+        self.last_signals = {}  # Her hisse için son sinyal
+        self.signal_cooldown = 7200  # 2 saat cooldown
+        self.state_file = 'nasdaq_signal_state.json'
+        self._load_signal_state()
+
+    def send_telegram_message(self, message):
+        """Telegram'a mesaj gönder"""
+        try:
+            self.log.info(f"📱 TELEGRAM_GÖNDERME_BAŞLADI - Chat ID: {self.chat_id}")
+            self.log.info(f"📱 TELEGRAM_MESAJ_İÇERİĞİ: {message[:100]}...")
+            
+            data = {
+                'chat_id': self.chat_id,
+                'text': message,
+                'parse_mode': 'HTML'
+            }
+            
+            self.log.info(f"📱 TELEGRAM_API_URL: {self.base_url}")
+            self.log.info(f"📱 TELEGRAM_DATA: {data}")
+            
+            response = requests.post(self.base_url, data=data, timeout=10)
+            
+            self.log.info(f"📱 TELEGRAM_RESPONSE_STATUS: {response.status_code}")
+            self.log.info(f"📱 TELEGRAM_RESPONSE_TEXT: {response.text}")
+            
+            if response.status_code == 200:
+                self.log.info(f"✅ NASDAQ Telegram mesajı başarıyla gönderildi - Chat ID: {self.chat_id}")
+            else:
+                self.log.error(f"❌ NASDAQ Telegram hatası: {response.status_code} - {response.text}")
+        except Exception as e:
+            self.log.error(f"❌ NASDAQ Telegram gönderme hatası: {e}")
+
+    def _load_signal_state(self):
+        """Sinyal state'ini dosyadan yükle"""
+        try:
+            if os.path.exists(self.state_file):
+                with open(self.state_file, 'r') as f:
+                    data = json.load(f)
+                    for symbol, signal_data in data.items():
+                        self.last_signals[symbol] = {
+                            'signal': signal_data['signal'],
+                            'time': datetime.fromisoformat(signal_data['time'])
+                        }
+                self.log.info(f"📊 Signal state yüklendi: {len(self.last_signals)} hisse")
+            else:
+                self.log.info("📊 Signal state dosyası bulunamadı, yeni başlatılıyor")
+        except Exception as e:
+            self.log.error(f"❌ Signal state yükleme hatası: {e}")
+
+    def _save_signal_state(self):
+        """Sinyal state'ini dosyaya kaydet"""
+        try:
+            data = {}
+            for symbol, signal_data in self.last_signals.items():
+                data[symbol] = {
+                    'signal': signal_data['signal'],
+                    'time': signal_data['time'].isoformat()
+                }
+            with open(self.state_file, 'w') as f:
+                json.dump(data, f, indent=2)
+            self.log.info(f"💾 Signal state kaydedildi: {len(self.last_signals)} hisse")
+        except Exception as e:
+            self.log.error(f"❌ Signal state kaydetme hatası: {e}")
+
+    def is_market_open(self):
+        """NASDAQ piyasasının açık olup olmadığını kontrol et"""
+        now = datetime.now(self.timezone)
+        # Check if it's a weekend (Saturday or Sunday)
+        if now.weekday() >= 5:  # Monday is 0, Sunday is 6
+            return False
+        
+        # Check if current time is within working hours
+        if self.working_hours_start <= now.time() <= self.working_hours_end:
+            return True
+        return False
+
+    def get_nasdaq_data(self, symbol, period='5d', interval='15m'):
+        """Yahoo Finance'dan NASDAQ verisi çek"""
+        ticker = yf.Ticker(symbol)
+        df = ticker.history(period=period, interval=interval)
+        if df.empty:
+            self.log.warning(f"⚠️ {symbol} için veri alınamadı.")
+            return None
+        return df
+
+    def calculate_atr_trailing_stop(self, df):
+        """ATR Trailing Stop ve EMA(1) hesapla"""
+        # ATR calculation
+        high_low = df['High'] - df['Low']
+        high_close = np.abs(df['High'] - df['Close'].shift())
+        low_close = np.abs(df['Low'] - df['Close'].shift())
+        ranges = pd.concat([high_low, high_close, low_close], axis=1)
+        true_range = ranges.max(axis=1)
+        df['ATR'] = true_range.ewm(span=self.atr_period, adjust=False).mean()
+
+        nLoss = self.key_value * df['ATR']
+
+        # EMA(1) - essentially the close price for a period of 1
+        df['EMA1'] = df['Close'].ewm(span=1, adjust=False).mean()
+
+        # ATR Trailing Stop calculation
+        xATRTrailingStop = pd.Series(index=df.index, dtype=float)
+        pos = pd.Series(index=df.index, dtype=int)
+        
+        for i in range(1, len(df)):
+            src = df['Close'].iloc[i]
+            prev_src = df['Close'].iloc[i-1]
+            prev_xATRTrailingStop = xATRTrailingStop.iloc[i-1] if i > 0 else 0
+            prev_pos = pos.iloc[i-1] if i > 0 else 0
+
+            if src > prev_xATRTrailingStop and prev_src > prev_xATRTrailingStop:
+                xATRTrailingStop.iloc[i] = max(prev_xATRTrailingStop, src - nLoss.iloc[i])
+            elif src < prev_xATRTrailingStop and prev_src < prev_xATRTrailingStop:
+                xATRTrailingStop.iloc[i] = min(prev_xATRTrailingStop, src + nLoss.iloc[i])
+            elif src > prev_xATRTrailingStop:
+                xATRTrailingStop.iloc[i] = src - nLoss.iloc[i]
+            else:
+                xATRTrailingStop.iloc[i] = src + nLoss.iloc[i]
+            
+            if prev_src < prev_xATRTrailingStop and src > prev_xATRTrailingStop:
+                pos.iloc[i] = 1  # Buy signal
+            elif prev_src > prev_xATRTrailingStop and src < prev_xATRTrailingStop:
+                pos.iloc[i] = -1  # Sell signal
+            else:
+                pos.iloc[i] = prev_pos
+        
+        df['xATRTrailingStop'] = xATRTrailingStop
+        df['pos'] = pos  # 1 for buy, -1 for sell, 0 for hold
+
+        return df
+
+    def generate_signal(self, df):
+        """Sinyal üret - Pine Script'teki buy/sell kriterleri"""
+        if df is None or df.empty:
+            return {'signal': 'HOLD', 'price': None, 'trailing_stop': None, 'ema1': None, 'atr': None}
+
+        close = df['Close'].iloc[-1]
+        xATRTrailingStop = df['xATRTrailingStop'].iloc[-1]
+        ema1 = df['EMA1'].iloc[-1]
+        atr_val = df['ATR'].iloc[-1]
+        
+        prev_ema1 = df['EMA1'].iloc[-2]
+        prev_xATRTrailingStop = df['xATRTrailingStop'].iloc[-2]
+
+        signal = 'HOLD'
+        
+        # Pine Script logic: buy = src > xATRTrailingStop and above
+        # above = crossover(ema, xATRTrailingStop)
+        buy_cond1 = close > xATRTrailingStop
+        buy_cond2 = ema1 > xATRTrailingStop and prev_ema1 <= prev_xATRTrailingStop  # Crossover
+
+        # Pine Script logic: sell = src < xATRTrailingStop and below
+        # below = crossover(xATRTrailingStop, ema)
+        sell_cond1 = close < xATRTrailingStop
+        sell_cond2 = ema1 < xATRTrailingStop and prev_ema1 >= prev_xATRTrailingStop  # Crossunder
+
+        if buy_cond1 and buy_cond2:
+            signal = 'BUY'
+        elif sell_cond1 and sell_cond2:
+            signal = 'SELL'
+        
+        return {
+            'signal': signal,
+            'price': close,
+            'trailing_stop': xATRTrailingStop,
+            'ema1': ema1,
+            'atr': atr_val
+        }
+
+    def run(self):
+        """Ana döngü"""
+        while True:
+            current_time = datetime.now(self.timezone)
+            self.log.info(f"🔄 NASDAQ_CYCLE_START: {current_time.strftime('%H:%M:%S')}")
+            
+            if not self.is_market_open():
+                self.log.info("😴 NASDAQ piyasası kapalı veya çalışma saatleri dışında. Bekleniyor...")
+                time.sleep(self.check_interval)
+                continue
+
+            # 15 dakikalık mum kapanışı için 1 dakika bekle
+            current_minute = current_time.minute
+            if current_minute % 15 == 0:  # 00:00, 00:15, 00:30, 00:45
+                self.log.info("⏰ 15 dakikalık mum kapanışı için 60 saniye bekleniyor...")
+                time.sleep(60)  # 1 dakika bekle
+                current_time = datetime.now(self.timezone)
+                self.log.info(f"🔄 NASDAQ_CYCLE_CONTINUE: {current_time.strftime('%H:%M:%S')}")
+
+            self.log.info(f"🔍 NASDAQ sinyal kontrolü başlatılıyor - {len(self.symbols)} hisse")
+            
+            for symbol in self.symbols:
+                try:
+                    df = self.get_nasdaq_data(symbol, interval=self.timeframe)
+                    if df is None or df.empty:
+                        continue
+                    
+                    df = self.calculate_atr_trailing_stop(df)
+                    signal_data = self.generate_signal(df)
+                    
+                    if signal_data['signal'] != 'HOLD':
+                        # Sinyal state kontrolü
+                        current_time = datetime.now()
+                        last_signal_time = self.last_signals.get(symbol, {}).get('time')
+                        last_signal_type = self.last_signals.get(symbol, {}).get('signal')
+                        
+                        self.log.info(f"🔍 SİNYAL_STATE_KONTROLÜ - {symbol}")
+                        self.log.info(f"🔍 MEVCUT_SİNYAL: {signal_data['signal']}")
+                        self.log.info(f"🔍 SON_SİNYAL_TİPİ: {last_signal_type}")
+                        self.log.info(f"🔍 SON_SİNYAL_ZAMANI: {last_signal_time}")
+                        self.log.info(f"🔍 MEVCUT_ZAMAN: {current_time}")
+                        self.log.info(f"🔍 COOLDOWN_SÜRESİ: {self.signal_cooldown} saniye")
+                        
+                        # Yeni sinyal mi kontrol et
+                        is_new_signal = (
+                            last_signal_time is None or 
+                            (current_time - last_signal_time).total_seconds() > self.signal_cooldown or
+                            last_signal_type != signal_data['signal']
+                        )
+                        
+                        # Debug log
+                        if last_signal_time:
+                            time_diff = (current_time - last_signal_time).total_seconds()
+                            self.log.info(f"🔍 {symbol}: Son sinyal {time_diff:.0f} saniye önce, cooldown: {self.signal_cooldown} saniye")
+                            self.log.info(f"🔍 ZAMAN_FARKI_KONTROLÜ: {time_diff:.0f} > {self.signal_cooldown} = {time_diff > self.signal_cooldown}")
+                        
+                        self.log.info(f"🔍 YENİ_SİNYAL_Mİ: {is_new_signal}")
+                        
+                        if is_new_signal:
+                            self.log.info(f"🎯 YENİ NASDAQ SİNYALİ! {symbol}: {signal_data['signal']}")
+                            self.log.info(f"🎯 TELEGRAM_MESAJI_HAZIRLANIYOR - Chat ID: {self.chat_id}")
+                            
+                            telegram_msg = f"""
+🇺🇸 NASDAQ {signal_data['signal']} SİNYALİ
+
+📊 Hisse: {symbol}
+💰 Fiyat: ${signal_data['price']:.2f}
+📈 EMA(1): ${signal_data['ema1']:.2f}
+🛡️ Trailing Stop: ${signal_data['trailing_stop']:.2f}
+📊 ATR: ${signal_data['atr']:.2f}
+⏰ Zaman: {datetime.now(self.timezone).strftime('%H:%M:%S')} UTC
+
+🚀 {'ALIM SİNYALİ!' if signal_data['signal'] == 'BUY' else 'SATIM SİNYALİ!'}
+"""
+                            self.send_telegram_message(telegram_msg)
+                            
+                            # Sinyal state'ini güncelle
+                            self.log.info(f"💾 SİNYAL_STATE_GÜNCELLENİYOR - {symbol}: {signal_data['signal']}")
+                            self.last_signals[symbol] = {
+                                'signal': signal_data['signal'],
+                                'time': current_time
+                            }
+                            self._save_signal_state()
+                            self.log.info(f"💾 SİNYAL_STATE_GÜNCELLENDİ - {symbol}")
+                        else:
+                            self.log.info(f"⏭️ {symbol}: Aynı sinyal devam ediyor, mesaj gönderilmiyor")
+                    else:
+                        self.log.info(f"✅ {symbol}: HOLD")
+                        
+                except Exception as e:
+                    self.log.error(f"❌ {symbol} için sinyal kontrol hatası: {e}")
+                    
+            self.log.info("✅ NASDAQ sinyal kontrolü tamamlandı")
+            
+            # Bir sonraki 15 dakikalık periyoda kadar bekle
+            current_time = datetime.now(self.timezone)
+            next_check_minute = ((current_time.minute // 15) + 1) * 15
+            if next_check_minute >= 60:
+                next_check_minute = 0
+                next_check_hour = current_time.hour + 1
+            else:
+                next_check_hour = current_time.hour
+            
+            next_check_time = current_time.replace(hour=next_check_hour, minute=next_check_minute, second=0, microsecond=0)
+            wait_seconds = (next_check_time - current_time).total_seconds()
+            
+            self.log.info(f"⏰ Bir sonraki kontrol: {next_check_time.strftime('%H:%M:%S')} ({wait_seconds:.0f} saniye sonra)")
+            time.sleep(wait_seconds)
+
+if __name__ == "__main__":
+    generator = NASDAQSignalGenerator()
+    generator.run()

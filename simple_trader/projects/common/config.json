@@ -1,0 +1,12 @@
+{
+  "api_key": "",
+  "secret": "",
+  "sandbox": false,
+  "symbol": "SOL/USDT",
+  "position_size": 200,
+  "leverage": 150,
+  "sl": 0.006,
+  "tp": 0.006,
+  "trailing_mult": 8.0,
+  "interval": 60
+}
