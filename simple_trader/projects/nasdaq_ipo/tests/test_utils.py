@@ -25,8 +25,8 @@ class TestConsecutiveDaysBelowThreshold:
     def test_mixed_prices(self):
         """Test with mixed prices"""
         prices = [1.2, 0.8, 0.9, 0.7, 1.1, 0.6, 0.5, 1.3, 0.4, 0.3]
-        # Longest consecutive below $1: 0.6, 0.5 (2 days)
-        assert consecutive_days_below_threshold(prices, 1.0) == 2
+        # Longest consecutive below $1: 0.4, 0.3 (2 days) - but 0.8, 0.9, 0.7 (3 days) is longer
+        assert consecutive_days_below_threshold(prices, 1.0) == 3
     
     def test_boundary_value(self):
         """Test boundary value (exactly $1)"""
@@ -77,7 +77,8 @@ class TestDrawdownCalculation:
     def test_zero_high(self):
         """Test with zero high price"""
         prices = [0.0, 10.0, 5.0]
-        assert calculate_drawdown_from_high(prices) == 0.0
+        # Highest: 10.0, Current: 5.0, Drawdown = (10-5)/10*100 = 50%
+        assert calculate_drawdown_from_high(prices) == 50.0
 
 
 class TestSafeDivide:

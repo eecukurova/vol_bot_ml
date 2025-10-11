@@ -4,8 +4,9 @@ Telegram notification functionality
 import logging
 import requests
 import os
+import json
 from typing import List, Dict
-from datetime import datetime
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
 from .utils import format_currency, format_percentage, format_volume
@@ -21,6 +22,8 @@ class TelegramNotifier:
     def __init__(self):
         self.bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
         self.chat_id = os.getenv('TELEGRAM_CHAT_ID')
+        self.cooldown_file = 'telegram_cooldown.json'
+        self.cooldown_hours = 24
         
         if not self.bot_token or not self.chat_id:
             logger.warning("Telegram credentials not configured")
@@ -97,6 +100,61 @@ class TelegramNotifier:
         
         return success
     
+    def _load_cooldown_data(self) -> Dict:
+        """Load cooldown data from file"""
+        try:
+            if os.path.exists(self.cooldown_file):
+                with open(self.cooldown_file, 'r') as f:
+                    return json.load(f)
+        except Exception as e:
+            logger.warning(f"Error loading cooldown data: {e}")
+        return {}
+    
+    def _save_cooldown_data(self, data: Dict):
+        """Save cooldown data to file"""
+        try:
+            with open(self.cooldown_file, 'w') as f:
+                json.dump(data, f, indent=2)
+        except Exception as e:
+            logger.warning(f"Error saving cooldown data: {e}")
+    
+    def _is_in_cooldown(self, symbol: str) -> bool:
+        """Check if symbol is in cooldown period"""
+        cooldown_data = self._load_cooldown_data()
+        
+        if symbol not in cooldown_data:
+            return False
+        
+        last_sent = datetime.fromisoformat(cooldown_data[symbol])
+        cooldown_until = last_sent + timedelta(hours=self.cooldown_hours)
+        
+        return datetime.now() < cooldown_until
+    
+    def _update_cooldown(self, symbol: str):
+        """Update cooldown timestamp for symbol"""
+        cooldown_data = self._load_cooldown_data()
+        cooldown_data[symbol] = datetime.now().isoformat()
+        self._save_cooldown_data(cooldown_data)
+    
+    def _filter_cooldown_stocks(self, stocks: List[Dict]) -> List[Dict]:
+        """Filter out stocks that are in cooldown period"""
+        filtered_stocks = []
+        cooldown_count = 0
+        
+        for stock in stocks:
+            symbol = stock.get('symbol', '')
+            if self._is_in_cooldown(symbol):
+                cooldown_count += 1
+                logger.info(f"Skipping {symbol} - in cooldown period")
+            else:
+                filtered_stocks.append(stock)
+                self._update_cooldown(symbol)
+        
+        if cooldown_count > 0:
+            logger.info(f"Filtered out {cooldown_count} stocks due to cooldown")
+        
+        return filtered_stocks
+    
     def send_screener_results(self, 
                             stocks: List[Dict], 
                             filter_summary: str,
@@ -108,9 +166,10 @@ class TelegramNotifier:
         # Send header message
         header_sent = self._send_header_message(len(stocks), filter_summary, top_n)
         
-        # Send stock list
+        # Send stock list (with cooldown filtering)
         if header_sent:
-            return self._send_stock_list(stocks[:top_n])
+            filtered_stocks = self._filter_cooldown_stocks(stocks[:top_n])
+            return self._send_stock_list(filtered_stocks)
         
         return False
     
@@ -118,7 +177,7 @@ class TelegramNotifier:
         """Send header message with summary"""
         today = datetime.now().strftime('%Y-%m-%d')
         
-        message = f"""<b>NASDAQ Post-IPO Sub-$1 Screener</b> ({today})
+        message = f"""<b>NASDAQ Post-IPO Sub-USD1 Screener</b> ({today})
 Filters: {filter_summary}
 Top {min(total_found, top_n)} by VolSpike & Drawdown"""
         

@@ -56,7 +56,7 @@ class StockRanker:
         # Quaternary: RSI (lower is better for oversold recovery)
         rsi = stock.get('rsi14', 50.0)
         
-        return (vol_spike, drawdown, -market_cap_safe, rsi)  # Negative for ascending sort
+        return (vol_spike, drawdown, -market_cap_safe, -rsi)  # Negative RSI for lower=better
     
     def get_ranking_explanation(self) -> str:
         """Get explanation of ranking criteria"""

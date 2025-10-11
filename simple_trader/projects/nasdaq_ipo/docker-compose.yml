@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  nasdaq-ipo-screener:
+    build: .
+    container_name: nasdaq-ipo-screener
+    environment:
+      - FINNHUB_TOKEN=${FINNHUB_TOKEN}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    volumes:
+      - ./logs:/app/logs
+      - ./output:/app/output
+      - ./telegram_cooldown.json:/app/telegram_cooldown.json
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

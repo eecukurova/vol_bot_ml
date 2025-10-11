@@ -10,7 +10,7 @@ from .utils import parse_date, days_ago
 logger = logging.getLogger(__name__)
 
 # Symbol hygiene filters - exclude non-common stocks
-EXCLUDE_TOKENS = (" W", " WS", "WARRANT", " RIGHT", " UNIT", " SPAC", " ETF", " TRUST", " FUND", " ADR", " ADS")
+EXCLUDE_TOKENS = (" W", " WS", "WARRANT", " RIGHT", " UNIT", " SPAC", " ETF", " TRUST", " FUND", " ADR", " ADS", "SPECIAL PURPOSE ACQUISITION")
 
 
 def is_common_stock(symbol: str, name: str = "") -> bool:
@@ -20,6 +20,10 @@ def is_common_stock(symbol: str, name: str = "") -> bool:
     
     # Quick exclusion for common suffixes
     if s.endswith(("W", "U", "R")):
+        return False
+    
+    # Check for exact symbol matches first
+    if s in ["SPAC", "ETF", "TRUST", "FUND"]:
         return False
     
     # Check for exclusion tokens in symbol or name
@@ -58,6 +62,7 @@ class StockFilter:
         filtered_stocks = []
         filter_stats = {
             'total': len(stocks),
+            'symbol_hygiene_filter': 0,
             'price_filter': 0,
             'volume_filter': 0,
             'rsi_filter': 0,
@@ -189,6 +194,6 @@ def get_filter_summary(min_price: float = 0.30,
                       min_drawdown: float = 70.0,
                       ipo_days_back: int = 180) -> str:
     """Get human-readable filter summary"""
-    return (f"IPO≤{ipo_days_back}d, Px {min_price}–{max_price}, "
-            f"Vol>{min_volume:,}, RSI {rsi_min}–{rsi_max}, ADX<{adx_max}, "
-            f"≤{max_consec_below1}d <$1, DD≥{min_drawdown}%")
+    return (f"IPO&lt;={ipo_days_back}d, Px {min_price}-{max_price}, "
+            f"Vol&gt;{min_volume:,}, RSI {rsi_min}-{rsi_max}, ADX&lt;{adx_max}, "
+            f"&lt;={max_consec_below1}d &lt;USD1, DD&gt;={min_drawdown}%")

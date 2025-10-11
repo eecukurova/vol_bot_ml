@@ -6,6 +6,8 @@ Main application entry point
 import argparse
 import logging
 import sys
+import csv
+import os
 from datetime import datetime
 from typing import List, Dict
 
@@ -18,6 +20,7 @@ from core.data import analyze_stocks
 from core.filters import StockFilter, get_filter_summary
 from core.rank import rank_stocks
 from core.telegram import send_screener_results
+from core.tracking import StockTracker
 
 
 def parse_arguments():
@@ -175,9 +178,39 @@ def main():
         # Step 6: Output results
         print_console_summary(ranked_stocks, filter_summary)
         
-        # Step 7: Send Telegram notification (if not dry-run)
+        # Step 6.5: Update tracking system
+        logger.info("Step 6.5: Updating stock tracking")
+        tracker = StockTracker()
+        
+        # Add new stocks to tracking
+        for stock in ranked_stocks:
+            symbol = stock['symbol']
+            price = stock['lastClose']
+            tracker.add_new_stock(symbol, price)
+        
+        # Update existing tracked stocks with current prices
+        active_stocks = tracker.get_active_stocks()
+        if active_stocks:
+            logger.info(f"Updating {len(active_stocks)} tracked stocks")
+            # Re-analyze tracked stocks to get current prices
+            tracked_analyses = analyze_stocks(active_stocks, ipo_dates)
+            for analysis in tracked_analyses:
+                if analysis:
+                    symbol = analysis['symbol']
+                    current_price = analysis['lastClose']
+                    tracker.update_stock_price(symbol, current_price)
+        
+        # Step 7: Save CSV report
+        if ranked_stocks:
+            save_csv_report(ranked_stocks, args)
+        
+        # Step 8: Print tracking summary
+        tracking_summary = tracker.get_tracking_summary()
+        print("\n" + tracking_summary)
+        
+        # Step 9: Send Telegram notification (if not dry-run)
         if not args.dry_run:
-            logger.info("Step 7: Sending Telegram notification")
+            logger.info("Step 8: Sending Telegram notification")
             success = send_screener_results(ranked_stocks, filter_summary, args.top_n)
             if success:
                 logger.info("Telegram notification sent successfully")
@@ -194,6 +227,54 @@ def main():
     except Exception as e:
         logger.error(f"Unexpected error: {e}", exc_info=True)
         sys.exit(1)
+
+
+def save_csv_report(stocks: List[Dict], args):
+    """Save results to CSV report"""
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    if not stocks:
+        return
+    
+    # Create output directory if it doesn't exist
+    os.makedirs('output', exist_ok=True)
+    
+    # Generate filename with timestamp
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    filename = f"output/nasdaq_ipo_report_{timestamp}.csv"
+    
+    # Define CSV columns
+    fieldnames = [
+        'symbol', 'lastClose', 'lastVolume', 'volSpikeRatio', 
+        'rsi14', 'adx14', 'daysConsecBelow1', 'drawdownFromHigh',
+        'ipoDate', 'marketCap'
+    ]
+    
+    try:
+        with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            
+            for stock in stocks:
+                # Prepare row data
+                row = {}
+                for field in fieldnames:
+                    value = stock.get(field, '')
+                    # Format numeric values
+                    if field in ['lastClose', 'volSpikeRatio', 'rsi14', 'adx14', 'drawdownFromHigh']:
+                        row[field] = f"{value:.2f}" if value else ''
+                    elif field in ['lastVolume', 'marketCap']:
+                        row[field] = f"{value:,.0f}" if value else ''
+                    else:
+                        row[field] = value
+                
+                writer.writerow(row)
+        
+        logger.info(f"CSV report saved: {filename}")
+        
+    except Exception as e:
+        logger.error(f"Error saving CSV report: {e}")
 
 
 if __name__ == "__main__":

@@ -109,3 +109,106 @@ def get_market_cap_estimate(price: float, shares_outstanding: Optional[int] = No
     if shares_outstanding is None:
         return None
     return price * shares_outstanding
+
+
+def calculate_consecutive_business_days_below_1(prices: List[float], dates: List[str], threshold: float = 1.0) -> int:
+    """Calculate consecutive business days below $1 (Nasdaq deficiency rule)"""
+    if not prices or not dates:
+        return 0
+    
+    consecutive_days = 0
+    # Start from most recent and count backwards
+    for i in range(len(prices) - 1, -1, -1):
+        if prices[i] < threshold:
+            consecutive_days += 1
+        else:
+            break
+    
+    return consecutive_days
+
+
+def calculate_deficiency_risk_metrics(symbol: str, prices: List[float], dates: List[str]) -> dict:
+    """Calculate Nasdaq deficiency risk metrics"""
+    if not prices or not dates:
+        return {
+            'consecutive_below_1': 0,
+            'deficiency_risk_flag': False,
+            'deficiency_risk_level': 'NONE',
+            'days_since_deficiency_start': 0,
+            'compliance_deadline': None,
+            'compliance_status': 'COMPLIANT'
+        }
+    
+    consecutive_below_1 = calculate_consecutive_business_days_below_1(prices, dates)
+    
+    # Deficiency risk levels
+    if consecutive_below_1 >= 30:
+        deficiency_risk_flag = True
+        if consecutive_below_1 >= 180:
+            deficiency_risk_level = 'CRITICAL'
+        elif consecutive_below_1 >= 150:
+            deficiency_risk_level = 'HIGH'
+        elif consecutive_below_1 >= 60:
+            deficiency_risk_level = 'MEDIUM'
+        else:
+            deficiency_risk_level = 'LOW'
+    else:
+        deficiency_risk_flag = False
+        deficiency_risk_level = 'NONE'
+    
+    # Calculate compliance deadline
+    compliance_deadline = None
+    compliance_status = 'COMPLIANT'
+    
+    if deficiency_risk_flag:
+        # Assume deficiency started 30 days ago (when rule triggers)
+        deficiency_start_days = max(0, consecutive_below_1 - 30)
+        days_since_deficiency_start = deficiency_start_days
+        
+        # 180-day compliance period
+        if days_since_deficiency_start < 180:
+            compliance_deadline = 180 - days_since_deficiency_start
+            compliance_status = 'IN_COMPLIANCE_PERIOD'
+        else:
+            compliance_status = 'COMPLIANCE_EXPIRED'
+    else:
+        days_since_deficiency_start = 0
+    
+    return {
+        'consecutive_below_1': consecutive_below_1,
+        'deficiency_risk_flag': deficiency_risk_flag,
+        'deficiency_risk_level': deficiency_risk_level,
+        'days_since_deficiency_start': days_since_deficiency_start,
+        'compliance_deadline': compliance_deadline,
+        'compliance_status': compliance_status
+    }
+
+
+def format_deficiency_warning(symbol: str, days_below: int, days_since_start: int, risk_level: str) -> str:
+    """Format deficiency warning message"""
+    if risk_level == 'NONE':
+        return f"✅ {symbol}: No deficiency risk"
+    elif risk_level == 'LOW':
+        return f"⚠️ {symbol}: {days_below} days below $1 (deficiency risk)"
+    elif risk_level == 'MEDIUM':
+        return f"🚨 {symbol}: {days_below} days below $1 (medium risk)"
+    elif risk_level == 'HIGH':
+        return f"🔥 {symbol}: {days_below} days below $1 (high risk - {days_since_start} days since deficiency)"
+    elif risk_level == 'CRITICAL':
+        return f"💀 {symbol}: {days_below} days below $1 (CRITICAL - compliance expired)"
+    else:
+        return f"❓ {symbol}: Unknown deficiency status"
+
+
+def get_compliance_deadline_warning(days_remaining: int) -> str:
+    """Get compliance deadline warning message"""
+    if days_remaining is None:
+        return ""
+    elif days_remaining <= 0:
+        return "COMPLIANCE EXPIRED"
+    elif days_remaining <= 30:
+        return f"⚠️ {days_remaining} days to compliance deadline"
+    elif days_remaining <= 60:
+        return f"⏰ {days_remaining} days to compliance deadline"
+    else:
+        return f"📅 {days_remaining} days to compliance deadline"
