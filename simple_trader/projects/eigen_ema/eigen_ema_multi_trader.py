@@ -634,13 +634,28 @@ class MultiTimeframeEMATrader:
     def cancel_sl_tp_orders(self):
         """SL/TP emirlerini iptal et"""
         try:
-            if not self.active_position:
-                return
-            
-            sl_order_id = self.active_position.get('sl_order_id')
-            tp_order_id = self.active_position.get('tp_order_id')
-            
             cancelled_count = 0
+            
+            # Önce active_position'dan emir ID'lerini al
+            sl_order_id = None
+            tp_order_id = None
+            
+            if self.active_position:
+                sl_order_id = self.active_position.get('sl_order_id')
+                tp_order_id = self.active_position.get('tp_order_id')
+            
+            # Eğer active_position yoksa, açık emirlerden SL/TP emirlerini bul
+            if not sl_order_id and not tp_order_id:
+                try:
+                    open_orders = self.exchange.fetch_open_orders(self.symbol)
+                    for order in open_orders:
+                        if order['type'] in ['STOP_MARKET', 'TAKE_PROFIT_MARKET']:
+                            if order['type'] == 'STOP_MARKET':
+                                sl_order_id = order['id']
+                            elif order['type'] == 'TAKE_PROFIT_MARKET':
+                                tp_order_id = order['id']
+                except Exception as e:
+                    self.log.warning(f"⚠️ Açık emirler alınamadı: {e}")
             
             # Stop Loss emrini iptal et
             if sl_order_id:
@@ -738,6 +753,10 @@ class MultiTimeframeEMATrader:
             if should_close:
                 self.log.info(f"🎯 POZİSYON KAPATMA SEBEBİ: {close_reason}")
                 self.log.info(f"📊 PnL: %{pnl_pct:.2f}")
+                
+                # Pozisyon kapanış bildirimi gönder
+                self.send_position_close_notification()
+                
                 self.close_position()
             else:
                 self.log.info(f"📊 Pozisyon izleniyor - PnL: %{pnl_pct:.2f}")
