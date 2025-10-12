@@ -1,93 +1,70 @@
 {
-  "api_key": "3qWqvsKBb2h127SPOv9RVRsJYRHpvwtBDE3zVc20cBjS1lwWDCn3IY5azWjUSP0e",
-  "secret": "HZRMeUvbKkbONjXsbZrD2WFuPPXARPTM2oM0TnTOaRsIBKoNdLUsCLVCQLnpZB3u",
+  "api_key": "YOUR_BINANCE_API_KEY",
+  "secret": "YOUR_BINANCE_SECRET_KEY",
   "sandbox": false,
+  "exchange": "binance",
+
   "symbol": "PENGU/USDT",
-  "trade_amount_usd": 10,
+  "futures_suffix": ":USDT",
+  "use_futures": true,
+  "margin_mode": "isolated",
   "leverage": 10,
-  
+  "hedge_mode": false,
+  "reduce_only_default": true,
+
+  "trade_amount_usd": 100.0,
+  "dry_run": false,
+
+  "ema": { 
+    "fast_period": 12, 
+    "slow_period": 26 
+  },
+  "heikin_ashi": { 
+    "enabled": true 
+  },
+
   "multi_timeframe": {
-    "enabled": true,
     "timeframes": {
-      "15m": {
-        "enabled": true,
-        "take_profit": 0.002,
-        "stop_loss": 0.01,
-        "priority": 3
-      },
-      "30m": {
-        "enabled": true,
-        "take_profit": 0.003,
-        "stop_loss": 0.01,
-        "priority": 2
-      },
-      "1h": {
-        "enabled": true,
-        "take_profit": 0.004,
-        "stop_loss": 0.01,
-        "priority": 1
-      }
-    }
-  },
-  
-  "ema": {
-    "fast_period": 12,
-    "slow_period": 26
-  },
-  
-  "pine_script_params": {
-    "rsi": {
-      "length": 15,
-      "oversold": 25,
-      "overbought": 70
+      "1h":  { "enabled": true, "take_profit": 0.006, "stop_loss": 0.015 },
+      "30m": { "enabled": true, "take_profit": 0.006, "stop_loss": 0.015 },
+      "15m": { "enabled": true, "take_profit": 0.006, "stop_loss": 0.015 }
     },
-    "bollinger_bands": {
-      "length": 20,
-      "std_dev": 2.0
-    },
-    "volume": {
-      "ma_length": 20,
-      "threshold": 1.0
-    },
-    "momentum": {
-      "length": 4,
-      "threshold": 0.6
-    }
+    "filter_tf": "1h",
+    "trigger_tf": "15m"
   },
-  
-  "heikin_ashi": {
-    "enabled": true
-  },
-  
+
   "signal_management": {
-    "single_position_only": false,
-    "cooldown_after_exit": 0,
-    "priority_order": ["1h", "30m", "15m"],
+    "single_position_only": true,
+    "cooldown_after_exit": 300,
+
+    "use_intrabar_signals": true,
+    "ema_cross_hysteresis": 0.0,
+    "tf_cooldown_bars": { "15m": 1, "30m": 1, "1h": 1 },
+
     "timeframe_validation": {
       "enabled": true,
-      "min_candles_for_signal": 50,
-      "require_confirmed_candle": true
+      "min_candles_for_signal": 120,
+      "require_confirmed_candle": false
     }
   },
-  
+
   "risk_management": {
+    "stop_loss_percentage": 0.015,
+    "take_profit_percentage": 0.006,
     "break_even_enabled": true,
-    "break_even_percentage": 2.5,
-    "max_positions": 1
+    "break_even_percentage": 0.005
   },
-  
-  "idempotency": {
-    "enabled": true,
-    "state_file": "runs/ema_crossover_state.json",
-    "retry_attempts": 3,
-    "retry_delay": 1.0
-  },
-  
+
   "sl_tp": {
     "trigger_source": "MARK_PRICE",
     "hedge_mode": false
   },
-  
+
+  "idempotency": {
+    "enabled": true,
+    "state_file": "runs/multiple_ema_crossover_state.json"
+  },
+
   "logging": {
     "level": "INFO",
     "file": "multiple_ema_crossover_trading.log",
@@ -95,10 +72,10 @@
     "detailed_positions": true,
     "detailed_timeframes": true
   },
-  
+
   "telegram": {
-    "bot_token": "7956697051:AAErScGMFGVxOyt3dGiw0jrFoakBELRdtm4",
-    "chat_id": "-1002699769366",
-    "enabled": true
+    "enabled": true,
+    "bot_token": "YOUR_TELEGRAM_BOT_TOKEN",
+    "chat_id": "YOUR_TELEGRAM_CHAT_ID"
   }
 }
