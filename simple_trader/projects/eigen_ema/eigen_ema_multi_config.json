@@ -3,9 +3,8 @@
   "secret": "HZRMeUvbKkbONjXsbZrD2WFuPPXARPTM2oM0TnTOaRsIBKoNdLUsCLVCQLnpZB3u",
   "sandbox": false,
   "symbol": "PENGU/USDT",
-  "trade_amount_usd": 10,
+  "trade_amount_usd": 1000,
   "leverage": 10,
-  
   "multi_timeframe": {
     "enabled": true,
     "timeframes": {
@@ -29,12 +28,10 @@
       }
     }
   },
-  
   "ema": {
     "fast_period": 12,
     "slow_period": 26
   },
-  
   "pine_script_params": {
     "rsi": {
       "length": 15,
@@ -54,40 +51,38 @@
       "threshold": 0.6
     }
   },
-  
   "heikin_ashi": {
     "enabled": true
   },
-  
   "signal_management": {
     "single_position_only": false,
     "cooldown_after_exit": 0,
-    "priority_order": ["1h", "30m", "15m"],
+    "priority_order": [
+      "1h",
+      "30m",
+      "15m"
+    ],
     "timeframe_validation": {
       "enabled": true,
       "min_candles_for_signal": 50,
       "require_confirmed_candle": true
     }
   },
-  
   "risk_management": {
     "break_even_enabled": true,
     "break_even_percentage": 2.5,
     "max_positions": 1
   },
-  
   "idempotency": {
     "enabled": true,
     "state_file": "runs/ema_crossover_state.json",
     "retry_attempts": 3,
     "retry_delay": 1.0
   },
-  
   "sl_tp": {
     "trigger_source": "MARK_PRICE",
     "hedge_mode": false
   },
-  
   "logging": {
     "level": "INFO",
     "file": "ema_crossover_trading.log",
@@ -95,7 +90,6 @@
     "detailed_positions": true,
     "detailed_timeframes": true
   },
-  
   "telegram": {
     "bot_token": "7956697051:AAErScGMFGVxOyt3dGiw0jrFoakBELRdtm4",
     "chat_id": "-1002699769366",
