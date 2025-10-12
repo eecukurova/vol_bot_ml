@@ -647,6 +647,10 @@ class MultiTimeframeEMATrader:
             
             # Pozisyon bilgileri
             entry_price = self.active_position['entry_price']
+            # Debug: Pozisyon bilgilerini kontrol et
+            if not self.active_position or "entry_price" not in self.active_position:
+                self.log.error(f"❌ Pozisyon izleme hatası: active_position eksik veya entry_price field yok: {self.active_position}")
+                return
             side = self.active_position['side']
             tp_pct = self.active_position['take_profit_pct']
             sl_pct = self.active_position['stop_loss_pct']
