@@ -562,6 +562,34 @@ class IdempotentOrderClient:
             self._save_state()
             self.log.info(f"🧹 Cleaned up {len(old_orders)} old orders")
     
+    def sync_with_exchange(self, symbol: str):
+        """Sync state with actual exchange orders"""
+        try:
+            # Get active orders from exchange
+            open_orders = self.exchange.fetch_open_orders(symbol)
+            active_client_ids = set()
+            
+            for order in open_orders:
+                client_id = order.get('clientOrderId')
+                if client_id and client_id.startswith('vlsy-'):
+                    active_client_ids.add(client_id)
+            
+            # Remove orders from state that are not active on exchange
+            stale_orders = []
+            for client_id in list(self.state['orders'].keys()):
+                if client_id not in active_client_ids:
+                    stale_orders.append(client_id)
+            
+            for client_id in stale_orders:
+                del self.state['orders'][client_id]
+            
+            if stale_orders:
+                self._save_state()
+                self.log.info(f"🔄 Synced with exchange: removed {len(stale_orders)} stale orders")
+                
+        except Exception as e:
+            self.log.error(f"❌ Sync with exchange failed: {e}")
+    
     def get_last_signal(self) -> Optional[str]:
         """Get last signal from state"""
         return self.state.get('last_signal')

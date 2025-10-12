@@ -702,6 +702,8 @@ class MultiTimeframeEMATrader:
             try:
                 # Cleanup old orders
                 self.order_client.cleanup_old_orders(1)  # 1 hour
+                # Sync with exchange to remove stale orders
+                self.order_client.sync_with_exchange(self.symbol)
                 self.log.info(f"🔄 CYCLE_START: {datetime.now().strftime('%H:%M:%S')}")
                 
                 # Aktif pozisyon varsa izle
