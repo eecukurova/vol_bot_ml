@@ -696,6 +696,8 @@ class MultiTimeframeEMATrader:
         
         while True:
             try:
+                # Cleanup old orders
+                self.order_client.cleanup_old_orders(1)  # 1 hour
                 self.log.info(f"🔄 CYCLE_START: {datetime.now().strftime('%H:%M:%S')}")
                 
                 # Aktif pozisyon varsa izle
