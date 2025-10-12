@@ -213,6 +213,53 @@ class MultiTimeframeEMATrader:
         except Exception as e:
             self.log.error(f"❌ Telegram gönderme hatası: {e}")
     
+    def send_position_close_notification(self):
+        """Pozisyon kapanış bildirimi gönder"""
+        if not self.active_position or not self.telegram_enabled:
+            return
+            
+        try:
+            # Pozisyon bilgilerini al
+            entry_price = self.active_position.get('entry_price', 0)
+            side = self.active_position.get('side', 'unknown')
+            timeframe = self.active_position.get('timeframe', 'unknown')
+            signal_type = self.active_position.get('signal_type', 'unknown')
+            
+            # Mevcut fiyatı al
+            ticker = self.exchange.fetch_ticker(self.symbol)
+            current_price = ticker['last']
+            
+            # PnL hesapla
+            if side == 'long':
+                pnl_pct = ((current_price - entry_price) / entry_price) * 100
+            else:
+                pnl_pct = ((entry_price - current_price) / entry_price) * 100
+            
+            # PnL emoji
+            pnl_emoji = "📈" if pnl_pct > 0 else "📉" if pnl_pct < 0 else "➡️"
+            
+            telegram_msg = f"""
+🔚 <b>PENGU POZİSYON KAPANDI</b>
+
+📊 <b>Timeframe:</b> {timeframe}
+📈 <b>Yön:</b> {side.upper()}
+🎯 <b>Sinyal:</b> {signal_type}
+
+💰 <b>Entry Fiyatı:</b> ${entry_price:.4f}
+💵 <b>Kapanış Fiyatı:</b> ${current_price:.4f}
+
+{pnl_emoji} <b>PnL:</b> {pnl_pct:+.2f}%
+⏰ <b>Zaman:</b> {datetime.now().strftime('%H:%M:%S')} UTC
+
+{'🎉 Pozisyon karlı kapatıldı!' if pnl_pct > 0 else '😔 Pozisyon zararla kapatıldı!' if pnl_pct < 0 else '➡️ Pozisyon başabaş kapatıldı!'}
+            """
+            
+            self.send_telegram_message(telegram_msg)
+            self.log.info("📱 Pozisyon kapanış bildirimi gönderildi")
+            
+        except Exception as e:
+            self.log.error(f"❌ Pozisyon kapanış bildirimi hatası: {e}")
+    
     def get_market_data(self, timeframe, limit=100):
         """Market verisi al"""
         try:
@@ -636,6 +683,10 @@ class MultiTimeframeEMATrader:
             position_info = self.check_position_status()
             if not position_info['exists']:
                 self.log.info("ℹ️ Pozisyon otomatik olarak kapatılmış")
+                
+                # Pozisyon kapanış bildirimi gönder
+                self.send_position_close_notification()
+                
                 # SL/TP emirlerini iptal et
                 self.cancel_sl_tp_orders()
                 self.active_position = None
