@@ -796,7 +796,9 @@ class MultiTimeframeEMATrader:
                         'entry_price': position_status['entry_price'],
                         'amount': position_status['size'],
                         'order_id': 'unknown',
-                        'timestamp': datetime.now()
+                        'timestamp': datetime.now(),
+                        'take_profit_pct': 0.001,
+                        'stop_loss_pct': 0.01
                     }
                     continue
                 
