@@ -298,8 +298,7 @@ class IdempotentOrderClient:
             order_type = 'STOP_MARKET' if intent == 'SL' else 'TAKE_PROFIT_MARKET'
             params = {
                 'stopPrice': stop_price,
-                'closePosition': True,
-                'workingType': self.trigger_source
+                'reduceOnly': True
             }
             if self.hedge_mode and position_side:
                 params['positionSide'] = position_side
@@ -322,8 +321,7 @@ class IdempotentOrderClient:
         params = {
             'newClientOrderId': client_order_id,
             'stopPrice': self.exchange.price_to_precision(symbol, stop_price),
-            'closePosition': True,
-            'workingType': self.trigger_source
+            'reduceOnly': True
         }
         if self.hedge_mode and position_side:
             params['positionSide'] = position_side
@@ -395,9 +393,8 @@ class IdempotentOrderClient:
         if not self.enabled:
             # Fallback to direct order
             params = {
-                'triggerPrice': price,
-                'closePosition': True,
-                'workingType': self.trigger_source
+                'stopPrice': price,
+                'reduceOnly': True
             }
             if self.hedge_mode and position_side:
                 params['positionSide'] = position_side
@@ -420,9 +417,8 @@ class IdempotentOrderClient:
             'side': side,
             'price': price,
             'params': {
-                'triggerPrice': price,
-                'closePosition': True,
-                'workingType': self.trigger_source
+                'stopPrice': price,
+                'reduceOnly': True
             },
             'status': 'PENDING',
             'ts': int(time.time() * 1000),
