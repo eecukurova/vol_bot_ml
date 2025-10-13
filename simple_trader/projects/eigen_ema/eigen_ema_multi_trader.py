@@ -468,15 +468,11 @@ class MultiTimeframeEMATrader:
             if side == 'buy':  # LONG pozisyon
                 sl = price * (1 - sl_pct)  # SL: Entry'den düşük
                 tp = price * (1 + tp_pct)  # TP: Entry'den yüksek
-                # TP fiyatını minimum %0.1 daha uzak yap (immediately trigger önlemek için)
-                tp = max(tp, price * 1.001)
                 sl_side = 'sell'
                 tp_side = 'sell'
             else:  # SHORT pozisyon
                 sl = price * (1 + sl_pct)  # SL: Entry'den yüksek (zarar)
                 tp = price * (1 - tp_pct)  # TP: Entry'den düşük (kar)
-                # TP fiyatını minimum %0.1 daha uzak yap (immediately trigger önlemek için)
-                tp = min(tp, price * 0.999)
                 sl_side = 'buy'
                 tp_side = 'buy'
             
@@ -511,6 +507,7 @@ class MultiTimeframeEMATrader:
                     'symbol': self.symbol,
                     'side': side,
                     'price': price,
+                    "entry_price": price,
                     'size': size,
                     'time': datetime.now(),
                     'sl': sl,
@@ -713,10 +710,6 @@ class MultiTimeframeEMATrader:
             
             # Pozisyon bilgileri
             entry_price = self.active_position['entry_price']
-            # Debug: Pozisyon bilgilerini kontrol et
-            if not self.active_position or "entry_price" not in self.active_position:
-                self.log.error(f"❌ Pozisyon izleme hatası: active_position eksik veya entry_price field yok: {self.active_position}")
-                return
             side = self.active_position['side']
             tp_pct = self.active_position['take_profit_pct']
             sl_pct = self.active_position['stop_loss_pct']
@@ -802,8 +795,6 @@ class MultiTimeframeEMATrader:
                         'side': position_status['side'],
                         'entry_price': position_status['entry_price'],
                         'amount': position_status['size'],
-                        'take_profit_pct': 0.5,  # Default
-                        'stop_loss_pct': 1.5,    # Default
                         'order_id': 'unknown',
                         'timestamp': datetime.now()
                     }
