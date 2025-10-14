@@ -213,53 +213,6 @@ class MultiTimeframeEMATrader:
         except Exception as e:
             self.log.error(f"❌ Telegram gönderme hatası: {e}")
     
-    def send_position_close_notification(self):
-        """Pozisyon kapanış bildirimi gönder"""
-        if not self.active_position or not self.telegram_enabled:
-            return
-            
-        try:
-            # Pozisyon bilgilerini al
-            entry_price = self.active_position.get('entry_price', 0)
-            side = self.active_position.get('side', 'unknown')
-            timeframe = self.active_position.get('timeframe', 'unknown')
-            signal_type = self.active_position.get('signal_type', 'unknown')
-            
-            # Mevcut fiyatı al
-            ticker = self.exchange.fetch_ticker(self.symbol)
-            current_price = ticker['last']
-            
-            # PnL hesapla
-            if side == 'long':
-                pnl_pct = ((current_price - entry_price) / entry_price) * 100
-            else:
-                pnl_pct = ((entry_price - current_price) / entry_price) * 100
-            
-            # PnL emoji
-            pnl_emoji = "📈" if pnl_pct > 0 else "📉" if pnl_pct < 0 else "➡️"
-            
-            telegram_msg = f"""
-🔚 <b>PENGU POZİSYON KAPANDI</b>
-
-📊 <b>Timeframe:</b> {timeframe}
-📈 <b>Yön:</b> {side.upper()}
-🎯 <b>Sinyal:</b> {signal_type}
-
-💰 <b>Entry Fiyatı:</b> ${entry_price:.4f}
-💵 <b>Kapanış Fiyatı:</b> ${current_price:.4f}
-
-{pnl_emoji} <b>PnL:</b> {pnl_pct:+.2f}%
-⏰ <b>Zaman:</b> {datetime.now().strftime('%H:%M:%S')} UTC
-
-{'🎉 Pozisyon karlı kapatıldı!' if pnl_pct > 0 else '😔 Pozisyon zararla kapatıldı!' if pnl_pct < 0 else '➡️ Pozisyon başabaş kapatıldı!'}
-            """
-            
-            self.send_telegram_message(telegram_msg)
-            self.log.info("📱 Pozisyon kapanış bildirimi gönderildi")
-            
-        except Exception as e:
-            self.log.error(f"❌ Pozisyon kapanış bildirimi hatası: {e}")
-    
     def get_market_data(self, timeframe, limit=100):
         """Market verisi al"""
         try:
@@ -468,11 +421,15 @@ class MultiTimeframeEMATrader:
             if side == 'buy':  # LONG pozisyon
                 sl = price * (1 - sl_pct)  # SL: Entry'den düşük
                 tp = price * (1 + tp_pct)  # TP: Entry'den yüksek
+                # TP fiyatını minimum %0.1 daha uzak yap (immediately trigger önlemek için)
+                tp = max(tp, price * 1.001)
                 sl_side = 'sell'
                 tp_side = 'sell'
             else:  # SHORT pozisyon
                 sl = price * (1 + sl_pct)  # SL: Entry'den yüksek (zarar)
                 tp = price * (1 - tp_pct)  # TP: Entry'den düşük (kar)
+                # TP fiyatını minimum %0.1 daha uzak yap (immediately trigger önlemek için)
+                tp = min(tp, price * 0.999)
                 sl_side = 'buy'
                 tp_side = 'buy'
             
@@ -507,7 +464,6 @@ class MultiTimeframeEMATrader:
                     'symbol': self.symbol,
                     'side': side,
                     'price': price,
-                    "entry_price": price,
                     'size': size,
                     'time': datetime.now(),
                     'sl': sl,
@@ -631,28 +587,13 @@ class MultiTimeframeEMATrader:
     def cancel_sl_tp_orders(self):
         """SL/TP emirlerini iptal et"""
         try:
+            if not self.active_position:
+                return
+            
+            sl_order_id = self.active_position.get('sl_order_id')
+            tp_order_id = self.active_position.get('tp_order_id')
+            
             cancelled_count = 0
-            
-            # Önce active_position'dan emir ID'lerini al
-            sl_order_id = None
-            tp_order_id = None
-            
-            if self.active_position:
-                sl_order_id = self.active_position.get('sl_order_id')
-                tp_order_id = self.active_position.get('tp_order_id')
-            
-            # Eğer active_position yoksa, açık emirlerden SL/TP emirlerini bul
-            if not sl_order_id and not tp_order_id:
-                try:
-                    open_orders = self.exchange.fetch_open_orders(self.symbol)
-                    for order in open_orders:
-                        if order['type'] in ['STOP_MARKET', 'TAKE_PROFIT_MARKET']:
-                            if order['type'] == 'STOP_MARKET':
-                                sl_order_id = order['id']
-                            elif order['type'] == 'TAKE_PROFIT_MARKET':
-                                tp_order_id = order['id']
-                except Exception as e:
-                    self.log.warning(f"⚠️ Açık emirler alınamadı: {e}")
             
             # Stop Loss emrini iptal et
             if sl_order_id:
@@ -695,10 +636,6 @@ class MultiTimeframeEMATrader:
             position_info = self.check_position_status()
             if not position_info['exists']:
                 self.log.info("ℹ️ Pozisyon otomatik olarak kapatılmış")
-                
-                # Pozisyon kapanış bildirimi gönder
-                self.send_position_close_notification()
-                
                 # SL/TP emirlerini iptal et
                 self.cancel_sl_tp_orders()
                 self.active_position = None
@@ -746,10 +683,6 @@ class MultiTimeframeEMATrader:
             if should_close:
                 self.log.info(f"🎯 POZİSYON KAPATMA SEBEBİ: {close_reason}")
                 self.log.info(f"📊 PnL: %{pnl_pct:.2f}")
-                
-                # Pozisyon kapanış bildirimi gönder
-                self.send_position_close_notification()
-                
                 self.close_position()
             else:
                 self.log.info(f"📊 Pozisyon izleniyor - PnL: %{pnl_pct:.2f}")
@@ -763,10 +696,6 @@ class MultiTimeframeEMATrader:
         
         while True:
             try:
-                # Cleanup old orders
-                self.order_client.cleanup_old_orders(1)  # 1 hour
-                # Sync with exchange to remove stale orders
-                self.order_client.sync_with_exchange(self.symbol)
                 self.log.info(f"🔄 CYCLE_START: {datetime.now().strftime('%H:%M:%S')}")
                 
                 # Aktif pozisyon varsa izle
@@ -795,10 +724,10 @@ class MultiTimeframeEMATrader:
                         'side': position_status['side'],
                         'entry_price': position_status['entry_price'],
                         'amount': position_status['size'],
+                        'take_profit_pct': 0.5,  # Default
+                        'stop_loss_pct': 1.5,    # Default
                         'order_id': 'unknown',
-                        'timestamp': datetime.now(),
-                        'take_profit_pct': 0.001,
-                        'stop_loss_pct': 0.01
+                        'timestamp': datetime.now()
                     }
                     continue
                 
