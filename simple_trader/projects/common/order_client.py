@@ -278,7 +278,7 @@ class IdempotentOrderClient:
     
     def place_stop_market_close(self, symbol: str, side: str, stop_price: float,
                                position_side: Optional[str] = None, intent: str = "SL", 
-                               extra: str = "") -> Dict[str, Any]:
+                               extra: str = "", amount: Optional[float] = None) -> Dict[str, Any]:
         """
         Place stop market close order (SL/TP) with idempotency
         
@@ -303,7 +303,7 @@ class IdempotentOrderClient:
             if self.hedge_mode and position_side:
                 params['positionSide'] = position_side
             
-            return self.exchange.create_order(symbol, order_type, side, None, None, params)
+            return self.exchange.create_order(symbol, order_type, side, amount, None, params)
         
         client_order_id = self._generate_client_order_id(intent, symbol, side, extra)
         
@@ -332,7 +332,7 @@ class IdempotentOrderClient:
             'symbol': symbol,
             'type': order_type,
             'side': side,
-            'amount': None,  # closePosition=True means no amount needed
+            'amount': None,  # Will be set by caller for reduceOnly orders
             'price': stop_price,
             'params': params,
             'ts': int(time.time() * 1000)
@@ -345,7 +345,7 @@ class IdempotentOrderClient:
             # Place order with retry
             order_result = self._retry_with_backoff(
                 self.exchange.create_order,
-                symbol, order_type, side, None, None, params
+                symbol, order_type, side, amount, None, params
             )
             
             # Update status to SENT
@@ -375,7 +375,7 @@ class IdempotentOrderClient:
     
     def place_take_profit_market_close(self, symbol: str, side: str, price: float,
                                      position_side: Optional[str] = None, intent: str = "TP", 
-                                     extra: str = "") -> Dict[str, Any]:
+                                     extra: str = "", amount: Optional[float] = None) -> Dict[str, Any]:
         """
         Place take profit market close order (TP) with idempotency
         
@@ -399,7 +399,7 @@ class IdempotentOrderClient:
             if self.hedge_mode and position_side:
                 params['positionSide'] = position_side
             
-            return self.exchange.create_order(symbol, 'TAKE_PROFIT_MARKET', side, None, None, params)
+            return self.exchange.create_order(symbol, 'TAKE_PROFIT_MARKET', side, amount, None, params)
         
         client_order_id = self._generate_client_order_id(intent, symbol, side, extra)
         
@@ -439,7 +439,7 @@ class IdempotentOrderClient:
             # Place the order
             order_result = self._retry_with_backoff(
                 self.exchange.create_order,
-                symbol, 'TAKE_PROFIT_MARKET', side, None, None, order_data['params']
+                symbol, 'TAKE_PROFIT_MARKET', side, amount, None, order_data['params']
             )
             
             # Update status to SENT
@@ -517,7 +517,7 @@ class IdempotentOrderClient:
                             order_result = self._retry_with_backoff(
                                 self.exchange.create_order,
                                 symbol, order_data['type'], order_data['side'],
-                                None, None, order_data['params']
+                                order_data['amount'], None, order_data['params']
                             )
                         
                         self.state['orders'][client_id]['status'] = 'SENT'
