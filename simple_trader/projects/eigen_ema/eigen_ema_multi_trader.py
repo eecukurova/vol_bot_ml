@@ -718,17 +718,22 @@ class MultiTimeframeEMATrader:
                 position_status = self.check_position_status()
                 if position_status['exists']:
                     self.log.info("ℹ️ Exchange'de aktif pozisyon bulundu, izleniyor...")
-                    # Pozisyon bilgilerini güncelle
+                    # Pozisyon bilgilerini güncelle - Config'den default timeframe değerlerini al
+                    # 15m timeframe'i default olarak kullan (en sık kullanılan)
+                    default_tf = '15m'
+                    default_tf_config = self.timeframes[default_tf]
+                    
                     self.active_position = {
                         'timeframe': 'unknown',
                         'side': position_status['side'],
                         'entry_price': position_status['entry_price'],
                         'amount': position_status['size'],
-                        'take_profit_pct': 0.5,  # Default
-                        'stop_loss_pct': 1.5,    # Default
+                        'take_profit_pct': default_tf_config['take_profit'],
+                        'stop_loss_pct': default_tf_config['stop_loss'],
                         'order_id': 'unknown',
                         'timestamp': datetime.now()
                     }
+                    self.log.info(f"📊 Default TP/SL kullanılıyor ({default_tf}): TP={default_tf_config['take_profit']*100:.1f}%, SL={default_tf_config['stop_loss']*100:.1f}%")
                     continue
                 
                 # Tüm timeframe'leri kontrol et
