@@ -31,7 +31,7 @@
   },
   
   "ema": {
-    "fast_period": 12,
+    "fast_period": 10,
     "slow_period": 26
   },
   
