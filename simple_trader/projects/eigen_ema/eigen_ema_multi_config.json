@@ -73,6 +73,12 @@
   "risk_management": {
     "break_even_enabled": true,
     "break_even_percentage": 2.5,
+    "trailing_stop_enabled": true,
+    "trailing_stop_percentage": 1.0,
+    "dynamic_tp_enabled": true,
+    "tp_increment_percentage": 0.3,
+    "max_tp_percentage": 2.0,
+    "trailing_update_threshold": 0.5,
     "max_positions": 1
   },
   

@@ -468,12 +468,18 @@ class MultiTimeframeEMATrader:
                     'time': datetime.now(),
                     'sl': sl,
                     'tp': tp,
+                    'current_sl': sl,  # Trailing için mevcut SL
+                    'current_tp': tp,  # Dynamic TP için mevcut TP
                     'sl_order_id': sl_order.get('id') if sl_order else None,
                     'tp_order_id': tp_order.get('id') if tp_order else None,
                     'timeframe': timeframe,
                     'take_profit_pct': tp_pct,
                     'stop_loss_pct': sl_pct,
-                    'order_id': order['id']
+                    'order_id': order['id'],
+                    'entry_price': price,  # Break-even için entry price
+                    'trailing_active': False,  # Trailing aktif mi?
+                    'dynamic_tp_active': False,  # Dynamic TP aktif mi?
+                    'last_update_time': datetime.now()
                 }
                 
                 # Başarılı pozisyon açma logları (hem LONG hem SHORT)
@@ -536,6 +542,261 @@ class MultiTimeframeEMATrader:
             self.log.error(f"❌ Pozisyon açma hatası: {e}")
             return False
     
+    def handle_advanced_risk_management(self, position_data, current_price, pnl_pct, side, entry_price):
+        """
+        Gelişmiş risk yönetimi: Break-Even, Trailing Stop, Dynamic TP
+        """
+        try:
+            risk_config = self.cfg['risk_management']
+            trailing_enabled = risk_config.get('trailing_stop_enabled', False)
+            dynamic_tp_enabled = risk_config.get('dynamic_tp_enabled', False)
+            trailing_pct = risk_config.get('trailing_stop_percentage', 1.0)
+            update_threshold = risk_config.get('trailing_update_threshold', 0.5)
+            
+            # Break-Even kontrolü
+            if pnl_pct >= risk_config['break_even_percentage']:
+                self.log.info(f"🛡️ Break-Even aktif - PnL: %{pnl_pct:.2f}")
+                
+                # Trailing Stop Loss kontrolü
+                if trailing_enabled:
+                    self.update_trailing_stop_loss(position_data, current_price, side, trailing_pct)
+                
+                # Dynamic Take Profit kontrolü
+                if dynamic_tp_enabled:
+                    self.update_dynamic_take_profit(position_data, current_price, pnl_pct, side, entry_price)
+                
+        except Exception as e:
+            self.log.error(f"❌ Advanced risk management hatası: {e}")
+    
+    def update_trailing_stop_loss(self, position_data, current_price, side, trailing_pct):
+        """
+        Trailing Stop Loss güncelleme
+        """
+        try:
+            current_sl = position_data.get('current_sl', position_data.get('sl'))
+            entry_price = position_data['entry_price']
+            
+            # Yeni SL hesapla
+            if side == 'buy':  # LONG
+                new_sl = current_price * (1 - trailing_pct/100)
+                # SL'i sadece yukarı doğru hareket ettir
+                if new_sl > current_sl and new_sl > entry_price:
+                    self.update_stop_loss_order(position_data, new_sl, "Trailing SL")
+                    
+            elif side == 'sell':  # SHORT
+                new_sl = current_price * (1 + trailing_pct/100)
+                # SL'i sadece aşağı doğru hareket ettir
+                if new_sl < current_sl and new_sl < entry_price:
+                    self.update_stop_loss_order(position_data, new_sl, "Trailing SL")
+                    
+        except Exception as e:
+            self.log.error(f"❌ Trailing SL güncelleme hatası: {e}")
+    
+    def update_dynamic_take_profit(self, position_data, current_price, pnl_pct, side, entry_price):
+        """
+        Dynamic Take Profit güncelleme
+        """
+        try:
+            risk_config = self.cfg['risk_management']
+            tp_increment = risk_config.get('tp_increment_percentage', 0.3)
+            max_tp = risk_config.get('max_tp_percentage', 2.0)
+            update_threshold = risk_config.get('trailing_update_threshold', 0.5)
+            
+            current_tp = position_data.get('current_tp', position_data.get('tp'))
+            
+            # Yeni TP hesapla
+            if side == 'buy':  # LONG
+                new_tp = current_price * (1 + tp_increment/100)
+                # Maksimum TP sınırı
+                max_tp_price = entry_price * (1 + max_tp/100)
+                new_tp = min(new_tp, max_tp_price)
+                
+                # TP'yi sadece yukarı doğru hareket ettir
+                if new_tp > current_tp:
+                    self.update_take_profit_order(position_data, new_tp, "Dynamic TP")
+                    
+            elif side == 'sell':  # SHORT
+                new_tp = current_price * (1 - tp_increment/100)
+                # Maksimum TP sınırı
+                max_tp_price = entry_price * (1 - max_tp/100)
+                new_tp = max(new_tp, max_tp_price)
+                
+                # TP'yi sadece aşağı doğru hareket ettir
+                if new_tp < current_tp:
+                    self.update_take_profit_order(position_data, new_tp, "Dynamic TP")
+                    
+        except Exception as e:
+            self.log.error(f"❌ Dynamic TP güncelleme hatası: {e}")
+    
+    def update_stop_loss_order(self, position_data, new_sl, reason):
+        """
+        Stop Loss emrini güncelle
+        """
+        try:
+            # Eski SL emrini iptal et
+            old_sl_id = position_data.get('sl_order_id')
+            if old_sl_id:
+                try:
+                    self.exchange.cancel_order(old_sl_id, f"{self.symbol}:USDT")
+                    self.log.info(f"✅ Eski SL emri iptal edildi: {old_sl_id}")
+                except Exception as e:
+                    self.log.warning(f"⚠️ SL emri iptal hatası: {e}")
+            
+            # Yeni SL emri yerleştir
+            side = 'sell' if position_data['side'] == 'buy' else 'buy'
+            futures_symbol = f"{self.symbol}:USDT"
+            
+            new_sl_order = self.order_client.place_stop_market_close(
+                symbol=futures_symbol,
+                side=side,
+                stop_price=new_sl,
+                position_side=position_data['side'].upper(),
+                intent="SL",
+                extra=f"{reason.lower().replace(' ', '_')}_{int(time.time())}",
+                amount=position_data['size']
+            )
+            
+            if new_sl_order and new_sl_order.get('id'):
+                # State'i güncelle
+                position_data['current_sl'] = new_sl
+                position_data['sl_order_id'] = new_sl_order['id']
+                position_data['trailing_active'] = True
+                position_data['last_update_time'] = datetime.now()
+                
+                self.log.info(f"🛡️ {reason} güncellendi: ${new_sl:.4f}")
+                self.log.info(f"📊 SL Order ID: {new_sl_order['id']}")
+                
+                # Telegram bildirimi
+                self.send_telegram_message(f"""
+🛡️ TRAILING STOP GÜNCELLENDİ
+
+📊 Symbol: {self.symbol}
+📈 Side: {position_data['side'].upper()}
+💰 Entry: ${position_data['entry_price']:.4f}
+📊 Current: ${current_price:.4f}
+🛡️ New SL: ${new_sl:.4f}
+📊 Reason: {reason}
+⏰ Time: {datetime.now().strftime('%H:%M:%S')}
+""")
+            else:
+                self.log.error(f"❌ {reason} güncelleme başarısız!")
+                
+        except Exception as e:
+            self.log.error(f"❌ SL order güncelleme hatası: {e}")
+    
+    def update_take_profit_order(self, position_data, new_tp, reason):
+        """
+        Take Profit emrini güncelle
+        """
+        try:
+            # Eski TP emrini iptal et
+            old_tp_id = position_data.get('tp_order_id')
+            if old_tp_id:
+                try:
+                    self.exchange.cancel_order(old_tp_id, f"{self.symbol}:USDT")
+                    self.log.info(f"✅ Eski TP emri iptal edildi: {old_tp_id}")
+                except Exception as e:
+                    self.log.warning(f"⚠️ TP emri iptal hatası: {e}")
+            
+            # Yeni TP emri yerleştir
+            side = 'sell' if position_data['side'] == 'buy' else 'buy'
+            futures_symbol = f"{self.symbol}:USDT"
+            
+            new_tp_order = self.order_client.place_take_profit_market_close(
+                symbol=futures_symbol,
+                side=side,
+                price=new_tp,
+                position_side=position_data['side'].upper(),
+                intent="TP",
+                extra=f"{reason.lower().replace(' ', '_')}_{int(time.time())}",
+                amount=position_data['size']
+            )
+            
+            if new_tp_order and new_tp_order.get('id'):
+                # State'i güncelle
+                position_data['current_tp'] = new_tp
+                position_data['tp_order_id'] = new_tp_order['id']
+                position_data['dynamic_tp_active'] = True
+                position_data['last_update_time'] = datetime.now()
+                
+                self.log.info(f"🎯 {reason} güncellendi: ${new_tp:.4f}")
+                self.log.info(f"📊 TP Order ID: {new_tp_order['id']}")
+                
+                # Telegram bildirimi
+                self.send_telegram_message(f"""
+🎯 DYNAMIC TP GÜNCELLENDİ
+
+📊 Symbol: {self.symbol}
+📈 Side: {position_data['side'].upper()}
+💰 Entry: ${position_data['entry_price']:.4f}
+📊 Current: ${current_price:.4f}
+🎯 New TP: ${new_tp:.4f}
+📊 Reason: {reason}
+⏰ Time: {datetime.now().strftime('%H:%M:%S')}
+""")
+            else:
+                self.log.error(f"❌ {reason} güncelleme başarısız!")
+                
+        except Exception as e:
+            self.log.error(f"❌ TP order güncelleme hatası: {e}")
+    
+    def log_trailing_status(self, position_data, current_price, pnl_pct):
+        """
+        Trailing stop durumunu logla
+        """
+        try:
+            if not position_data:
+                return
+            
+            self.log.info("=" * 60)
+            self.log.info("🛡️ TRAILING STOP STATUS")
+            self.log.info("=" * 60)
+            self.log.info(f"📊 Symbol: {position_data['symbol']}")
+            self.log.info(f"📈 Side: {position_data['side'].upper()}")
+            self.log.info(f"💰 Entry: ${position_data['entry_price']:.4f}")
+            self.log.info(f"📊 Current: ${current_price:.4f}")
+            self.log.info(f"📈 PnL: %{pnl_pct:.2f}")
+            self.log.info(f"🛡️ Current SL: ${position_data.get('current_sl', 'N/A'):.4f}")
+            self.log.info(f"🎯 Current TP: ${position_data.get('current_tp', 'N/A'):.4f}")
+            self.log.info(f"🔄 Trailing Active: {position_data.get('trailing_active', False)}")
+            self.log.info(f"🎯 Dynamic TP Active: {position_data.get('dynamic_tp_active', False)}")
+            self.log.info(f"⏰ Last Update: {position_data.get('last_update_time', 'N/A')}")
+            self.log.info("=" * 60)
+            
+        except Exception as e:
+            self.log.error(f"❌ Trailing status log hatası: {e}")
+    
+    def test_trailing_calculations(self, entry_price, current_price, side):
+        """
+        Trailing stop hesaplamalarını test et
+        """
+        try:
+            risk_config = self.cfg['risk_management']
+            trailing_pct = risk_config.get('trailing_stop_percentage', 1.0)
+            tp_increment = risk_config.get('tp_increment_percentage', 0.3)
+            
+            self.log.info("🧪 TRAILING CALCULATION TEST")
+            self.log.info(f"Entry: ${entry_price:.4f}")
+            self.log.info(f"Current: ${current_price:.4f}")
+            self.log.info(f"Side: {side}")
+            
+            if side == 'buy':  # LONG
+                pnl_pct = ((current_price - entry_price) / entry_price) * 100
+                new_sl = current_price * (1 - trailing_pct/100)
+                new_tp = current_price * (1 + tp_increment/100)
+            else:  # SHORT
+                pnl_pct = ((entry_price - current_price) / entry_price) * 100
+                new_sl = current_price * (1 + trailing_pct/100)
+                new_tp = current_price * (1 - tp_increment/100)
+            
+            self.log.info(f"PnL: %{pnl_pct:.2f}")
+            self.log.info(f"New SL: ${new_sl:.4f}")
+            self.log.info(f"New TP: ${new_tp:.4f}")
+            self.log.info("=" * 40)
+            
+        except Exception as e:
+            self.log.error(f"❌ Trailing test hatası: {e}")
+
     def close_position(self):
         """Mevcut pozisyonu kapat"""
         try:
@@ -657,9 +918,12 @@ class MultiTimeframeEMATrader:
             else:
                 pnl_pct = ((entry_price - current_price) / entry_price) * 100
             
-            # Break Even kontrolü
-            break_even_enabled = self.cfg['risk_management']['break_even_enabled']
-            break_even_pct = self.cfg['risk_management']['break_even_percentage']
+            # Risk Management kontrolü
+            risk_config = self.cfg['risk_management']
+            break_even_enabled = risk_config['break_even_enabled']
+            break_even_pct = risk_config['break_even_percentage']
+            trailing_enabled = risk_config.get('trailing_stop_enabled', False)
+            dynamic_tp_enabled = risk_config.get('dynamic_tp_enabled', False)
             
             # TP/SL kontrolü
             should_close = False
@@ -672,13 +936,14 @@ class MultiTimeframeEMATrader:
                 should_close = True
                 close_reason = f"Stop Loss (%{sl_pct})"
             elif break_even_enabled and pnl_pct >= break_even_pct:
-                # Break Even'e ulaştıysa SL'i entry price'a çek
-                if side == 'long' and current_price >= entry_price:
-                    should_close = False  # Pozisyonu kapatma, sadece SL'i güncelle
-                    self.log.info(f"🛡️ Break Even aktif - SL entry price'a çekildi")
-                elif side == 'short' and current_price <= entry_price:
-                    should_close = False  # Pozisyonu kapatma, sadece SL'i güncelle
-                    self.log.info(f"🛡️ Break Even aktif - SL entry price'a çekildi")
+                # Break Even veya Trailing Stop aktif
+                self.handle_advanced_risk_management(
+                    self.active_position, current_price, pnl_pct, side, entry_price
+                )
+                
+                # Debug log - Trailing status
+                if self.cfg['logging'].get('detailed_positions', False):
+                    self.log_trailing_status(self.active_position, current_price, pnl_pct)
             
             if should_close:
                 self.log.info(f"🎯 POZİSYON KAPATMA SEBEBİ: {close_reason}")
