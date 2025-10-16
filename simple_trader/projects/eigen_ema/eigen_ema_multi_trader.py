@@ -385,6 +385,11 @@ class MultiTimeframeEMATrader:
     def open_position(self, signal_info):
         """Pozisyon aç"""
         try:
+            # Single position only kontrolü
+            if self.single_position_only and self.active_position:
+                self.log.info(f"🚫 Single position only aktif - Yeni pozisyon açılamaz")
+                return False
+            
             timeframe = signal_info['timeframe']
             signal = signal_info['signal']
             price = signal_info['price']
