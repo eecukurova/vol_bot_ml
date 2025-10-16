@@ -294,16 +294,19 @@ class IdempotentOrderClient:
             Order result dict
         """
         if not self.enabled:
-            # Fallback to direct order
+            # Fallback to direct order - PENGU/USDT format
             order_type = 'STOP_MARKET' if intent == 'SL' else 'TAKE_PROFIT_MARKET'
             params = {
-                'stopPrice': stop_price,
-                'reduceOnly': True
+                'stopPrice': self.exchange.price_to_precision(symbol, stop_price),
+                'closePosition': True,  # PENGU/USDT için gerekli
+                'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
+                'priceProtect': True  # PENGU/USDT için gerekli
             }
             if self.hedge_mode and position_side:
                 params['positionSide'] = position_side
             
-            return self.exchange.create_order(symbol, order_type, side, amount, None, params)
+            # PENGU/USDT için amount parametresi None olmalı (closePosition kullanılıyor)
+            return self.exchange.create_order(symbol, order_type, side, None, None, params)
         
         client_order_id = self._generate_client_order_id(intent, symbol, side, extra)
         
@@ -317,11 +320,13 @@ class IdempotentOrderClient:
         # Determine order type
         order_type = 'STOP_MARKET' if intent == 'SL' else 'TAKE_PROFIT_MARKET'
         
-        # Create order params
+        # Create order params - PENGU/USDT format
         params = {
             'newClientOrderId': client_order_id,
             'stopPrice': self.exchange.price_to_precision(symbol, stop_price),
-            'reduceOnly': True
+            'closePosition': True,  # PENGU/USDT için gerekli
+            'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
+            'priceProtect': True  # PENGU/USDT için gerekli
         }
         if self.hedge_mode and position_side:
             params['positionSide'] = position_side
@@ -332,7 +337,7 @@ class IdempotentOrderClient:
             'symbol': symbol,
             'type': order_type,
             'side': side,
-            'amount': None,  # Will be set by caller for reduceOnly orders
+            'amount': None,  # PENGU/USDT için None (closePosition kullanılıyor)
             'price': stop_price,
             'params': params,
             'ts': int(time.time() * 1000)
@@ -342,10 +347,10 @@ class IdempotentOrderClient:
         self.log.info(f"📝 ORDER_CREATE: {intent} {client_order_id} - {side} @ {stop_price} {symbol}")
         
         try:
-            # Place order with retry
+            # Place order with retry - PENGU/USDT için amount None
             order_result = self._retry_with_backoff(
                 self.exchange.create_order,
-                symbol, order_type, side, amount, None, params
+                symbol, order_type, side, None, None, params
             )
             
             # Update status to SENT
@@ -391,15 +396,18 @@ class IdempotentOrderClient:
             Order result dict
         """
         if not self.enabled:
-            # Fallback to direct order
+            # Fallback to direct order - PENGU/USDT format
             params = {
-                'stopPrice': price,
-                'reduceOnly': True
+                'stopPrice': self.exchange.price_to_precision(symbol, price),
+                'closePosition': True,  # PENGU/USDT için gerekli
+                'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
+                'priceProtect': True  # PENGU/USDT için gerekli
             }
             if self.hedge_mode and position_side:
                 params['positionSide'] = position_side
             
-            return self.exchange.create_order(symbol, 'TAKE_PROFIT_MARKET', side, amount, None, params)
+            # PENGU/USDT için amount parametresi None olmalı (closePosition kullanılıyor)
+            return self.exchange.create_order(symbol, 'TAKE_PROFIT_MARKET', side, None, None, params)
         
         client_order_id = self._generate_client_order_id(intent, symbol, side, extra)
         
@@ -416,9 +424,12 @@ class IdempotentOrderClient:
             'type': 'TAKE_PROFIT_MARKET',
             'side': side,
             'price': price,
+            'amount': None,  # PENGU/USDT için None (closePosition kullanılıyor)
             'params': {
-                'stopPrice': price,
-                'reduceOnly': True
+                'stopPrice': self.exchange.price_to_precision(symbol, price),
+                'closePosition': True,  # PENGU/USDT için gerekli
+                'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
+                'priceProtect': True  # PENGU/USDT için gerekli
             },
             'status': 'PENDING',
             'ts': int(time.time() * 1000),
@@ -436,10 +447,10 @@ class IdempotentOrderClient:
         self.log.info(f"📝 ORDER_CREATE: {intent} {client_order_id} - {side} @ {price} {symbol}")
         
         try:
-            # Place the order
+            # Place the order - PENGU/USDT için amount None
             order_result = self._retry_with_backoff(
                 self.exchange.create_order,
-                symbol, 'TAKE_PROFIT_MARKET', side, amount, None, order_data['params']
+                symbol, 'TAKE_PROFIT_MARKET', side, None, None, order_data['params']
             )
             
             # Update status to SENT

@@ -3,7 +3,7 @@
   "secret": "HZRMeUvbKkbONjXsbZrD2WFuPPXARPTM2oM0TnTOaRsIBKoNdLUsCLVCQLnpZB3u",
   "sandbox": false,
   "symbol": "PENGU/USDT",
-  "trade_amount_usd": 10,
+  "trade_amount_usd": 100,
   "leverage": 10,
   
   "multi_timeframe": {
@@ -60,7 +60,7 @@
   },
   
   "signal_management": {
-    "single_position_only": false,
+    "single_position_only": true,
     "cooldown_after_exit": 0,
     "priority_order": ["1h", "30m", "15m"],
     "timeframe_validation": {

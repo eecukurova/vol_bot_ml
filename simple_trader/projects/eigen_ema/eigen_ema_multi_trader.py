@@ -479,6 +479,9 @@ class MultiTimeframeEMATrader:
                     'entry_price': price,  # Break-even için entry price
                     'trailing_active': False,  # Trailing aktif mi?
                     'dynamic_tp_active': False,  # Dynamic TP aktif mi?
+                    'break_even_reached': False,  # Break-even'e ulaşıldı mı?
+                    'last_trailing_pnl': 0,  # Son trailing PnL
+                    'last_tp_pnl': 0,  # Son TP PnL
                     'last_update_time': datetime.now()
                 }
                 
@@ -555,15 +558,29 @@ class MultiTimeframeEMATrader:
             
             # Break-Even kontrolü
             if pnl_pct >= risk_config['break_even_percentage']:
-                self.log.info(f"🛡️ Break-Even aktif - PnL: %{pnl_pct:.2f}")
                 
-                # Trailing Stop Loss kontrolü
+                # Sadece ilk kez break-even'e ulaştığında log
+                if not position_data.get('break_even_reached', False):
+                    self.log.info(f"🛡️ Break-Even aktif - PnL: %{pnl_pct:.2f}")
+                    position_data['break_even_reached'] = True
+                
+                # Trailing Stop Loss kontrolü - Threshold kontrolü ile
                 if trailing_enabled:
-                    self.update_trailing_stop_loss(position_data, current_price, side, trailing_pct)
+                    last_pnl = position_data.get('last_trailing_pnl', 0)
+                    if abs(pnl_pct - last_pnl) >= update_threshold:
+                        self.update_trailing_stop_loss(position_data, current_price, side, trailing_pct)
+                        position_data['last_trailing_pnl'] = pnl_pct
+                    else:
+                        self.log.info(f"📊 Trailing SL - PnL: %{pnl_pct:.2f} (Threshold altında)")
                 
-                # Dynamic Take Profit kontrolü
+                # Dynamic Take Profit kontrolü - Threshold kontrolü ile
                 if dynamic_tp_enabled:
-                    self.update_dynamic_take_profit(position_data, current_price, pnl_pct, side, entry_price)
+                    last_tp_pnl = position_data.get('last_tp_pnl', 0)
+                    if abs(pnl_pct - last_tp_pnl) >= update_threshold:
+                        self.update_dynamic_take_profit(position_data, current_price, pnl_pct, side, entry_price)
+                        position_data['last_tp_pnl'] = pnl_pct
+                    else:
+                        self.log.info(f"📊 Dynamic TP - PnL: %{pnl_pct:.2f} (Threshold altında)")
                 
         except Exception as e:
             self.log.error(f"❌ Advanced risk management hatası: {e}")
@@ -637,7 +654,7 @@ class MultiTimeframeEMATrader:
             old_sl_id = position_data.get('sl_order_id')
             if old_sl_id:
                 try:
-                    self.exchange.cancel_order(old_sl_id, f"{self.symbol}:USDT")
+                    self.exchange.cancel_order(old_sl_id, f"{self.symbol.replace("/", "")}")
                     self.log.info(f"✅ Eski SL emri iptal edildi: {old_sl_id}")
                 except Exception as e:
                     self.log.warning(f"⚠️ SL emri iptal hatası: {e}")
@@ -693,7 +710,7 @@ class MultiTimeframeEMATrader:
             old_tp_id = position_data.get('tp_order_id')
             if old_tp_id:
                 try:
-                    self.exchange.cancel_order(old_tp_id, f"{self.symbol}:USDT")
+                    self.exchange.cancel_order(old_tp_id, f"{self.symbol.replace("/", "")}")
                     self.log.info(f"✅ Eski TP emri iptal edildi: {old_tp_id}")
                 except Exception as e:
                     self.log.warning(f"⚠️ TP emri iptal hatası: {e}")
@@ -859,7 +876,7 @@ class MultiTimeframeEMATrader:
             # Stop Loss emrini iptal et
             if sl_order_id:
                 try:
-                    cancel_result = self.exchange.cancel_order(sl_order_id, self.symbol)
+                    cancel_result = self.exchange.cancel_order(sl_order_id, f"{self.symbol.replace("/", "")}")
                     if cancel_result:
                         self.log.info(f"✅ SL emri iptal edildi: {sl_order_id}")
                         cancelled_count += 1
@@ -871,7 +888,7 @@ class MultiTimeframeEMATrader:
             # Take Profit emrini iptal et
             if tp_order_id:
                 try:
-                    cancel_result = self.exchange.cancel_order(tp_order_id, self.symbol)
+                    cancel_result = self.exchange.cancel_order(tp_order_id, f"{self.symbol.replace("/", "")}")
                     if cancel_result:
                         self.log.info(f"✅ TP emri iptal edildi: {tp_order_id}")
                         cancelled_count += 1
@@ -963,6 +980,9 @@ class MultiTimeframeEMATrader:
             try:
                 self.log.info(f"🔄 CYCLE_START: {datetime.now().strftime('%H:%M:%S')}")
                 
+                # Önce exchange'den pozisyon durumunu kontrol et
+                position_status = self.check_position_status()
+                
                 # Aktif pozisyon varsa izle
                 if self.active_position:
                     self.log.info("📊 Aktif pozisyon izleniyor...")
@@ -970,17 +990,7 @@ class MultiTimeframeEMATrader:
                     time.sleep(60)
                     continue
                 
-                # Cooldown kontrolü
-                if self.last_exit_time and self.cooldown_seconds > 0:
-                    time_since_exit = (datetime.now() - self.last_exit_time).total_seconds()
-                    if time_since_exit < self.cooldown_seconds:
-                        remaining = self.cooldown_seconds - time_since_exit
-                        self.log.info(f"⏰ Cooldown aktif - {remaining:.0f} saniye kaldı")
-                        time.sleep(60)
-                        continue
-                
-                # Pozisyon kontrolü (exchange'den)
-                position_status = self.check_position_status()
+                # Exchange'de pozisyon varsa ama active_position yoksa (sistem restart sonrası)
                 if position_status['exists']:
                     self.log.info("ℹ️ Exchange'de aktif pozisyon bulundu, izleniyor...")
                     # Pozisyon bilgilerini güncelle - Config'den default timeframe değerlerini al
@@ -1000,6 +1010,15 @@ class MultiTimeframeEMATrader:
                     }
                     self.log.info(f"📊 Default TP/SL kullanılıyor ({default_tf}): TP={default_tf_config['take_profit']*100:.1f}%, SL={default_tf_config['stop_loss']*100:.1f}%")
                     continue
+                
+                # Cooldown kontrolü
+                if self.last_exit_time and self.cooldown_seconds > 0:
+                    time_since_exit = (datetime.now() - self.last_exit_time).total_seconds()
+                    if time_since_exit < self.cooldown_seconds:
+                        remaining = self.cooldown_seconds - time_since_exit
+                        self.log.info(f"⏰ Cooldown aktif - {remaining:.0f} saniye kaldı")
+                        time.sleep(60)
+                        continue
                 
                 # Tüm timeframe'leri kontrol et
                 signals = self.check_all_timeframes()
