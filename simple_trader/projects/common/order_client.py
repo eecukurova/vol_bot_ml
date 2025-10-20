@@ -100,6 +100,130 @@ class IdempotentOrderClient:
         except Exception as e:
             self.log.error(f"❌ Failed to save state: {e}")
     
+    def _generate_deterministic_client_order_id(self, intent_type: str, symbol: str, side: str, 
+                                             qty: float, price: Optional[float] = None, 
+                                             reduce_only: bool = False, extra: str = "") -> str:
+        """
+        Deterministik clientOrderId üretimi
+        
+        Format: EMA::<symbol_narrow>::<side>::<intent_type>::<epoch_bucket>::<hash>
+        """
+        try:
+            # Symbol'ü daralt (BTC/USDT:USDT -> BTCUSDT)
+            symbol_narrow = symbol.replace('/', '').replace(':', '').replace('USDT', '')
+            
+            # Epoch bucket (5 dakikalık gruplar)
+            epoch_bucket = int(time.time() // 300) * 300
+            
+            # Essential fields hash
+            essential_fields = f"{symbol_narrow}:{side}:{intent_type}:{qty:.6f}"
+            if price:
+                essential_fields += f":{price:.6f}"
+            if reduce_only:
+                essential_fields += ":reduceOnly"
+            if extra:
+                essential_fields += f":{extra}"
+            
+            # Hash oluştur (ilk 8 karakter)
+            hash_obj = hashlib.md5(essential_fields.encode())
+            hash_suffix = hash_obj.hexdigest()[:8]
+            
+            # Deterministik clientOrderId
+            client_order_id = f"EMA::{symbol_narrow}::{side}::{intent_type}::{epoch_bucket}::{hash_suffix}"
+            
+            return client_order_id
+            
+        except Exception as e:
+            self.log.error(f"❌ Deterministik clientOrderId üretim hatası: {e}")
+            # Fallback to original method
+            return self._generate_client_order_id(intent_type, symbol, side, extra)
+    
+    def _register_intent(self, intent_id: str, symbol: str, side: str, intent_type: str, 
+                        qty: float, price: Optional[float] = None, reduce_only: bool = False) -> str:
+        """
+        Intent kaydı ve deterministik clientOrderId üretimi
+        """
+        try:
+            # Deterministik clientOrderId üret
+            client_order_id = self._generate_deterministic_client_order_id(
+                intent_type, symbol, side, qty, price, reduce_only, intent_id
+            )
+            
+            # Intent kaydı
+            intent_record = {
+                'intent_id': intent_id,
+                'symbol': symbol,
+                'side': side,
+                'type': intent_type,
+                'qty': qty,
+                'price': price,
+                'reduceOnly': reduce_only,
+                'timeInForce': 'GTC',
+                'created_at': int(time.time()),
+                'state': 'PENDING',
+                'client_order_id': client_order_id
+            }
+            
+            # State'e kaydet
+            if 'intents' not in self.state:
+                self.state['intents'] = {}
+            
+            self.state['intents'][intent_id] = intent_record
+            self._save_state()
+            
+            self.log.info(f"🔄 INTENT NEW id={intent_id} client_oid={client_order_id} type={intent_type} reduceOnly={reduce_only}")
+            
+            # QA Tracking - S6 Idempotent Retry
+            if hasattr(self, 'qa_tracker'):
+                self.qa_track_log('idempotent', f"INTENT NEW id={intent_id} client_oid={client_order_id} type={intent_type} reduceOnly={reduce_only}")
+            
+            return client_order_id
+            
+        except Exception as e:
+            self.log.error(f"❌ Intent kayıt hatası: {e}")
+            return self._generate_client_order_id(intent_type, symbol, side, intent_id)
+    
+    def _check_intent_duplicate(self, intent_id: str) -> bool:
+        """Intent duplikasyon kontrolü"""
+        try:
+            if 'intents' not in self.state:
+                return False
+            
+            existing_intent = self.state['intents'].get(intent_id)
+            if existing_intent and existing_intent['state'] in ['PENDING', 'SENT']:
+                self.log.warning(f"🔄 INTENT DEDUP removed_stale client_oid={existing_intent['client_order_id']} keep={intent_id}")
+                
+                # QA Tracking - S6 Idempotent Retry
+                if hasattr(self, 'qa_tracker'):
+                    self.qa_track_log('idempotent', f"INTENT DEDUP removed_stale client_oid={existing_intent['client_order_id']} keep={intent_id}")
+                
+                return True
+            
+            return False
+            
+        except Exception as e:
+            self.log.error(f"❌ Intent duplikasyon kontrol hatası: {e}")
+            return False
+    
+    def _link_intent_to_exchange_order(self, intent_id: str, exchange_order_id: str):
+        """Intent'i exchange order ile eşleştir"""
+        try:
+            if 'intents' not in self.state or intent_id not in self.state['intents']:
+                return
+            
+            self.state['intents'][intent_id]['state'] = 'LINKED'
+            self.state['intents'][intent_id]['exchange_order_id'] = exchange_order_id
+            self._save_state()
+            
+            self.log.info(f"🔄 INTENT LINKED id={intent_id} exchange_order_id={exchange_order_id}")
+            
+            # QA Tracking - S6 Idempotent Retry
+            if hasattr(self, 'qa_tracker'):
+                self.qa_track_log('idempotent', f"INTENT LINKED id={intent_id} exchange_order_id={exchange_order_id}")
+            
+        except Exception as e:
+            self.log.error(f"❌ Intent link hatası: {e}")
+    
     def _generate_client_order_id(self, intent: str, symbol: str, side: str, extra: str = "") -> str:
         """
         Generate deterministic clientOrderId
@@ -197,7 +321,8 @@ class IdempotentOrderClient:
             return False
     
     def place_entry_market(self, symbol: str, side: str, amount: float, 
-                          position_side: Optional[str] = None, extra: str = "") -> Dict[str, Any]:
+                          position_side: Optional[str] = None, extra: str = "", 
+                          reduce_only: bool = False) -> Dict[str, Any]:
         """
         Place market entry order with idempotency
         
@@ -215,7 +340,18 @@ class IdempotentOrderClient:
             # Fallback to direct order
             return self.exchange.create_market_order(symbol, side, amount)
         
-        client_order_id = self._generate_client_order_id('ENTRY', symbol, side, extra)
+        # Intent ID oluştur
+        intent_id = f"entry_{int(time.time())}_{side}_{amount:.6f}"
+        
+        # Duplikasyon kontrolü
+        if self._check_intent_duplicate(intent_id):
+            existing_intent = self.state['intents'].get(intent_id)
+            return {'id': existing_intent['client_order_id'], 'status': 'duplicate'}
+        
+        # Intent kaydı ve deterministik clientOrderId
+        client_order_id = self._register_intent(
+            intent_id, symbol, side, 'ENTRY', amount, reduce_only=reduce_only
+        )
         
         # Check if order already exists
         if client_order_id in self.state['orders']:
@@ -228,6 +364,8 @@ class IdempotentOrderClient:
         params = {'newClientOrderId': client_order_id}
         if self.hedge_mode and position_side:
             params['positionSide'] = position_side
+        if reduce_only:
+            params['reduceOnly'] = True
         
         # Save as PENDING
         self.state['orders'][client_order_id] = {
@@ -256,6 +394,9 @@ class IdempotentOrderClient:
             self.state['orders'][client_order_id]['exchange_id'] = order_result['id']
             self._save_state()
             
+            # Intent'i exchange order ile link et
+            self._link_intent_to_exchange_order(intent_id, order_result['id'])
+            
             self.log.info(f"✅ ORDER_SENT: {client_order_id} -> {order_result['id']}")
             return order_result
             
@@ -278,7 +419,8 @@ class IdempotentOrderClient:
     
     def place_stop_market_close(self, symbol: str, side: str, stop_price: float,
                                position_side: Optional[str] = None, intent: str = "SL", 
-                               extra: str = "", amount: Optional[float] = None) -> Dict[str, Any]:
+                               extra: str = "", amount: Optional[float] = None, 
+                               reduce_only: bool = True) -> Dict[str, Any]:
         """
         Place stop market close order (SL/TP) with idempotency
         
@@ -326,7 +468,8 @@ class IdempotentOrderClient:
             'stopPrice': self.exchange.price_to_precision(symbol, stop_price),
             'closePosition': True,  # PENGU/USDT için gerekli
             'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
-            'priceProtect': True  # PENGU/USDT için gerekli
+            'priceProtect': True,  # PENGU/USDT için gerekli
+            'reduceOnly': reduce_only  # ReduceOnly politikası
         }
         if self.hedge_mode and position_side:
             params['positionSide'] = position_side
@@ -380,7 +523,8 @@ class IdempotentOrderClient:
     
     def place_take_profit_market_close(self, symbol: str, side: str, price: float,
                                      position_side: Optional[str] = None, intent: str = "TP", 
-                                     extra: str = "", amount: Optional[float] = None) -> Dict[str, Any]:
+                                     extra: str = "", amount: Optional[float] = None,
+                                     reduce_only: bool = True) -> Dict[str, Any]:
         """
         Place take profit market close order (TP) with idempotency
         
@@ -401,7 +545,8 @@ class IdempotentOrderClient:
                 'stopPrice': self.exchange.price_to_precision(symbol, price),
                 'closePosition': True,  # PENGU/USDT için gerekli
                 'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
-                'priceProtect': True  # PENGU/USDT için gerekli
+                'priceProtect': True,  # PENGU/USDT için gerekli
+                'reduceOnly': reduce_only  # ReduceOnly politikası
             }
             if self.hedge_mode and position_side:
                 params['positionSide'] = position_side
@@ -429,7 +574,8 @@ class IdempotentOrderClient:
                 'stopPrice': self.exchange.price_to_precision(symbol, price),
                 'closePosition': True,  # PENGU/USDT için gerekli
                 'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
-                'priceProtect': True  # PENGU/USDT için gerekli
+                'priceProtect': True,  # PENGU/USDT için gerekli
+                'reduceOnly': reduce_only  # ReduceOnly politikası
             },
             'status': 'PENDING',
             'ts': int(time.time() * 1000),
