@@ -1,0 +1,29 @@
+{
+  "timeframes": ["4h", "1h"],
+  "atr_period": 10,
+  "key_value": 3,
+  "factor": 1.5,
+  "check_interval": 1800,
+  "premium_stocks": [
+    "AMD", "NVDA", "TSLA", "AAPL", "MSFT", "GOOGL", "META", "AMZN",
+    "NFLX", "CRM", "ADBE", "INTC", "QCOM", "AVGO", "TXN", "MU",
+    "AMAT", "LRCX", "KLAC", "MRVL", "SNPS", "CDNS", "FTNT",
+    "PYPL", "ROKU", "ZM", "DOCU", "OKTA", "CRWD", "ZS",
+    "NET", "DDOG", "SNOW", "PLTR", "RBLX", "U", "ABNB", "SHOP",
+    "ORCL", "IBM", "CSCO", "ACN", "NOW", "WDAY", "TEAM", "SPLK",
+    "PANW", "CYBR", "MDB", "ESTC", "TWLO", "SQ", "COIN", "HOOD",
+    "RIVN", "LCID", "F", "GM", "FORD", "NIO", "XPEV", "LI",
+    "BABA", "JD", "PDD", "TME", "BIDU", "NTES", "WB", "DOYU",
+    "UBER", "LYFT", "DASH", "GRUB", "PTON", "SPOT", "SNAP", "PINS",
+    "TWTR", "DIS", "NFLX", "CMCSA", "VZ", "T", "TMUS", "CHTR"
+  ],
+  "telegram": {
+    "enabled": true,
+    "bot_token": "8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0",
+    "chat_id": "-1003038204085"
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "premium_scanner.log"
+  }
+}

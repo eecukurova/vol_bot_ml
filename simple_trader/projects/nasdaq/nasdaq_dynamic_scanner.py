@@ -35,11 +35,17 @@ class NASDAQDynamicScanner:
         self.chat_id = self.cfg['telegram']['chat_id']
         self.base_url = f"https://api.telegram.org/bot{self.bot_token}/sendMessage"
         
-        # Scanner parameters
-        self.max_price = self.cfg.get('max_price', 5.00)
-        self.min_volume = self.cfg.get('min_volume', 100000)  # Minimum günlük volume
-        self.min_market_cap = self.cfg.get('min_market_cap', 10000000)  # 10M minimum
-        self.max_market_cap = self.cfg.get('max_market_cap', 1000000000)  # 1B maximum
+        # Scanner parameters (fallback to old flat keys, prefer filters block)
+        filters = self.cfg.get('filters', {})
+        self.max_price = self.cfg.get('max_price', filters.get('max_price', 5.00))
+        self.min_volume = self.cfg.get('min_volume', filters.get('min_volume', 100000))  # günlük min hacim
+        self.min_market_cap = self.cfg.get('min_market_cap', filters.get('min_market_cap', 10000000))
+        self.max_market_cap = self.cfg.get('max_market_cap', filters.get('max_market_cap', 1000000000))
+
+        # Optional watchlist (e.g., <$1 tech)
+        self.watchlist_cfg = self.cfg.get('watchlist', {
+            'enabled': False
+        })
         
         # Signal state
         self.last_signals = {}
@@ -49,6 +55,22 @@ class NASDAQDynamicScanner:
         self.log.info(f"💰 Max fiyat: ${self.max_price}")
         self.log.info(f"📊 Min volume: {self.min_volume:,}")
         self.log.info(f"🏢 Market cap: ${self.min_market_cap:,} - ${self.max_market_cap:,}")
+
+    def load_watchlist(self) -> List[str]:
+        """Load optional static watchlist from JSON file if enabled."""
+        try:
+            if not self.watchlist_cfg or not self.watchlist_cfg.get('enabled'):
+                return []
+            path = self.watchlist_cfg.get('file', 'nasdaq_under1_watchlist.json')
+            with open(path, 'r') as f:
+                symbols = json.load(f)
+            # Deduplicate and sanitize
+            symbols = [s.strip().upper() for s in symbols if isinstance(s, str) and s.strip()]
+            self.log.info(f"📄 Watchlist yüklendi: {len(symbols)} sembol")
+            return symbols
+        except Exception as e:
+            self.log.error(f"❌ Watchlist yüklenemedi: {e}")
+            return []
 
     def send_telegram_message(self, message: str):
         """Telegram'a mesaj gönder"""
@@ -118,8 +140,14 @@ class NASDAQDynamicScanner:
             self.log.error(f"❌ NASDAQ sembol çekme hatası: {e}")
             return []
 
-    def filter_tech_stocks(self, symbols: List[str]) -> List[Dict]:
-        """Teknoloji hisselerini filtrele"""
+    def filter_tech_stocks(self, symbols: List[str], *,
+                            max_price: Optional[float] = None,
+                            min_volume: Optional[int] = None,
+                            min_market_cap: Optional[int] = None,
+                            max_market_cap: Optional[int] = None,
+                            enforce_tech: bool = True) -> List[Dict]:
+        """Teknoloji hisselerini filtrele (opsiyonel eşikleri override edebilirsin).
+        enforce_tech=False ise sektör/industry kontrolü bypass edilir (watchlist için)."""
         filtered_stocks = []
         
         self.log.info(f"🔍 {len(symbols)} hisse filtreleniyor...")
@@ -130,38 +158,44 @@ class NASDAQDynamicScanner:
                 info = ticker.info
                 
                 # Temel bilgileri al
-                current_price = info.get('currentPrice', 0)
+                current_price = info.get('currentPrice') or info.get('regularMarketPrice') or info.get('open') or 0
                 volume = info.get('volume', 0)
                 market_cap = info.get('marketCap', 0)
                 sector = info.get('sector', '').lower()
                 industry = info.get('industry', '').lower()
                 
+                # Eşikler
+                p_max = self.max_price if max_price is None else max_price
+                v_min = self.min_volume if min_volume is None else min_volume
+                mc_min = self.min_market_cap if min_market_cap is None else min_market_cap
+                mc_max = self.max_market_cap if max_market_cap is None else max_market_cap
+
                 # Fiyat kontrolü
-                if not current_price or current_price > self.max_price:
+                if not current_price or current_price > p_max:
                     continue
                 
                 # Volume kontrolü
-                if volume < self.min_volume:
+                if volume < v_min:
                     continue
                 
                 # Market cap kontrolü
-                if not market_cap or market_cap < self.min_market_cap or market_cap > self.max_market_cap:
+                if not market_cap or market_cap < mc_min or market_cap > mc_max:
                     continue
                 
                 # Sektör kontrolü
-                is_tech = (
-                    'technology' in sector or
-                    'software' in industry or
-                    'hardware' in industry or
-                    'semiconductor' in industry or
-                    'internet' in industry or
-                    'telecommunications' in industry or
-                    'communication services' in sector or
-                    'consumer discretionary' in sector  # E-commerce, streaming vb.
-                )
-                
-                if not is_tech:
-                    continue
+                if enforce_tech:
+                    is_tech = (
+                        'technology' in sector or
+                        'software' in industry or
+                        'hardware' in industry or
+                        'semiconductor' in industry or
+                        'internet' in industry or
+                        'telecommunications' in industry or
+                        'communication services' in sector or
+                        'consumer discretionary' in sector
+                    )
+                    if not is_tech:
+                        continue
                 
                 filtered_stocks.append({
                     'symbol': symbol,
@@ -299,12 +333,35 @@ class NASDAQDynamicScanner:
         
         # Hisse listesini al
         symbols = self.get_nasdaq_symbols()
+        # Watchlist'i ekle (enabled ise)
+        watchlist_symbols = self.load_watchlist()
+        if watchlist_symbols:
+            symbols = list(dict.fromkeys(symbols + watchlist_symbols))  # preserve order, dedupe
         if not symbols:
             self.log.warning("⚠️ Hiç hisse bulunamadı")
             return
         
-        # Hisse filtrele
+        # Hisse filtrele (ana kriterler)
         filtered_stocks = self.filter_tech_stocks(symbols)
+
+        # Watchlist için ek tarama: daha sıkı/özel eşikler uygulanabilir
+        if watchlist_symbols:
+            wl_cfg = self.watchlist_cfg
+            wl_price = wl_cfg.get('max_price', 1.00)
+            wl_min_vol = wl_cfg.get('min_volume', 50000)
+            wl_mc_min = wl_cfg.get('min_market_cap', 0)
+            wl_mc_max = wl_cfg.get('max_market_cap', 200000000)
+            wl_filtered = self.filter_tech_stocks(watchlist_symbols,
+                                                  max_price=wl_price,
+                                                  min_volume=wl_min_vol,
+                                                  min_market_cap=wl_mc_min,
+                                                  max_market_cap=wl_mc_max,
+                                                  enforce_tech=False)
+            # Birleştir ve dedupe (watchlist öncelikli)
+            all_symbols = {s['symbol']: s for s in filtered_stocks}
+            for s in wl_filtered:
+                all_symbols[s['symbol']] = s
+            filtered_stocks = list(all_symbols.values())
         if not filtered_stocks:
             self.log.warning("⚠️ Filtrelenmiş hisse bulunamadı")
             return

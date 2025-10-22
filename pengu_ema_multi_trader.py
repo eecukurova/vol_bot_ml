@@ -17,12 +17,32 @@ import os
 
 # Path'leri dinamik olarak ayarla
 current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-common_dir = os.path.join(parent_dir, "common")
+common_dir = os.path.join(current_dir, "simple_trader", "projects", "common")
+pengu_ema_dir = os.path.join(current_dir, "simple_trader", "projects", "pengu_ema")
 
-sys.path.append(common_dir)
+# Add directories to Python path
+if common_dir not in sys.path:
+    sys.path.insert(0, common_dir)
+if pengu_ema_dir not in sys.path:
+    sys.path.insert(0, pengu_ema_dir)
 
-from order_client import IdempotentOrderClient
+# Import modules
+try:
+    # Import from common directory
+    from order_client import IdempotentOrderClient  # type: ignore
+    
+    # Import from pengu_ema directory
+    from config_schema import load_and_validate_config, PenguEMAConfig  # type: ignore
+    from symbol_mapping import SymbolMappingHelper  # type: ignore
+    
+except ImportError as e:
+    print(f"❌ Import hatası: {e}")
+    print(f"📁 Common dir: {common_dir}")
+    print(f"📁 Pengu EMA dir: {pengu_ema_dir}")
+    print(f"📁 Python path: {sys.path[:5]}...")  # Show first 5 paths
+    print(f"📁 Files in common dir: {os.listdir(common_dir) if os.path.exists(common_dir) else 'Not found'}")
+    print(f"📁 Files in pengu_ema dir: {os.listdir(pengu_ema_dir) if os.path.exists(pengu_ema_dir) else 'Not found'}")
+    sys.exit(1)
 
 class HeikinAshiCalculator:
     """Heikin Ashi candle hesaplama sınıfı"""
@@ -131,10 +151,23 @@ class MultiTimeframeEMATrader:
     
     def __init__(self, config_file=None):
         if config_file is None:
-            config_file = os.path.join(current_dir, 'eigen_ema_multi_config.json')
-        # Konfigürasyon yükle
-        with open(config_file, 'r') as f:
-            self.cfg = json.load(f)
+            config_file = os.path.join(current_dir, 'pengu_ema_multi_config.json')
+        
+        # Config doğrulama ve yükleme
+        try:
+            self.cfg_obj = load_and_validate_config(config_file)
+            self.cfg = self.cfg_obj.model_dump()  # Pydantic model'i dict'e çevir
+            self.log = logging.getLogger(__name__)
+            self.log.info("✅ Config doğrulaması başarılı - Pengu EMA Bot başlatılıyor")
+            self.log.info(f"📊 Symbol: {self.cfg_obj.symbol}")
+            self.log.info(f"💰 Trade Amount: {self.cfg_obj.trade_amount_usd} USDT")
+            self.log.info(f"⚡ Leverage: {self.cfg_obj.leverage}x")
+            self.log.info(f"🎯 Yüzde birimi standardı: 0.01 = %1")
+            
+        except Exception as e:
+            print(f"❌ Config doğrulama hatası: {e}")
+            print("🔧 Lütfen config dosyasını kontrol edin ve yüzde değerlerinin 0.01 = %1 standardında olduğundan emin olun")
+            sys.exit(1)
         
         # Logging setup
         logging.basicConfig(
@@ -151,9 +184,19 @@ class MultiTimeframeEMATrader:
         self.exchange = ccxt.binance({
             'apiKey': self.cfg['api_key'],
             'secret': self.cfg['secret'],
-            'sandbox': self.cfg['sandbox'],
             'enableRateLimit': True,
         })
+        
+        # Symbol mapping helper setup
+        self.symbol_helper = SymbolMappingHelper(self.exchange, self.log)
+        
+        # Symbol validation and mapping
+        try:
+            self.symbol_mapping = self.symbol_helper.load_and_validate_markets(self.cfg_obj.symbol)
+            self.log.info(f"🎯 Symbol mapping başarılı: {self.symbol_mapping.rest_symbol} / {self.symbol_mapping.order_symbol}")
+        except SystemExit:
+            self.log.error("❌ Symbol mapping başarısız - Bot durduruluyor")
+            raise
         
         # Order client
         self.order_client = IdempotentOrderClient(
@@ -188,6 +231,26 @@ class MultiTimeframeEMATrader:
         self.last_exit_time = None
         self.cooldown_seconds = self.cfg['signal_management']['cooldown_after_exit']
         
+        # QA Tracking sistemi
+        self.qa_tracker = {
+            'scenarios_passed': 0,
+            'total_scenarios': 6,
+            'anomalies': {
+                'monotonic_sl': 0,
+                'tp_rollback': 0,
+                'dup_orders': 0,
+                'stale_orders': 0
+            },
+            'logs': {
+                'partial_fill': [],
+                'micro_lot': [],
+                'dynamic_tp': [],
+                'reversal': [],
+                'unknown_order': [],
+                'idempotent': []
+            }
+        }
+        
         self.log.info("🚀 Multi-Timeframe EMA Crossover Trader başlatıldı")
         self.log.info(f"📊 Symbol: {self.symbol}")
         self.log.info(f"📈 Timeframes: {list(self.timeframes.keys())}")
@@ -216,7 +279,8 @@ class MultiTimeframeEMATrader:
     def get_market_data(self, timeframe, limit=100):
         """Market verisi al"""
         try:
-            ohlcv = self.exchange.fetch_ohlcv(self.symbol, timeframe, limit=limit)
+            symbol = self.symbol_helper.get_symbol_for_endpoint('fetch_ohlcv')
+            ohlcv = self.exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
             df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
             df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
             df.set_index('timestamp', inplace=True)
@@ -249,6 +313,7 @@ class MultiTimeframeEMATrader:
                 timeframe_minutes = {
                     '15m': 15,
                     '30m': 30,
+                    '1h': 60,
                     '4h': 240,
                     '1d': 1440
                 }
@@ -364,10 +429,10 @@ class MultiTimeframeEMATrader:
     def check_position_status(self):
         """Mevcut pozisyon durumunu kontrol et"""
         try:
-            futures_symbol = f"{self.symbol.replace('/', '')}"  # Futures format: PENGUUSDT
+            symbol = self.symbol_helper.get_symbol_for_endpoint('fetch_positions')
             positions = self.exchange.fetch_positions()  # Tüm pozisyonları getir
             for position in positions:
-                if position['symbol'] == futures_symbol and position['contracts'] > 0:
+                if position['symbol'] == symbol and position['contracts'] > 0:
                     return {
                         'exists': True,
                         'side': position['side'],
@@ -393,6 +458,25 @@ class MultiTimeframeEMATrader:
             signal = signal_info['signal']
             price = signal_info['price']
             
+            # Ters sinyal kontrolü - ReduceOnly politikası
+            if self.active_position:
+                current_side = self.active_position['side']
+                new_side = 'buy' if signal == 'long' else 'sell'
+                
+                # Ters yön kontrolü
+                if (current_side == 'long' and new_side == 'sell') or (current_side == 'short' and new_side == 'buy'):
+                    self.log.info(f"🔄 REVERSAL BLOCK new_entry_deferred=1 reason=open_position_exists")
+                    self.log.info(f"⚠️ Ters sinyal tespit edildi - Önce mevcut pozisyonu kapat")
+                    
+                    # QA Tracking - S4 Reversal Flow
+                    self.qa_track_log('reversal', f"REVERSAL BLOCK new_entry_deferred=1 reason=open_position_exists")
+                    
+                    # Mevcut pozisyonu kapat (reduceOnly=true)
+                    self.close_position_with_reduce_only()
+                    
+                    # Bu döngüde yeni pozisyon açma - bir sonraki döngüde izin ver
+                    return False
+            
             # Timeframe parametrelerini al
             tf_config = self.timeframes[timeframe]
             tp_pct = tf_config['take_profit']
@@ -412,9 +496,9 @@ class MultiTimeframeEMATrader:
             # Idempotent market order (hem LONG hem SHORT)
             side_lower = side
             position_side = 'LONG' if side == 'buy' else 'SHORT'
-            futures_symbol = f"{self.symbol}:USDT"  # Futures format
+            symbol = self.symbol_helper.get_symbol_for_endpoint('create_order')
             order = self.order_client.place_entry_market(
-                symbol=futures_symbol,
+                symbol=symbol,
                 side=side_lower,
                 amount=size,
                 position_side=position_side,
@@ -437,49 +521,49 @@ class MultiTimeframeEMATrader:
                 sl_side = 'buy'
                 tp_side = 'buy'
             
+            # Idempotent SL/TP orders (hem LONG hem SHORT)
+            sl_order = self.order_client.place_stop_market_close(
+                symbol=symbol,
+                side=sl_side,
+                stop_price=sl,
+                position_side=position_side,
+                intent="SL",
+                extra=f"sl_{int(time.time())}"
+            )
+            
+            tp_order = self.order_client.place_take_profit_market_close(
+                symbol=symbol,
+                side=tp_side,
+                price=tp,
+                position_side=position_side,
+                intent="TP",
+                extra=f"tp_{int(time.time())}"
+            )
+            
+            # Order başarı kontrolü (EIGEN ile aynı)
+            if not sl_order or not sl_order.get('id'):
+                self.log.error("❌ SL order başarısız!")
+            if not tp_order or not tp_order.get('id'):
+                self.log.error("❌ TP order başarısız!")
+            
             if order:
-                # Entry order başarılı, şimdi TP/SL orderlarını yerleştir
-                self.log.info("✅ Entry order başarılı, TP/SL orderları yerleştiriliyor...")
-                
-                # Idempotent SL/TP orders (hem LONG hem SHORT)
-                sl_order = self.order_client.place_stop_market_close(
-                    symbol=futures_symbol,
-                    side=sl_side,
-                    amount=size,
-                    stop_price=sl,
-                    position_side=position_side,
-                    intent="SL",
-                    extra=f"sl_{int(time.time())}"
-                )
-                
-                tp_order = self.order_client.place_take_profit_market_close(
-                    symbol=futures_symbol,
-                    side=tp_side,
-                    amount=size,
-                    price=tp,
-                    position_side=position_side,
-                    intent="TP",
-                    extra=f"tp_{int(time.time())}"
-                )
-                
-                # Order başarı kontrolü (EIGEN ile aynı)
-                if not sl_order or not sl_order.get('id'):
-                    self.log.error("❌ SL order başarısız!")
-                    return False
-                if not tp_order or not tp_order.get('id'):
-                    self.log.error("❌ TP order başarısız!")
-                    return False
                 # Pozisyon bilgilerini kaydet (hem LONG hem SHORT)
                 self.active_position = {
                     'symbol': self.symbol,
                     'side': side,
                     'price': price,
                     'size': size,
+                    'intended_qty': size,  # Kısmi dolum takibi için
+                    'amount': size,
+                    'entry_price': price,
                     'time': datetime.now(),
                     'sl': sl,
                     'tp': tp,
                     'current_sl': sl,  # Trailing için mevcut SL
                     'current_tp': tp,  # Dynamic TP için mevcut TP
+                    'hit_levels': set(),  # Dynamic TP hit levels
+                    'trailing_active': False,  # Trailing aktif mi?
+                    'trailing_mfe': 0,  # Most Favorable Exit
                     'sl_order_id': sl_order.get('id') if sl_order else None,
                     'tp_order_id': tp_order.get('id') if tp_order else None,
                     'timeframe': timeframe,
@@ -487,7 +571,6 @@ class MultiTimeframeEMATrader:
                     'stop_loss_pct': sl_pct,
                     'order_id': order['id'],
                     'entry_price': price,  # Break-even için entry price
-                    'trailing_active': False,  # Trailing aktif mi?
                     'dynamic_tp_active': False,  # Dynamic TP aktif mi?
                     'break_even_reached': False,  # Break-even'e ulaşıldı mı?
                     'last_trailing_pnl': 0,  # Son trailing PnL
@@ -608,13 +691,13 @@ class MultiTimeframeEMATrader:
                 new_sl = current_price * (1 - trailing_pct/100)
                 # SL'i sadece yukarı doğru hareket ettir
                 if new_sl > current_sl and new_sl > entry_price:
-                    self.update_stop_loss_order(position_data, new_sl, "Trailing SL")
+                    self.update_stop_loss_order(position_data, new_sl, "Trailing SL", current_price)
                     
             elif side == 'sell':  # SHORT
                 new_sl = current_price * (1 + trailing_pct/100)
                 # SL'i sadece aşağı doğru hareket ettir
                 if new_sl < current_sl and new_sl < entry_price:
-                    self.update_stop_loss_order(position_data, new_sl, "Trailing SL")
+                    self.update_stop_loss_order(position_data, new_sl, "Trailing SL", current_price)
                     
         except Exception as e:
             self.log.error(f"❌ Trailing SL güncelleme hatası: {e}")
@@ -640,7 +723,7 @@ class MultiTimeframeEMATrader:
                 
                 # TP'yi sadece yukarı doğru hareket ettir
                 if new_tp > current_tp:
-                    self.update_take_profit_order(position_data, new_tp, "Dynamic TP")
+                    self.update_take_profit_order(position_data, new_tp, "Dynamic TP", current_price)
                     
             elif side == 'sell':  # SHORT
                 new_tp = current_price * (1 - tp_increment/100)
@@ -650,12 +733,12 @@ class MultiTimeframeEMATrader:
                 
                 # TP'yi sadece aşağı doğru hareket ettir
                 if new_tp < current_tp:
-                    self.update_take_profit_order(position_data, new_tp, "Dynamic TP")
+                    self.update_take_profit_order(position_data, new_tp, "Dynamic TP", current_price)
                     
         except Exception as e:
             self.log.error(f"❌ Dynamic TP güncelleme hatası: {e}")
     
-    def update_stop_loss_order(self, position_data, new_sl, reason):
+    def update_stop_loss_order(self, position_data, new_sl, reason, current_price=None):
         """
         Stop Loss emrini güncelle
         """
@@ -694,7 +777,8 @@ class MultiTimeframeEMATrader:
                 self.log.info(f"📊 SL Order ID: {new_sl_order['id']}")
                 
                 # Telegram bildirimi
-                self.send_telegram_message(f"""
+                if current_price:
+                    self.send_telegram_message(f"""
 🛡️ TRAILING STOP GÜNCELLENDİ
 
 📊 Symbol: {self.symbol}
@@ -711,7 +795,7 @@ class MultiTimeframeEMATrader:
         except Exception as e:
             self.log.error(f"❌ SL order güncelleme hatası: {e}")
     
-    def update_take_profit_order(self, position_data, new_tp, reason):
+    def update_take_profit_order(self, position_data, new_tp, reason, current_price=None):
         """
         Take Profit emrini güncelle
         """
@@ -750,7 +834,8 @@ class MultiTimeframeEMATrader:
                 self.log.info(f"📊 TP Order ID: {new_tp_order['id']}")
                 
                 # Telegram bildirimi
-                self.send_telegram_message(f"""
+                if current_price:
+                    self.send_telegram_message(f"""
 🎯 DYNAMIC TP GÜNCELLENDİ
 
 📊 Symbol: {self.symbol}
@@ -886,7 +971,8 @@ class MultiTimeframeEMATrader:
             # Stop Loss emrini iptal et
             if sl_order_id:
                 try:
-                    cancel_result = self.exchange.cancel_order(sl_order_id, f"{self.symbol.replace("/", "")}", params={"type": "future"})
+                    symbol = self.symbol_helper.get_symbol_for_endpoint('cancel_order')
+                    cancel_result = self.exchange.cancel_order(sl_order_id, symbol)
                     if cancel_result:
                         self.log.info(f"✅ SL emri iptal edildi: {sl_order_id}")
                         cancelled_count += 1
@@ -898,7 +984,8 @@ class MultiTimeframeEMATrader:
             # Take Profit emrini iptal et
             if tp_order_id:
                 try:
-                    cancel_result = self.exchange.cancel_order(tp_order_id, f"{self.symbol.replace("/", "")}", params={"type": "future"})
+                    symbol = self.symbol_helper.get_symbol_for_endpoint('cancel_order')
+                    cancel_result = self.exchange.cancel_order(tp_order_id, symbol)
                     if cancel_result:
                         self.log.info(f"✅ TP emri iptal edildi: {tp_order_id}")
                         cancelled_count += 1
@@ -914,6 +1001,56 @@ class MultiTimeframeEMATrader:
                 
         except Exception as e:
             self.log.error(f"❌ SL/TP emir iptal hatası: {e}")
+    
+    def close_position_with_reduce_only(self):
+        """Pozisyonu ReduceOnly ile kapat"""
+        try:
+            if not self.active_position:
+                self.log.warning("⚠️ Kapatılacak aktif pozisyon yok")
+                return False
+            
+            side = self.active_position['side']
+            amount = self.active_position['amount']
+            
+            # ReduceOnly ile pozisyon kapatma
+            close_side = 'sell' if side == 'long' else 'buy'
+            position_side = 'LONG' if side == 'long' else 'SHORT'
+            
+            self.log.info(f"🔄 EXIT INTENT reduceOnly=true qty={amount} reason=reversal_signal")
+            
+            # QA Tracking - S4 Reversal Flow
+            self.qa_track_log('reversal', f"EXIT INTENT reduceOnly=true qty={amount} reason=reversal_signal")
+            
+            symbol = self.symbol_helper.get_symbol_for_endpoint('create_order')
+            
+            # Market order ile pozisyonu kapat (reduceOnly=true)
+            order = self.order_client.place_entry_market(
+                symbol=symbol,
+                side=close_side,
+                amount=amount,
+                position_side=position_side,
+                extra=f"exit_{int(time.time())}",
+                reduce_only=True  # ReduceOnly politikası
+            )
+            
+            if order and order.get('id'):
+                self.log.info(f"✅ Pozisyon kapatma emri gönderildi: {order['id']}")
+                
+                # SL/TP emirlerini iptal et
+                self.cancel_sl_tp_orders()
+                
+                # Pozisyonu temizle
+                self.active_position = None
+                self.last_exit_time = datetime.now()
+                
+                return True
+            else:
+                self.log.error("❌ Pozisyon kapatma emri başarısız")
+                return False
+                
+        except Exception as e:
+            self.log.error(f"❌ Pozisyon kapatma hatası: {e}")
+            return False
     
     def monitor_position(self):
         """Aktif pozisyonu izle"""
@@ -952,6 +1089,10 @@ class MultiTimeframeEMATrader:
             trailing_enabled = risk_config.get('trailing_stop_enabled', False)
             dynamic_tp_enabled = risk_config.get('dynamic_tp_enabled', False)
             
+            # Dynamic TP ve Trailing SL kontrolleri
+            self._check_dynamic_tp(current_price, pnl_pct, side, entry_price)
+            self._check_trailing_stop(current_price, pnl_pct, side, entry_price)
+            
             # TP/SL kontrolü
             should_close = False
             close_reason = ""
@@ -982,6 +1123,509 @@ class MultiTimeframeEMATrader:
         except Exception as e:
             self.log.error(f"❌ Pozisyon izleme hatası: {e}")
     
+    def reconcile(self):
+        """Reconciliation mini-döngüsü - Borsa gerçeği ile lokal state eşitleme"""
+        try:
+            self.log.info("🔄 RECONCILE_START")
+            
+            # 1. Açık emirler snapshot
+            symbol = self.symbol_helper.get_symbol_for_endpoint("fetch_open_orders")
+            open_orders = self.exchange.fetch_open_orders(symbol)
+            
+            # 2. Mevcut pozisyon
+            positions = self.exchange.fetch_positions()
+            position = None
+            for pos in positions:
+                if pos["symbol"] == symbol and pos["contracts"] > 0:
+                    position = pos
+                    break
+            
+            # 3. Yeni gerçekleşen işlemler (son 5 dakika)
+            since_ts = int((datetime.now() - timedelta(minutes=5)).timestamp() * 1000)
+            trades = self.exchange.fetch_my_trades(symbol, since=since_ts)
+            
+            # 4. Kısmi dolum takibi ve VWAP hesaplama
+            qty_adjust = 0
+            if self.active_position and trades:
+                qty_adjust = self._process_partial_fills(trades, position)
+            
+            # 5. Lokal state ile karşılaştır ve düzelt
+            fixed_count = 0
+            stale_orders = 0
+            
+            # Hayalet emirleri temizle
+            if self.active_position:
+                sl_order_id = self.active_position.get("sl_order_id")
+                tp_order_id = self.active_position.get("tp_order_id")
+                
+                # SL order kontrolü
+                if sl_order_id:
+                    sl_exists = any(order["id"] == sl_order_id for order in open_orders)
+                    if not sl_exists:
+                        self.log.warning(f"⚠️ ORDER STALE REMOVED client_oid={sl_order_id} type=SL")
+                        self.log.warning(f"⚠️ RECON WARN unknown_order client_oid={sl_order_id} action=state_cleanup")
+                        
+                        # QA Tracking - S5 Unknown Order Recovery
+                        self.qa_track_log('unknown_order', f"ORDER STALE REMOVED client_oid={sl_order_id} type=SL")
+                        self.qa_track_log('unknown_order', f"RECON WARN unknown_order client_oid={sl_order_id} action=state_cleanup")
+                        
+                        self.active_position["sl_order_id"] = None
+                        stale_orders += 1
+                        fixed_count += 1
+                
+                # TP order kontrolü
+                if tp_order_id:
+                    tp_exists = any(order["id"] == tp_order_id for order in open_orders)
+                    if not tp_exists:
+                        self.log.warning(f"⚠️ ORDER STALE REMOVED client_oid={tp_order_id} type=TP")
+                        self.log.warning(f"⚠️ RECON WARN unknown_order client_oid={tp_order_id} action=state_cleanup")
+                        
+                        # QA Tracking - S5 Unknown Order Recovery
+                        self.qa_track_log('unknown_order', f"ORDER STALE REMOVED client_oid={tp_order_id} type=TP")
+                        self.qa_track_log('unknown_order', f"RECON WARN unknown_order client_oid={tp_order_id} action=state_cleanup")
+                        
+                        self.active_position["tp_order_id"] = None
+                        stale_orders += 1
+                        fixed_count += 1
+            
+            # Pozisyon durumu kontrolü
+            if position:
+                if not self.active_position:
+                    # Exchange'de pozisyon var ama lokal state yok
+                    self.log.info("ℹ️ RECON WARN position_exists_local_missing - Pozisyon bulundu")
+                    self.active_position = {
+                        "side": position["side"],
+                        "entry_price": position["entryPrice"],
+                        "amount": position["contracts"],
+                        "timestamp": datetime.now()
+                    }
+                    fixed_count += 1
+            else:
+                if self.active_position:
+                    # Lokal state'te pozisyon var ama exchange'de yok
+                    self.log.info("ℹ️ RECON WARN position_missing_local_exists - Pozisyon temizlendi")
+                    self.active_position = None
+                    fixed_count += 1
+            
+            # Özet log
+            pos_size = position["contracts"] if position else 0
+            pos_side = position["side"] if position else "flat"
+            trades_new = len(trades)
+            
+            self.log.info(f"✅ reconcile ok openOrders={len(open_orders)} pos_size={pos_size} side={pos_side} trades_new={trades_new} fixed={{stale_orders:{stale_orders}, qty_adjust:{qty_adjust}}}")
+            
+        except Exception as e:
+            self.log.error(f"❌ Reconciliation hatası: {e}")
+    
+    def _process_partial_fills(self, trades, position):
+        """Kısmi dolumları işle ve TP/SL'yi uyarla"""
+        try:
+            if not self.active_position or not trades:
+                return 0
+            
+            # Pozisyon bilgilerini al
+            intended_qty = self.active_position.get('intended_qty', self.active_position.get('amount', 0))
+            current_qty = position['contracts'] if position else 0
+            
+            # Kısmi dolum kontrolü
+            if current_qty < intended_qty:
+                remaining_qty = current_qty
+                cum_filled = intended_qty - current_qty
+                
+                # VWAP hesaplama (basit ortalama)
+                total_cost = 0
+                total_qty = 0
+                for trade in trades:
+                    if trade['side'] == self.active_position['side']:
+                        total_cost += trade['amount'] * trade['price']
+                        total_qty += trade['amount']
+                
+                avg_entry_price = total_cost / total_qty if total_qty > 0 else self.active_position['entry_price']
+                
+                self.log.info(f"🔄 PARTIAL FILL detected cum_filled={cum_filled:.4f} remaining={remaining_qty:.4f} vwap={avg_entry_price:.4f}")
+                
+                # QA Tracking - S1 Partial Fill
+                self.qa_track_log('partial_fill', f"PARTIAL FILL detected cum_filled={cum_filled:.4f} remaining={remaining_qty:.4f} vwap={avg_entry_price:.4f}")
+                
+                # TP/SL'yi kalan miktara uyarla
+                self._resize_protection_orders(remaining_qty)
+                
+                # Pozisyon bilgilerini güncelle
+                self.active_position['amount'] = remaining_qty
+                self.active_position['entry_price'] = avg_entry_price
+                self.active_position['cum_filled'] = cum_filled
+                self.active_position['remaining_qty'] = remaining_qty
+                
+                return 1  # qty_adjust sayacı
+            
+            return 0
+            
+        except Exception as e:
+            self.log.error(f"❌ Kısmi dolum işleme hatası: {e}")
+            return 0
+    
+    def _resize_protection_orders(self, new_qty):
+        """TP/SL emirlerini yeni miktara uyarla"""
+        try:
+            if not self.active_position or new_qty <= 0:
+                return
+            
+            # Lot adımı kontrolü
+            symbol = self.symbol_helper.get_symbol_for_endpoint('fetch_open_orders')
+            markets = self.exchange.load_markets()
+            market = markets.get(symbol)
+            
+            if market:
+                min_amount = market.get('limits', {}).get('amount', {}).get('min', 0.001)
+                
+                if new_qty < min_amount:
+                    # Lot altı durum - tüm korumaları iptal et ve pozisyonu kapat
+                    self.log.info(f"🔄 MICRO LOT EXIT used reduceOnly=true qty={new_qty:.6f} min_lot={min_amount}")
+                    
+                    # QA Tracking - S2 Micro Lot
+                    self.qa_track_log('micro_lot', f"MICRO LOT EXIT used reduceOnly=true qty={new_qty:.6f} min_lot={min_amount}")
+                    
+                    self.cancel_sl_tp_orders()
+                    self.close_position_with_reduce_only()
+                    return
+            
+            # Mevcut TP/SL emirlerini iptal et
+            old_sl_qty = self.active_position.get('sl_order_id')
+            old_tp_qty = self.active_position.get('tp_order_id')
+            
+            if old_sl_qty or old_tp_qty:
+                self.log.info(f"🔄 TP/SL RESIZE old_qty={self.active_position.get('amount', 0):.4f} new_qty={new_qty:.4f}")
+                
+                # QA Tracking - S1 Partial Fill
+                self.qa_track_log('partial_fill', f"TP/SL RESIZE old_qty={self.active_position.get('amount', 0):.4f} new_qty={new_qty:.4f}")
+                
+                self.cancel_sl_tp_orders()
+                
+                # Yeni TP/SL emirleri oluştur
+                self._create_protection_orders(new_qty)
+            
+        except Exception as e:
+            self.log.error(f"❌ TP/SL resize hatası: {e}")
+    
+    def _create_protection_orders(self, qty):
+        """Yeni TP/SL koruma emirleri oluştur"""
+        try:
+            if not self.active_position or qty <= 0:
+                return
+            
+            side = self.active_position['side']
+            entry_price = self.active_position['entry_price']
+            timeframe = self.active_position.get('timeframe', '15m')
+            
+            # Timeframe konfigürasyonunu al
+            tf_config = self.timeframes.get(timeframe, self.timeframes['15m'])
+            tp_pct = tf_config['take_profit']
+            sl_pct = tf_config['stop_loss']
+            
+            # TP/SL fiyatlarını hesapla
+            if side == 'long':
+                sl_price = entry_price * (1 - sl_pct)
+                tp_price = entry_price * (1 + tp_pct)
+                sl_side = 'sell'
+                tp_side = 'sell'
+            else:
+                sl_price = entry_price * (1 + sl_pct)
+                tp_price = entry_price * (1 - tp_pct)
+                sl_side = 'buy'
+                tp_side = 'buy'
+            
+            # Position side
+            position_side = 'LONG' if side == 'long' else 'SHORT'
+            symbol = self.symbol_helper.get_symbol_for_endpoint('create_order')
+            
+            # Yeni SL emri
+            sl_order = self.order_client.place_stop_market_close(
+                symbol=symbol,
+                side=sl_side,
+                stop_price=sl_price,
+                position_side=position_side,
+                intent="SL",
+                extra=f"resize_{int(time.time())}",
+                reduce_only=True
+            )
+            
+            # Yeni TP emri
+            tp_order = self.order_client.place_take_profit_market_close(
+                symbol=symbol,
+                side=tp_side,
+                price=tp_price,
+                position_side=position_side,
+                intent="TP",
+                extra=f"resize_{int(time.time())}",
+                reduce_only=True
+            )
+            
+            # Order ID'leri kaydet
+            if sl_order and sl_order.get('id'):
+                self.active_position['sl_order_id'] = sl_order['id']
+            if tp_order and tp_order.get('id'):
+                self.active_position['tp_order_id'] = tp_order['id']
+            
+            self.log.info(f"✅ PROTECTION RESEED side={side} sl={sl_price:.4f} tp={tp_price:.4f} reason=resize")
+            
+        except Exception as e:
+            self.log.error(f"❌ Koruma emirleri oluşturma hatası: {e}")
+    
+    def qa_track_log(self, scenario: str, log_message: str):
+        """QA için log mesajlarını takip et"""
+        try:
+            if scenario in self.qa_tracker['logs']:
+                self.qa_tracker['logs'][scenario].append({
+                    'timestamp': datetime.now(),
+                    'message': log_message
+                })
+        except Exception as e:
+            self.log.error(f"❌ QA tracking hatası: {e}")
+    
+    def qa_check_anomaly(self, anomaly_type: str, condition: bool, message: str = ""):
+        """QA anomalilerini kontrol et"""
+        try:
+            if condition and anomaly_type in self.qa_tracker['anomalies']:
+                self.qa_tracker['anomalies'][anomaly_type] += 1
+                self.log.warning(f"⚠️ QA ANOMALY {anomaly_type}: {message}")
+        except Exception as e:
+            self.log.error(f"❌ QA anomaly check hatası: {e}")
+    
+    def qa_generate_summary(self):
+        """QA özet raporu oluştur"""
+        try:
+            passed = self.qa_tracker['scenarios_passed']
+            total = self.qa_tracker['total_scenarios']
+            anomalies = self.qa_tracker['anomalies']
+            
+            summary = f"qa_summary passed={passed}/{total} anomalies={{monotonic_sl:{anomalies['monotonic_sl']}, tp_rollback:{anomalies['tp_rollback']}, dup_orders:{anomalies['dup_orders']}, stale_orders:{anomalies['stale_orders']}}}"
+            
+            self.log.info(f"📊 {summary}")
+            return summary
+            
+        except Exception as e:
+            self.log.error(f"❌ QA summary hatası: {e}")
+            return "qa_summary error"
+    
+    def _check_dynamic_tp(self, current_price: float, pnl_pct: float, side: str, entry_price: float):
+        """Dynamic TP merdiveni kontrolü"""
+        try:
+            if not self.active_position:
+                return False
+            
+            timeframe = self.active_position.get('timeframe', '15m')
+            tf_config = self.timeframes.get(timeframe, self.timeframes['15m'])
+            
+            if not tf_config.get('dynamic_tp', {}).get('enabled', False):
+                return False
+            
+            dynamic_tp_config = tf_config['dynamic_tp']
+            levels = dynamic_tp_config.get('levels', [])
+            
+            # Hit levels set'i (bir eşik tek kez tetiklensin)
+            hit_levels = self.active_position.get('hit_levels', set())
+            
+            for level in levels:
+                threshold_pct = level['threshold'] * 100  # 0.01 -> 1%
+                tp_pct = level['tp_pct']
+                
+                # Eşik aşıldı mı ve daha önce tetiklenmedi mi?
+                if pnl_pct >= threshold_pct and threshold_pct not in hit_levels:
+                    # Yeni TP fiyatını hesapla
+                    if side == 'long':
+                        new_tp_price = entry_price * (1 + tp_pct)
+                    else:  # short
+                        new_tp_price = entry_price * (1 - tp_pct)
+                    
+                    # Geri gitmeme kuralı (non-decreasing)
+                    current_tp_price = self.active_position.get('current_tp', 0)
+                    
+                    if side == 'long':
+                        if new_tp_price < current_tp_price:
+                            self.log.warning(f"⚠️ QA WARN tp_rollback_blocked: new_tp={new_tp_price:.4f} < current_tp={current_tp_price:.4f}")
+                            self.qa_check_anomaly('tp_rollback', True, f"TP rollback blocked for LONG")
+                            continue
+                    else:  # short
+                        if new_tp_price > current_tp_price:
+                            self.log.warning(f"⚠️ QA WARN tp_rollback_blocked: new_tp={new_tp_price:.4f} > current_tp={current_tp_price:.4f}")
+                            self.qa_check_anomaly('tp_rollback', True, f"TP rollback blocked for SHORT")
+                            continue
+                    
+                    # TP güncelle
+                    self._update_take_profit_order(new_tp_price, f"dynamic_tp_{threshold_pct:.0f}")
+                    
+                    # Hit level'ı kaydet
+                    hit_levels.add(threshold_pct)
+                    self.active_position['hit_levels'] = hit_levels
+                    self.active_position['current_tp'] = new_tp_price
+                    
+                    # QA Tracking - S3 Dynamic TP
+                    self.qa_track_log('dynamic_tp', f"TP SET/UPDATED price={new_tp_price:.4f} reason=dynamic_tp_{threshold_pct:.0f}")
+                    
+                    self.log.info(f"🎯 TP SET/UPDATED price={new_tp_price:.4f} reason=dynamic_tp_{threshold_pct:.0f}")
+                    return True
+            
+            return False
+            
+        except Exception as e:
+            self.log.error(f"❌ Dynamic TP kontrol hatası: {e}")
+            return False
+    
+    def _check_trailing_stop(self, current_price: float, pnl_pct: float, side: str, entry_price: float):
+        """Trailing Stop Loss kontrolü"""
+        try:
+            if not self.active_position:
+                return False
+            
+            timeframe = self.active_position.get('timeframe', '15m')
+            tf_config = self.timeframes.get(timeframe, self.timeframes['15m'])
+            
+            trailing_activation = tf_config.get('trailing_activation', 0.015) * 100  # 0.015 -> 1.5%
+            trailing_step = tf_config.get('trailing_step', 0.005) * 100  # 0.005 -> 0.5%
+            
+            # Trailing aktivasyon kontrolü
+            if pnl_pct >= trailing_activation:
+                if not self.active_position.get('trailing_active', False):
+                    # İlk kez trailing aktivasyon
+                    self.active_position['trailing_active'] = True
+                    self.active_position['trailing_mfe'] = pnl_pct  # Most Favorable Exit
+                    
+                    self.log.info(f"🛡️ SL SET reason=trailing_activate pnl={pnl_pct:.2f}%")
+                    
+                    # QA Tracking - S3 Trailing
+                    self.qa_track_log('dynamic_tp', f"SL SET reason=trailing_activate pnl={pnl_pct:.2f}%")
+                    
+                    return True
+                
+                # Trailing step kontrolü
+                current_mfe = self.active_position.get('trailing_mfe', trailing_activation)
+                
+                if pnl_pct >= current_mfe + trailing_step:
+                    # Yeni SL fiyatını hesapla
+                    if side == 'long':
+                        new_sl_price = entry_price * (1 + (pnl_pct - trailing_step) / 100)
+                    else:  # short
+                        new_sl_price = entry_price * (1 - (pnl_pct - trailing_step) / 100)
+                    
+                    # Monotonik zorunluluk kontrolü
+                    current_sl_price = self.active_position.get('current_sl', 0)
+                    
+                    if side == 'long':
+                        if new_sl_price < current_sl_price:
+                            self.log.warning(f"⚠️ QA WARN sl_monotonic_blocked: new_sl={new_sl_price:.4f} < current_sl={current_sl_price:.4f}")
+                            self.qa_check_anomaly('monotonic_sl', True, f"SL monotonic blocked for LONG")
+                            return False
+                    else:  # short
+                        if new_sl_price > current_sl_price:
+                            self.log.warning(f"⚠️ QA WARN sl_monotonic_blocked: new_sl={new_sl_price:.4f} > current_sl={current_sl_price:.4f}")
+                            self.qa_check_anomaly('monotonic_sl', True, f"SL monotonic blocked for SHORT")
+                            return False
+                    
+                    # SL güncelle
+                    self._update_stop_loss_order(new_sl_price, f"trailing_step")
+                    
+                    # MFE'yi güncelle
+                    self.active_position['trailing_mfe'] = pnl_pct
+                    self.active_position['current_sl'] = new_sl_price
+                    
+                    # QA Tracking - S3 Trailing
+                    self.qa_track_log('dynamic_tp', f"SL UPDATED price={new_sl_price:.4f} reason=trailing_step")
+                    
+                    self.log.info(f"🛡️ SL UPDATED price={new_sl_price:.4f} reason=trailing_step")
+                    return True
+            
+            return False
+            
+        except Exception as e:
+            self.log.error(f"❌ Trailing stop kontrol hatası: {e}")
+            return False
+    
+    def _update_take_profit_order(self, new_price: float, reason: str):
+        """Take Profit emrini güncelle"""
+        try:
+            if not self.active_position:
+                return False
+            
+            # Mevcut TP emrini iptal et
+            tp_order_id = self.active_position.get('tp_order_id')
+            if tp_order_id:
+                symbol = self.symbol_helper.get_symbol_for_endpoint('cancel_order')
+                self.exchange.cancel_order(tp_order_id, symbol)
+            
+            # Yeni TP emri oluştur
+            side = self.active_position['side']
+            position_side = 'LONG' if side == 'long' else 'SHORT'
+            
+            if side == 'long':
+                tp_side = 'sell'
+            else:
+                tp_side = 'buy'
+            
+            symbol = self.symbol_helper.get_symbol_for_endpoint('create_order')
+            
+            tp_order = self.order_client.place_take_profit_market_close(
+                symbol=symbol,
+                side=tp_side,
+                price=new_price,
+                position_side=position_side,
+                intent="TP",
+                extra=f"update_{reason}_{int(time.time())}",
+                reduce_only=True
+            )
+            
+            if tp_order and tp_order.get('id'):
+                self.active_position['tp_order_id'] = tp_order['id']
+                return True
+            
+            return False
+            
+        except Exception as e:
+            self.log.error(f"❌ TP güncelleme hatası: {e}")
+            return False
+    
+    def _update_stop_loss_order(self, new_price: float, reason: str):
+        """Stop Loss emrini güncelle"""
+        try:
+            if not self.active_position:
+                return False
+            
+            # Mevcut SL emrini iptal et
+            sl_order_id = self.active_position.get('sl_order_id')
+            if sl_order_id:
+                symbol = self.symbol_helper.get_symbol_for_endpoint('cancel_order')
+                self.exchange.cancel_order(sl_order_id, symbol)
+            
+            # Yeni SL emri oluştur
+            side = self.active_position['side']
+            position_side = 'LONG' if side == 'long' else 'SHORT'
+            
+            if side == 'long':
+                sl_side = 'sell'
+            else:
+                sl_side = 'buy'
+            
+            symbol = self.symbol_helper.get_symbol_for_endpoint('create_order')
+            
+            sl_order = self.order_client.place_stop_market_close(
+                symbol=symbol,
+                side=sl_side,
+                stop_price=new_price,
+                position_side=position_side,
+                intent="SL",
+                extra=f"update_{reason}_{int(time.time())}",
+                reduce_only=True
+            )
+            
+            if sl_order and sl_order.get('id'):
+                self.active_position['sl_order_id'] = sl_order['id']
+                return True
+            
+            return False
+            
+        except Exception as e:
+            self.log.error(f"❌ SL güncelleme hatası: {e}")
+            return False
+    
     def run(self):
         """Ana döngü"""
         self.log.info("🚀 Multi-Timeframe EMA Crossover trading başlatıldı")
@@ -989,6 +1633,9 @@ class MultiTimeframeEMATrader:
         while True:
             try:
                 self.log.info(f"🔄 CYCLE_START: {datetime.now().strftime('%H:%M:%S')}")
+                
+                # Reconciliation mini-döngüsü - Her ana döngü başında
+                self.reconcile()
                 
                 # Önce exchange'den pozisyon durumunu kontrol et
                 position_status = self.check_position_status()

@@ -35,11 +35,11 @@ dev = [
 ]
 
 [project.scripts]
-atr-optimizer = "atr_st_optimizer.cli:app"
+strategy-optimizer = "strategy_optimizer.cli:app"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["atr_st_optimizer*"]
+include = ["strategy_optimizer*"]
 
 [tool.black]
 line-length = 88

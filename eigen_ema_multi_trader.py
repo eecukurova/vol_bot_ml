@@ -249,6 +249,7 @@ class MultiTimeframeEMATrader:
                 timeframe_minutes = {
                     '15m': 15,
                     '30m': 30,
+                    '1h': 60,
                     '4h': 240,
                     '1d': 1440
                 }
@@ -437,38 +438,60 @@ class MultiTimeframeEMATrader:
                 sl_side = 'buy'
                 tp_side = 'buy'
             
+            # Idempotent SL/TP orders (hem LONG hem SHORT)
+            sl_order = self.order_client.place_stop_market_close(
+                amount=size,
+                symbol=futures_symbol,
+                side=sl_side,
+                stop_price=sl,
+                position_side=position_side,
+                intent="SL",
+                extra=f"sl_{int(time.time())}"
+            )
+            
+            tp_order = self.order_client.place_take_profit_market_close(
+                amount=size,
+                symbol=futures_symbol,
+                side=tp_side,
+                price=tp,
+                position_side=position_side,
+                intent="TP",
+                extra=f"tp_{int(time.time())}"
+            )
+            
+            # Order başarı kontrolü ve fallback mekanizması
+            sl_success = sl_order and sl_order.get('id')
+            tp_success = tp_order and tp_order.get('id')
+            
+            if not sl_success:
+                self.log.error("❌ SL order başarısız!")
+            if not tp_success:
+                self.log.error("❌ TP order başarısız!")
+            
+            # Fallback: TP/SL emirleri başarısızsa pozisyonu market order ile kapat
+            if not sl_success or not tp_success:
+                self.log.warning("⚠️ TP/SL emirleri başarısız - Pozisyon market order ile kapatılıyor")
+                
+                # Market order ile pozisyonu kapat
+                close_side = 'sell' if side == 'buy' else 'buy'
+                close_order = self.order_client.place_entry_market(
+                    symbol=futures_symbol,
+                    side=close_side,
+                    amount=size,
+                    position_side=position_side,
+                    extra=f"fallback_close_{int(time.time())}",
+                    reduce_only=True
+                )
+                
+                if close_order and close_order.get('id'):
+                    self.log.info(f"✅ Fallback market order başarılı: {close_order['id']}")
+                    self.log.info(f"🔄 Pozisyon market order ile kapatıldı (TP/SL başarısız)")
+                    return True
+                else:
+                    self.log.error("❌ Fallback market order da başarısız!")
+                    return False
+            
             if order:
-                # Entry order başarılı, şimdi TP/SL orderlarını yerleştir
-                self.log.info("✅ Entry order başarılı, TP/SL orderları yerleştiriliyor...")
-                
-                # Idempotent SL/TP orders (hem LONG hem SHORT)
-                sl_order = self.order_client.place_stop_market_close(
-                    symbol=futures_symbol,
-                    side=sl_side,
-                    amount=size,
-                    stop_price=sl,
-                    position_side=position_side,
-                    intent="SL",
-                    extra=f"sl_{int(time.time())}"
-                )
-                
-                tp_order = self.order_client.place_take_profit_market_close(
-                    symbol=futures_symbol,
-                    side=tp_side,
-                    amount=size,
-                    price=tp,
-                    position_side=position_side,
-                    intent="TP",
-                    extra=f"tp_{int(time.time())}"
-                )
-                
-                # Order başarı kontrolü (EIGEN ile aynı)
-                if not sl_order or not sl_order.get('id'):
-                    self.log.error("❌ SL order başarısız!")
-                    return False
-                if not tp_order or not tp_order.get('id'):
-                    self.log.error("❌ TP order başarısız!")
-                    return False
                 # Pozisyon bilgilerini kaydet (hem LONG hem SHORT)
                 self.active_position = {
                     'symbol': self.symbol,
@@ -679,8 +702,7 @@ class MultiTimeframeEMATrader:
                 stop_price=new_sl,
                 position_side=position_data['side'].upper(),
                 intent="SL",
-                extra=f"{reason.lower().replace(' ', '_')}_{int(time.time())}",
-                amount=position_data['size']
+                extra=f"{reason.lower().replace(' ', '_')}_{int(time.time())}"
             )
             
             if new_sl_order and new_sl_order.get('id'):
@@ -735,8 +757,7 @@ class MultiTimeframeEMATrader:
                 price=new_tp,
                 position_side=position_data['side'].upper(),
                 intent="TP",
-                extra=f"{reason.lower().replace(' ', '_')}_{int(time.time())}",
-                amount=position_data['size']
+                extra=f"{reason.lower().replace(' ', '_')}_{int(time.time())}"
             )
             
             if new_tp_order and new_tp_order.get('id'):

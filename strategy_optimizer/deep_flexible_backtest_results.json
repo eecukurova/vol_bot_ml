@@ -1,0 +1,39 @@
+{
+  "strategy": "DEEP Supertrend RSI (Flexible)",
+  "parameters": {
+    "rsi_length": 14,
+    "rsi_oversold": 35,
+    "rsi_overbought": 65,
+    "rsi_long_exit": 70,
+    "rsi_short_exit": 30,
+    "supertrend_length": 1,
+    "supertrend_multiplier": 2.5,
+    "support_resistance_period": 20
+  },
+  "backtest_period": "7 days",
+  "metrics": {
+    "total_trades": 1,
+    "winning_trades": 0,
+    "losing_trades": 1,
+    "win_rate": 0.0,
+    "total_pnl": -4.1260786288822806e+108,
+    "avg_win": 0,
+    "avg_loss": -4.1260786288822806e+108,
+    "profit_factor": 0.0,
+    "max_drawdown": 0.0,
+    "sharpe_ratio": 0,
+    "trades": [
+      {
+        "type": "SHORT",
+        "entry_time": "2024-10-15 04:12:00",
+        "entry_price": 0.08986451061864527,
+        "amount": 10,
+        "exit_time": "2024-10-21 23:59:00",
+        "exit_price": 3.7078803675855704e+106,
+        "pnl": -4.1260786288822806e+108,
+        "pnl_percent": -4.126078628882281e+109
+      }
+    ]
+  },
+  "timestamp": "2025-10-22T10:53:56.004803"
+}

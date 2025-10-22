@@ -23,6 +23,8 @@ common_dir = os.path.join(parent_dir, "common")
 sys.path.append(common_dir)
 
 from order_client import IdempotentOrderClient
+from config_schema import load_and_validate_config, PenguEMAConfig
+from symbol_mapping import SymbolMappingHelper
 
 class HeikinAshiCalculator:
     """Heikin Ashi candle hesaplama sınıfı"""
@@ -131,10 +133,23 @@ class MultiTimeframeEMATrader:
     
     def __init__(self, config_file=None):
         if config_file is None:
-            config_file = os.path.join(current_dir, 'eigen_ema_multi_config.json')
-        # Konfigürasyon yükle
-        with open(config_file, 'r') as f:
-            self.cfg = json.load(f)
+            config_file = os.path.join(current_dir, 'pengu_ema_multi_config.json')
+        
+        # Config doğrulama ve yükleme
+        try:
+            self.cfg_obj = load_and_validate_config(config_file)
+            self.cfg = self.cfg_obj.model_dump()  # Pydantic model'i dict'e çevir
+            self.log = logging.getLogger(__name__)
+            self.log.info("✅ Config doğrulaması başarılı - Pengu EMA Bot başlatılıyor")
+            self.log.info(f"📊 Symbol: {self.cfg_obj.symbol}")
+            self.log.info(f"💰 Trade Amount: {self.cfg_obj.trade_amount_usd} USDT")
+            self.log.info(f"⚡ Leverage: {self.cfg_obj.leverage}x")
+            self.log.info(f"🎯 Yüzde birimi standardı: 0.01 = %1")
+            
+        except Exception as e:
+            print(f"❌ Config doğrulama hatası: {e}")
+            print("🔧 Lütfen config dosyasını kontrol edin ve yüzde değerlerinin 0.01 = %1 standardında olduğundan emin olun")
+            sys.exit(1)
         
         # Logging setup
         logging.basicConfig(
@@ -154,6 +169,17 @@ class MultiTimeframeEMATrader:
             'sandbox': self.cfg['sandbox'],
             'enableRateLimit': True,
         })
+        
+        # Symbol mapping helper setup
+        self.symbol_helper = SymbolMappingHelper(self.exchange, self.log)
+        
+        # Symbol validation and mapping
+        try:
+            self.symbol_mapping = self.symbol_helper.load_and_validate_markets(self.cfg_obj.symbol)
+            self.log.info(f"🎯 Symbol mapping başarılı: {self.symbol_mapping.rest_symbol} / {self.symbol_mapping.order_symbol}")
+        except SystemExit:
+            self.log.error("❌ Symbol mapping başarısız - Bot durduruluyor")
+            raise
         
         # Order client
         self.order_client = IdempotentOrderClient(
@@ -216,7 +242,8 @@ class MultiTimeframeEMATrader:
     def get_market_data(self, timeframe, limit=100):
         """Market verisi al"""
         try:
-            ohlcv = self.exchange.fetch_ohlcv(self.symbol, timeframe, limit=limit)
+            symbol = self.symbol_helper.get_symbol_for_endpoint('fetch_ohlcv')
+            ohlcv = self.exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
             df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
             df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
             df.set_index('timestamp', inplace=True)
@@ -249,6 +276,7 @@ class MultiTimeframeEMATrader:
                 timeframe_minutes = {
                     '15m': 15,
                     '30m': 30,
+                    '1h': 60,
                     '4h': 240,
                     '1d': 1440
                 }
@@ -364,10 +392,10 @@ class MultiTimeframeEMATrader:
     def check_position_status(self):
         """Mevcut pozisyon durumunu kontrol et"""
         try:
-            futures_symbol = f"{self.symbol.replace('/', '')}"  # Futures format: PENGUUSDT
+            symbol = self.symbol_helper.get_symbol_for_endpoint('fetch_positions')
             positions = self.exchange.fetch_positions()  # Tüm pozisyonları getir
             for position in positions:
-                if position['symbol'] == futures_symbol and position['contracts'] > 0:
+                if position['symbol'] == symbol and position['contracts'] > 0:
                     return {
                         'exists': True,
                         'side': position['side'],
@@ -412,9 +440,9 @@ class MultiTimeframeEMATrader:
             # Idempotent market order (hem LONG hem SHORT)
             side_lower = side
             position_side = 'LONG' if side == 'buy' else 'SHORT'
-            futures_symbol = f"{self.symbol}:USDT"  # Futures format
+            symbol = self.symbol_helper.get_symbol_for_endpoint('create_order')
             order = self.order_client.place_entry_market(
-                symbol=futures_symbol,
+                symbol=symbol,
                 side=side_lower,
                 amount=size,
                 position_side=position_side,
@@ -437,38 +465,34 @@ class MultiTimeframeEMATrader:
                 sl_side = 'buy'
                 tp_side = 'buy'
             
+            # Idempotent SL/TP orders (hem LONG hem SHORT)
+            sl_order = self.order_client.place_stop_market_close(
+                symbol=symbol,
+                side=sl_side,
+                amount=size,
+                stop_price=sl,
+                position_side=position_side,
+                intent="SL",
+                extra=f"sl_{int(time.time())}"
+            )
+            
+            tp_order = self.order_client.place_take_profit_market_close(
+                symbol=symbol,
+                side=tp_side,
+                amount=size,
+                price=tp,
+                position_side=position_side,
+                intent="TP",
+                extra=f"tp_{int(time.time())}"
+            )
+            
+            # Order başarı kontrolü (EIGEN ile aynı)
+            if not sl_order or not sl_order.get('id'):
+                self.log.error("❌ SL order başarısız!")
+            if not tp_order or not tp_order.get('id'):
+                self.log.error("❌ TP order başarısız!")
+            
             if order:
-                # Entry order başarılı, şimdi TP/SL orderlarını yerleştir
-                self.log.info("✅ Entry order başarılı, TP/SL orderları yerleştiriliyor...")
-                
-                # Idempotent SL/TP orders (hem LONG hem SHORT)
-                sl_order = self.order_client.place_stop_market_close(
-                    symbol=futures_symbol,
-                    side=sl_side,
-                    amount=size,
-                    stop_price=sl,
-                    position_side=position_side,
-                    intent="SL",
-                    extra=f"sl_{int(time.time())}"
-                )
-                
-                tp_order = self.order_client.place_take_profit_market_close(
-                    symbol=futures_symbol,
-                    side=tp_side,
-                    amount=size,
-                    price=tp,
-                    position_side=position_side,
-                    intent="TP",
-                    extra=f"tp_{int(time.time())}"
-                )
-                
-                # Order başarı kontrolü (EIGEN ile aynı)
-                if not sl_order or not sl_order.get('id'):
-                    self.log.error("❌ SL order başarısız!")
-                    return False
-                if not tp_order or not tp_order.get('id'):
-                    self.log.error("❌ TP order başarısız!")
-                    return False
                 # Pozisyon bilgilerini kaydet (hem LONG hem SHORT)
                 self.active_position = {
                     'symbol': self.symbol,
@@ -886,7 +910,8 @@ class MultiTimeframeEMATrader:
             # Stop Loss emrini iptal et
             if sl_order_id:
                 try:
-                    cancel_result = self.exchange.cancel_order(sl_order_id, f"{self.symbol.replace("/", "")}", params={"type": "future"})
+                    symbol = self.symbol_helper.get_symbol_for_endpoint('cancel_order')
+                    cancel_result = self.exchange.cancel_order(sl_order_id, symbol)
                     if cancel_result:
                         self.log.info(f"✅ SL emri iptal edildi: {sl_order_id}")
                         cancelled_count += 1
@@ -898,7 +923,8 @@ class MultiTimeframeEMATrader:
             # Take Profit emrini iptal et
             if tp_order_id:
                 try:
-                    cancel_result = self.exchange.cancel_order(tp_order_id, f"{self.symbol.replace("/", "")}", params={"type": "future"})
+                    symbol = self.symbol_helper.get_symbol_for_endpoint('cancel_order')
+                    cancel_result = self.exchange.cancel_order(tp_order_id, symbol)
                     if cancel_result:
                         self.log.info(f"✅ TP emri iptal edildi: {tp_order_id}")
                         cancelled_count += 1

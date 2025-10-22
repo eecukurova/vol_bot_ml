@@ -34,4 +34,4 @@ RUN useradd -m -u 1000 optimizer && \
 USER optimizer
 
 # Default command
-CMD ["python", "-m", "atr_st_optimizer.cli", "--help"]
+CMD ["python", "-m", "strategy_optimizer.cli", "--help"]

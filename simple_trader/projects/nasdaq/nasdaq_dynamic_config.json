@@ -20,5 +20,13 @@
     "max_market_cap": 1000000000,
     "sector": "Technology",
     "exchange": "NASDAQ"
+  },
+  "watchlist": {
+    "enabled": true,
+    "file": "nasdaq_under1_watchlist.json",
+    "max_price": 1.00,
+    "min_volume": 50000,
+    "min_market_cap": 0,
+    "max_market_cap": 200000000
   }
 }

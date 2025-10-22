@@ -1,0 +1,23 @@
+{
+  "api_key": "3qWqvsKBb2h127SPOv9RVRsJYRHpvwtBDE3zVc20cBjS1lwWDCn3IY5azWjUSP0e",
+  "secret": "HZRMeUvbKkbONjXsbZrD2WFuPPXARPTM2oM0TnTOaRsIBKoNdLUsCLVCQLnpZB3u",
+  "sandbox": false,
+  "symbol": "PENGU/USDT",
+  "trade_amount_usd": 100,
+  "leverage": 10,
+  "ema_fast": 10,
+  "ema_slow": 26,
+  "take_profit_pct": 0.5,
+  "stop_loss_pct": 1.5,
+  "log_level": "INFO",
+  "idempotency": {
+    "state_file": "runs/pengu_ema_state.json",
+    "retry_attempts": 3,
+    "retry_delay": 5
+  },
+  "telegram": {
+    "bot_token": "8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0",
+    "chat_id": "-1003038204085",
+    "enabled": true
+  }
+}

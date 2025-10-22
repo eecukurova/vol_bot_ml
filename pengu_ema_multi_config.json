@@ -1,7 +1,7 @@
 {
   "api_key": "3qWqvsKBb2h127SPOv9RVRsJYRHpvwtBDE3zVc20cBjS1lwWDCn3IY5azWjUSP0e",
   "secret": "HZRMeUvbKkbONjXsbZrD2WFuPPXARPTM2oM0TnTOaRsIBKoNdLUsCLVCQLnpZB3u",
-  "sandbox": false,
+  "sandbox": true,
   "symbol": "PENGU/USDT",
   "trade_amount_usd": 100,
   "leverage": 10,
@@ -13,13 +13,52 @@
         "enabled": true,
         "take_profit": 0.002,
         "stop_loss": 0.01,
-        "priority": 2
+        "priority": 3,
+        "trailing_activation": 0.015,
+        "trailing_step": 0.005,
+        "trailing_distance": 0.003,
+        "dynamic_tp": {
+          "enabled": true,
+          "levels": [
+            {"threshold": 0.003, "tp_pct": 0.005},
+            {"threshold": 0.005, "tp_pct": 0.008},
+            {"threshold": 0.01, "tp_pct": 0.015}
+          ]
+        }
       },
       "30m": {
         "enabled": true,
         "take_profit": 0.003,
         "stop_loss": 0.01,
-        "priority": 1
+        "priority": 2,
+        "trailing_activation": 0.02,
+        "trailing_step": 0.005,
+        "trailing_distance": 0.004,
+        "dynamic_tp": {
+          "enabled": true,
+          "levels": [
+            {"threshold": 0.004, "tp_pct": 0.006},
+            {"threshold": 0.007, "tp_pct": 0.01},
+            {"threshold": 0.012, "tp_pct": 0.02}
+          ]
+        }
+      },
+      "1h": {
+        "enabled": true,
+        "take_profit": 0.004,
+        "stop_loss": 0.01,
+        "priority": 1,
+        "trailing_activation": 0.03,
+        "trailing_step": 0.01,
+        "trailing_distance": 0.005,
+        "dynamic_tp": {
+          "enabled": true,
+          "levels": [
+            {"threshold": 0.005, "tp_pct": 0.008},
+            {"threshold": 0.01, "tp_pct": 0.015},
+            {"threshold": 0.02, "tp_pct": 0.03}
+          ]
+        }
       }
     }
   },
@@ -56,7 +95,7 @@
   "signal_management": {
     "single_position_only": true,
     "cooldown_after_exit": 0,
-    "priority_order": ["30m", "15m"],
+    "priority_order": ["1h", "30m", "15m"],
     "timeframe_validation": {
       "enabled": true,
       "min_candles_for_signal": 50,
@@ -66,13 +105,13 @@
   
   "risk_management": {
     "break_even_enabled": true,
-    "break_even_percentage": 2.5,
-    "trailing_stop_enabled": false,
-    "trailing_stop_percentage": 1.0,
-    "dynamic_tp_enabled": false,
-    "tp_increment_percentage": 0.3,
-    "max_tp_percentage": 2.0,
-    "trailing_update_threshold": 0.5,
+    "break_even_percentage": 0.025,
+    "trailing_stop_enabled": true,
+    "trailing_stop_percentage": 0.01,
+    "dynamic_tp_enabled": true,
+    "tp_increment_percentage": 0.003,
+    "max_tp_percentage": 0.02,
+    "trailing_update_threshold": 0.005,
     "max_positions": 1
   },
   
