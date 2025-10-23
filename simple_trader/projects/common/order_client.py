@@ -128,8 +128,10 @@ class IdempotentOrderClient:
             hash_obj = hashlib.md5(essential_fields.encode())
             hash_suffix = hash_obj.hexdigest()[:8]
             
-            # Deterministik clientOrderId
-            client_order_id = f"EMA::{symbol_narrow}::{side}::{intent_type}::{epoch_bucket}::{hash_suffix}"
+            # Deterministik clientOrderId (kısa format)
+            side_short = side[0].upper()  # B veya S
+            intent_short = intent_type.lower()[:2]  # en, sl, tp
+            client_order_id = f"EMA-{symbol_narrow}-{side_short}-{intent_short}-{hash_suffix}"
             
             return client_order_id
             
@@ -228,7 +230,7 @@ class IdempotentOrderClient:
         """
         Generate deterministic clientOrderId
         
-        Format: vlsy-{intent.lower()}-{sha1[:16]}
+        Format: EMA::{symbol_narrow}::{side}::{intent_type}::{epoch_bucket}::{hash}
         
         Args:
             intent: ENTRY, SL, TP
@@ -239,14 +241,31 @@ class IdempotentOrderClient:
         Returns:
             Deterministic clientOrderId
         """
-        # Create deterministic string
-        data = f"{intent.lower()}-{symbol}-{side}-{extra}-{int(time.time() // 60)}"  # Minute precision
-        
-        # Generate SHA1 hash
-        hash_obj = hashlib.sha1(data.encode())
-        hash_hex = hash_obj.hexdigest()[:16]
-        
-        client_id = f"vlsy-{intent.lower()}-{hash_hex}"
+        try:
+            # Symbol'ü daralt (SOL/USDT:USDT -> SOL)
+            symbol_narrow = symbol.replace('/', '').replace(':', '').replace('USDT', '')
+            
+            # Epoch bucket (5 dakikalık gruplar)
+            epoch_bucket = int(time.time() // 300) * 300
+            
+            # Essential fields hash
+            essential_fields = f"{symbol_narrow}:{side}:{intent.lower()}:{extra}"
+            
+            # Hash oluştur (ilk 8 karakter)
+            hash_obj = hashlib.md5(essential_fields.encode())
+            hash_suffix = hash_obj.hexdigest()[:8]
+            
+            # Deterministik clientOrderId (çok kısa format - max 35 karakter)
+            side_short = side[0].upper()  # B veya S
+            intent_short = intent.lower()[:2]  # en, sl, tp
+            client_id = f"EMA-{symbol_narrow}-{side_short}-{intent_short}-{hash_suffix}"
+            
+        except Exception as e:
+            self.log.error(f"❌ Deterministik clientOrderId üretim hatası: {e}")
+            # Fallback to simple format
+            hash_obj = hashlib.sha1(f"{intent.lower()}-{symbol}-{side}-{extra}".encode())
+            hash_hex = hash_obj.hexdigest()[:8]
+            client_id = f"EMA-{intent.lower()[:2]}-{hash_hex}"
         
         self.log.debug(f"🔑 Generated clientOrderId: {client_id}")
         return client_id
@@ -468,8 +487,8 @@ class IdempotentOrderClient:
             'stopPrice': self.exchange.price_to_precision(symbol, stop_price),
             'closePosition': True,  # PENGU/USDT için gerekli
             'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
-            'priceProtect': True,  # PENGU/USDT için gerekli
-            'reduceOnly': reduce_only  # ReduceOnly politikası
+            'priceProtect': True  # PENGU/USDT için gerekli
+            # NOT: closePosition=True varsa reduceOnly gönderilmez (Binance API kuralı)
         }
         if self.hedge_mode and position_side:
             params['positionSide'] = position_side
@@ -546,7 +565,7 @@ class IdempotentOrderClient:
                 'closePosition': True,  # PENGU/USDT için gerekli
                 'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
                 'priceProtect': True,  # PENGU/USDT için gerekli
-                'reduceOnly': reduce_only  # ReduceOnly politikası
+                # NOT: closePosition=True varsa reduceOnly gönderilmez
             }
             if self.hedge_mode and position_side:
                 params['positionSide'] = position_side
@@ -575,7 +594,7 @@ class IdempotentOrderClient:
                 'closePosition': True,  # PENGU/USDT için gerekli
                 'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
                 'priceProtect': True,  # PENGU/USDT için gerekli
-                'reduceOnly': reduce_only  # ReduceOnly politikası
+                # NOT: closePosition=True varsa reduceOnly gönderilmez
             },
             'status': 'PENDING',
             'ts': int(time.time() * 1000),
@@ -724,7 +743,7 @@ class IdempotentOrderClient:
             
             for order in open_orders:
                 client_id = order.get('clientOrderId')
-                if client_id and client_id.startswith('vlsy-'):
+                if client_id and (client_id.startswith('vlsy-') or client_id.startswith('EMA-')):
                     active_client_ids.add(client_id)
             
             # Remove orders from state that are not active on exchange
