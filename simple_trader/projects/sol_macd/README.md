@@ -132,8 +132,4 @@ sudo systemctl restart sol-macd-trader.service
 
 ## 📞 Destek
 
-Herhangi bir sorun için logları kontrol edin ve gerekirse service'i yeniden başlatın.
 
-## 📄 Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır.

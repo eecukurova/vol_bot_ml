@@ -115,8 +115,9 @@ class IdempotentOrderClient:
             # Epoch bucket (5 dakikalık gruplar)
             epoch_bucket = int(time.time() // 300) * 300
             
-            # Essential fields hash
-            essential_fields = f"{symbol_narrow}:{side}:{intent_type}:{qty:.6f}"
+            # Essential fields hash (timestamp ekleyerek unique yap)
+            current_time = int(time.time())
+            essential_fields = f"{symbol_narrow}:{side}:{intent_type}:{qty:.6f}:{current_time}"
             if price:
                 essential_fields += f":{price:.6f}"
             if reduce_only:
@@ -248,8 +249,9 @@ class IdempotentOrderClient:
             # Epoch bucket (5 dakikalık gruplar)
             epoch_bucket = int(time.time() // 300) * 300
             
-            # Essential fields hash
-            essential_fields = f"{symbol_narrow}:{side}:{intent.lower()}:{extra}"
+            # Essential fields hash (timestamp ekleyerek unique yap)
+            current_time = int(time.time())
+            essential_fields = f"{symbol_narrow}:{side}:{intent.lower()}:{extra}:{current_time}"
             
             # Hash oluştur (ilk 8 karakter)
             hash_obj = hashlib.md5(essential_fields.encode())

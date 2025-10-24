@@ -176,15 +176,7 @@ class PremiumStockScanner:
             end_date = datetime.now()
             start_date = end_date - timedelta(days=30)  # 30 günlük veri
             
-            # Timeframe mapping
-            interval_map = {
-                '1h': '1h',
-                '4h': '1d',  # 4H için günlük veri kullan
-                '1d': '1d'
-            }
-            
-            interval = interval_map.get(timeframe, '1d')
-            data = ticker.history(start=start_date, end=end_date, interval=interval)
+            data = ticker.history(start=start_date, end=end_date, interval=timeframe)
             
             if data.empty:
                 self.log.warning(f"⚠️ {symbol} ({timeframe}) için veri bulunamadı")
@@ -261,8 +253,27 @@ class PremiumStockScanner:
         except Exception as e:
             self.log.error(f"❌ Telegram gönderme hatası: {e}")
 
+    def is_working_hours(self) -> bool:
+        """Çalışma saatleri kontrolü - UTC"""
+        from datetime import datetime, timezone
+        
+        utc_tz = timezone.utc
+        now = datetime.now(utc_tz)
+        current_time = now.strftime("%H:%M")
+        start_time = self.cfg['working_hours']['start']
+        end_time = self.cfg['working_hours']['end']
+        
+        if now.weekday() >= 5:  # Hafta sonu
+            return False
+        
+        return start_time <= current_time <= end_time
+
     def scan_premium_stocks(self):
         """Premium hisseleri tara (çoklu timeframe)"""
+        if not self.is_working_hours():
+            self.log.info("⏰ Çalışma saatleri dışında, bekleniyor...")
+            return
+            
         self.log.info("🔍 Premium hisseler taranıyor...")
         
         signals_found = []
@@ -277,11 +288,6 @@ class PremiumStockScanner:
                             self.log.info(f"📈 {symbol} ({timeframe}): {signal_data['trend']} - "
                                         f"Fiyat: ${signal_data['price']:.2f} - "
                                         f"SuperTrend: ${signal_data['super_trend']:.2f}")
-                        else:
-                            # Debug: Sinyal olmayan hisseler için sadece debug log
-                            self.log.debug(f"🔍 {symbol} ({timeframe}): {signal_data['trend']} - "
-                                         f"Fiyat: ${signal_data['price']:.2f} - "
-                                         f"SuperTrend: ${signal_data['super_trend']:.2f} - Sinyal yok")
                     
                     # Rate limiting
                     time.sleep(0.2)

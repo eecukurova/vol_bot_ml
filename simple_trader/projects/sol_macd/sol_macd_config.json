@@ -69,7 +69,7 @@
   },
   
   "logging": {
-    "level": "DEBUG",
+    "level": "INFO",
     "file": "sol_macd_trading.log",
     "detailed_signals": true,
     "detailed_positions": true,

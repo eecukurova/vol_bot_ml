@@ -1,0 +1,14 @@
+{
+  "15m": {
+    "timeframe": "15m",
+    "best_result": null,
+    "top_results": [],
+    "error": "No valid results found"
+  },
+  "1h": {
+    "timeframe": "1h",
+    "best_result": null,
+    "top_results": [],
+    "error": "No valid results found"
+  }
+}

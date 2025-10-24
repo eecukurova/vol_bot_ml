@@ -373,7 +373,7 @@ class SolMacdTrader:
             positions = self.exchange.fetch_positions([symbol])
             current_pos = None
             for pos in positions:
-                if pos['symbol'] == symbol and pos['contracts'] > 0:
+                if pos['symbol'] == symbol and abs(float(pos['contracts'])) > 0:
                     current_pos = pos
                     break
             
@@ -461,7 +461,7 @@ class SolMacdTrader:
             positions = self.exchange.fetch_positions([symbol])
             current_pos = None
             for pos in positions:
-                if pos['symbol'] == symbol and pos['contracts'] > 0:
+                if pos['symbol'] == symbol and abs(float(pos['contracts'])) > 0:
                     current_pos = pos
                     break
             
@@ -577,11 +577,36 @@ class SolMacdTrader:
         
         while True:
             try:
-                # Mevcut pozisyon kontrol et
-                if self.current_position:
-                    # Pozisyon durumunu kontrol et (TP/SL gerçekleşmesi)
-                    self.check_position_status()
-                    
+                # ÖNCE EXCHANGE'DEN GERÇEK POZİSYON DURUMUNU KONTROL ET
+                positions = self.exchange.fetch_positions([symbol])
+                has_active_position = False
+                for pos in positions:
+                    # CCXT pozisyon field'ları: 'size', 'contracts', 'amount' olabilir
+                    position_size = pos.get('size', pos.get('contracts', pos.get('amount', 0)))
+                    if pos['symbol'] == symbol and abs(float(position_size)) > 0:
+                        has_active_position = True
+                        # Pozisyon varsa current_position'ı güncelle
+                        if not self.current_position:
+                            self.current_position = {
+                                'side': 'buy' if float(position_size) > 0 else 'sell',
+                                'entry_price': float(pos['entryPrice']),
+                                'size': abs(float(position_size)),
+                                'timestamp': time.time()
+                            }
+                            self.logger.info(f"Mevcut pozisyon tespit edildi: {position_size} @ {pos['entryPrice']}")
+                        break
+                
+                # Pozisyon yoksa ama current_position varsa temizle
+                if not has_active_position and self.current_position:
+                    self.logger.info("🚨 Pozisyon kapanmış - Exchange tarafından kapatıldı")
+                    self.current_position = None
+                
+                # Pozisyon kontrolü: Hem internal state hem de exchange kontrolü
+                if has_active_position or self.current_position:
+                    if has_active_position:
+                        self.logger.debug(f"Exchange'de aktif pozisyon var: {symbol}")
+                    if self.current_position:
+                        self.logger.debug(f"Internal state'de pozisyon var: {self.current_position['side']}")
                     # Çıkış sinyallerini kontrol et
                     self.check_exit_signals()
                 else:

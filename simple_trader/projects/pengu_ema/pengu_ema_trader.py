@@ -250,10 +250,16 @@ class PenguEmaTrader:
             if signal == 'LONG':
                 side = 'buy'
                 tp_price = price * (1 + self.take_profit_pct / 100)
+                # Minimum TP farkı ekle (Binance için)
+                min_tp_diff = price * 0.005  # %0.5 minimum fark
+                tp_price = max(tp_price, price + min_tp_diff)
                 sl_price = price * (1 - self.stop_loss_pct / 100)
             else:  # SHORT
                 side = 'sell'
                 tp_price = price * (1 - self.take_profit_pct / 100)
+                # Minimum TP farkı ekle (Binance için)
+                min_tp_diff = price * 0.005  # %0.5 minimum fark
+                tp_price = min(tp_price, price - min_tp_diff)
                 sl_price = price * (1 + self.stop_loss_pct / 100)
             
             # Place entry order
@@ -343,6 +349,21 @@ class PenguEmaTrader:
                 data = self.get_market_data()
                 if not data:
                     self.log.warning("⚠️ Market data alınamadı")
+                    time.sleep(300)
+                    continue
+                
+                # Check for existing position first
+                positions = self.exchange.fetch_positions([self.symbol])
+                has_active_position = False
+                for pos in positions:
+                    position_size = pos.get('size', pos.get('contracts', pos.get('amount', 0)))
+                    if pos['symbol'] == self.symbol and abs(float(position_size)) > 0:
+                        has_active_position = True
+                        self.log.info(f"📊 Aktif pozisyon var: {position_size} @ {pos['entryPrice']}")
+                        break
+                
+                if has_active_position:
+                    self.log.info("📊 Aktif pozisyon var - yeni sinyal bekleniyor")
                     time.sleep(300)
                     continue
                 

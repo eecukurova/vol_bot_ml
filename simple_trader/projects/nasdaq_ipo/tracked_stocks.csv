@@ -1,3 +1,3 @@
-symbol,first_recommended_date,first_price,last_price,max_price,min_price,days_tracked,status,performance_pct
-SPCE,2025-10-10,4.0900,4.0900,4.0900,4.0900,1,ACTIVE,0.00
-CLOV,2025-10-10,2.5600,2.5600,2.5600,2.5600,1,ACTIVE,0.00
+symbol,first_recommended_date,first_price,last_price,max_price,min_price,days_tracked,status,performance_pct,consecutive_below_1,deficiency_risk_flag,deficiency_risk_level,days_since_deficiency_start,compliance_deadline,compliance_status
+SPCE,2025-10-10,4.0900,3.9400,4.0900,3.9400,13,ACTIVE,-3.67,0,False,NONE,0,,COMPLIANT
+CLOV,2025-10-10,2.5600,3.2200,3.2200,2.5600,13,HIT_TARGET,25.78,0,False,NONE,0,,COMPLIANT

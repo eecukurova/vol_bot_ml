@@ -133,11 +133,132 @@ class NASDAQDynamicScanner:
                 'NOW', 'TEAM', 'SHOP', 'ABNB', 'DOCU', 'ZM', 'ROKU', 'SPOT', 'SQ', 'PYPL'
             ]
             
+            # Yeni IPO'ları kontrol et ve ekle
+            new_ipos = self.check_recent_ipos()
+            if new_ipos:
+                tech_symbols.extend(new_ipos)
+                self.log.info(f"🆕 {len(new_ipos)} yeni IPO eklendi: {new_ipos}")
+            
             self.log.info(f"📊 {len(tech_symbols)} teknoloji hissesi yüklendi")
             return tech_symbols
             
         except Exception as e:
             self.log.error(f"❌ NASDAQ sembol çekme hatası: {e}")
+            return []
+
+    def check_recent_ipos(self) -> List[str]:
+        """Son IPO'ları kontrol et ve teknoloji olanları döndür"""
+        try:
+            # Bu fonksiyon gerçek IPO verilerini çekmek için genişletilebilir
+            # Şimdilik manuel olarak eklenen yeni IPO'ları kontrol edelim
+            
+            # Örnek: Son dönemde eklenen yeni teknoloji IPO'ları
+            recent_ipos = [
+                # Bu listeyi manuel olarak güncelleyebilirsiniz
+                # 'NEWIPO1', 'NEWIPO2', 'NEWIPO3'
+            ]
+            
+            # Watchlist'ten de kontrol et
+            if self.watchlist_cfg.get('enabled'):
+                watchlist_file = self.watchlist_cfg.get('file', 'nasdaq_under1_watchlist.json')
+                try:
+                    with open(watchlist_file, 'r') as f:
+                        watchlist_stocks = json.load(f)
+                        # Watchlist'teki hisseleri de ekle
+                        recent_ipos.extend(watchlist_stocks)
+                except Exception as e:
+                    self.log.warning(f"⚠️ Watchlist okuma hatası: {e}")
+            
+            return recent_ipos
+            
+        except Exception as e:
+            self.log.error(f"❌ IPO kontrol hatası: {e}")
+            return []
+
+    def add_new_ipo(self, symbol: str, description: str = ""):
+        """Yeni IPO'yu watchlist'e ekle"""
+        try:
+            watchlist_file = self.watchlist_cfg.get('file', 'nasdaq_under1_watchlist.json')
+            
+            # Mevcut watchlist'i oku
+            try:
+                with open(watchlist_file, 'r') as f:
+                    watchlist_stocks = json.load(f)
+            except FileNotFoundError:
+                watchlist_stocks = []
+            
+            # Yeni hisseyi ekle (duplicate kontrolü)
+            if symbol not in watchlist_stocks:
+                watchlist_stocks.append(symbol)
+                
+                # Watchlist'i güncelle
+                with open(watchlist_file, 'w') as f:
+                    json.dump(watchlist_stocks, f, indent=2)
+                
+                self.log.info(f"🆕 Yeni IPO eklendi: {symbol} - {description}")
+                
+                # Telegram bildirimi gönder
+                message = f"🆕 <b>Yeni IPO Eklendi</b>\n\n"
+                message += f"📊 <b>Hisse:</b> {symbol}\n"
+                message += f"📝 <b>Açıklama:</b> {description}\n"
+                message += f"⏰ <b>Zaman:</b> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+                message += f"✅ Watchlist'e eklendi ve tarama başladı!"
+                
+                self.send_telegram_message(message)
+                
+                return True
+            else:
+                self.log.warning(f"⚠️ {symbol} zaten watchlist'te mevcut")
+                return False
+                
+        except Exception as e:
+            self.log.error(f"❌ IPO ekleme hatası: {e}")
+            return False
+
+    def remove_ipo(self, symbol: str):
+        """IPO'yu watchlist'ten çıkar"""
+        try:
+            watchlist_file = self.watchlist_cfg.get('file', 'nasdaq_under1_watchlist.json')
+            
+            # Mevcut watchlist'i oku
+            try:
+                with open(watchlist_file, 'r') as f:
+                    watchlist_stocks = json.load(f)
+            except FileNotFoundError:
+                self.log.warning(f"⚠️ Watchlist dosyası bulunamadı: {watchlist_file}")
+                return False
+            
+            # Hisseyi çıkar
+            if symbol in watchlist_stocks:
+                watchlist_stocks.remove(symbol)
+                
+                # Watchlist'i güncelle
+                with open(watchlist_file, 'w') as f:
+                    json.dump(watchlist_stocks, f, indent=2)
+                
+                self.log.info(f"🗑️ IPO çıkarıldı: {symbol}")
+                return True
+            else:
+                self.log.warning(f"⚠️ {symbol} watchlist'te bulunamadı")
+                return False
+                
+        except Exception as e:
+            self.log.error(f"❌ IPO çıkarma hatası: {e}")
+            return False
+
+    def list_watchlist(self):
+        """Watchlist'i listele"""
+        try:
+            watchlist_file = self.watchlist_cfg.get('file', 'nasdaq_under1_watchlist.json')
+            
+            with open(watchlist_file, 'r') as f:
+                watchlist_stocks = json.load(f)
+            
+            self.log.info(f"📋 Watchlist ({len(watchlist_stocks)} hisse): {watchlist_stocks}")
+            return watchlist_stocks
+            
+        except Exception as e:
+            self.log.error(f"❌ Watchlist listeleme hatası: {e}")
             return []
 
     def filter_tech_stocks(self, symbols: List[str], *,
