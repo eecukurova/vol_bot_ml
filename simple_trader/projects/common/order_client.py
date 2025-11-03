@@ -60,6 +60,9 @@ class IdempotentOrderClient:
         self.log.info(f"🎯 Trigger source: {self.trigger_source}")
         self.log.info(f"🔀 Hedge mode: {self.hedge_mode}")
         self.log.info(f"📊 Last signal: {self.state.get('last_signal', 'None')}")
+        
+        # Market metadata cache
+        self._market_cache = {}
     
     def _load_state(self):
         """Load state from JSON file"""
@@ -483,10 +486,13 @@ class IdempotentOrderClient:
         # Determine order type
         order_type = 'STOP_MARKET' if intent == 'SL' else 'TAKE_PROFIT_MARKET'
         
+        # Adjust stop price against current mark to avoid -2021
+        safe_stop = self._adjust_stop_price_safely(symbol, side, intent, stop_price)
+
         # Create order params - PENGU/USDT format
         params = {
             'newClientOrderId': client_order_id,
-            'stopPrice': self.exchange.price_to_precision(symbol, stop_price),
+            'stopPrice': self.exchange.price_to_precision(symbol, safe_stop),
             'closePosition': True,  # PENGU/USDT için gerekli
             'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
             'priceProtect': True  # PENGU/USDT için gerekli
@@ -512,10 +518,22 @@ class IdempotentOrderClient:
         
         try:
             # Place order with retry - PENGU/USDT için amount None
-            order_result = self._retry_with_backoff(
-                self.exchange.create_order,
-                symbol, order_type, side, None, None, params
-            )
+            try:
+                order_result = self._retry_with_backoff(
+                    self.exchange.create_order,
+                    symbol, order_type, side, None, None, params
+                )
+            except Exception as e:
+                if self._is_immediate_trigger_error(e):
+                    safer = self._adjust_stop_price_safely(symbol, side, intent, safe_stop)
+                    params['stopPrice'] = self.exchange.price_to_precision(symbol, safer)
+                    self.log.warning(f"🔧 -2021 retry with adjusted stopPrice={params['stopPrice']}")
+                    order_result = self._retry_with_backoff(
+                        self.exchange.create_order,
+                        symbol, order_type, side, None, None, params
+                    )
+                else:
+                    raise
             
             # Update status to SENT
             self.state['orders'][client_order_id]['status'] = 'SENT'
@@ -584,15 +602,18 @@ class IdempotentOrderClient:
                 self.log.info(f"🔄 ORDER_DUPLICATE: {intent} order {client_order_id} already sent")
                 return {'id': client_order_id, 'status': 'duplicate'}
         
+        # Adjust stop price against current mark to avoid -2021
+        safe_price = self._adjust_stop_price_safely(symbol, side, intent, price)
+
         # Prepare order data
         order_data = {
             'symbol': symbol,
             'type': 'TAKE_PROFIT_MARKET',
             'side': side,
-            'price': price,
+            'price': safe_price,
             'amount': None,  # PENGU/USDT için None (closePosition kullanılıyor)
             'params': {
-                'stopPrice': self.exchange.price_to_precision(symbol, price),
+                'stopPrice': self.exchange.price_to_precision(symbol, safe_price),
                 'closePosition': True,  # PENGU/USDT için gerekli
                 'workingType': 'MARK_PRICE',  # PENGU/USDT için gerekli
                 'priceProtect': True,  # PENGU/USDT için gerekli
@@ -615,10 +636,22 @@ class IdempotentOrderClient:
         
         try:
             # Place the order - PENGU/USDT için amount None
-            order_result = self._retry_with_backoff(
-                self.exchange.create_order,
-                symbol, 'TAKE_PROFIT_MARKET', side, None, None, order_data['params']
-            )
+            try:
+                order_result = self._retry_with_backoff(
+                    self.exchange.create_order,
+                    symbol, 'TAKE_PROFIT_MARKET', side, None, None, order_data['params']
+                )
+            except Exception as e:
+                if self._is_immediate_trigger_error(e):
+                    safer = self._adjust_stop_price_safely(symbol, side, intent, safe_price)
+                    order_data['params']['stopPrice'] = self.exchange.price_to_precision(symbol, safer)
+                    self.log.warning(f"🔧 -2021 retry with adjusted stopPrice={order_data['params']['stopPrice']}")
+                    order_result = self._retry_with_backoff(
+                        self.exchange.create_order,
+                        symbol, 'TAKE_PROFIT_MARKET', side, None, None, order_data['params']
+                    )
+                else:
+                    raise
             
             # Update status to SENT
             self.state['orders'][client_order_id]['status'] = 'SENT'
@@ -763,6 +796,85 @@ class IdempotentOrderClient:
                 
         except Exception as e:
             self.log.error(f"❌ Sync with exchange failed: {e}")
+    
+    def _get_mark_price(self, symbol: str) -> Optional[float]:
+        """Fetch current mark price with fallbacks."""
+        try:
+            ticker = self.exchange.fetch_ticker(symbol)
+            mark = None
+            if isinstance(ticker, dict):
+                info = ticker.get('info')
+                if isinstance(info, dict) and info.get('markPrice') is not None:
+                    mark = float(info.get('markPrice'))
+            if mark is None and isinstance(ticker, dict):
+                mark = ticker.get('last') or ticker.get('close')
+            return float(mark) if mark is not None else None
+        except Exception as e:
+            self.log.warning(f"⚠️ Mark price alınamadı: {e}")
+            return None
+    
+    def _get_tick_size(self, symbol: str) -> Optional[float]:
+        """Extract tickSize from market filters or precision."""
+        try:
+            market = self._market_cache.get(symbol)
+            if not market:
+                market = self.exchange.market(symbol)
+                self._market_cache[symbol] = market
+            info = market.get('info', {}) if isinstance(market, dict) else {}
+            filters = info.get('filters') or []
+            for f in filters:
+                if f.get('filterType') in ('PRICE_FILTER', 'PERCENT_PRICE_BY_SIDE'):
+                    ts = f.get('tickSize')
+                    if ts is not None:
+                        ts = float(ts)
+                        if ts > 0:
+                            return ts
+            precision = market.get('precision', {}) if isinstance(market, dict) else {}
+            price_prec = precision.get('price')
+            if isinstance(price_prec, int) and price_prec >= 0:
+                return 10 ** (-price_prec) if price_prec <= 8 else None
+            return None
+        except Exception as e:
+            self.log.warning(f"⚠️ tickSize alınamadı: {e}")
+            return None
+    
+    def _align_price(self, symbol: str, price: float) -> float:
+        try:
+            return float(self.exchange.price_to_precision(symbol, price))
+        except Exception:
+            return price
+    
+    def _adjust_stop_price_safely(self, symbol: str, side: str, intent: str, stop_price: float) -> float:
+        """
+        Ensure stopPrice will not immediately trigger against current mark.
+        intent 'TP' uses TAKE_PROFIT_MARKET, others use STOP_MARKET.
+        Closing side defines inequality:
+          - TP sell: stop > mark; TP buy: stop < mark
+          - SL sell: stop < mark; SL buy: stop > mark
+        """
+        mark = self._get_mark_price(symbol)
+        if mark is None:
+            return self._align_price(symbol, stop_price)
+        tick = self._get_tick_size(symbol) or 0.0
+        buffer = tick * 2 if tick else abs(mark) * 1e-6
+        adjusted = stop_price
+        s = (side or '').lower()
+        is_tp = (intent or '').upper() == 'TP'
+        if is_tp:
+            if s == 'sell' and adjusted <= mark:
+                adjusted = mark + buffer
+            elif s == 'buy' and adjusted >= mark:
+                adjusted = mark - buffer
+        else:
+            if s == 'sell' and adjusted >= mark:
+                adjusted = mark - buffer
+            elif s == 'buy' and adjusted <= mark:
+                adjusted = mark + buffer
+        return self._align_price(symbol, adjusted)
+    
+    def _is_immediate_trigger_error(self, error: Exception) -> bool:
+        msg = str(error)
+        return ('-2021' in msg) or ('immediately trigger' in msg.lower())
     
     def get_last_signal(self) -> Optional[str]:
         """Get last signal from state"""

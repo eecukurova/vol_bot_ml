@@ -47,6 +47,28 @@ class PenguEmaTrader:
         else:
             self.log.info("📱 Telegram bildirimleri pasif")
         
+        # Signal confirmation settings
+        self.confirmation_config = self.config.get('signal_confirmation', {})
+        self.confirmation_enabled = self.confirmation_config.get('enabled', True)
+        self.confirmation_duration = self.confirmation_config.get('confirmation_duration_seconds', 121)
+        self.check_interval = self.confirmation_config.get('check_interval_seconds', 60)
+        self.min_confirmation_count = self.confirmation_config.get('min_confirmation_count', 2)
+        
+        # Confirmation state
+        self.signal_confirmation_start_time = None
+        self.current_signal = None
+        self.confirmation_count = 0
+        self.last_confirmation_check = None
+        
+        # Track last processed signal to prevent duplicate orders
+        self.last_processed_signal = None
+        self.last_processed_signal_time = None
+        
+        if self.confirmation_enabled:
+            self.log.info(f"🔍 Signal confirmation aktif: {self.confirmation_duration}s süre, {self.check_interval}s aralık")
+        else:
+            self.log.info("⚡ Signal confirmation pasif - anında pozisyon açılacak")
+        
         self.log.info(f"🚀 PENGU EMA Trader başlatıldı")
         self.log.info(f"📊 Symbol: {self.symbol}")
         self.log.info(f"📈 EMA Fast: {self.ema_fast}, Slow: {self.ema_slow}")
@@ -237,6 +259,88 @@ class PenguEmaTrader:
             self.log.error(f"❌ EMA crossover kontrol hatası: {e}")
             return None
 
+    def start_signal_confirmation(self, signal: str, data: Dict):
+        """Start signal confirmation process"""
+        self.signal_confirmation_start_time = time.time()
+        self.current_signal = signal
+        self.confirmation_count = 1
+        self.last_confirmation_check = time.time()
+        
+        self.log.info(f"🔍 CONFIRMATION BAŞLADI: {signal} sinyali")
+        self.log.info(f"💰 Fiyat: {data['price']:.6f}")
+        self.log.info(f"📊 EMA Fast: {data['ema_fast']:.6f}, Slow: {data['ema_slow']:.6f}")
+        self.log.info(f"⏰ Confirmation süresi: {self.confirmation_duration} saniye")
+        self.log.info(f"🔄 Kontrol aralığı: {self.check_interval} saniye")
+        
+        # Telegram bildirimi
+        if self.telegram_enabled:
+            telegram_msg = f"""
+🔍 <b>PENGU EMA - Sinyal Confirmation Başladı</b>
+
+📊 <b>Symbol:</b> {self.symbol}
+🎯 <b>Sinyal:</b> {signal}
+💰 <b>Fiyat:</b> ${data['price']:.6f}
+📈 <b>EMA Fast:</b> {data['ema_fast']:.6f}
+📉 <b>EMA Slow:</b> {data['ema_slow']:.6f}
+
+⏰ <b>Confirmation Süresi:</b> {self.confirmation_duration} saniye
+🔄 <b>Kontrol Aralığı:</b> {self.check_interval} saniye
+📊 <b>Min Confirmation:</b> {self.min_confirmation_count} kez
+
+⏰ <b>Zaman:</b> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+            """
+            self.send_telegram_message(telegram_msg)
+
+    def check_signal_confirmation(self, data: Dict) -> bool:
+        """Check if signal is still valid during confirmation"""
+        current_time = time.time()
+        elapsed_time = current_time - self.signal_confirmation_start_time
+        
+        # Check if it's time for next confirmation check
+        if current_time - self.last_confirmation_check < self.check_interval:
+            return False
+        
+        # Check current signal
+        current_signal = self.check_ema_crossover(data)
+        
+        if current_signal == self.current_signal:
+            # Signal still valid
+            self.confirmation_count += 1
+            self.last_confirmation_check = current_time
+            
+            remaining_time = self.confirmation_duration - elapsed_time
+            
+            self.log.info(f"✅ CONFIRMATION CHECK #{self.confirmation_count}: {self.current_signal} sinyali hala aktif")
+            self.log.info(f"💰 Fiyat: {data['price']:.6f}")
+            self.log.info(f"📊 EMA Fast: {data['ema_fast']:.6f}, Slow: {data['ema_slow']:.6f}")
+            self.log.info(f"⏰ Kalan süre: {remaining_time:.0f} saniye")
+            
+            # Check if confirmation is complete
+            if elapsed_time >= self.confirmation_duration and self.confirmation_count >= self.min_confirmation_count:
+                self.log.info(f"🎯 CONFIRMATION TAMAMLANDI: {self.current_signal} sinyali onaylandı!")
+                self.log.info(f"📊 Toplam confirmation sayısı: {self.confirmation_count}")
+                return True
+            else:
+                self.log.info(f"⏳ Confirmation devam ediyor... ({self.confirmation_count}/{self.min_confirmation_count} min)")
+                return False
+        else:
+            # Signal changed or disappeared
+            self.log.warning(f"❌ CONFIRMATION İPTAL: Sinyal değişti!")
+            self.log.warning(f"📊 Beklenen: {self.current_signal}, Mevcut: {current_signal}")
+            self.log.warning(f"⏰ Elapsed time: {elapsed_time:.0f} saniye")
+            
+            # Reset confirmation state
+            self.reset_confirmation_state()
+            return False
+
+    def reset_confirmation_state(self):
+        """Reset confirmation state"""
+        self.signal_confirmation_start_time = None
+        self.current_signal = None
+        self.confirmation_count = 0
+        self.last_confirmation_check = None
+        self.log.info("🔄 Confirmation state sıfırlandı")
+
     def open_position(self, signal: str, data: Dict):
         """Open position based on signal"""
         try:
@@ -297,6 +401,10 @@ class PenguEmaTrader:
                 # Place TP/SL orders
                 self.place_tp_sl_orders(side, tp_price, sl_price, position_size)
                 
+                # Reset confirmation state after successful position opening
+                if self.signal_confirmation_start_time:
+                    self.reset_confirmation_state()
+                
                 return True
             else:
                 self.log.error(f"❌ {signal} pozisyon açılamadı")
@@ -352,7 +460,7 @@ class PenguEmaTrader:
                     time.sleep(300)
                     continue
                 
-                # Check for existing position first
+                # Check for existing position AND open orders
                 positions = self.exchange.fetch_positions([self.symbol])
                 has_active_position = False
                 for pos in positions:
@@ -362,27 +470,74 @@ class PenguEmaTrader:
                         self.log.info(f"📊 Aktif pozisyon var: {position_size} @ {pos['entryPrice']}")
                         break
                 
-                if has_active_position:
-                    self.log.info("📊 Aktif pozisyon var - yeni sinyal bekleniyor")
+                # Check for open orders (pending entry orders)
+                open_orders = self.exchange.fetch_open_orders(self.symbol)
+                has_open_orders = len(open_orders) > 0
+                
+                if has_open_orders:
+                    self.log.warning(f"⚠️ Açık emir var: {len(open_orders)} adet")
+                    for order in open_orders:
+                        self.log.warning(f"📝 Emir: {order['id']} - {order['side']} {order['amount']} @ {order.get('price', 'market')}")
+                
+                if has_active_position or has_open_orders:
+                    self.log.info(f"📊 Aktif pozisyon veya açık emir var - yeni sinyal bekleniyor")
                     time.sleep(300)
                     continue
                 
                 # Check for EMA crossover
                 signal = self.check_ema_crossover(data)
                 
-                if signal:
-                    self.log.info(f"🎯 EMA Crossover sinyali: {signal}")
-                    self.log.info(f"💰 Fiyat: {data['price']:.6f}")
-                    self.log.info(f"📊 EMA Fast: {data['ema_fast']:.6f}, Slow: {data['ema_slow']:.6f}")
-                    self.log.info(f"🕯️ Heikin Ashi: Aktif")
-                    
-                    # Open position
-                    success = self.open_position(signal, data)
-                    if success:
-                        self.log.info(f"✅ {signal} pozisyon başarıyla açıldı")
+                # Prevent processing the same signal multiple times
+                if signal and self.last_processed_signal == signal:
+                    time_since_last = time.time() - self.last_processed_signal_time if self.last_processed_signal_time else float('inf')
+                    if time_since_last < 3600:  # Don't process same signal for 1 hour
+                        self.log.debug(f"⏭️ Sinyal zaten işlendi: {signal} ({time_since_last:.0f}s önce)")
+                        time.sleep(300)
+                        continue
+                
+                if signal and not self.signal_confirmation_start_time:
+                    # New signal detected - start confirmation if enabled
+                    if self.confirmation_enabled:
+                        self.start_signal_confirmation(signal, data)
                     else:
-                        self.log.error(f"❌ {signal} pozisyon açılamadı")
+                        # Confirmation disabled - open position immediately
+                        self.log.info(f"🎯 EMA Crossover sinyali: {signal}")
+                        self.log.info(f"💰 Fiyat: {data['price']:.6f}")
+                        self.log.info(f"📊 EMA Fast: {data['ema_fast']:.6f}, Slow: {data['ema_slow']:.6f}")
+                        self.log.info(f"🕯️ Heikin Ashi: Aktif")
+                        
+                        # Open position
+                        success = self.open_position(signal, data)
+                        if success:
+                            self.log.info(f"✅ {signal} pozisyon başarıyla açıldı")
+                            # Mark signal as processed
+                            self.last_processed_signal = signal
+                            self.last_processed_signal_time = time.time()
+                        else:
+                            self.log.error(f"❌ {signal} pozisyon açılamadı")
+                
+                elif self.signal_confirmation_start_time:
+                    # Confirmation process is active
+                    confirmation_complete = self.check_signal_confirmation(data)
+                    
+                    if confirmation_complete:
+                        # Confirmation completed - open position
+                        self.log.info(f"🎯 CONFIRMATION TAMAMLANDI - Pozisyon açılıyor: {self.current_signal}")
+                        
+                        success = self.open_position(self.current_signal, data)
+                        if success:
+                            self.log.info(f"✅ {self.current_signal} pozisyon başarıyla açıldı")
+                            # Mark signal as processed
+                            self.last_processed_signal = self.current_signal
+                            self.last_processed_signal_time = time.time()
+                        else:
+                            self.log.error(f"❌ {self.current_signal} pozisyon açılamadı")
+                        
+                        # Reset confirmation state
+                        self.reset_confirmation_state()
+                
                 else:
+                    # No signal and no confirmation active
                     self.log.debug(f"📊 Sinyal yok - EMA Fast: {data['ema_fast']:.6f}, Slow: {data['ema_slow']:.6f}")
                 
                 # Wait before next check

@@ -1,0 +1,146 @@
+//@version=5
+strategy("PENGU Heikin Ashi Hybrid", shorttitle="PENGU HA Hybrid", overlay=true,
+         initial_capital=10000, commission_type=strategy.commission.percent, commission_value=0.1)
+
+// ============================================================================
+// PENGU HEIKIN ASHI HYBRID STRATEGY
+// Test Results: +7.72% return, 75% WR, 16 trades
+// ============================================================================
+
+// Inputs
+rsi_length = input.int(15, "RSI Length", minval=1, maxval=50)
+rsi_oversold = input.int(25, "RSI Oversold", minval=10, maxval=40)
+rsi_overbought = input.int(70, "RSI Overbought", minval=60, maxval=90)
+
+bb_length = input.int(20, "BB Length", minval=5, maxval=50)
+bb_std_dev = input.float(2.0, "BB Std Dev", minval=1.0, maxval=4.0, step=0.1)
+
+ema_fast = input.int(12, "EMA Fast", minval=5, maxval=30)
+ema_slow = input.int(26, "EMA Slow", minval=10, maxval=50)
+
+volume_threshold = input.float(1.0, "Volume Threshold", minval=0.5, maxval=3.0, step=0.1)
+momentum_threshold = input.float(0.6, "Momentum Threshold %", minval=0.1, maxval=2.0, step=0.1)
+momentum_length = input.int(4, "Momentum Length", minval=3, maxval=10)
+
+cooldown_bars = input.int(2, "Cooldown Bars", minval=0, maxval=10)
+
+// Risk Management
+tp_pct = input.float(2.0, title="Take Profit %", minval=0.5, maxval=5.0, step=0.1)
+sl_pct = input.float(4.0, title="Stop Loss %", minval=1.0, maxval=10.0, step=0.1)
+
+// ======================
+// HEIKIN ASHI CALCULATION
+// ======================
+ha_close = (open + high + low + close) / 4
+var float ha_open = na
+ha_open := na(ha_open[1]) ? (open + close) / 2 : (ha_open[1] + ha_close[1]) / 2
+ha_high = math.max(high, math.max(ha_open, ha_close))
+ha_low = math.min(low, math.min(ha_open, ha_close))
+
+// ======================
+// INDICATORS
+// ======================
+rsi_val = ta.rsi(ha_close, rsi_length)
+
+bb_middle = ta.sma(ha_close, bb_length)
+bb_std = ta.stdev(ha_close, bb_length)
+bb_upper = bb_middle + (bb_std * bb_std_dev)
+bb_lower = bb_middle - (bb_std * bb_std_dev)
+
+ema_fast_ln = ta.ema(ha_close, ema_fast)
+ema_slow_ln = ta.ema(ha_close, ema_slow)
+
+volume_ma = ta.sma(volume, 20)
+volume_ratio = volume_ma > 0 ? volume / volume_ma : 0.0
+
+price_mom = ha_close[momentum_length] != 0 ? ((ha_close - ha_close[momentum_length]) / ha_close[momentum_length]) * 100 : 0.0
+ha_up = ha_close > ha_open
+ha_down = ha_close < ha_open
+
+// ======================
+// SIGNAL CONDITIONS
+// ======================
+long_c1 = (rsi_val < rsi_oversold) and (ha_close <= bb_lower * 1.02) and (volume_ratio > volume_threshold) and 
+          (ema_fast_ln > ema_slow_ln) and (price_mom > -momentum_threshold) and ha_up
+
+long_c2 = (ha_close > bb_lower) and (ha_close[1] <= bb_lower[1]) and (rsi_val > rsi_val[1]) and 
+          (volume_ratio > volume_threshold) and (ema_fast_ln > ema_slow_ln) and ha_up
+
+long_c3 = (price_mom > momentum_threshold) and (volume_ratio > volume_threshold * 1.5) and 
+          (ema_fast_ln > ema_slow_ln) and (rsi_val > 30) and (rsi_val < 70) and ha_up
+
+short_c1 = (rsi_val > rsi_overbought) and (ha_close >= bb_upper * 0.98) and (volume_ratio > volume_threshold) and 
+           (ema_fast_ln < ema_slow_ln) and (price_mom < momentum_threshold) and ha_down
+
+short_c2 = (ha_close < bb_upper) and (ha_close[1] >= bb_upper[1]) and (rsi_val < rsi_val[1]) and 
+           (volume_ratio > volume_threshold) and (ema_fast_ln < ema_slow_ln) and ha_down
+
+short_c3 = (price_mom < -momentum_threshold) and (volume_ratio > volume_threshold * 1.5) and 
+           (ema_fast_ln < ema_slow_ln) and (rsi_val > 30) and (rsi_val < 70) and ha_down
+
+base_long = long_c1 or long_c2 or long_c3
+base_short = short_c1 or short_c2 or short_c3
+
+// ======================
+// COOLDOWN
+// ======================
+var int last_sig_bar = na
+long_signal = base_long and (na(last_sig_bar) or bar_index - last_sig_bar >= cooldown_bars)
+short_signal = base_short and (na(last_sig_bar) or bar_index - last_sig_bar >= cooldown_bars)
+
+if long_signal or short_signal
+    last_sig_bar := bar_index
+
+// ======================
+// STRATEGY EXECUTION
+// ======================
+var float long_entry = na
+var float short_entry = na
+
+// Long entry
+if long_signal and strategy.position_size == 0
+    long_entry := close
+    strategy.entry("Long", strategy.long, comment="L")
+
+// Short entry
+if short_signal and strategy.position_size == 0
+    short_entry := close
+    strategy.entry("Short", strategy.short, comment="S")
+
+// Exit long position
+if strategy.position_size > 0 and not na(long_entry)
+    current_return = ((close - long_entry) / long_entry) * 100
+    
+    if current_return >= tp_pct
+        strategy.close("Long", comment="TP")
+        long_entry := na
+    else if current_return <= -sl_pct
+        strategy.close("Long", comment="SL")
+        long_entry := na
+
+// Exit short position
+if strategy.position_size < 0 and not na(short_entry)
+    current_return = ((short_entry - close) / short_entry) * 100
+    
+    if current_return >= tp_pct
+        strategy.close("Short", comment="TP")
+        short_entry := na
+    else if current_return <= -sl_pct
+        strategy.close("Short", comment="SL")
+        short_entry := na
+
+// Opposite signal exits
+if short_signal and strategy.position_size > 0
+    strategy.close("Long", comment="Exit")
+    long_entry := na
+
+if long_signal and strategy.position_size < 0
+    strategy.close("Short", comment="Exit")
+    short_entry := na
+
+// Plotting
+plotshape(long_signal, title="L", style=shape.triangleup, location=location.belowbar,
+          color=color.new(color.lime, 0), size=size.tiny, text="L")
+plotshape(short_signal, title="S", style=shape.triangledown, location=location.abovebar,
+          color=color.new(color.red, 0), size=size.tiny, text="S")
+

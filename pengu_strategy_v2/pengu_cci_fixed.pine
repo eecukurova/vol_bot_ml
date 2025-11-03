@@ -1,0 +1,70 @@
+//@version=5
+strategy("PENGU CCI Fixed", shorttitle="PENGU CCI", overlay=false,
+         initial_capital=10000, commission_type=strategy.commission.percent, commission_value=0.1,
+         default_qty_type=strategy.percent_of_equity, default_qty_value=100)
+
+// ============================================================================
+// PENGU CCI STRATEGY - FIXED VERSION
+// Python backtest ile uyumlu hale getirildi
+// ============================================================================
+
+// === Inputs ===
+cci_length = input.int(20, title="CCI Length", minval=1, maxval=50)
+buy_threshold = input.int(-100, title="Buy Threshold", minval=-300, maxval=0)
+sell_threshold = input.int(100, title="Sell Threshold", minval=0, maxval=300)
+
+// === Risk Management ===
+stop_loss_pct = input.float(2.0, title="Stop Loss %", minval=0.5, maxval=5.0, step=0.1)
+take_profit_pct = input.float(1.0, title="Take Profit %", minval=0.3, maxval=3.0, step=0.1)
+
+// === CCI Calculation ===
+tp = (high + low + close) / 3
+tp_sma = ta.sma(tp, cci_length)
+tp_mad = ta.sma(math.abs(tp - ta.sma(tp, cci_length)), cci_length)
+cci = (tp - tp_sma) / (0.015 * tp_mad)
+
+// === Signal Generation ===
+buy_signal = ta.crossover(cci, buy_threshold)
+sell_signal = ta.crossunder(cci, sell_threshold)
+
+// === Strategy Execution ===
+// Track entry price for TP/SL calculation
+var float entry_price = na
+
+// Entry
+if buy_signal and strategy.position_size == 0
+    entry_price := close
+    strategy.entry("Long", strategy.long, comment="Buy")
+
+// Exit logic - her bar'da kontrol et
+if strategy.position_size > 0 and not na(entry_price)
+    current_return = ((close - entry_price) / entry_price) * 100
+    
+    // TP
+    if current_return >= take_profit_pct
+        strategy.close("Long", comment="TP")
+        entry_price := na
+    
+    // SL
+    else if current_return <= -stop_loss_pct
+        strategy.close("Long", comment="SL")
+        entry_price := na
+
+// Sell signal exit
+if sell_signal and strategy.position_size > 0
+    strategy.close("Long", comment="Sell")
+    entry_price := na
+
+// === Plotting ===
+plot(cci, title="CCI", color=color.blue, linewidth=2)
+hline(0, "Zero", color=color.gray)
+hline(buy_threshold, "Buy", color=color.green, linestyle=hline.style_dotted)
+hline(sell_threshold, "Sell", color=color.red, linestyle=hline.style_dotted)
+
+bgcolor(cci > 100 ? color.new(color.red, 90) : cci < -100 ? color.new(color.green, 90) : na)
+
+plotshape(buy_signal, title="Buy", location=location.belowbar, 
+          color=color.green, style=shape.triangleup)
+plotshape(sell_signal, title="Sell", location=location.abovebar, 
+          color=color.red, style=shape.triangledown)
+

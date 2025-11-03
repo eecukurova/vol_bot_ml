@@ -178,7 +178,59 @@ class SolMacdTrader:
         # State
         self.current_position = None
         self.last_signal_time = None
+        self._last_trade_candle = self._load_trade_candle()  # Son işlem açılan 4h periyodu
         
+        # Signal confirmation settings
+        self.confirmation_config = self.config.get('signal_confirmation', {})
+        self.confirmation_enabled = self.confirmation_config.get('enabled', True)
+        self.confirmation_duration = self.confirmation_config.get('confirmation_duration_seconds', 121)
+        self.check_interval = self.confirmation_config.get('check_interval_seconds', 60)
+        self.min_confirmation_count = self.confirmation_config.get('min_confirmation_count', 2)
+        
+        # Confirmation state
+        self.signal_confirmation_start_time = None
+        self.current_signal = None
+        self.confirmation_count = 0
+        self.last_confirmation_check = None
+        
+        if self.confirmation_enabled:
+            self.logger.info(f"🔍 Signal confirmation aktif: {self.confirmation_duration}s süre, {self.check_interval}s aralık")
+        else:
+            self.logger.info("⚡ Signal confirmation pasif - anında pozisyon açılacak")
+        
+    def _get_state_file(self):
+        """State dosyası path"""
+        return os.path.join(os.path.dirname(__file__), "trade_state.json")
+    
+    def _load_trade_candle(self):
+        """Son işlem periyodunu yükle"""
+        state_file = self._get_state_file()
+        if os.path.exists(state_file):
+            try:
+                with open(state_file, 'r') as f:
+                    state = json.load(f)
+                    if 'last_trade_candle' in state:
+                        from datetime import datetime
+                        dt = datetime.fromisoformat(state['last_trade_candle'])
+                        # Naive datetime olarak dön (UTC zamanı local gibi tut)
+                        if dt.tzinfo is not None:
+                            dt = dt.replace(tzinfo=None)
+                        self.logger.info(f"📅 Son işlem periyodu yüklendi: {dt}")
+                        return dt
+            except:
+                pass
+        return None
+    
+    def _save_trade_candle(self, dt):
+        """Son işlem periyodunu kaydet"""
+        try:
+            state_file = self._get_state_file()
+            state = {'last_trade_candle': dt.isoformat()}
+            with open(state_file, 'w') as f:
+                json.dump(state, f)
+        except Exception as e:
+            self.logger.error(f"State kaydedilemedi: {e}")
+    
     def setup_logging(self):
         """Logging ayarla"""
         log_config = self.config['logging']
@@ -326,6 +378,16 @@ class SolMacdTrader:
             }
             
             if order_result['success']:
+                # Get current 4h candle timestamp (round down to 4h boundary) - UTC!
+                from datetime import datetime, timezone
+                current_time_utc = datetime.now(timezone.utc)
+                # Round to 4h boundary
+                current_4h = current_time_utc.replace(minute=0, second=0, microsecond=0)
+                current_4h = current_4h.replace(hour=(current_4h.hour // 4) * 4)
+                # Naive datetime olarak kaydet
+                if current_4h.tzinfo is not None:
+                    current_4h = current_4h.replace(tzinfo=None)
+                
                 self.current_position = {
                     'order_id': order_result['order_id'],
                     'side': side,
@@ -335,8 +397,14 @@ class SolMacdTrader:
                     'timeframe': timeframe,
                     'timestamp': signal['timestamp'],
                     'sl_order_id': order_result['sl_order_id'],
-                    'tp_order_id': order_result['tp_order_id']
+                    'tp_order_id': order_result['tp_order_id'],
+                    'candle_start_time': current_4h.isoformat()  # Hangi 4h periyodunda açıldı
                 }
+                
+                # BU 4H PERİYODUNU KAYDET
+                self._last_trade_candle = current_4h
+                self._save_trade_candle(current_4h)
+                self.logger.info(f"📅 4H periyodu kaydedildi: {current_4h}")
                 
                 self.logger.info(f"Pozisyon açıldı: {side} {symbol} @ {signal['price']:.4f}")
                 self.logger.info(f"SL: {stop_loss:.4f}, TP: {take_profit:.4f}")
@@ -361,6 +429,11 @@ class SolMacdTrader:
             self.logger.error(f"Pozisyon açma hatası: {e}")
             return False
     
+    def _symbol_match(self, pos_symbol: str, target_symbol: str) -> bool:
+        """Symbol karşılaştırması: API 'SOL/USDT:USDT' dönebilir, 'SOL/USDT' ile eşleştir"""
+        pos_clean = pos_symbol.replace(':USDT', '')
+        return (pos_symbol == target_symbol or pos_clean == target_symbol or target_symbol in pos_symbol)
+    
     def check_position_status(self):
         """Pozisyon durumunu kontrol et ve TP/SL gerçekleşmesi durumunda diğer emri cancel et"""
         if not self.current_position:
@@ -373,7 +446,7 @@ class SolMacdTrader:
             positions = self.exchange.fetch_positions([symbol])
             current_pos = None
             for pos in positions:
-                if pos['symbol'] == symbol and abs(float(pos['contracts'])) > 0:
+                if self._symbol_match(pos['symbol'], symbol) and abs(float(pos['contracts'])) > 0:
                     current_pos = pos
                     break
             
@@ -430,20 +503,30 @@ class SolMacdTrader:
             self.logger.error(f"Karşıt order kontrol hatası: {e}")
 
     def check_exit_signals(self):
-        """Çıkış sinyallerini kontrol et"""
+        """Çıkış sinyallerini kontrol et - Sadece warning için (opsiyonel TP/SL close)"""
         if not self.current_position:
             return
         
         try:
             symbol = self.config['symbol']
-            timeframe = self.current_position['timeframe']
+            timeframe = self.current_position.get('timeframe', '4h')
             
             # Sinyal kontrol et
             signal = self.check_signals(symbol, timeframe)
             
             if signal and signal['type'] != self.current_position['side']:
-                # Karşı sinyal geldi, pozisyonu kapat
-                self.close_position("signal_reversal")
+                # Karşı sinyal geldi
+                auto_close_on_reversal = self.config.get('signal_management', {}).get('auto_close_on_reversal', False)
+                
+                if auto_close_on_reversal:
+                    # Otomatik kapat
+                    self.logger.warning(f"⚠️ Karşı sinyal tespit edildi: Position={self.current_position['side']}, Signal={signal['type']}")
+                    self.logger.warning(f"    Pozisyon otomatik kapatılıyor (reversal)")
+                    self.close_position("signal_reversal")
+                else:
+                    # Sadece log
+                    self.logger.warning(f"⚠️ Karşı sinyal tespit edildi: Position={self.current_position['side']}, Signal={signal['type']}")
+                    self.logger.warning(f"    Pozisyon açık kalıyor - TP/SL bekleniyor")
                 
         except Exception as e:
             self.logger.error(f"Çıkış sinyal kontrol hatası: {e}")
@@ -461,7 +544,7 @@ class SolMacdTrader:
             positions = self.exchange.fetch_positions([symbol])
             current_pos = None
             for pos in positions:
-                if pos['symbol'] == symbol and abs(float(pos['contracts'])) > 0:
+                if self._symbol_match(pos['symbol'], symbol) and abs(float(pos['contracts'])) > 0:
                     current_pos = pos
                     break
             
@@ -568,6 +651,106 @@ class SolMacdTrader:
         except Exception as e:
             self.logger.error(f"Telegram mesaj gönderme hatası: {e}")
     
+    def start_signal_confirmation(self, signal: dict, data: dict = None):
+        """Start signal confirmation process"""
+        self.signal_confirmation_start_time = time.time()
+        signal_type = signal.get('type', '').upper()  # 'buy' -> 'BUY', 'sell' -> 'SELL'
+        self.current_signal = signal_type
+        self.confirmation_count = 1
+        self.last_confirmation_check = time.time()
+        
+        price = signal.get('price', 0)
+        timeframe = signal.get('timeframe', '4h')
+        indicators = signal.get('indicators', {})
+        
+        self.logger.info(f"🔍 CONFIRMATION BAŞLADI: {signal_type} sinyali")
+        self.logger.info(f"💰 Fiyat: {price:.4f}")
+        self.logger.info(f"⏰ Timeframe: {timeframe}")
+        self.logger.info(f"📊 Bull Score: {indicators.get('bull_score', 0)}, Bear Score: {indicators.get('bear_score', 0)}")
+        self.logger.info(f"⏰ Confirmation süresi: {self.confirmation_duration} saniye")
+        self.logger.info(f"🔄 Kontrol aralığı: {self.check_interval} saniye")
+        
+        # Telegram bildirimi
+        telegram_msg = f"""
+🔍 <b>SOL MACD - Sinyal Confirmation Başladı</b>
+
+📊 <b>Symbol:</b> {self.config['symbol']}
+🎯 <b>Sinyal:</b> {signal_type}
+💰 <b>Fiyat:</b> ${price:.4f}
+⏰ <b>Timeframe:</b> {timeframe}
+
+📈 <b>RSI:</b> {indicators.get('rsi', 0):.2f}
+📊 <b>Bull Score:</b> {indicators.get('bull_score', 0)}
+📉 <b>Bear Score:</b> {indicators.get('bear_score', 0)}
+
+⏰ <b>Confirmation Süresi:</b> {self.confirmation_duration} saniye
+🔄 <b>Kontrol Aralığı:</b> {self.check_interval} saniye
+📊 <b>Min Confirmation:</b> {self.min_confirmation_count} kez
+
+⏰ <b>Zaman:</b> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+        """
+        self.send_telegram_message(telegram_msg)
+    
+    def check_signal_confirmation(self, symbol: str, timeframe: str) -> bool:
+        """Check if signal is still valid during confirmation"""
+        current_time = time.time()
+        elapsed_time = current_time - self.signal_confirmation_start_time
+        
+        # Check if it's time for next confirmation check
+        if current_time - self.last_confirmation_check < self.check_interval:
+            return False
+        
+        # Check current signal
+        current_signal_data = self.check_signals(symbol, timeframe)
+        
+        if not current_signal_data:
+            # Signal disappeared
+            self.logger.warning(f"❌ CONFIRMATION İPTAL: Sinyal kayboldu!")
+            self.logger.warning(f"⏰ Elapsed time: {elapsed_time:.0f} saniye")
+            self.reset_confirmation_state()
+            return False
+        
+        current_signal_type = current_signal_data.get('type', '').upper()
+        
+        if current_signal_type == self.current_signal:
+            # Signal still valid
+            self.confirmation_count += 1
+            self.last_confirmation_check = current_time
+            
+            remaining_time = self.confirmation_duration - elapsed_time
+            
+            self.logger.info(f"✅ CONFIRMATION CHECK #{self.confirmation_count}: {self.current_signal} sinyali hala aktif")
+            self.logger.info(f"💰 Fiyat: {current_signal_data.get('price', 0):.4f}")
+            indicators = current_signal_data.get('indicators', {})
+            self.logger.info(f"📊 Bull Score: {indicators.get('bull_score', 0)}, Bear Score: {indicators.get('bear_score', 0)}")
+            self.logger.info(f"⏰ Kalan süre: {remaining_time:.0f} saniye")
+            
+            # Check if confirmation is complete
+            if elapsed_time >= self.confirmation_duration and self.confirmation_count >= self.min_confirmation_count:
+                self.logger.info(f"🎯 CONFIRMATION TAMAMLANDI: {self.current_signal} sinyali onaylandı!")
+                self.logger.info(f"📊 Toplam confirmation sayısı: {self.confirmation_count}")
+                return True
+            else:
+                self.logger.info(f"⏳ Confirmation devam ediyor... ({self.confirmation_count}/{self.min_confirmation_count} min)")
+                return False
+        else:
+            # Signal changed or disappeared
+            self.logger.warning(f"❌ CONFIRMATION İPTAL: Sinyal değişti!")
+            self.logger.warning(f"📊 Beklenen: {self.current_signal}, Mevcut: {current_signal_type}")
+            self.logger.warning(f"⏰ Elapsed time: {elapsed_time:.0f} saniye")
+            
+            # Reset confirmation state
+            self.reset_confirmation_state()
+            return False
+    
+    def reset_confirmation_state(self):
+        """Reset confirmation state"""
+        self.signal_confirmation_start_time = None
+        self.current_signal = None
+        self.confirmation_count = 0
+        self.last_confirmation_check = None
+        self.logger.info("🔄 Confirmation state sıfırlandı")
+    
     def run(self):
         """Ana trading döngüsü"""
         self.logger.info("SOL MACD Trend Trader başlatıldı")
@@ -580,48 +763,182 @@ class SolMacdTrader:
                 # ÖNCE EXCHANGE'DEN GERÇEK POZİSYON DURUMUNU KONTROL ET
                 positions = self.exchange.fetch_positions([symbol])
                 has_active_position = False
+                
+                # DEBUG: Pozisyon durumunu logla
+                if positions:
+                    self.logger.debug(f"Exchange'den alınan pozisyon sayısı: {len(positions)}")
+                
                 for pos in positions:
                     # CCXT pozisyon field'ları: 'size', 'contracts', 'amount' olabilir
                     position_size = pos.get('size', pos.get('contracts', pos.get('amount', 0)))
-                    if pos['symbol'] == symbol and abs(float(position_size)) > 0:
+                    
+                    # INFO level ile logla
+                    self.logger.info(f"📊 Pozisyon kontrol: symbol={pos.get('symbol')}, size={position_size}")
+                    
+                    # String veya number kontrolü
+                    try:
+                        pos_size_float = float(position_size) if position_size else 0.0
+                    except (ValueError, TypeError):
+                        pos_size_float = 0.0
+                    
+                    # Symbol karşılaştırması kullan
+                    if self._symbol_match(pos['symbol'], symbol) and abs(pos_size_float) > 0:
                         has_active_position = True
+                        self.logger.info(f"✅ AKTİF POZİSYON BULUNDU: {pos['side']} {pos_size_float} @ {pos.get('entryPrice')}")
+                        
                         # Pozisyon varsa current_position'ı güncelle
                         if not self.current_position:
                             self.current_position = {
-                                'side': 'buy' if float(position_size) > 0 else 'sell',
-                                'entry_price': float(pos['entryPrice']),
-                                'size': abs(float(position_size)),
-                                'timestamp': time.time()
+                                'side': pos['side'],
+                                'entry_price': float(pos.get('entryPrice', 0)),
+                                'size': abs(pos_size_float),
+                                'timestamp': time.time(),
+                                'timeframe': '4h'  # Default timeframe
                             }
-                            self.logger.info(f"Mevcut pozisyon tespit edildi: {position_size} @ {pos['entryPrice']}")
+                            self.logger.info(f"Internal state güncellendi: {self.current_position}")
                         break
                 
                 # Pozisyon yoksa ama current_position varsa temizle
                 if not has_active_position and self.current_position:
-                    self.logger.info("🚨 Pozisyon kapanmış - Exchange tarafından kapatıldı")
+                    self.logger.info("🚨 Pozisyon kapanmış - Exchange tarafından kapatıldı (TP/SL)")
+                    # 4H periyodunu kaydet (bu periyotta işlem yapıldı, tekrar açma)
+                    if 'candle_start_time' in self.current_position:
+                        try:
+                            from datetime import datetime
+                            closed_candle = datetime.fromisoformat(self.current_position['candle_start_time'])
+                            self._last_trade_candle = closed_candle
+                            self._save_trade_candle(closed_candle)
+                            self.logger.info(f"📅 Bu periyotta işlem yapıldı, artık YENİ PERİYOT bekleniyor")
+                            self.logger.info(f"   Son işlem periyodu: {closed_candle}")
+                        except Exception as e:
+                            self.logger.error(f"Periyot kaydedilemedi: {e}")
+                    else:
+                        # TP/SL ile kapandı ama internal state'de candle_start_time yok
+                        # _last_trade_candle'ı kullan (zaten dosyada kayıtlı)
+                        if self._last_trade_candle is not None:
+                            self.logger.info(f"📅 Bu periyotta işlem yapıldı, yeni periyot beklenecek")
+                            self.logger.info(f"   Son işlem periyodu (dosyadan): {self._last_trade_candle}")
+                            self._save_trade_candle(self._last_trade_candle)
                     self.current_position = None
+                    time.sleep(60)  # Bu iterasyonda yeni işlem açma, bekle
+                    continue
                 
                 # Pozisyon kontrolü: Hem internal state hem de exchange kontrolü
                 if has_active_position or self.current_position:
                     if has_active_position:
-                        self.logger.debug(f"Exchange'de aktif pozisyon var: {symbol}")
+                        self.logger.info(f"⚠️ Exchange'de aktif pozisyon var - Yeni pozisyon açılmayacak")
+                        if self.current_position:
+                            self.logger.info(f"  Internal state: {self.current_position['side']} @ {self.current_position.get('entry_price', 'N/A')}")
                     if self.current_position:
                         self.logger.debug(f"Internal state'de pozisyon var: {self.current_position['side']}")
                     # Çıkış sinyallerini kontrol et
                     self.check_exit_signals()
                 else:
-                    # Yeni sinyal kontrol et
-                    signal = self.check_signals(symbol, timeframe)
+                    # Yeni sinyal kontrol et - SADECE POZİSYON YOKSA
                     
-                    if signal:
-                        self.logger.info(f"Yeni sinyal: {signal['type']} @ {signal['price']:.4f}")
+                    # 4H PERİYOT KONTROLÜ: Bu periyotta zaten işlem açılmış mı?
+                    from datetime import datetime, timezone
+                    # BINANCE UTC TIME KULLAN ama naive olarak tut
+                    current_time_utc = datetime.now(timezone.utc)
+                    current_4h = current_time_utc.replace(minute=0, second=0, microsecond=0)
+                    current_4h = current_4h.replace(hour=(current_4h.hour // 4) * 4)
+                    # Naive datetime olarak kaydet (timezone-aware karşılaştırmaları kaldır)
+                    if current_4h.tzinfo is not None:
+                        current_4h = current_4h.replace(tzinfo=None)
+                    
+                    # Son açılan işlemin periyodunu kontrol et
+                    if self._last_trade_candle is not None:
+                        # Son işlem bu 4h periyodunda mı? (NaN-safe datetime comparison)
+                        last_candle_dt = self._last_trade_candle
+                        if isinstance(last_candle_dt, str):
+                            from datetime import datetime as dt
+                            last_candle_dt = dt.fromisoformat(last_candle_dt.replace('Z', '+00:00')).replace(tzinfo=None)
                         
-                        # Pozisyon aç
-                        if self.open_position(signal):
-                            self.last_signal_time = signal['timestamp']
+                        # BU PERİYOTTA İŞLEM AÇILDI MI?
+                        # Son işlem periyodu == şu anki periyot ise engelle
+                        if last_candle_dt == current_4h:
+                            self.logger.info(f"⏸️ Bu 4h periyotunda ({current_4h}) zaten işlem açıldı. Yeni periyodu bekle...")
+                            self.logger.info(f"   Son işlem periyodu: {last_candle_dt}")
+                            time.sleep(60)
+                            continue
+                        else:
+                            self.logger.info(f"✅ Farklı periyot: {last_candle_dt} → {current_4h}")
+                    
+                    self.logger.info(f"✅ Pozisyon yok - Sinyal kontrolüne geçiliyor (Periyot: {current_4h})")
+                    
+                    if self.signal_confirmation_start_time:
+                        # Confirmation process is active
+                        confirmation_complete = self.check_signal_confirmation(symbol, timeframe)
+                        
+                        if confirmation_complete:
+                            # Confirmation completed - open position
+                            # Get latest signal data for position opening
+                            signal = self.check_signals(symbol, timeframe)
+                            if signal and signal.get('type', '').upper() == self.current_signal:
+                                self.logger.info(f"🎯 CONFIRMATION TAMAMLANDI - Pozisyon açılıyor: {self.current_signal}")
+                                
+                                # POZİSYON AÇMADAN ÖNCE TEKRAR KONTROL ET (GÜVENLİK)
+                                final_check_positions = self.exchange.fetch_positions([symbol])
+                                final_check_active = False
+                                for pos in final_check_positions:
+                                    pos_size = pos.get('size', pos.get('contracts', 0))
+                                    try:
+                                        if self._symbol_match(pos['symbol'], symbol) and abs(float(pos_size)) > 0:
+                                            final_check_active = True
+                                            self.logger.warning(f"⚠️ Güvenlik kontrolü: Son anda pozisyon tespit edildi! Yeni pozisyon açılmayacak.")
+                                            break
+                                    except (ValueError, TypeError):
+                                        pass
+                                
+                                if not final_check_active:
+                                    # Pozisyon aç (4H periyodu open_position içinde kaydedilecek)
+                                    success = self.open_position(signal)
+                                    if success:
+                                        self.logger.info(f"✅ {self.current_signal} pozisyon başarıyla açıldı")
+                                        self.last_signal_time = signal['timestamp']
+                                    else:
+                                        self.logger.error(f"❌ {self.current_signal} pozisyon açılamadı")
+                                
+                                # Reset confirmation state
+                                self.reset_confirmation_state()
                     else:
-                        # Debug: Sinyal kontrol edildi ama sinyal yok
-                        self.logger.debug(f"Sinyal kontrol edildi: {symbol} {timeframe} - Sinyal yok")
+                        # No confirmation active - check for new signals
+                        signal = self.check_signals(symbol, timeframe)
+                        
+                        if signal:
+                            self.logger.info(f"Yeni sinyal: {signal['type']} @ {signal['price']:.4f}")
+                            
+                            # Prevent processing the same signal multiple times
+                            if self.last_signal_time and signal['timestamp'] == self.last_signal_time:
+                                self.logger.debug(f"⏭️ Sinyal zaten işlendi: {signal['type']}")
+                                time.sleep(60)
+                                continue
+                            
+                            # Start confirmation if enabled
+                            if self.confirmation_enabled:
+                                self.start_signal_confirmation(signal)
+                            else:
+                                # Confirmation disabled - open position immediately
+                                # POZİSYON AÇMADAN ÖNCE TEKRAR KONTROL ET (GÜVENLİK)
+                                final_check_positions = self.exchange.fetch_positions([symbol])
+                                final_check_active = False
+                                for pos in final_check_positions:
+                                    pos_size = pos.get('size', pos.get('contracts', 0))
+                                    try:
+                                        if self._symbol_match(pos['symbol'], symbol) and abs(float(pos_size)) > 0:
+                                            final_check_active = True
+                                            self.logger.warning(f"⚠️ Güvenlik kontrolü: Son anda pozisyon tespit edildi! Yeni pozisyon açılmayacak.")
+                                            break
+                                    except (ValueError, TypeError):
+                                        pass
+                                
+                                if not final_check_active:
+                                    # Pozisyon aç (4H periyodu open_position içinde kaydedilecek)
+                                    if self.open_position(signal):
+                                        self.last_signal_time = signal['timestamp']
+                        else:
+                            # Debug: Sinyal kontrol edildi ama sinyal yok
+                            self.logger.debug(f"Sinyal kontrol edildi: {symbol} {timeframe} - Sinyal yok")
                 
                 # Bekle
                 time.sleep(60)  # 1 dakika bekle

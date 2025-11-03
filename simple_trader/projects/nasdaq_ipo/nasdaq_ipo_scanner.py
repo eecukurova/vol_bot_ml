@@ -9,6 +9,7 @@ import json
 import time
 import logging
 import requests
+import os
 from datetime import datetime
 import pytz
 from typing import Dict, List, Optional
@@ -44,6 +45,10 @@ class NASDAQDynamicScanner:
         # Signal state
         self.last_signals = {}
         self.scanned_symbols = set()
+        
+        # Liste paylaşımı için state
+        self.last_list_share_time = None
+        self.list_share_interval = 4 * 3600  # 4 saatte bir liste paylaş
         
         self.log.info(f"🚀 NASDAQ IPO Scanner başlatıldı")
         self.log.info(f"💰 Max fiyat: ${self.max_price}")
@@ -82,9 +87,22 @@ class NASDAQDynamicScanner:
         return start_time <= current_time <= end_time
 
     def get_nasdaq_symbols(self) -> List[str]:
-        """NASDAQ'tan teknoloji hisselerini çek"""
+        """NASDAQ'tan teknoloji hisselerini çek - IPO listesi + hardcoded"""
         try:
-            # Bilinen teknoloji hisse listesi (genişletilmiş)
+            symbols = set()
+            
+            # 1. IPO listesini oku (ipos.csv)
+            try:
+                if os.path.exists('ipos.csv'):
+                    ipo_df = pd.read_csv('ipos.csv')
+                    if 'symbol' in ipo_df.columns:
+                        ipo_symbols = ipo_df['symbol'].dropna().tolist()
+                        symbols.update(ipo_symbols)
+                        self.log.info(f"📊 {len(ipo_symbols)} IPO hissesi yüklendi (ipos.csv)")
+            except Exception as e:
+                self.log.warning(f"⚠️ IPO CSV okuma hatası: {e}")
+            
+            # 2. Bilinen teknoloji hisse listesi (fallback)
             tech_symbols = [
                 # Büyük teknoloji firmaları
                 'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'META', 'NVDA', 'NFLX', 'ADBE', 'CRM',
@@ -97,22 +115,20 @@ class NASDAQDynamicScanner:
                 # Küçük teknoloji hisseleri
                 'KPLTW', 'MNYWW', 'EPWK', 'CYCU', 'AEVAW', 'YYAI', 'WCT', 'ZPTA', 'EGLXF', 'VEEA',
                 'ILLR', 'SELX', 'TDTH', 'ZSPC', 'CLPS', 'CXAIW', 'CHR', 'FPAY', 'IOTR', 'AIRE',
-                'OPTT', 'FEMY', 'SENS', 'ARBK', 'DKI', 'MYPS', 'ISPC', 'DDOG', 'SNOW', 'PLTR',
+                'OPTT', 'FEMY', 'SENS', 'ARBK', 'DKI', 'MYPS', 'ISPC',
                 
                 # Ek teknoloji hisseleri
-                'U', 'SOFI', 'HOOD', 'COIN', 'RBLX', 'PTON', 'PINS', 'SNAP', 'TWTR', 'UBER',
+                'U', 'SOFI', 'HOOD', 'COIN', 'RBLX', 'PTON', 'PINS', 'SNAP', 'UBER',
                 'LYFT', 'DASH', 'GRAB', 'BABA', 'JD', 'PDD', 'BILI', 'IQ', 'VIPS', 'WB',
                 
                 # Fintech
-                'SQ', 'PYPL', 'AFRM', 'UPST', 'LC', 'SOFI', 'HOOD', 'COIN', 'MSTR', 'RIOT',
-                
-                # SaaS/Cloud
-                'SNOW', 'DDOG', 'NET', 'ZS', 'CRWD', 'OKTA', 'PLTR', 'MDB', 'TWLO', 'WDAY',
-                'NOW', 'TEAM', 'SHOP', 'ABNB', 'DOCU', 'ZM', 'ROKU', 'SPOT', 'SQ', 'PYPL'
+                'AFRM', 'UPST', 'LC', 'MSTR', 'RIOT',
             ]
+            symbols.update(tech_symbols)
             
-            self.log.info(f"📊 {len(tech_symbols)} teknoloji hissesi yüklendi")
-            return tech_symbols
+            symbol_list = list(symbols)
+            self.log.info(f"📊 Toplam {len(symbol_list)} hisse yüklendi (IPO + Teknoloji)")
+            return symbol_list
             
         except Exception as e:
             self.log.error(f"❌ NASDAQ sembol çekme hatası: {e}")
@@ -187,6 +203,10 @@ class NASDAQDynamicScanner:
                 continue
         
         self.log.info(f"🎯 {len(filtered_stocks)} hisse filtrelendi")
+        
+        # Filtrelenmiş hisse listesini paylaş (periyodik)
+        self.share_filtered_list(filtered_stocks)
+        
         return filtered_stocks
 
     def get_stock_data(self, symbol: str, period: str = "5d") -> Optional[pd.DataFrame]:
@@ -378,6 +398,59 @@ class NASDAQDynamicScanner:
                 self.log.error(f"❌ {symbol} işleme hatası: {e}")
         
         self.log.info(f"✅ Tarama tamamlandı - {signals_found} sinyal bulundu")
+    
+    def share_filtered_list(self, filtered_stocks: List[Dict]):
+        """Filtrelenmiş hisse listesini Telegram'a gönder"""
+        try:
+            from datetime import datetime, timedelta
+            
+            # Son paylaşım zamanını kontrol et
+            now = datetime.now()
+            if self.last_list_share_time is None:
+                self.last_list_share_time = now
+            
+            # 4 saat geçmediyse paylaşma
+            if (now - self.last_list_share_time).total_seconds() < self.list_share_interval:
+                return
+            
+            if not filtered_stocks:
+                return
+            
+            # Liste mesajı oluştur
+            message = f"📊 <b>NASDAQ IPO Scanner - Filtrelenmiş Hisse Listesi</b>\n\n"
+            message += f"⏰ <b>Zaman:</b> {now.strftime('%Y-%m-%d %H:%M:%S')} UTC\n"
+            message += f"📈 <b>Toplam:</b> {len(filtered_stocks)} hisse\n\n"
+            
+            # İlk 20 hisseyi göster
+            top_stocks = sorted(filtered_stocks, key=lambda x: x.get('volume', 0), reverse=True)[:20]
+            
+            message += "<b>Top 20 (Volume'a göre):</b>\n\n"
+            for i, stock in enumerate(top_stocks, 1):
+                symbol = stock.get('symbol', 'N/A')
+                price = stock.get('price', 0)
+                volume = stock.get('volume', 0)
+                market_cap = stock.get('market_cap', 0)
+                
+                volume_m = volume / 1_000_000 if volume > 0 else 0
+                cap_m = market_cap / 1_000_000 if market_cap > 0 else 0
+                
+                message += f"{i}. <b>{symbol}</b>\n"
+                message += f"   💰 ${price:.2f} | 📊 Vol: {volume_m:.1f}M | 🏢 Cap: ${cap_m:.1f}M\n\n"
+            
+            if len(filtered_stocks) > 20:
+                message += f"\n... ve {len(filtered_stocks) - 20} hisse daha\n"
+            
+            message += f"\n🔍 <b>Filtreler:</b>\n"
+            message += f"   • Max Fiyat: ${self.max_price:.2f}\n"
+            message += f"   • Min Volume: {self.min_volume:,}\n"
+            message += f"   • Market Cap: ${self.min_market_cap/1_000_000:.1f}M - ${self.max_market_cap/1_000_000:.1f}M\n"
+            
+            self.send_telegram_message(message)
+            self.last_list_share_time = now
+            self.log.info(f"📱 Filtrelenmiş hisse listesi Telegram'a gönderildi ({len(filtered_stocks)} hisse)")
+            
+        except Exception as e:
+            self.log.error(f"❌ Liste paylaşım hatası: {e}")
 
     def run(self):
         """Ana döngü"""
@@ -399,15 +472,16 @@ class NASDAQDynamicScanner:
                 self.scan_and_process_signals()
                 
                 # Bir sonraki 15 dakikalık periyoda kadar bekle
+                from datetime import timedelta
                 current_time = datetime.now()
                 next_check_minute = ((current_time.minute // 15) + 1) * 15
                 if next_check_minute >= 60:
                     next_check_minute = 0
-                    next_check_hour = current_time.hour + 1
+                    # Saat 24'ü önlemek için timedelta kullan
+                    next_check_time = (current_time + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0)
                 else:
-                    next_check_hour = current_time.hour
+                    next_check_time = current_time.replace(minute=next_check_minute, second=0, microsecond=0)
                 
-                next_check_time = current_time.replace(hour=next_check_hour, minute=next_check_minute, second=0, microsecond=0)
                 wait_seconds = (next_check_time - current_time).total_seconds()
                 
                 self.log.info(f"⏰ Bir sonraki tarama: {next_check_time.strftime('%H:%M:%S')} ({wait_seconds:.0f} saniye sonra)")

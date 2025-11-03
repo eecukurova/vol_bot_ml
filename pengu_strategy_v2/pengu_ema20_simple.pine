@@ -1,0 +1,112 @@
+//@version=5
+strategy("PENGU EMA20 Simple 1% Profit", shorttitle="PENGU EMA20", overlay=true,
+         initial_capital=10000, commission_type=strategy.commission.percent, commission_value=0.1)
+
+// === PENGU EMA20 Simple Strategy ===
+ema_period = input.int(20, title="EMA Period", minval=1, maxval=200)
+use_heikin_ashi = input.bool(true, title="Use Heikin Ashi", group="Settings")
+
+// === Risk Management - 1% Target ===
+stop_loss_pct = input.float(2.0, title="Stop Loss %", minval=0.5, maxval=5.0, step=0.1)
+take_profit_pct = input.float(1.0, title="Take Profit %", minval=0.3, maxval=3.0, step=0.1)
+leverage = input.int(5, title="Leverage", minval=1, maxval=10)
+
+// === Strategy Settings ===
+position_size_pct = input.float(20, title="Position Size %", minval=5, maxval=50, step=5) / 100
+
+// === Heikin Ashi Calculation ===
+var float ha_open = na
+var float ha_close = na
+
+ha_close := (open + high + low + close) / 4
+ha_open := na(ha_open[1]) ? (open + close) / 2 : (ha_open[1] + ha_close[1]) / 2
+
+ha_high = math.max(high, math.max(ha_open, ha_close))
+ha_low = math.min(low, math.min(ha_open, ha_close))
+
+// === EMA Calculation ===
+price_source = use_heikin_ashi ? ha_close : close
+ema_value = ta.ema(price_source, ema_period)
+prev_ema = ema_value[1]
+
+// === Signal Generation ===
+// Buy: Price crosses above EMA
+buy_signal = ta.crossover(price_source, ema_value)
+
+// Sell: Price crosses below EMA
+sell_signal = ta.crossunder(price_source, ema_value)
+
+// === Strategy Execution ===
+var float entry_price = na
+var float current_drawdown = na
+
+// Open long position on buy signal
+if buy_signal and strategy.position_size == 0
+    entry_price := close
+    strategy.entry("Long", strategy.long, comment="PENGU EMA20 Buy")
+
+// Close position on sell signal or TP/SL
+if strategy.position_size > 0
+    entry_price := na(entry_price) ? strategy.position_avg_price : entry_price
+    
+    // Calculate current P&L percentage
+    current_return = (close - entry_price) / entry_price * 100
+    
+    // Check for stop loss
+    if current_return <= -stop_loss_pct
+        strategy.close("Long", comment="Stop Loss")
+        entry_price := na
+    
+    // Check for take profit
+    else if current_return >= take_profit_pct
+        strategy.close("Long", comment="Take Profit")
+        entry_price := na
+
+// Close on sell signal
+if sell_signal and strategy.position_size > 0
+    strategy.close("Long", comment="PENGU EMA20 Sell")
+    entry_price := na
+
+// === Plotting ===
+// Price Chart
+plot(close, title="Close Price", color=color.blue, linewidth=1)
+plot(ha_close, title="Heikin Ashi", color=color.orange, linewidth=1, display=use_heikin_ashi ? display.all : display.none)
+
+// EMA Line
+plot(ema_value, title="EMA 20", color=color.red, linewidth=2)
+
+// Background coloring
+bgcolor(close > ema_value ? color.new(color.green, 95) : color.new(color.red, 95), title="EMA Trend")
+
+// Signal markers
+plotshape(buy_signal, title="Buy", location=location.belowbar, 
+          color=color.green, style=shape.triangleup, size=size.normal)
+plotshape(sell_signal, title="Sell", location=location.abovebar, 
+          color=color.red, style=shape.triangledown, size=size.normal)
+
+// === Information Table ===
+if barstate.islast
+    var table info_table = table.new(position.top_right, 2, 6, bgcolor=color.white, border_width=1)
+    
+    table.cell(info_table, 0, 0, "Parameter", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 0, "Value", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 1, "EMA Period", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 1, str.tostring(ema_period), text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 2, "Stop Loss", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 2, str.tostring(stop_loss_pct) + "%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 3, "Take Profit", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 3, str.tostring(take_profit_pct) + "%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 4, "Position Size", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 4, str.tostring(position_size_pct * 100) + "%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 5, "Trend", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 5, close > ema_value ? "Bullish" : "Bearish",
+               text_color=close > ema_value ? color.green : color.red, text_size=size.small)
+
+// === Alerts ===
+alertcondition(buy_signal, title="PENGU EMA20 Buy", message="PENGU EMA20 Buy Signal")
+alertcondition(sell_signal, title="PENGU EMA20 Sell", message="PENGU EMA20 Sell Signal")

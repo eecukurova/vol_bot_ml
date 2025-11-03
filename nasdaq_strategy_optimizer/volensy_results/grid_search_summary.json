@@ -1,0 +1,165 @@
+{
+  "total_combinations": 108,
+  "symbols": [
+    "ETH/USDT",
+    "BTC/USDT",
+    "SOL/USDT"
+  ],
+  "timeframes": [
+    "15m",
+    "1h",
+    "4h"
+  ],
+  "best_results": {
+    "BTC/USDT": {
+      "1h": {
+        "params": {
+          "ema_len": 40,
+          "macd_fast": 12,
+          "macd_slow": 26,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 1.4997738691014584,
+        "total_return": 0.23963076485770218,
+        "max_drawdown": -2.61256345028285,
+        "num_trades": 9
+      },
+      "4h": {
+        "params": {
+          "ema_len": 40,
+          "macd_fast": 8,
+          "macd_slow": 26,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 0.7716697375035767,
+        "total_return": -0.7588005095501102,
+        "max_drawdown": -3.8882261782711107,
+        "num_trades": 14
+      },
+      "15m": {
+        "params": {
+          "ema_len": 20,
+          "macd_fast": 12,
+          "macd_slow": 21,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 0.32147239808182526,
+        "total_return": -1.278711604527889,
+        "max_drawdown": -3.730414913981276,
+        "num_trades": 7
+      }
+    },
+    "ETH/USDT": {
+      "15m": {
+        "params": {
+          "ema_len": 30,
+          "macd_fast": 8,
+          "macd_slow": 21,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 2.7854882058361294,
+        "total_return": 1.1996324748581173,
+        "max_drawdown": -2.897207661314148,
+        "num_trades": 15
+      },
+      "1h": {
+        "params": {
+          "ema_len": 40,
+          "macd_fast": 8,
+          "macd_slow": 26,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 0.714285742630381,
+        "total_return": -1.0400008400001934,
+        "max_drawdown": -3.890827507806862,
+        "num_trades": 16
+      },
+      "4h": {
+        "params": {
+          "ema_len": 20,
+          "macd_fast": 8,
+          "macd_slow": 26,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 0.8575783714886669,
+        "total_return": -0.9568603588151018,
+        "max_drawdown": -4.246867641316931,
+        "num_trades": 24
+      }
+    },
+    "SOL/USDT": {
+      "15m": {
+        "params": {
+          "ema_len": 20,
+          "macd_fast": 8,
+          "macd_slow": 21,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 0.9429508039782042,
+        "total_return": -0.4395399398349764,
+        "max_drawdown": -3.8445389015186944,
+        "num_trades": 16
+      },
+      "1h": {
+        "params": {
+          "ema_len": 30,
+          "macd_fast": 12,
+          "macd_slow": 26,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 1.7137702368179972,
+        "total_return": 0.9984326244082331,
+        "max_drawdown": -3.2260971026718024,
+        "num_trades": 25
+      },
+      "4h": {
+        "params": {
+          "ema_len": 20,
+          "macd_fast": 12,
+          "macd_slow": 26,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 4.500226368993737,
+        "total_return": 2.4803747551437665,
+        "max_drawdown": -2.7050761546298054,
+        "num_trades": 23
+      }
+    }
+  }
+}

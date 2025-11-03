@@ -1,0 +1,128 @@
+//@version=6
+indicator(title="Volensy MACD Trend - BTC Optimized", shorttitle="Volensy MACD BTC", overlay=true)
+
+// =========================
+// 1) BTC/USDT Optimized Parameters (Best Performance: BTC/USDT 1h)
+// =========================
+group_trend = "Trend / EMA"
+emaLen      = input.int(40,  "Trend EMA Periyodu", minval=1, group=group_trend)
+
+group_macd  = "MACD"
+macdFast    = input.int(12,  "MACD Hızlı EMA", minval=1, group=group_macd)
+macdSlow    = input.int(26,  "MACD Yavaş EMA", minval=1, group=group_macd)
+macdSignal  = input.int(9,   "MACD Sinyal EMA", minval=1, group=group_macd)
+
+group_rsi   = "RSI"
+rsiLen      = input.int(14,  "RSI Periyodu", minval=1, group=group_rsi)
+rsiOB       = input.float(70,"RSI Aşırı Alım", step=0.1, group=group_rsi)
+rsiOS       = input.float(30,"RSI Aşırı Satım", step=0.1, group=group_rsi)
+
+group_atr   = "ATR (Bilgi)"
+atrLen      = input.int(14,  "ATR Periyodu", minval=1, group=group_atr)
+
+group_viz   = "Görsel / Alarm"
+showBg      = input.bool(true,  "Trend Bölgesi Arka Planını Göster", group=group_viz)
+showShapes  = input.bool(true,  "Grafikte AL/SAT Üçgenlerini Göster", group=group_viz)
+showLabels  = input.bool(true,  "AL/SAT Etiketlerini Göster", group=group_viz)
+onlyOnClose = input.bool(true,  "Sinyalleri Sadece Bar Kapanışında Üret", group=group_viz)
+
+// =========================
+// 2) Hesaplamalar
+// =========================
+emaTrend = ta.ema(close, emaLen)
+
+// MACD
+macd     = ta.ema(close, macdFast) - ta.ema(close, macdSlow)
+macdSig  = ta.ema(macd, macdSignal)
+macdHist = macd - macdSig
+
+// RSI
+rsi = ta.rsi(close, rsiLen)
+
+// ATR (bilgi amaçlı)
+atr = ta.atr(atrLen)
+
+// =========================
+// 3) Bileşen Koşulları ve Skorlar
+// =========================
+isBullTrend    = close > emaTrend
+isBearTrend    = close < emaTrend
+isBullMomentum = rsi > 50
+isBearMomentum = rsi < 50
+isBullPower    = macd > macdSig
+isBearPower    = macd < macdSig
+
+notOverbought = rsi < rsiOB
+notOversold   = rsi > rsiOS
+
+bullScore = (isBullTrend ? 1 : 0) + (isBullMomentum ? 1 : 0) + (isBullPower ? 1 : 0)
+bearScore = (isBearTrend ? 1 : 0) + (isBearMomentum ? 1 : 0) + (isBearPower ? 1 : 0)
+
+rawBuy  = (bullScore == 3) and notOverbought
+rawSell = (bearScore == 3) and notOversold
+
+canSignal = onlyOnClose ? barstate.isconfirmed : true
+
+// =========================
+// 4) Yinelenen Aynı Sinyali Engelleme
+// =========================
+var int lastDir = 0
+buyOK  = canSignal and rawBuy  and (lastDir != 1)
+sellOK = canSignal and rawSell and (lastDir != -1)
+
+if buyOK
+    lastDir := 1
+else if sellOK
+    lastDir := -1
+
+// =========================
+// 5) Görselleştirme
+// =========================
+// EMA çizimi
+plot(emaTrend, title="Trend EMA", color=color.new(color.blue, 0), linewidth=2)
+
+// Arka plan
+bgcolor(showBg ? (isBullTrend ? color.new(color.green, 89) : isBearTrend ? color.new(color.red, 89) : na) : na)
+
+// Üçgen şekiller
+plotshape(showShapes and buyOK,  title="AL Sinyali 📈",  style=shape.triangleup,   location=location.belowbar, size=size.small, color=color.new(color.lime, 0), text="AL 📈")
+plotshape(showShapes and sellOK, title="SAT Sinyali 📉", style=shape.triangledown, location=location.abovebar,  size=size.small, color=color.new(color.red,  0), text="SAT 📉")
+
+// Etiketler
+if showLabels and buyOK
+    label.new(bar_index, low,  "AL 📈",  style=label.style_label_up,   color=color.new(color.lime, 0), textcolor=color.black)
+if showLabels and sellOK
+    label.new(bar_index, high, "SAT 📉", style=label.style_label_down, color=color.new(color.red,  0), textcolor=color.white)
+
+// Bar renklendirme
+barcolor(isBullTrend ? color.new(color.green, 80) : isBearTrend ? color.new(color.red, 80) : na)
+
+// =========================
+// 6) Alarm Koşulları
+// =========================
+alertcondition(buyOK,  title="AL Sinyali 📈",  message="Volensy MACD BTC: AL 📈 - EMA/RSI/MACD hepsi BULLISH.")
+alertcondition(sellOK, title="SAT Sinyali 📉", message="Volensy MACD BTC: SAT 📉 - EMA/RSI/MACD hepsi BEARISH.")
+
+// =========================
+// 7) Bilgi Paneli
+// =========================
+var table info = table.new(position.top_right, 1, 7, frame_color=color.new(color.black, 0), frame_width=1, border_width=0)
+if barstate.islast
+    table.cell(info, 0, 0, "Volensy MACD BTC Optimized", text_color=color.white, bgcolor=color.new(color.orange, 75))
+    table.cell(info, 0, 1, "EMA("+str.tostring(emaLen)+") = " + str.tostring(emaTrend, format.mintick), text_color=color.white, bgcolor=color.new(color.orange, 75))
+    table.cell(info, 0, 2, "RSI("+str.tostring(rsiLen)+") = " + str.tostring(rsi, format.mintick), text_color=color.white)
+    table.cell(info, 0, 3, "MACD = " + str.tostring(macd, format.mintick), text_color=color.white)
+    table.cell(info, 0, 4, "Signal = " + str.tostring(macdSig, format.mintick), text_color=color.white)
+    table.cell(info, 0, 5, "BullScore: " + str.tostring(bullScore) + " | BearScore: " + str.tostring(bearScore), text_color=color.white)
+    table.cell(info, 0, 6, "ATR("+str.tostring(atrLen)+") = " + str.tostring(atr, format.mintick), text_color=color.white)
+
+// =========================
+// 8) BTC Performans Bilgileri
+// =========================
+var table perf = table.new(position.top_left, 1, 5, frame_color=color.new(color.black, 0), frame_width=1, border_width=0)
+if barstate.islast
+    table.cell(perf, 0, 0, "BTC/USDT 1h Results", text_color=color.white, bgcolor=color.new(color.orange, 75))
+    table.cell(perf, 0, 1, "PF: 1.50 | Return: 0.24%", text_color=color.white)
+    table.cell(perf, 0, 2, "Max DD: -2.61%", text_color=color.white)
+    table.cell(perf, 0, 3, "Trades: 9", text_color=color.white)
+    table.cell(perf, 0, 4, "EMA: 40 | MACD: 12,26,9", text_color=color.white)

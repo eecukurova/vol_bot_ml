@@ -1,0 +1,141 @@
+//@version=5
+strategy("PENGU EMA Crossover Strategy", shorttitle="PENGU EMA", overlay=true,
+         initial_capital=10000, commission_type=strategy.commission.percent, commission_value=0.1)
+
+// === PENGU EMA Parametreleri ===
+ema_fast = input.int(10, title="EMA Fast Period", minval=1, maxval=50)
+ema_slow = input.int(26, title="EMA Slow Period", minval=1, maxval=100)
+use_heikin_ashi = input.bool(true, title="Use Heikin Ashi", group="Settings")
+
+// === Risk Management ===
+stop_loss_pct = input.float(1.0, title="Stop Loss %", minval=0.5, maxval=5.0, step=0.1)
+take_profit_pct = input.float(1.5, title="Take Profit %", minval=0.5, maxval=5.0, step=0.1)
+leverage = input.int(5, title="Leverage", minval=1, maxval=10)
+
+// === Strategy Settings ===
+initial_capital = input.float(10000, title="Initial Capital", minval=1000)
+position_size_pct = input.float(20, title="Position Size %", minval=5, maxval=50, step=5) / 100
+default_qty_type = strategy.percent_of_equity
+default_qty_value = 100
+
+// === Heikin Ashi Calculation ===
+var float ha_open = na
+var float ha_close = na
+
+ha_close := (open + high + low + close) / 4
+ha_open := na(ha_open[1]) ? (open + close) / 2 : (ha_open[1] + ha_close[1]) / 2
+
+ha_high = math.max(high, math.max(ha_open, ha_close))
+ha_low = math.min(low, math.min(ha_open, ha_close))
+
+// Choose price source (Heikin Ashi or Regular)
+price_source = use_heikin_ashi ? ha_close : close
+prev_price_source = use_heikin_ashi ? ha_close[1] : close[1]
+
+// === EMA Calculation ===
+ema_fast_value = ta.ema(price_source, ema_fast)
+ema_slow_value = ta.ema(price_source, ema_slow)
+
+// Previous EMAs for crossover detection
+prev_ema_fast = ema_fast_value[1]
+prev_ema_slow = ema_slow_value[1]
+
+// === Signal Generation ===
+// Buy Signal: Fast EMA crosses above Slow EMA
+buy_signal = ta.crossover(ema_fast_value, ema_slow_value) or (prev_ema_fast <= prev_ema_slow and ema_fast_value > ema_slow_value)
+
+// Sell Signal: Fast EMA crosses below Slow EMA
+sell_signal = ta.crossunder(ema_fast_value, ema_slow_value) or (prev_ema_fast >= prev_ema_slow and ema_fast_value < ema_slow_value)
+
+// === Strategy Execution ===
+// Long signals
+if buy_signal and strategy.position_size == 0
+    strategy.entry("Long", strategy.long, qty=position_size_pct, comment="PENGU EMA Buy")
+
+if sell_signal and strategy.position_size > 0
+    strategy.close("Long", comment="PENGU EMA Sell")
+
+// Short signals
+if sell_signal and strategy.position_size == 0
+    strategy.entry("Short", strategy.short, qty=position_size_pct, comment="PENGU EMA Short")
+
+if buy_signal and strategy.position_size < 0
+    strategy.close("Short", comment="PENGU EMA Close Short")
+
+// === Stop Loss and Take Profit ===
+if strategy.position_size > 0
+    // LONG position
+    stop_price = strategy.position_avg_price * (1 - stop_loss_pct / 100)
+    profit_price = strategy.position_avg_price * (1 + take_profit_pct / 100)
+    
+    strategy.exit("SL/TP Long", "Long", stop=stop_price, limit=profit_price, comment="SL/TP")
+else if strategy.position_size < 0
+    // SHORT position
+    stop_price = strategy.position_avg_price * (1 + stop_loss_pct / 100)
+    profit_price = strategy.position_avg_price * (1 - take_profit_pct / 100)
+    
+    strategy.exit("SL/TP Short", "Short", stop=stop_price, limit=profit_price, comment="SL/TP")
+
+// === Plotting ===
+// Price Chart
+plot(close, title="Close Price", color=color.blue, linewidth=1)
+plot(ha_close, title="Heikin Ashi Close", color=color.orange, linewidth=1, display=use_heikin_ashi ? display.all : display.none)
+
+// EMA Lines
+plot(ema_fast_value, title="EMA Fast", color=color.green, linewidth=2)
+plot(ema_slow_value, title="EMA Slow", color=color.red, linewidth=2)
+
+// Background coloring
+bgcolor(ema_fast_value > ema_slow_value ? color.new(color.green, 95) : color.new(color.red, 95), 
+        title="EMA Trend Background")
+
+// Signal markers
+plotshape(buy_signal, title="Buy Signal", location=location.belowbar, 
+          color=color.green, style=shape.triangleup, size=size.normal)
+plotshape(sell_signal, title="Sell Signal", location=location.abovebar, 
+          color=color.red, style=shape.triangledown, size=size.normal)
+
+// === Information Table ===
+if barstate.islast
+    var table info_table = table.new(position.top_right, 2, 8, bgcolor=color.white, border_width=1)
+    
+    table.cell(info_table, 0, 0, "Parameter", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 0, "Value", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 1, "EMA Fast", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 1, str.tostring(ema_fast), text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 2, "EMA Slow", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 2, str.tostring(ema_slow), text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 3, "Heikin Ashi", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 3, use_heikin_ashi ? "ON" : "OFF", 
+               text_color=use_heikin_ashi ? color.green : color.red, text_size=size.small)
+    
+    table.cell(info_table, 0, 4, "Stop Loss", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 4, str.tostring(stop_loss_pct) + "%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 5, "Take Profit", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 5, str.tostring(take_profit_pct) + "%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 6, "Leverage", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 6, str.tostring(leverage) + "x", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 7, "Current Trend", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 7, ema_fast_value > ema_slow_value ? "Bullish" : "Bearish", 
+               text_color=ema_fast_value > ema_slow_value ? color.green : color.red, text_size=size.small)
+
+// === Alerts ===
+alertcondition(buy_signal, title="PENGU EMA Buy Signal", message="PENGU EMA Buy Signal - Fast EMA crossed above Slow EMA")
+alertcondition(sell_signal, title="PENGU EMA Sell Signal", message="PENGU EMA Sell Signal - Fast EMA crossed below Slow EMA")
+
+// === Performance Metrics ===
+// Bu PENGU EMA stratejisi Python'da şu sonuçları veriyor:
+// - EMA Fast: 10
+// - EMA Slow: 26
+// - Heikin Ashi: Aktif
+// - Stop Loss: 1.5%
+// - Take Profit: 0.5%
+// - Leverage: 10x
+// - Trade Amount: $100
+// - Confirmation Süresi: 121 saniye (Pine Script'te alert fonksiyonu ile kontrol edilebilir)

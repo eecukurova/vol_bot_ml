@@ -1,0 +1,75 @@
+//@version=5
+strategy("PENGU EMA20 - Working Version", shorttitle="PENGU EMA20", overlay=true,
+         initial_capital=10000, commission_type=strategy.commission.percent, commission_value=0.1)
+
+// === PENGU EMA20 Strategy ===
+ema_period = input.int(20, title="EMA Period", minval=1, maxval=200)
+use_heikin_ashi = input.bool(true, title="Use Heikin Ashi")
+
+// === Risk Management ===
+stop_loss_pct = input.float(2.0, title="Stop Loss %", minval=0.5, maxval=5.0, step=0.1)
+take_profit_pct = input.float(1.0, title="Take Profit %", minval=0.3, maxval=3.0, step=0.1)
+
+// === Heikin Ashi Calculation ===
+var float ha_open = na
+var float ha_close = na
+
+ha_close := (open + high + low + close) / 4
+ha_open := na(ha_open[1]) ? (open + close) / 2 : (ha_open[1] + ha_close[1]) / 2
+
+ha_high = math.max(high, math.max(ha_open, ha_close))
+ha_low = math.min(low, math.min(ha_open, ha_close))
+
+// === EMA Calculation ===
+price_source = use_heikin_ashi ? ha_close : close
+ema_value = ta.ema(price_source, ema_period)
+
+// === Signal Generation ===
+buy_signal = ta.crossover(price_source, ema_value)
+sell_signal = ta.crossunder(price_source, ema_value)
+
+// === Strategy Logic ===
+// Track entry price
+var float entry_price_tracked = na
+
+// Entry logic
+if buy_signal and strategy.position_size == 0
+    entry_price_tracked := close
+    strategy.entry("Long", strategy.long, comment="Buy")
+
+// Exit logic with TP/SL
+if strategy.position_size > 0
+    current_price = close
+    entry_price = entry_price_tracked
+    
+    // Calculate return percentage
+    if not na(entry_price)
+        return_pct = ((current_price - entry_price) / entry_price) * 100
+        
+        // Stop Loss
+        if return_pct <= -stop_loss_pct
+            strategy.close("Long", comment="SL")
+            entry_price_tracked := na
+        
+        // Take Profit
+        else if return_pct >= take_profit_pct
+            strategy.close("Long", comment="TP")
+            entry_price_tracked := na
+
+// Also close on sell signal
+if sell_signal and strategy.position_size > 0
+    strategy.close("Long", comment="Sell")
+    entry_price_tracked := na
+
+// === Plotting ===
+plot(close, title="Close", color=color.blue)
+plot(ema_value, title="EMA 20", color=color.red, linewidth=2)
+plot(ha_close, title="HA Close", color=color.orange, display=use_heikin_ashi ? display.all : display.none)
+
+bgcolor(price_source > ema_value ? color.new(color.green, 95) : color.new(color.red, 95))
+
+plotshape(buy_signal, title="Buy", location=location.belowbar, 
+          color=color.green, style=shape.triangleup)
+plotshape(sell_signal, title="Sell", location=location.abovebar, 
+          color=color.red, style=shape.triangledown)
+

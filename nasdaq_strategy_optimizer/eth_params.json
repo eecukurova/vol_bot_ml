@@ -1,0 +1,61 @@
+{
+  "symbol": "ETHUSDT",
+  "timeframe": "4h",
+  "start_date": "2023-01-01",
+  "end_date": "2024-12-31",
+  "initial_capital": 10000,
+  "commission": 0.001,
+  "slippage": 0.0005,
+  "parameters": {
+    "bb_length": {
+      "min": 10,
+      "max": 25,
+      "step": 1
+    },
+    "bb_mult": {
+      "min": 1.2,
+      "max": 2.5,
+      "step": 0.1
+    },
+    "min_price_change": {
+      "min": 0.5,
+      "max": 3.0,
+      "step": 0.1
+    },
+    "max_price_change": {
+      "min": 5.0,
+      "max": 12.0,
+      "step": 0.5
+    },
+    "target_profit": {
+      "min": 1.0,
+      "max": 3.5,
+      "step": 0.1
+    },
+    "stop_loss_pct": {
+      "min": 1.5,
+      "max": 4.0,
+      "step": 0.1
+    },
+    "volume_multiplier": {
+      "min": 1.0,
+      "max": 1.8,
+      "step": 0.1
+    },
+    "trailing_percent": {
+      "min": 0.5,
+      "max": 2.0,
+      "step": 0.1
+    }
+  },
+  "optimization_goals": {
+    "primary": "profit_factor",
+    "secondary": "total_trades",
+    "min_trades": 50,
+    "max_drawdown": 0.15,
+    "min_win_rate": 0.45
+  },
+  "timeframes": ["4h", "1d"],
+  "heiken_ashi": true,
+  "description": "ETH USDT Bollinger Bands Optimized Strategy - Focus on frequent signals with high profitability"
+}

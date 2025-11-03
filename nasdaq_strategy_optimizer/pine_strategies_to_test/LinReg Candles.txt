@@ -1,0 +1,13 @@
+123456789
+//@version=4
+study(title="Humble LinReg Candles", shorttitle="LinReg Candles", format=format.price, precision=4, overlay=true)
+
+signal_length = input(title="Signal Smoothing", type=input.integer, minval = 1, maxval = 200, defval = 11)
+sma_signal = input(title="Simple MA (Signal Line)", type=input.bool, defval=true)
+
+lin_reg = input(title="Lin Reg", type=input.bool, defval=true)
+linreg_length = input(title="Linear Regression Length", type=input.integer, minval = 1, maxval = 200, defval = 11)
+
+bopen = lin_reg ? linreg(open, linreg_length, 0) : open
+…
+plot(signal, color=color.white)

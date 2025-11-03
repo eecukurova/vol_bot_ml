@@ -1,0 +1,7 @@
+longcondition=ta.crossover(close, last_open_long)
+shortcondition=ta.crossunder(close, last_open_short)
+
+plotshape(longcondition, style=shape.labelup, location=location.belowbar, text="AL", textcolor=color.white, color=color.green)
+plotshape(shortcondition, style=shape.labeldown, location=location.abovebar, text="SAT", textcolor=color.white, color=color.red)
+alertcondition(longcondition, title="Al", message=" AL")
+alertcondition(shortcondition, title="SAT", message=" SAT")

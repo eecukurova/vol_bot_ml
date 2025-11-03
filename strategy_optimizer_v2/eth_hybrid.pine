@@ -1,0 +1,252 @@
+//@version=5
+strategy("ETH Bollinger Bands Hybrid", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=15)
+
+// ============================================================================
+// ETH USDT HYBRID PARAMETERS - BALANCED APPROACH
+// ============================================================================
+
+// Bollinger Bands Parameters - Balanced
+bb_length = input.int(12, "Bollinger Bands Period", minval=8, maxval=20)
+bb_mult = input.float(1.6, "Bollinger Bands Std Dev", minval=1.2, maxval=2.2, step=0.1)
+
+// Price Filters - Balanced
+min_price_change = input.float(1.5, "Minimum Price Change (%)", minval=1.0, maxval=2.5, step=0.1) / 100
+max_price_change = input.float(7.0, "Maximum Price Change (%)", minval=3.0, maxval=12.0, step=0.1) / 100
+high_close_margin = input.float(2.5, "Close-High Margin (%)", minval=1.0, maxval=5.0, step=0.1) / 100
+
+// Volume Filters - Balanced
+min_volume = input.float(400000, "Minimum Volume", minval=200000, maxval=800000, step=50000)
+volume_period = input.int(7, "Average Volume Period", minval=5, maxval=15)
+volume_multiplier = input.float(1.3, "Volume Multiplier", minval=1.0, maxval=1.8, step=0.1)
+
+// Risk Management - Balanced
+target_profit = input.float(1.8, "Target Profit (%)", minval=1.0, maxval=3.0, step=0.1) / 100
+stop_loss_pct = input.float(1.2, "Stop Loss (%)", minval=0.8, maxval=2.0, step=0.1) / 100
+trailing_stop = input.bool(true, "Enable Trailing Stop")
+trailing_percent = input.float(0.6, "Trailing Stop (%)", minval=0.4, maxval=1.2, step=0.1) / 100
+
+// Analysis Parameters - Balanced
+candle_analysis_period = input.int(2, "Candle Analysis Period", minval=1, maxval=4)
+
+// Heiken Ashi Integration
+use_heiken_ashi = input.bool(true, "Use Heiken Ashi Candles")
+
+// ETH Specific Filters
+eth_volatility_filter = input.bool(true, "ETH Volatility Filter")
+min_atr = input.float(0.6, "Minimum ATR (%)", minval=0.3, maxval=1.5, step=0.1) / 100
+
+// ============================================================================
+// CALCULATIONS
+// ============================================================================
+
+// Heiken Ashi Calculation - Balanced
+ha_close = use_heiken_ashi ? (open + high + low + close) / 4 : close
+var float ha_open = na
+var float prev_ha_close = na
+
+// Initialize HA Open
+if barstate.isfirst
+    ha_open := open
+    prev_ha_close := ha_close
+else
+    if use_heiken_ashi
+        ha_open := (ha_open[1] + prev_ha_close) / 2
+        prev_ha_close := ha_close
+    else
+        ha_open := open
+
+ha_high = use_heiken_ashi ? math.max(high, math.max(ha_open, ha_close)) : high
+ha_low = use_heiken_ashi ? math.min(low, math.min(ha_open, ha_close)) : low
+
+// Bollinger Bands Calculation
+[bb_upper, bb_middle, bb_lower] = ta.bb(ha_close, bb_length, bb_mult)
+
+// Volume Analysis - Balanced
+avg_volume = ta.sma(volume, volume_period)
+volume_condition = volume > min_volume and volume > (avg_volume * volume_multiplier)
+
+// Price Change Analysis
+price_change = barstate.isfirst ? 0 : (ha_close - prev_ha_close) / prev_ha_close
+price_change_valid = price_change >= min_price_change and price_change <= max_price_change
+
+// Close-High Difference
+high_close_diff = math.abs(1 - (ha_high / ha_close))
+
+// ATR for ETH volatility
+atr = ta.atr(14)
+atr_percent = atr / ha_close
+atr_condition = not eth_volatility_filter or atr_percent >= min_atr
+
+// ============================================================================
+// BALANCED ENTRY CONDITIONS
+// ============================================================================
+
+// 1. Balanced Candle Analysis
+green_candle = ha_close > ha_open
+close_near_high = high_close_diff < high_close_margin
+close_higher_than_prev = barstate.isfirst ? true : ha_close > prev_ha_close
+strong_momentum = (ha_close - ha_open) / ha_open > 0.002  // 0.2% minimum body
+
+// 2. Bollinger Bands Analysis - Balanced
+bb_upper_touch = ha_close >= bb_upper * 0.985  // Close to upper band
+bb_middle_cross = barstate.isfirst ? false : ha_close > bb_middle and prev_ha_close <= bb_middle[1]
+bb_expansion = (bb_upper - bb_lower) / bb_middle > 0.018  // Band expansion
+bb_squeeze = (bb_upper - bb_lower) / bb_middle < 0.06  // Band squeeze
+
+// 3. Momentum Indicators - Balanced
+rsi = ta.rsi(ha_close, 12)  // Balanced RSI
+rsi_oversold = rsi < 70 and rsi > 30  // Optimal balanced range
+macd_line = ta.ema(ha_close, 10) - ta.ema(ha_close, 22)  // Balanced MACD
+macd_signal = ta.ema(macd_line, 7)
+macd_bullish = macd_line > macd_signal and macd_line[1] <= macd_signal[1]
+
+// 4. Trend Confirmation - Balanced
+ema_15 = ta.ema(ha_close, 15)
+ema_30 = ta.ema(ha_close, 30)
+ema_50 = ta.ema(ha_close, 50)
+trend_bullish = ema_15 > ema_30 and ema_30 > ema_50 and ha_close > ema_15
+
+// 5. ETH Specific Conditions - Balanced
+eth_momentum = ta.roc(ha_close, 7) > 0.3  // Balanced momentum requirement
+eth_volume_surge = volume > avg_volume * 1.4  // Balanced volume surge
+
+// 6. Additional Quality Filters
+quality_filter_1 = ta.sma(ha_close, 5) > ta.sma(ha_close, 10)  // Short-term uptrend
+quality_filter_2 = ha_close > ha_open and ha_open > ha_close[1]  // Consecutive green candles
+quality_filter_3 = volume > ta.sma(volume, 20)  // Above average volume
+
+// 7. Combined Entry Conditions - Optimal balanced scenarios
+entry_scenario_1 = green_candle and close_near_high and volume_condition and bb_upper_touch and rsi_oversold and atr_condition
+entry_scenario_2 = bb_middle_cross and volume_condition and macd_bullish and trend_bullish and eth_momentum
+entry_scenario_3 = green_candle and strong_momentum and volume_condition and bb_expansion and rsi_oversold and eth_volume_surge and quality_filter_1
+entry_scenario_4 = bb_squeeze and volume_condition and macd_bullish and trend_bullish and eth_momentum and quality_filter_2
+
+entry_condition = entry_scenario_1 or entry_scenario_2 or entry_scenario_3 or entry_scenario_4
+
+// ============================================================================
+// BALANCED RISK MANAGEMENT
+// ============================================================================
+
+var float stop_loss_price = na
+var float take_profit_price = na
+var float highest_price = na
+var bool trailing_active = false
+
+// Position Management
+if entry_condition and strategy.position_size == 0
+    stop_loss_price := ha_close * (1 - stop_loss_pct)
+    take_profit_price := ha_close * (1 + target_profit)
+    highest_price := ha_close
+    trailing_active := false
+
+// Balanced Trailing Stop Logic
+if strategy.position_size > 0
+    if ha_close > highest_price
+        highest_price := ha_close
+        if trailing_stop and ha_close > take_profit_price * 0.75  // Start trailing after 75% of target
+            trailing_active := true
+    
+    if trailing_active
+        new_trailing_stop = highest_price * (1 - trailing_percent)
+        if new_trailing_stop > stop_loss_price
+            stop_loss_price := new_trailing_stop
+
+// ============================================================================
+// STRATEGY EXECUTION
+// ============================================================================
+
+// Entry
+if entry_condition and strategy.position_size == 0
+    strategy.entry("ETH_HYBRID_LONG", strategy.long, comment="ETH Hybrid Entry")
+
+// Exit Conditions
+if strategy.position_size > 0
+    // Take Profit
+    if ha_close >= take_profit_price
+        strategy.close("ETH_HYBRID_LONG", comment="Take Profit")
+    
+    // Stop Loss
+    if ha_close <= stop_loss_price
+        strategy.close("ETH_HYBRID_LONG", comment="Stop Loss")
+    
+    // Time-based exit (balanced)
+    if bar_index - strategy.opentrades.entry_bar_index(0) > 60  // Exit after 60 bars
+        strategy.close("ETH_HYBRID_LONG", comment="Time Exit")
+
+// ============================================================================
+// VISUALIZATION
+// ============================================================================
+
+// Bollinger Bands
+plot(bb_upper, "BB Upper", color=color.red, linewidth=1)
+plot(bb_middle, "BB Middle", color=color.blue, linewidth=1)
+plot(bb_lower, "BB Lower", color=color.green, linewidth=1)
+
+// EMAs
+plot(ema_15, "EMA 15", color=color.orange, linewidth=1)
+plot(ema_30, "EMA 30", color=color.purple, linewidth=1)
+plot(ema_50, "EMA 50", color=color.gray, linewidth=1)
+
+// Entry Signals
+plotshape(entry_scenario_1, "Scenario 1", shape.triangleup, location.belowbar, color=color.green, size=size.small)
+plotshape(entry_scenario_2, "Scenario 2", shape.circle, location.belowbar, color=color.blue, size=size.small)
+plotshape(entry_scenario_3, "Scenario 3", shape.diamond, location.belowbar, color=color.yellow, size=size.small)
+plotshape(entry_scenario_4, "Scenario 4", shape.square, location.belowbar, color=color.purple, size=size.small)
+
+// Position Background
+bgcolor(strategy.position_size > 0 ? color.new(color.blue, 95) : na, title="Position Background")
+
+// Stop Loss and Take Profit Levels
+plot(strategy.position_size > 0 ? stop_loss_price : na, "Stop Loss", color=color.red, style=plot.style_linebr, linewidth=2)
+plot(strategy.position_size > 0 ? take_profit_price : na, "Take Profit", color=color.green, style=plot.style_linebr, linewidth=2)
+
+// ============================================================================
+// INFORMATION TABLE
+// ============================================================================
+
+if barstate.islast
+    var table info_table = table.new(position.top_right, 2, 12, bgcolor=color.white, border_width=1)
+    
+    table.cell(info_table, 0, 0, "Parameter", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 0, "Value", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 1, "BB Period", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 1, str.tostring(bb_length), text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 2, "BB Multiplier", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 2, str.tostring(bb_mult), text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 3, "Target Profit", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 3, str.tostring(target_profit * 100) + "%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 4, "Stop Loss", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 4, str.tostring(stop_loss_pct * 100) + "%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 5, "Position Size", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 5, "15%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 6, "Heiken Ashi", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 6, use_heiken_ashi ? "ON" : "OFF", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 7, "Trailing Stop", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 7, trailing_stop ? "ON" : "OFF", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 8, "Min Volume", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 8, str.tostring(min_volume), text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 9, "Price Change", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 9, str.tostring(min_price_change * 100) + "-" + str.tostring(max_price_change * 100) + "%", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 10, "ATR Filter", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 10, eth_volatility_filter ? "ON" : "OFF", text_color=color.black, text_size=size.small)
+    
+    table.cell(info_table, 0, 11, "Scenarios", text_color=color.black, text_size=size.small)
+    table.cell(info_table, 1, 11, "4 Balanced", text_color=color.black, text_size=size.small)
+
+// ============================================================================
+// ALERTS
+// ============================================================================
+
+alertcondition(entry_condition, "ETH Hybrid Entry Signal", "ETH Hybrid strategy entry signal!")
+alertcondition(strategy.position_size > 0 and (ha_close >= take_profit_price or ha_close <= stop_loss_price), 
+               "ETH Hybrid Exit Signal", "ETH Hybrid position closed!")

@@ -16,8 +16,14 @@
     "retry_delay": 5
   },
   "telegram": {
-    "bot_token": "8006591828:AAH4tfgCCBQLH2V43PngE52veAH_7EBhZz0",
-    "chat_id": "-1003038204085",
+    "bot_token": "7956697051:AAErScGMFGVxOyt3dGiw0jrFoakBELRdtm4",
+    "chat_id": "-1002699769366",
     "enabled": true
+  },
+  "signal_confirmation": {
+    "enabled": true,
+    "confirmation_duration_seconds": 121,
+    "check_interval_seconds": 60,
+    "min_confirmation_count": 2
   }
 }

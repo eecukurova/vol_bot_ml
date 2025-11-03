@@ -1,0 +1,202 @@
+//@version=5
+strategy(title="ATR SuperTrend NASDAQ Optimized", shorttitle="ATR-ST-NASDAQ", overlay=true, initial_capital=10000, default_qty_type=strategy.percent_of_equity, default_qty_value=100)
+
+// ============================================================================
+// INPUT PARAMETERS - NASDAQ OPTIMIZED
+// ============================================================================
+
+// ATR Parameters
+key_value = input.float(2.5, title="Key Value (Sensitivity)", minval=1.0, maxval=5.0, step=0.1, group="ATR Settings")
+atr_period = input.int(14, title="ATR Period", minval=5, maxval=50, step=1, group="ATR Settings")
+
+// SuperTrend Parameters  
+multiplier = input.float(1.8, title="SuperTrend Multiplier", minval=1.0, maxval=3.0, step=0.1, group="SuperTrend Settings")
+
+// Candlestick Options
+use_heikin_ashi = input.bool(false, title="Use Heikin Ashi Candles", group="Candlestick Settings")
+
+// Risk Management
+stop_loss_pct = input.float(2.0, title="Stop Loss %", minval=0.5, maxval=10.0, step=0.1, group="Risk Management")
+take_profit_pct = input.float(4.0, title="Take Profit %", minval=1.0, maxval=20.0, step=0.1, group="Risk Management")
+
+// Display Options
+show_signals = input.bool(true, title="Show Buy/Sell Signals", group="Display")
+show_supertrend = input.bool(true, title="Show SuperTrend Line", group="Display")
+show_atr_line = input.bool(false, title="Show ATR Line", group="Display")
+
+// ============================================================================
+// CALCULATIONS
+// ============================================================================
+
+// Heikin Ashi Calculation
+ha_close = (open + high + low + close) / 4
+var float ha_open = na
+ha_open := na(ha_open[1]) ? (open + close) / 2 : (ha_open[1] + ha_close[1]) / 2
+ha_high = math.max(high, math.max(ha_open, ha_close))
+ha_low = math.min(low, math.min(ha_open, ha_close))
+
+// Source price (Heikin Ashi or regular)
+src = use_heikin_ashi ? ha_close : close
+
+// ATR Calculation
+xATR = ta.atr(atr_period)
+nLoss = key_value * xATR
+
+// ATR Trailing Stop Calculation
+var float xATRTrailingStop = na
+xATRTrailingStop := na(xATRTrailingStop[1]) ? src - nLoss : 
+   src > xATRTrailingStop[1] and src[1] > xATRTrailingStop[1] ? math.max(xATRTrailingStop[1], src - nLoss) :
+   src < xATRTrailingStop[1] and src[1] < xATRTrailingStop[1] ? math.min(xATRTrailingStop[1], src + nLoss) :
+   src > xATRTrailingStop[1] ? src - nLoss : src + nLoss
+
+// Position Calculation
+var int pos = 0
+pos := src[1] < xATRTrailingStop[1] and src > xATRTrailingStop[1] ? 1 :
+   src[1] > xATRTrailingStop[1] and src < xATRTrailingStop[1] ? -1 : pos[1]
+
+// EMA(1) for signal confirmation
+ema1 = ta.ema(src, 1)
+
+// Signal Detection
+above = ta.crossover(ema1, xATRTrailingStop)
+below = ta.crossover(xATRTrailingStop, ema1)
+
+buy_signal = src > xATRTrailingStop and above
+sell_signal = src < xATRTrailingStop and below
+
+// SuperTrend Calculation
+hl2 = (high + low) / 2
+superTrend = xATR * multiplier
+trendUp = hl2 - superTrend
+trendDown = hl2 + superTrend
+
+var float superTrendLine = na
+superTrendLine := na(superTrendLine[1]) ? na : 
+   close > superTrendLine[1] ? math.max(trendUp, superTrendLine[1]) : math.min(trendDown, superTrendLine[1])
+superTrendLine := na(superTrendLine) ? na : 
+   close > superTrendLine ? trendDown : trendUp
+
+// SuperTrend Signals
+buy_supertrend = ta.crossover(close, superTrendLine)
+sell_supertrend = ta.crossunder(close, superTrendLine)
+
+// Combined Signals (ATR + SuperTrend)
+buy_combined = buy_signal and buy_supertrend
+sell_combined = sell_signal and sell_supertrend
+
+// ============================================================================
+// STRATEGY EXECUTION
+// ============================================================================
+
+// Entry Conditions
+if buy_combined and strategy.position_size == 0
+    strategy.entry("Long", strategy.long, comment="ATR+ST Buy")
+
+if sell_combined and strategy.position_size == 0
+    strategy.entry("Short", strategy.short, comment="ATR+ST Sell")
+
+// Exit Conditions
+if strategy.position_size > 0
+    strategy.exit("Long Exit", "Long", stop=close * (1 - stop_loss_pct / 100), limit=close * (1 + take_profit_pct / 100))
+
+if strategy.position_size < 0
+    strategy.exit("Short Exit", "Short", stop=close * (1 + stop_loss_pct / 100), limit=close * (1 - take_profit_pct / 100))
+
+// ============================================================================
+// PLOTTING
+// ============================================================================
+
+// Color coding
+xcolor = pos == -1 ? color.red : pos == 1 ? color.green : color.blue
+
+// ATR Trailing Stop Line
+plot(xATRTrailingStop, color=xcolor, linewidth=2, title="ATR Trailing Stop")
+
+// SuperTrend Line
+plot(show_supertrend ? superTrendLine : na, color=color.blue, linewidth=2, title="SuperTrend Line")
+
+// ATR Line (optional)
+plot(show_atr_line ? xATR : na, color=color.yellow, linewidth=1, title="ATR Line")
+
+// Buy/Sell Signals
+plotshape(show_signals and buy_signal, title="Buy Signal", text="BUY", style=shape.labelup, location=location.belowbar, color=color.green, textcolor=color.white, size=size.small)
+plotshape(show_signals and sell_signal, title="Sell Signal", text="SELL", style=shape.labeldown, location=location.abovebar, color=color.red, textcolor=color.white, size=size.small)
+
+// Combined Signals
+plotshape(show_signals and buy_combined, title="Combined Buy", text="BUY+", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.normal)
+plotshape(show_signals and sell_combined, title="Combined Sell", text="SELL+", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.normal)
+
+// Bar Coloring
+barcolor(pos == 1 ? color.new(color.green, 80) : pos == -1 ? color.new(color.red, 80) : na, title="Bar Color")
+
+// ============================================================================
+// ALERTS
+// ============================================================================
+
+// ATR Signals
+alertcondition(buy_signal, title="ATR Buy Signal", message="ATR Buy Signal: {{ticker}}")
+alertcondition(sell_signal, title="ATR Sell Signal", message="ATR Sell Signal: {{ticker}}")
+
+// SuperTrend Signals
+alertcondition(buy_supertrend, title="SuperTrend Buy", message="SuperTrend Buy Signal: {{ticker}}")
+alertcondition(sell_supertrend, title="SuperTrend Sell", message="SuperTrend Sell Signal: {{ticker}}")
+
+// Combined Signals
+alertcondition(buy_combined, title="Combined Buy", message="Combined Buy Signal (ATR+SuperTrend): {{ticker}}")
+alertcondition(sell_combined, title="Combined Sell", message="Combined Sell Signal (ATR+SuperTrend): {{ticker}}")
+
+// ============================================================================
+// TABLE - PERFORMANCE METRICS
+// ============================================================================
+
+if barstate.islast
+    var table info_table = table.new(position.top_right, 2, 8, bgcolor=color.white, border_width=1)
+    
+    // Strategy Performance
+    net_profit = strategy.netprofit
+    total_trades = strategy.closedtrades
+    win_rate = total_trades > 0 ? strategy.wintrades / total_trades * 100 : 0
+    max_dd = strategy.max_drawdown
+    
+    // Current Parameters
+    table.cell(info_table, 0, 0, "Parameter", text_color=color.black, bgcolor=color.gray)
+    table.cell(info_table, 1, 0, "Value", text_color=color.black, bgcolor=color.gray)
+    
+    table.cell(info_table, 0, 1, "Key Value", text_color=color.black)
+    table.cell(info_table, 1, 1, str.tostring(key_value), text_color=color.black)
+    
+    table.cell(info_table, 0, 2, "ATR Period", text_color=color.black)
+    table.cell(info_table, 1, 2, str.tostring(atr_period), text_color=color.black)
+    
+    table.cell(info_table, 0, 3, "Multiplier", text_color=color.black)
+    table.cell(info_table, 1, 3, str.tostring(multiplier), text_color=color.black)
+    
+    table.cell(info_table, 0, 4, "Net Profit", text_color=color.black)
+    table.cell(info_table, 1, 4, str.tostring(net_profit, "#.##"), text_color=color.black)
+    
+    table.cell(info_table, 0, 5, "Total Trades", text_color=color.black)
+    table.cell(info_table, 1, 5, str.tostring(total_trades), text_color=color.black)
+    
+    table.cell(info_table, 0, 6, "Win Rate %", text_color=color.black)
+    table.cell(info_table, 1, 6, str.tostring(win_rate, "#.##"), text_color=color.black)
+    
+    table.cell(info_table, 0, 7, "Max Drawdown", text_color=color.black)
+    table.cell(info_table, 1, 7, str.tostring(max_dd, "#.##"), text_color=color.black)
+
+// ============================================================================
+// NOTES
+// ============================================================================
+
+// Bu Pine Script, Strategy Optimizer projesinden optimize edilmiş parametrelerle
+// NASDAQ hisseleri için tasarlanmıştır.
+//
+// Optimize edilmiş parametreler:
+// - AAPL: key_value=2.5, atr_period=14, multiplier=1.8
+// - AMD: key_value=3.0, atr_period=10, multiplier=1.5
+// - AMZN: key_value=2.8, atr_period=12, multiplier=1.6
+//
+// Kullanım:
+// 1. TradingView'da Pine Script editörüne yapıştırın
+// 2. Parametreleri hisse senedine göre ayarlayın
+// 3. Backtest yapın ve sonuçları analiz edin
+// 4. Canlı trading için uygun parametreleri seçin

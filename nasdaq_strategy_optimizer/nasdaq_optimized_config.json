@@ -1,0 +1,100 @@
+{
+  "timestamp": "2025-10-25T15:31:07.740516",
+  "strategy": "NASDAQ ATR SuperTrend",
+  "optimized_symbols": {
+    "NVDA": {
+      "params": {
+        "a": 0.5,
+        "c": 2,
+        "st_factor": 0.4,
+        "use_ema_confirmation": false,
+        "volume_filter": false
+      },
+      "expected_signals": 7,
+      "expected_trades": 3,
+      "expected_pf": 14.54,
+      "expected_win_rate": 66.67,
+      "volatility": 49.38,
+      "sector": "Technology",
+      "description": "En kararl\u0131 performans - Y\u00fcksek profit factor"
+    },
+    "MSFT": {
+      "params": {
+        "a": 0.5,
+        "c": 2,
+        "st_factor": 0.4,
+        "use_ema_confirmation": false,
+        "volume_filter": false
+      },
+      "expected_signals": 10,
+      "expected_trades": 3,
+      "expected_pf": 9.76,
+      "expected_win_rate": 66.67,
+      "volatility": 24.72,
+      "sector": "Technology",
+      "description": "En g\u00fcvenli performans - D\u00fc\u015f\u00fck volatilite"
+    },
+    "META": {
+      "params": {
+        "a": 0.5,
+        "c": 2,
+        "st_factor": 0.4,
+        "use_ema_confirmation": false,
+        "volume_filter": false
+      },
+      "expected_signals": 9,
+      "expected_trades": 2,
+      "expected_pf": Infinity,
+      "expected_win_rate": 100.0,
+      "volatility": 36.7,
+      "sector": "Technology",
+      "description": "M\u00fckemmel win rate - %100 ba\u015far\u0131"
+    },
+    "AMZN": {
+      "params": {
+        "a": 0.5,
+        "c": 2,
+        "st_factor": 0.4,
+        "use_ema_confirmation": false,
+        "volume_filter": false
+      },
+      "expected_signals": 9,
+      "expected_trades": 3,
+      "expected_pf": Infinity,
+      "expected_win_rate": 100.0,
+      "volatility": 34.1,
+      "sector": "Consumer Discretionary",
+      "description": "M\u00fckemmel win rate - Y\u00fcksek i\u015flem say\u0131s\u0131"
+    },
+    "TSLA": {
+      "params": {
+        "a": 0.5,
+        "c": 2,
+        "st_factor": 0.4,
+        "use_ema_confirmation": false,
+        "volume_filter": false
+      },
+      "expected_signals": 16,
+      "expected_trades": 5,
+      "expected_pf": 1.27,
+      "expected_win_rate": 60.0,
+      "volatility": 67.82,
+      "sector": "Consumer Discretionary",
+      "description": "En aktif - Y\u00fcksek sinyal say\u0131s\u0131"
+    }
+  },
+  "best_parameters": {
+    "a": 0.5,
+    "c": 2,
+    "st_factor": 0.4,
+    "use_ema_confirmation": false,
+    "volume_filter": false
+  },
+  "summary": {
+    "total_symbols_tested": 8,
+    "successful_symbols": 5,
+    "best_performer": "NVDA",
+    "most_active": "TSLA",
+    "most_reliable": "META"
+  }
+}

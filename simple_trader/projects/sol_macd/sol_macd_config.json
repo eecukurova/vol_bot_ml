@@ -37,6 +37,7 @@
     "single_position_only": true,
     "cooldown_after_exit": 0,
     "priority_order": ["4h"],
+    "auto_close_on_reversal": false,
     "timeframe_validation": {
       "enabled": true,
       "min_candles_for_signal": 50,
@@ -80,5 +81,11 @@
     "bot_token": "7956697051:AAErScGMFGVxOyt3dGiw0jrFoakBELRdtm4",
     "chat_id": "-1002699769366",
     "enabled": true
+  },
+  "signal_confirmation": {
+    "enabled": true,
+    "confirmation_duration_seconds": 121,
+    "check_interval_seconds": 60,
+    "min_confirmation_count": 2
   }
 }

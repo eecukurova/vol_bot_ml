@@ -1,0 +1,226 @@
+[
+  {
+    "symbol": "BTC/USDT",
+    "timeframe": "1h",
+    "params": {
+      "ema_len": 30,
+      "macd_fast": 12,
+      "macd_slow": 26,
+      "macd_signal": 9,
+      "rsi_len": 14,
+      "rsi_ob": 70,
+      "rsi_os": 30,
+      "atr_len": 14
+    },
+    "metrics": {
+      "total_return_pct": -0.3187098945274374,
+      "max_drawdown_pct": -2.996763863576243,
+      "profit_factor": 0.9646434951241675,
+      "win_rate_pct": 69.23076923076923,
+      "num_trades": 13,
+      "expectancy": -0.456692037249951,
+      "sharpe_ratio": 0.014709113596452581,
+      "mar_ratio": -0.10635135400595065,
+      "exposure_pct": 15.0,
+      "final_capital": 9968.129010547256
+    },
+    "num_trades": 13,
+    "success": true
+  },
+  {
+    "symbol": "BTC/USDT",
+    "timeframe": "1h",
+    "params": {
+      "ema_len": 20,
+      "macd_fast": 12,
+      "macd_slow": 26,
+      "macd_signal": 9,
+      "rsi_len": 14,
+      "rsi_ob": 70,
+      "rsi_os": 30,
+      "atr_len": 14
+    },
+    "metrics": {
+      "total_return_pct": -0.5999102249775388,
+      "max_drawdown_pct": -2.9936428595068714,
+      "profit_factor": 0.8571292830673416,
+      "win_rate_pct": 66.66666666666666,
+      "num_trades": 15,
+      "expectancy": -1.9998004999501158,
+      "sharpe_ratio": 0.0006154900677677218,
+      "mar_ratio": -0.2003947207905619,
+      "exposure_pct": 15.0,
+      "final_capital": 9940.008977502246
+    },
+    "num_trades": 15,
+    "success": true
+  },
+  {
+    "symbol": "BTC/USDT",
+    "timeframe": "1h",
+    "params": {
+      "ema_len": 30,
+      "macd_fast": 12,
+      "macd_slow": 21,
+      "macd_signal": 9,
+      "rsi_len": 14,
+      "rsi_ob": 70,
+      "rsi_os": 30,
+      "atr_len": 14
+    },
+    "metrics": {
+      "total_return_pct": -1.3583414093853208,
+      "max_drawdown_pct": -3.8418445193942166,
+      "profit_factor": 0.571614595634786,
+      "win_rate_pct": 57.14285714285714,
+      "num_trades": 14,
+      "expectancy": -7.708431927107997,
+      "sharpe_ratio": -0.052643074379236,
+      "mar_ratio": -0.3535649093887601,
+      "exposure_pct": 10.0,
+      "final_capital": 9864.165859061468
+    },
+    "num_trades": 14,
+    "success": true
+  },
+  {
+    "symbol": "BTC/USDT",
+    "timeframe": "1h",
+    "params": {
+      "ema_len": 30,
+      "macd_fast": 8,
+      "macd_slow": 26,
+      "macd_signal": 9,
+      "rsi_len": 14,
+      "rsi_ob": 70,
+      "rsi_os": 30,
+      "atr_len": 14
+    },
+    "metrics": {
+      "total_return_pct": -1.3583414093853208,
+      "max_drawdown_pct": -3.8418445193942166,
+      "profit_factor": 0.5716145956347858,
+      "win_rate_pct": 57.14285714285714,
+      "num_trades": 14,
+      "expectancy": -7.708431927108005,
+      "sharpe_ratio": -0.052456867691204404,
+      "mar_ratio": -0.3535649093887601,
+      "exposure_pct": 10.0,
+      "final_capital": 9864.165859061468
+    },
+    "num_trades": 14,
+    "success": true
+  },
+  {
+    "symbol": "BTC/USDT",
+    "timeframe": "1h",
+    "params": {
+      "ema_len": 20,
+      "macd_fast": 12,
+      "macd_slow": 21,
+      "macd_signal": 9,
+      "rsi_len": 14,
+      "rsi_ob": 70,
+      "rsi_os": 30,
+      "atr_len": 14
+    },
+    "metrics": {
+      "total_return_pct": -1.6395417398353855,
+      "max_drawdown_pct": -3.837372607462606,
+      "profit_factor": 0.5510326488650278,
+      "win_rate_pct": 56.25,
+      "num_trades": 16,
+      "expectancy": -8.248628624657147,
+      "sharpe_ratio": -0.062295012814064625,
+      "mar_ratio": -0.4272563307110026,
+      "exposure_pct": 20.0,
+      "final_capital": 9836.045826016461
+    },
+    "num_trades": 16,
+    "success": true
+  },
+  {
+    "symbol": "BTC/USDT",
+    "timeframe": "1h",
+    "params": {
+      "ema_len": 20,
+      "macd_fast": 8,
+      "macd_slow": 26,
+      "macd_signal": 9,
+      "rsi_len": 14,
+      "rsi_ob": 70,
+      "rsi_os": 30,
+      "atr_len": 14
+    },
+    "metrics": {
+      "total_return_pct": -1.6395417398353855,
+      "max_drawdown_pct": -3.837372607462606,
+      "profit_factor": 0.5510326488650277,
+      "win_rate_pct": 56.25,
+      "num_trades": 16,
+      "expectancy": -8.248628624657155,
+      "sharpe_ratio": -0.06216294145567855,
+      "mar_ratio": -0.4272563307110026,
+      "exposure_pct": 20.0,
+      "final_capital": 9836.045826016461
+    },
+    "num_trades": 16,
+    "success": true
+  },
+  {
+    "symbol": "BTC/USDT",
+    "timeframe": "1h",
+    "params": {
+      "ema_len": 30,
+      "macd_fast": 8,
+      "macd_slow": 21,
+      "macd_signal": 9,
+      "rsi_len": 14,
+      "rsi_ob": 70,
+      "rsi_os": 30,
+      "atr_len": 14
+    },
+    "metrics": {
+      "total_return_pct": -1.5187116945279193,
+      "max_drawdown_pct": -3.984183154280733,
+      "profit_factor": 0.500087349831129,
+      "win_rate_pct": 53.84615384615385,
+      "num_trades": 13,
+      "expectancy": -9.687465883404984,
+      "sharpe_ratio": -0.0684485173612265,
+      "mar_ratio": -0.3811852105484075,
+      "exposure_pct": 10.0,
+      "final_capital": 9848.128830547208
+    },
+    "num_trades": 13,
+    "success": true
+  },
+  {
+    "symbol": "BTC/USDT",
+    "timeframe": "1h",
+    "params": {
+      "ema_len": 20,
+      "macd_fast": 8,
+      "macd_slow": 21,
+      "macd_signal": 9,
+      "rsi_len": 14,
+      "rsi_ob": 70,
+      "rsi_os": 30,
+      "atr_len": 14
+    },
+    "metrics": {
+      "total_return_pct": -1.7999120249780027,
+      "max_drawdown_pct": -3.997232522928361,
+      "profit_factor": 0.48973498249263037,
+      "win_rate_pct": 53.333333333333336,
+      "num_trades": 15,
+      "expectancy": -9.999804499951136,
+      "sharpe_ratio": -0.07729623159611318,
+      "mar_ratio": -0.4502895477442459,
+      "exposure_pct": 20.0,
+      "final_capital": 9820.0087975022
+    },
+    "num_trades": 15,
+    "success": true
+  }
+]

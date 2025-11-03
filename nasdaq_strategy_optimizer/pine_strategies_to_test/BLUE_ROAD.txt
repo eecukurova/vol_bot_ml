@@ -1,0 +1,81 @@
+//@version=4
+
+study(title="BLUE_ROAD", shorttitle= "BLUE_ROAD", overlay=true)
+
+//Expert Trend Locator (XTL)
+len     = input(25, minval=1, title = "XTL Period")
+hLmt    = input(34, title="Threshold Value", minval=10)
+
+xtl_src = hlc3
+XTL = cci(xtl_src,len)
+
+bull = XTL > hLmt
+bear = XTL < -hLmt
+neutral = (XTL <= hLmt) and (XTL >= -hLmt)
+
+upcolor = color.rgb(0, 135, 225)
+dwncolor = color.rgb(255, 0, 0)
+ntlcolor = color.rgb(255, 255, 255, 30)
+
+barcolor(bull? upcolor : neutral? ntlcolor : dwncolor)
+
+//Displaced Moving Average (DMA)
+showdma = input (true, "Show DMA?")
+malength = input(8, minval=1, title="DMA Length")
+displacement=input(5, minval=0, title="DMA Displacement")
+
+DMA1 = sma(low, malength)
+DMA2 = sma(high, malength)
+
+DMA_Color =  DMA1 > DMA1[1] ? color.rgb(50, 125, 255, 60) : DMA1 <= DMA1[1] ? color.rgb(250, 0, 0, 60): color.black
+ccol = color.rgb(255, 255, 255, 90)
+d1 = plot(showdma?DMA1:na, title="DMA1", color = DMA_Color, linewidth = 2, offset = displacement)
+d2 = plot(showdma?DMA2:na, title="DMA2", color = DMA_Color, linewidth = 2, offset = displacement)
+fill(d1, d2,color = ccol, title = "DMA Cloud")
+
+///Breakout Bar Entry & Stop
+showbbar = input(defval = true, title = "Show Breakout Bar Signals")
+cont = input(defval = false, title = "Levels as Lines")
+state = 0
+state := (bear? 0 : bull? 1 : neutral? state[1]:na)
+prev_state = state[1]
+
+bbar_stop = input(defval = 0.5, type = input.float, title = "Stop Loss Ratio")
+bbar_entry = input(defval = 1.5, type = input.float, title = "Entry Ratio")
+
+tar1 = input(defval = true, title = "Show Target 1")
+tar2 = input(defval = false, title = "Show Target 2")
+bbar_tgt1 = input(defval = 3, type = input.float, title = "Target Ratio 1")
+bbar_tgt2 = input(defval = 4, type = input.float, title = "Target Ratio 2")
+
+range = high-low
+float cstop = 0
+cstop := state > prev_state? (low-range*bbar_stop) : state < prev_state? (high+range*bbar_stop) : fixnan(cstop[1])
+float centry = 0
+centry := state > prev_state? (low+range*bbar_entry) : state < prev_state? (high-range*bbar_entry) :fixnan(centry[1])
+float ctgt1 = 0
+ctgt1 := state > prev_state? (low+range*bbar_tgt1) : state < prev_state? (high-range*bbar_tgt1) : fixnan(ctgt1[1])
+float ctgt2 = 0
+ctgt2 := state > prev_state? (low+range*bbar_tgt2) : state < prev_state? (high-range*bbar_tgt2) : fixnan(ctgt2[1])
+
+ncstop = state > prev_state? (low-range*bbar_stop) : state < prev_state? (high+range*bbar_stop) : na
+ncentry = state > prev_state? (low+range*bbar_entry) : state < prev_state? (high-range*bbar_entry) : na
+nctgt1 = state > prev_state? (low+range*bbar_tgt1) : state < prev_state? (high-range*bbar_tgt1) : na
+nctgt2 = state > prev_state? (low+range*bbar_tgt2) : state < prev_state? (high-range*bbar_tgt2) : na
+
+
+pstop = cont? cstop : ncstop
+pentry = cont? centry : ncentry
+ptgt1 = cont? ctgt1 : nctgt1
+ptgt2 = cont? ctgt2 : nctgt2
+displ = cont? -1 : 0
+
+bool colbar = 1
+colbar := bull? 1 : bear? 0 : fixnan(colbar[1])
+color entrycol = colbar == 1 ? color.rgb(0,0,255) : color.rgb(255,0,0)
+color stopcol = colbar == 1 ?color.rgb(255,0,0) : color.rgb(0,0,255) 
+
+plot(showbbar? (change(pstop)?na : pstop):na, title='Stop', color=stopcol, linewidth=2, style=plot.style_circles, offset= displ)
+plot(showbbar? (change(pentry)?na : pentry):na, title='Entry Signal', color=entrycol, linewidth=2, style=plot.style_linebr, offset= displ)
+plot((showbbar and tar1 )? (change(ptgt1)?na:ptgt1):na, title='Target 1', color=color.yellow, linewidth=2, style=plot.style_cross, offset = displ)
+plot((showbbar and tar2 )? (change(ptgt2)?na:ptgt2):na, title='Target 2', color=color.yellow, linewidth=2, style=plot.style_cross, offset = displ)

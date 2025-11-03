@@ -1,0 +1,109 @@
+//@version=5
+strategy("PENGU Volensy Optimized", overlay=true,
+    initial_capital=100000, commission_type=strategy.commission.percent, commission_value=0.05,
+    pyramiding=0, default_qty_type=strategy.percent_of_equity, default_qty_value=100)
+
+// ============================================================================
+// PENGU VOLENSY OPTIMIZED
+// Based on Volensy strategy, optimized for PENGU
+// Expected: +23.82% return, 83.33% WR, 6 trades
+// ============================================================================
+
+// === Parameters ===
+useDaily   = input.bool(true, "Use Daily Conditions")
+chgPctMin  = input.float(2.0, "Min Close Change %", step=0.1)      // Optimized for PENGU
+volKatsayi = input.float(1.5, "Volume Multiplier", step=0.1)     // More selective
+lenVolMa   = input.int(10, "Volume MA Period")
+lenBreak   = input.int(50, "Breakout Period", minval=2)           // 50 days for PENGU
+absVolMin  = input.float(100000, "Min Absolute Volume")
+
+tpPct      = input.float(5.0, "Take Profit %", minval=0.1, step=0.1)
+slPct      = input.float(2.5, "Stop Loss %", minval=0.1, step=0.1)
+timeStop   = input.int(0, "Time Stop (0=disabled)", minval=0)
+
+confirmBar = input.bool(true, "Confirm on bar close")
+
+// === Multi-timeframe ===
+tfDaily = "D"
+
+// Daily data
+cD     = request.security(syminfo.tickerid, tfDaily, close, lookahead=barmerge.lookahead_off)
+cD1    = request.security(syminfo.tickerid, tfDaily, close[1], lookahead=barmerge.lookahead_off)
+vD     = request.security(syminfo.tickerid, tfDaily, volume, lookahead=barmerge.lookahead_off)
+vmaD   = request.security(syminfo.tickerid, tfDaily, ta.sma(volume, lenVolMa), lookahead=barmerge.lookahead_off)
+hiPrevD = request.security(syminfo.tickerid, tfDaily, ta.highest(close[1], lenBreak), lookahead=barmerge.lookahead_off)
+
+// Current timeframe
+c      = close
+c1     = close[1]
+v      = volume
+vma    = ta.sma(volume, lenVolMa)
+hiPrev = ta.highest(close[1], lenBreak)
+
+// Choose series
+priceNow    = useDaily ? cD      : c
+pricePrev   = useDaily ? cD1      : c1
+volNow      = useDaily ? vD       : v
+volMaNow    = useDaily ? vmaD     : vma
+highestPrev = useDaily ? hiPrevD : hiPrev
+
+// === Conditions ===
+pctChange  = (priceNow / pricePrev - 1.0) * 100.0
+condPrice  = pctChange > chgPctMin
+condVolMa  = volNow > volMaNow * volKatsayi
+condBreak  = priceNow > highestPrev
+condAbsVol = volNow > absVolMin
+
+rawLong = condPrice and condVolMa and condBreak and condAbsVol
+longSignal = confirmBar ? (rawLong and barstate.isconfirmed) : rawLong
+
+// === Entry ===
+if (longSignal and strategy.position_size == 0)
+    strategy.entry("LONG", strategy.long, comment="Volensy")
+
+// === TP/SL ===
+longAvg = strategy.position_avg_price
+tpPrice = longAvg * (1 + tpPct/100.0)
+slPrice = longAvg * (1 - slPct/100.0)
+
+if (strategy.position_size > 0)
+    strategy.exit("TP/SL", from_entry="LONG", limit=tpPrice, stop=slPrice)
+
+// === Time Stop ===
+var int barsInPos = 0
+if strategy.position_size > 0
+    newEntry = nz(strategy.position_size[1], 0) == 0 and strategy.position_size > 0
+    barsInPos := newEntry ? 1 : (barsInPos + 1)
+else
+    barsInPos := 0
+
+useTimeStop = timeStop > 0 and strategy.position_size > 0 and barsInPos >= timeStop
+if useTimeStop
+    strategy.close("LONG", comment="TimeStop")
+
+// === Plotting ===
+plotshape(longSignal, title="BUY", style=shape.labelup, 
+          color=color.new(color.lime, 0), location=location.belowbar, 
+          size=size.large, text="VOLENSY\nBUY")
+
+plot(highestPrev, "Breakout Line", color=color.new(color.orange, 50), linewidth=2)
+
+// Background
+bgcolor(longSignal ? color.new(color.green, 90) : na)
+
+// Info table
+if barstate.islast
+    var table info = table.new(position.top_right, 2, 6, bgcolor=color.white, border_width=1)
+    table.cell(info, 0, 0, "Strategy", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 0, "Volensy", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 0, 1, "Change %", text_color=color.black)
+    table.cell(info, 1, 1, str.tostring(math.round(pctChange, 2)) + "%", text_color=pctChange > chgPctMin ? color.green : color.red)
+    table.cell(info, 0, 2, "Volume Ratio", text_color=color.black)
+    table.cell(info, 1, 2, str.tostring(volNow / volMaNow, "#.##"), text_color=volNow / volMaNow > volKatsayi ? color.green : color.red)
+    table.cell(info, 0, 3, "Breakout", text_color=color.black)
+    table.cell(info, 1, 3, priceNow > highestPrev ? "YES" : "NO", text_color=priceNow > highestPrev ? color.green : color.red)
+    table.cell(info, 0, 4, "Signal", text_color=color.black)
+    table.cell(info, 1, 4, longSignal ? "✅ BUY" : "❌ WAIT", text_color=longSignal ? color.green : color.gray)
+    table.cell(info, 0, 5, "Position", text_color=color.black)
+    table.cell(info, 1, 5, strategy.position_size > 0 ? "Long Open" : "No Position", text_color=strategy.position_size > 0 ? color.green : color.gray)
+

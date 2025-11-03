@@ -1,0 +1,29 @@
+{
+  "total_combinations": 8,
+  "symbols": [
+    "BTC/USDT"
+  ],
+  "timeframes": [
+    "1h"
+  ],
+  "best_results": {
+    "BTC/USDT": {
+      "1h": {
+        "params": {
+          "ema_len": 30,
+          "macd_fast": 12,
+          "macd_slow": 26,
+          "macd_signal": 9,
+          "rsi_len": 14,
+          "rsi_ob": 70,
+          "rsi_os": 30,
+          "atr_len": 14
+        },
+        "profit_factor": 0.9646434951241675,
+        "total_return": -0.3187098945274374,
+        "max_drawdown": -2.996763863576243,
+        "num_trades": 13
+      }
+    }
+  }
+}

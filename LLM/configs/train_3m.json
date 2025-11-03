@@ -1,0 +1,17 @@
+{
+  "symbol": "BTCUSDT",
+  "timeframe": "3m",
+  "tp_pct": 0.005,
+  "sl_pct_candidates": [0.006, 0.008, 0.010],
+  "horizon": 50,
+  "window": 64,
+  "val_ratio": 0.2,
+  "fee": 0.0005,
+  "slippage": 0.0,
+  "thr_long": 0.6,
+  "thr_short": 0.6,
+  "epochs": 10,
+  "batch_size": 64,
+  "lr": 0.001,
+  "seed": 42
+}
