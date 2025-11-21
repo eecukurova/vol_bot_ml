@@ -1,9 +1,11 @@
 """Live loop with hooks for order execution and alerts."""
 
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, Any
 import logging
 import ccxt
 import json
+from datetime import datetime
+from pathlib import Path
 
 import pandas as pd
 import numpy as np
@@ -173,8 +175,9 @@ def send_order(
             # Return active_position info so caller can add it to Telegram message
             return active_position  # Returns "LONG" or "SHORT"
         elif active_position is not None and active_position != side:
-            logger.info(f"⚠️ Active {active_position} position exists, but new signal is {side}. Opening anyway (will close opposite position first).")
-            # Continue to open position (will close opposite)
+            logger.info(f"⚠️ Active {active_position} position exists, but new signal is {side}. Will close opposite position first.")
+            # Binance will automatically close opposite position when opening new one
+            # But we need to wait longer for the position to be fully closed
     except Exception as e:
         logger.error(f"❌ Position check failed: {e}. Proceeding with order anyway...")
         import traceback
@@ -184,6 +187,14 @@ def send_order(
     try:
         # Calculate quantity
         amount = qty / entry
+        
+        # Binance minimum precision check: minimum 0.001 BTC
+        min_btc_amount = 0.001
+        if amount < min_btc_amount:
+            required_usd = min_btc_amount * entry
+            logger.error(f"❌ Amount too small: {amount:.6f} BTC < {min_btc_amount} BTC (minimum)")
+            logger.error(f"   Required trade amount: ${required_usd:.2f} (current: ${qty:.2f})")
+            return "ERROR_AMOUNT_TOO_SMALL"
         
         # Apply exchange precision and minimum amount
         if _exchange is not None:
@@ -228,32 +239,108 @@ def send_order(
             position_side=position_side,
             extra="LLM"
         )
-        logger.info(f"✅ Entry order placed: {entry_result.get('id')}")
         
-        # Place TP/SL orders
+        # Check if entry order was successful
+        entry_id = entry_result.get('id')
+        entry_status = entry_result.get('status', '')
+        
+        # Entry order başarısızsa TP/SL yerleştirme
+        # 'duplicate' veya 'duplicate_resolved' durumları başarılı sayılır (order zaten yerleştirilmiş)
+        if not entry_id:
+            logger.error(f"❌ Entry order failed: No order ID returned. Result: {entry_result}. Not placing TP/SL orders.")
+            return "ERROR_ENTRY_FAILED"
+        
+        if entry_status in ['FAILED', 'failed']:
+            logger.error(f"❌ Entry order failed with status '{entry_status}': {entry_result}. Not placing TP/SL orders.")
+            return "ERROR_ENTRY_FAILED"
+        
+        # 'duplicate' veya 'duplicate_resolved' durumları başarılı sayılır
+        if entry_status in ['duplicate', 'duplicate_resolved']:
+            logger.info(f"ℹ️ Entry order already exists (duplicate): {entry_id}. Proceeding with TP/SL placement.")
+        
+        logger.info(f"✅ Entry order placed: {entry_id}")
+        
+        # Entry order'dan sonra pozisyonun gerçekten açılıp açılmadığını kontrol et
+        # Zıt pozisyon varsa daha uzun bekleme süresi gerekir (Binance otomatik kapatır)
+        import time
+        if active_position is not None and active_position != side:
+            # Zıt pozisyon kapatılıyor, daha uzun bekle
+            wait_time = 3  # 3 saniye bekle
+            logger.info(f"⏳ Waiting {wait_time}s for opposite position to close...")
+            time.sleep(wait_time)
+        else:
+            time.sleep(1)  # Normal durumda 1 saniye bekle
+        
+        # Pozisyon kontrolü - retry mekanizması ile
+        position_verified = False
+        max_retries = 3
+        retry_delay = 2  # 2 saniye
+        
+        for attempt in range(max_retries):
+            try:
+                verified_position = check_active_position(symbol)
+                if verified_position == position_side:
+                    position_verified = True
+                    logger.info(f"✅ Position verified: {position_side} position is active")
+                    break
+                elif verified_position is None and attempt < max_retries - 1:
+                    # Pozisyon henüz açılmamış, tekrar dene
+                    logger.info(f"⏳ Position not yet opened (attempt {attempt+1}/{max_retries}), waiting {retry_delay}s...")
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    logger.warning(f"⚠️ Position verification failed: Expected {position_side}, but active position is {verified_position}")
+                    if attempt < max_retries - 1:
+                        logger.info(f"⏳ Retrying position check (attempt {attempt+1}/{max_retries})...")
+                        time.sleep(retry_delay)
+                        continue
+            except Exception as pos_check_error:
+                logger.warning(f"⚠️ Position verification check failed (attempt {attempt+1}/{max_retries}): {pos_check_error}")
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    # Son denemede de başarısız olursa, güvenli tarafta kal
+                    logger.warning("⚠️ Position verification failed after all retries. Proceeding with TP/SL placement anyway.")
+                    position_verified = True  # Güvenli tarafta kal
+                    break
+        
+        if not position_verified:
+            logger.error(f"❌ Position not opened after entry order after {max_retries} attempts. Not placing TP/SL orders.")
+            return "ERROR_POSITION_NOT_OPENED"
+        
+        # Entry order başarılı ve pozisyon açıldı, şimdi TP/SL yerleştir
         close_order_side = "sell" if position_side == "LONG" else "buy"
         
-        # TP
-        tp_result = _order_client.place_take_profit_market_close(
-            symbol=symbol,
-            side=close_order_side,
-            price=tp,
-            position_side=position_side,
-            intent="TP",
-            extra="LLM"
-        )
-        logger.info(f"✅ TP order placed: {tp_result.get('id')}")
+        try:
+            # TP
+            tp_result = _order_client.place_take_profit_market_close(
+                symbol=symbol,
+                side=close_order_side,
+                price=tp,
+                position_side=position_side,
+                intent="TP",
+                extra="LLM"
+            )
+            logger.info(f"✅ TP order placed: {tp_result.get('id')}")
+        except Exception as tp_error:
+            logger.error(f"❌ Failed to place TP order: {tp_error}")
+            # TP başarısız olsa bile devam et (SL yerleştir)
         
-        # SL
-        sl_result = _order_client.place_stop_market_close(
-            symbol=symbol,
-            side=close_order_side,
-            stop_price=sl,
-            position_side=position_side,
-            intent="SL",
-            extra="LLM"
-        )
-        logger.info(f"✅ SL order placed: {sl_result.get('id')}")
+        try:
+            # SL
+            sl_result = _order_client.place_stop_market_close(
+                symbol=symbol,
+                side=close_order_side,
+                stop_price=sl,
+                position_side=position_side,
+                intent="SL",
+                extra="LLM"
+            )
+            logger.info(f"✅ SL order placed: {sl_result.get('id')}")
+        except Exception as sl_error:
+            logger.error(f"❌ Failed to place SL order: {sl_error}")
+            # SL başarısız olsa bile entry başarılı olduğu için devam et
         
         # Return None to indicate position was successfully opened
         return None
@@ -298,7 +385,28 @@ def send_telegram_alert(payload: Dict) -> None:
         position_opened = payload.get("position_opened", True)  # Default True for backward compatibility
         
         # Build message
-        message = f"""
+        blocked = payload.get("blocked", False)
+        block_reason = payload.get("block_reason", "")
+        vol_warning = payload.get("vol_warning", "")
+        
+        if blocked:
+            message = f"""
+🚫 LLM Futures Signal - ENGELLENDİ
+
+📌 Pair: {symbol}
+📊 Side: {side}
+💰 Entry: ${entry:,.2f}
+🎯 TP: ${tp:,.2f}
+🛑 SL: ${sl:,.2f}
+📈 Confidence: {conf:.2%}
+
+⚠️ PATTERN BLOCKER:
+{block_reason}
+"""
+            if vol_warning:
+                message += f"\n{vol_warning}"
+        else:
+            message = f"""
 🤖 LLM Futures Signal
 
 📌 Pair: {symbol}
@@ -308,13 +416,17 @@ def send_telegram_alert(payload: Dict) -> None:
 🛑 SL: ${sl:,.2f}
 📈 Confidence: {conf:.2%}
 """
-        
-        # Add position status
-        if not position_opened:
-            active_pos = payload.get("active_position", "N/A")
-            message += f"\n⏸️ Aktif {active_pos} pozisyon var - Yeni pozisyon açılmadı"
-        else:
-            message += f"\n✅ Pozisyon açıldı"
+            
+            # Add volume warning if present
+            if vol_warning:
+                message += f"\n{vol_warning}"
+            
+            # Add position status
+            if not position_opened:
+                active_pos = payload.get("active_position", "N/A")
+                message += f"\n⏸️ Aktif {active_pos} pozisyon var - Yeni pozisyon açılmadı"
+            else:
+                message += f"\n✅ Pozisyon açıldı"
         
         import requests
         response = requests.post(
@@ -331,6 +443,171 @@ def send_telegram_alert(payload: Dict) -> None:
         
     except Exception as e:
         logger.error(f"❌ Failed to send Telegram alert: {e}")
+
+
+def save_skipped_signal(
+    side: str,
+    entry: float,
+    tp: float,
+    sl: float,
+    confidence: float,
+    probs: Dict[str, float],
+    active_position: str,
+    features: Optional[Dict[str, Any]] = None,
+    symbol: str = "BTCUSDT"
+) -> None:
+    """
+    Save skipped signal to JSON file for later analysis.
+    
+    Args:
+        side: LONG or SHORT
+        entry: Entry price
+        tp: Take-profit price
+        sl: Stop-loss price
+        confidence: Signal confidence
+        probs: Probability distribution
+        active_position: Active position that caused skip
+        features: Optional market features dict
+        symbol: Trading symbol
+    """
+    try:
+        skipped_file = Path("runs/skipped_signals.json")
+        skipped_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Load existing skipped signals
+        skipped_signals = []
+        if skipped_file.exists():
+            try:
+                with open(skipped_file, 'r') as f:
+                    skipped_signals = json.load(f)
+            except:
+                skipped_signals = []
+        
+        # Create new skipped signal entry
+        skipped_signal = {
+            'timestamp': datetime.now().isoformat(),
+            'symbol': symbol,
+            'side': side,
+            'entry': entry,
+            'tp': tp,
+            'sl': sl,
+            'confidence': confidence,
+            'probs': probs,
+            'active_position': active_position,
+            'features': features or {}
+        }
+        
+        skipped_signals.append(skipped_signal)
+        
+        # Save (keep last 1000 signals)
+        if len(skipped_signals) > 1000:
+            skipped_signals = skipped_signals[-1000:]
+        
+        # Atomic write
+        temp_file = skipped_file.with_suffix('.tmp')
+        with open(temp_file, 'w') as f:
+            json.dump(skipped_signals, f, indent=2)
+        temp_file.replace(skipped_file)
+        
+        logger.debug(f"💾 Skipped signal saved: {side} @ ${entry:.2f}")
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to save skipped signal: {e}")
+
+
+def save_closed_position(
+    side: str,
+    entry: float,
+    exit_price: float,
+    tp: float,
+    sl: float,
+    confidence: float,
+    probs: Dict[str, float],
+    pnl: float,
+    exit_reason: str,  # "TP" or "SL"
+    entry_time: str,
+    exit_time: str,
+    features: Optional[Dict[str, Any]] = None,
+    symbol: str = "BTCUSDT"
+) -> None:
+    """
+    Save closed position to JSON file for pattern analysis.
+    
+    Args:
+        side: LONG or SHORT
+        entry: Entry price
+        exit_price: Exit price
+        tp: Take-profit price
+        sl: Stop-loss price
+        confidence: Signal confidence
+        probs: Probability distribution
+        pnl: Realized PnL
+        exit_reason: "TP" or "SL"
+        entry_time: Entry timestamp
+        exit_time: Exit timestamp
+        features: Optional market features dict
+        symbol: Trading symbol
+    """
+    try:
+        positions_file = Path("runs/closed_positions.json")
+        positions_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Load existing positions
+        closed_positions = []
+        if positions_file.exists():
+            try:
+                with open(positions_file, 'r') as f:
+                    closed_positions = json.load(f)
+            except:
+                closed_positions = []
+        
+        # Create new position entry
+        position = {
+            'timestamp': datetime.now().isoformat(),
+            'symbol': symbol,
+            'side': side,
+            'entry': entry,
+            'exit': exit_price,
+            'tp': tp,
+            'sl': sl,
+            'confidence': confidence,
+            'probs': probs,
+            'pnl': pnl,
+            'exit_reason': exit_reason,
+            'entry_time': entry_time,
+            'exit_time': exit_time,
+            'features': features or {}
+        }
+        
+        closed_positions.append(position)
+        
+        # Save (keep last 500 positions)
+        if len(closed_positions) > 500:
+            closed_positions = closed_positions[-500:]
+        
+        # Atomic write
+        temp_file = positions_file.with_suffix('.tmp')
+        with open(temp_file, 'w') as f:
+            json.dump(closed_positions, f, indent=2)
+        temp_file.replace(positions_file)
+        
+        logger.debug(f"💾 Closed position saved: {side} @ ${entry:.2f} → ${exit_price:.2f} ({exit_reason})")
+        
+        # Update entry_features.json with exit information
+        try:
+            from src.entry_features_logger import update_entry_with_exit
+            update_entry_with_exit(
+                entry_time=entry_time,
+                exit_reason=exit_reason,
+                exit_price=exit_price,
+                exit_time=exit_time,
+                pnl=pnl
+            )
+        except Exception as e:
+            logger.debug(f"Failed to update entry features with exit: {e}")
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to save closed position: {e}")
 
 
 def on_new_bar(
@@ -379,17 +656,8 @@ def on_new_bar(
     # Calculate TP/SL
     tp, sl = tp_sl_from_pct(last_price, tp_pct, sl_pct, side)
     
-    # Optional regime filter (EMA50 > EMA200, vol spike)
-    ema50 = df["ema50"].iloc[-1] if "ema50" in df.columns else last_price
-    ema200 = df["ema200"].iloc[-1] if "ema200" in df.columns else last_price
-    vol_spike = df["vol_spike"].iloc[-1] if "vol_spike" in df.columns else 1.0
-    
-    # Gate: filter noisy signals
-    regime_ok = ema50 > ema200 and vol_spike > 0.8
-    
-    if not regime_ok:
-        logger.info(f"Regime filter: REJECTED")
-        return
+    # Regime filter disabled by default (can be enabled via config in run_live_continuous.py)
+    # All signals will pass through
     
     # Prepare alert payload
     payload = {

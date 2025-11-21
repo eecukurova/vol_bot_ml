@@ -238,8 +238,13 @@ class NASDAQDynamicScanner:
             tr3 = abs(low - close.shift(1))
             tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
             
-            atr = tr.rolling(window=self.cfg['atr_period']).mean()
-            n_loss = self.cfg['key_value'] * atr
+            # Config'den strategy_params içinden al
+            strategy_params = self.cfg.get('strategy_params', {})
+            atr_period = strategy_params.get('atr_period', 10)  # Default: 10
+            key_value = strategy_params.get('key_value', 3)  # Default: 3
+            
+            atr = tr.rolling(window=atr_period).mean()
+            n_loss = key_value * atr
             src = close
             
             # Trailing Stop hesaplama

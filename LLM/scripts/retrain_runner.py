@@ -28,6 +28,7 @@ from src.train import train_model, save_model
 from src.utils import time_based_split, set_seed, load_feat_cols
 from src.models.transformer import SeqClassifier
 from src.backtest_core import run_backtest
+from src.hard_negatives_loader import add_hard_negatives_to_training
 
 app = typer.Typer()
 
@@ -319,9 +320,19 @@ def main(
     
     print(f"   Train: {len(X_train)}, Val: {len(X_val)}")
     
+    # Add hard negatives to training data
+    print(f"\n   📋 Integrating hard negatives...")
+    X_train_enhanced, Y_train_enhanced = add_hard_negatives_to_training(
+        X_train, Y_train,
+        df_labeled,
+        feature_cols,
+        config["window"],
+        y_col="y"
+    )
+    
     # Train
     new_model, history = train_model(
-        X_train, Y_train,
+        X_train_enhanced, Y_train_enhanced,
         X_val, Y_val,
         feature_cols,
         config,

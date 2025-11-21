@@ -1,11 +1,7 @@
 """
-Optimization module for ATR + SuperTrend Strategy Optimizer.
-
-This module provides grid search and walk-forward optimization functionality.
+Optimization module for VWMA ARB Strategy.
 """
 
-from .grid_search import GridSearchOptimizer, run_grid_search
-from .walk_forward import WalkForwardOptimizer, run_walk_forward
 from .metrics import (
     calculate_basic_metrics,
     calculate_trade_metrics,
@@ -19,10 +15,6 @@ from .metrics import (
 )
 
 __all__ = [
-    'GridSearchOptimizer',
-    'run_grid_search',
-    'WalkForwardOptimizer',
-    'run_walk_forward',
     'calculate_basic_metrics',
     'calculate_trade_metrics',
     'calculate_risk_metrics',

@@ -1,0 +1,320 @@
+#!/usr/bin/env python3
+"""
+SOL Live Projesi - Binance'den Stop Loss İşlemleri Analizi
+Gerçek işlemleri Binance API'den çekip analiz eder
+"""
+
+import json
+import ccxt
+from datetime import datetime, timedelta
+from pathlib import Path
+import sys
+from collections import defaultdict
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Load config
+config_path = Path("configs/llm_config.json")
+with open(config_path) as f:
+    cfg = json.load(f)
+
+exchange = ccxt.binance({
+    'apiKey': cfg['api_key'],
+    'secret': cfg['secret'],
+    'options': {'defaultType': 'future'},
+    'enableRateLimit': True
+})
+
+def get_recent_trades(days=30):
+    """Get recent trades from Binance."""
+    since = int((datetime.now() - timedelta(days=days)).timestamp() * 1000)
+    
+    try:
+        trades = exchange.fetch_my_trades("SOLUSDT", since=since, limit=1000)
+        return trades
+    except Exception as e:
+        print(f"❌ Hata: {e}")
+        return []
+
+def analyze_trades_directly(trades):
+    """Analyze trades directly by pairing buy/sell."""
+    positions = []
+    i = 0
+    
+    while i < len(trades):
+        entry_trade = trades[i]
+        
+        # Look for exit trade (opposite side)
+        exit_trade = None
+        for j in range(i + 1, min(i + 20, len(trades))):  # Check next 20 trades
+            if trades[j]['side'] != entry_trade['side']:
+                exit_trade = trades[j]
+                break
+        
+        if exit_trade:
+            entry_price = float(entry_trade['price'])
+            exit_price = float(exit_trade['price'])
+            
+            if entry_trade['side'] == 'buy':
+                pnl_pct = (exit_price - entry_price) / entry_price
+                side = 'LONG'
+            else:
+                pnl_pct = (entry_price - exit_price) / entry_price
+                side = 'SHORT'
+            
+            # Determine exit reason based on PnL and expected SL/TP
+            sl_pct = cfg.get('trading_params', {}).get('sl_pct', 0.010)
+            tp_pct = cfg.get('trading_params', {}).get('tp_pct', 0.005)
+            
+            if pnl_pct < -sl_pct * 0.9:  # Close to SL
+                exit_reason = 'SL'
+            elif pnl_pct > tp_pct * 0.9:  # Close to TP
+                exit_reason = 'TP'
+            else:
+                exit_reason = 'MANUAL'  # Unknown
+            
+            position = {
+                'side': side,
+                'entry_price': entry_price,
+                'exit_price': exit_price,
+                'pnl_pct': pnl_pct,
+                'exit_reason': exit_reason,
+                'entry_time': datetime.fromtimestamp(entry_trade['timestamp'] / 1000),
+                'exit_time': datetime.fromtimestamp(exit_trade['timestamp'] / 1000),
+                'entry_order_id': entry_trade.get('id'),
+                'exit_order_id': exit_trade.get('id'),
+            }
+            positions.append(position)
+            i += 2  # Skip both trades
+        else:
+            i += 1
+    
+    return positions
+
+def main():
+    print("=" * 100)
+    print("SOL LIVE PROJESİ - BINANCE'DEN STOP LOSS ANALİZİ")
+    print("=" * 100)
+    print()
+    
+    # Get data
+    print("📊 Binance'den işlemler çekiliyor...")
+    trades = get_recent_trades(days=30)
+    
+    print(f"   Toplam Trade: {len(trades)}")
+    print()
+    
+    if not trades:
+        print("⚠️ İşlem bulunamadı!")
+        return
+    
+    # Analyze positions
+    print("🔍 Pozisyonlar analiz ediliyor...")
+    positions = analyze_trades_directly(trades)
+    
+    if not positions:
+        print("⚠️ Analiz edilecek pozisyon bulunamadı!")
+        return
+    
+    # Filter recent positions (last 30 days)
+    cutoff_date = datetime.now() - timedelta(days=30)
+    recent_positions = [p for p in positions if p['entry_time'] >= cutoff_date]
+    
+    print(f"   Toplam Pozisyon: {len(recent_positions)}")
+    print()
+    
+    # Categorize
+    sl_positions = [p for p in recent_positions if p['exit_reason'] == 'SL']
+    tp_positions = [p for p in recent_positions if p['exit_reason'] == 'TP']
+    manual_positions = [p for p in recent_positions if p['exit_reason'] == 'MANUAL']
+    
+    print("=" * 100)
+    print("📊 GENEL İSTATİSTİKLER")
+    print("=" * 100)
+    print()
+    
+    total = len(recent_positions)
+    if total == 0:
+        print("⚠️ Son 30 günde pozisyon bulunamadı!")
+        return
+    
+    print(f"📈 Toplam Pozisyon: {total}")
+    print(f"   ✅ Take Profit: {len(tp_positions)} ({len(tp_positions)/total*100:.1f}%)")
+    print(f"   ❌ Stop Loss: {len(sl_positions)} ({len(sl_positions)/total*100:.1f}%)")
+    print(f"   🔄 Manuel: {len(manual_positions)} ({len(manual_positions)/total*100:.1f}%)")
+    print()
+    
+    # Win rate
+    closed_positions = sl_positions + tp_positions
+    if closed_positions:
+        win_rate = len(tp_positions) / len(closed_positions) * 100
+        print(f"🎯 Win Rate: {win_rate:.1f}%")
+        print()
+    
+    # PnL Analysis
+    print("=" * 100)
+    print("💰 KAR/ZARAR ANALİZİ")
+    print("=" * 100)
+    print()
+    
+    if tp_positions:
+        avg_tp_pnl = sum(p['pnl_pct'] for p in tp_positions) / len(tp_positions)
+        total_tp_pnl = sum(p['pnl_pct'] for p in tp_positions)
+        print(f"✅ Take Profit:")
+        print(f"   Adet: {len(tp_positions)}")
+        print(f"   Ortalama PnL: {avg_tp_pnl*100:.2f}%")
+        print(f"   Toplam PnL: {total_tp_pnl*100:.2f}%")
+        print()
+    
+    if sl_positions:
+        avg_sl_pnl = sum(p['pnl_pct'] for p in sl_positions) / len(sl_positions)
+        total_sl_pnl = sum(p['pnl_pct'] for p in sl_positions)
+        print(f"❌ Stop Loss:")
+        print(f"   Adet: {len(sl_positions)}")
+        print(f"   Ortalama PnL: {avg_sl_pnl*100:.2f}%")
+        print(f"   Toplam PnL: {total_sl_pnl*100:.2f}%")
+        print()
+    
+    # Side breakdown
+    print("=" * 100)
+    print("📊 YÖN ANALİZİ")
+    print("=" * 100)
+    print()
+    
+    sl_long = [p for p in sl_positions if p['side'] == 'LONG']
+    sl_short = [p for p in sl_positions if p['side'] == 'SHORT']
+    tp_long = [p for p in tp_positions if p['side'] == 'LONG']
+    tp_short = [p for p in tp_positions if p['side'] == 'SHORT']
+    
+    print(f"LONG Pozisyonlar:")
+    long_total = len(tp_long) + len(sl_long)
+    if long_total > 0:
+        print(f"   TP: {len(tp_long)} ({len(tp_long)/long_total*100:.1f}% win rate)")
+        print(f"   SL: {len(sl_long)} ({len(sl_long)/long_total*100:.1f}% loss rate)")
+    else:
+        print(f"   TP: 0")
+        print(f"   SL: 0")
+    print()
+    
+    print(f"SHORT Pozisyonlar:")
+    short_total = len(tp_short) + len(sl_short)
+    if short_total > 0:
+        print(f"   TP: {len(tp_short)} ({len(tp_short)/short_total*100:.1f}% win rate)")
+        print(f"   SL: {len(sl_short)} ({len(sl_short)/short_total*100:.1f}% loss rate)")
+    else:
+        print(f"   TP: 0")
+        print(f"   SL: 0")
+    print()
+    
+    # Time analysis
+    print("=" * 100)
+    print("⏰ ZAMAN ANALİZİ")
+    print("=" * 100)
+    print()
+    
+    if sl_positions:
+        sl_durations = [(p['exit_time'] - p['entry_time']).total_seconds() / 60 for p in sl_positions]
+        avg_sl_duration = sum(sl_durations) / len(sl_durations)
+        print(f"❌ Stop Loss:")
+        print(f"   Ortalama Süre: {avg_sl_duration:.1f} dakika")
+        print(f"   En Kısa: {min(sl_durations):.1f} dakika")
+        print(f"   En Uzun: {max(sl_durations):.1f} dakika")
+        print()
+    
+    if tp_positions:
+        tp_durations = [(p['exit_time'] - p['entry_time']).total_seconds() / 60 for p in tp_positions]
+        avg_tp_duration = sum(tp_durations) / len(tp_durations)
+        print(f"✅ Take Profit:")
+        print(f"   Ortalama Süre: {avg_tp_duration:.1f} dakika")
+        print(f"   En Kısa: {min(tp_durations):.1f} dakika")
+        print(f"   En Uzun: {max(tp_durations):.1f} dakika")
+        print()
+    
+    # Recent SL positions details
+    if sl_positions:
+        print("=" * 100)
+        print("❌ SON STOP LOSS İŞLEMLERİ (Detay)")
+        print("=" * 100)
+        print()
+        
+        recent_sl = sorted(sl_positions, key=lambda x: x['entry_time'], reverse=True)[:10]
+        for i, pos in enumerate(recent_sl, 1):
+            duration = (pos['exit_time'] - pos['entry_time']).total_seconds() / 60
+            print(f"{i}. {pos['side']} - Entry: ${pos['entry_price']:.2f} → Exit: ${pos['exit_price']:.2f}")
+            print(f"   PnL: {pos['pnl_pct']*100:.2f}% | Süre: {duration:.1f} dk")
+            print(f"   Entry: {pos['entry_time'].strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"   Exit: {pos['exit_time'].strftime('%Y-%m-%d %H:%M:%S')}")
+            print()
+    
+    # Recommendations
+    print("=" * 100)
+    print("💡 STOP LOSS AZALTMA ÖNERİLERİ")
+    print("=" * 100)
+    print()
+    
+    sl_rate = len(sl_positions) / total * 100 if total > 0 else 0
+    
+    if sl_rate > 50:
+        print("⚠️ KRİTİK: Stop Loss oranı %50'nin üzerinde!")
+        print("   Öneriler:")
+        print("   1. Confidence threshold'u yükselt (şu an: 0.85 → 0.90)")
+        print("   2. Probability ratio filtresini sıkılaştır (şu an: 3.0 → 5.0)")
+        print("   3. Volume spike threshold'u kontrol et")
+        print("   4. RSI filtrelerini sıkılaştır")
+        print("   5. Trend following exit ayarlarını optimize et")
+        print()
+    
+    if sl_positions:
+        quick_sl = [p for p in sl_positions if (p['exit_time'] - p['entry_time']).total_seconds() < 300]  # 5 dakikadan kısa
+        if len(quick_sl) > len(sl_positions) * 0.3:
+            print("⚠️ UYARI: Stop Loss işlemlerinin %30'undan fazlası 5 dakikadan kısa sürede gerçekleşmiş!")
+            print("   Öneriler:")
+            print("   1. SL seviyesini biraz genişlet (şu an: 1.0% → 1.2%)")
+            print("   2. Entry timing'i iyileştir")
+            print("   3. Minimum bar kontrolü ekle")
+            print("   4. Trend following exit'i optimize et")
+            print()
+    
+    if sl_long and sl_short:
+        long_sl_rate = len(sl_long) / (len(tp_long) + len(sl_long)) * 100 if (tp_long or sl_long) else 0
+        short_sl_rate = len(sl_short) / (len(tp_short) + len(sl_short)) * 100 if (tp_short or sl_short) else 0
+        
+        if long_sl_rate > short_sl_rate * 1.5:
+            print("⚠️ UYARI: LONG pozisyonlarda SL oranı SHORT'a göre çok yüksek!")
+            print("   Öneriler:")
+            print("   1. LONG sinyalleri için daha sıkı filtreler uygula")
+            print("   2. LONG için confidence threshold'u artır")
+            print()
+        elif short_sl_rate > long_sl_rate * 1.5:
+            print("⚠️ UYARI: SHORT pozisyonlarda SL oranı LONG'a göre çok yüksek!")
+            print("   Öneriler:")
+            print("   1. SHORT sinyalleri için daha sıkı filtreler uygula")
+            print("   2. SHORT için confidence threshold'u artır")
+            print()
+    
+    # Current config summary
+    print("=" * 100)
+    print("⚙️ MEVCUT AYARLAR")
+    print("=" * 100)
+    print()
+    
+    trading_params = cfg.get('trading_params', {})
+    print(f"Stop Loss: {trading_params.get('sl_pct', 0)*100:.2f}%")
+    print(f"Take Profit: {trading_params.get('tp_pct', 0)*100:.2f}%")
+    print(f"Confidence Threshold (LONG): {trading_params.get('thr_long', 0)*100:.0f}%")
+    print(f"Confidence Threshold (SHORT): {trading_params.get('thr_short', 0)*100:.0f}%")
+    print(f"Probability Ratio: {trading_params.get('min_prob_ratio', 0)}")
+    print()
+    
+    trend_following = cfg.get('trend_following_exit', {})
+    print(f"Trend Following Exit: {'Aktif' if trend_following.get('enabled', False) else 'Pasif'}")
+    if trend_following.get('enabled'):
+        print(f"   Trailing Activation: {trend_following.get('trailing_activation_pct', 0)*100:.1f}%")
+        print(f"   Trailing Distance: {trend_following.get('trailing_distance_pct', 0)*100:.1f}%")
+    print()
+    
+    print("=" * 100)
+
+if __name__ == "__main__":
+    main()
+

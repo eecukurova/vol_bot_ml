@@ -3,7 +3,7 @@
   "secret": "HZRMeUvbKkbONjXsbZrD2WFuPPXARPTM2oM0TnTOaRsIBKoNdLUsCLVCQLnpZB3u",
   "sandbox": false,
   "symbol": "BTCUSDT",
-  "trade_amount_usd": 1000,
+  "trade_amount_usd": 200,
   "leverage": 5,
   
   "idempotency": {
@@ -30,10 +30,22 @@
     "detailed_signals": true
   },
   "trading_params": {
-    "sl_pct": 0.010,
-    "tp_pct": 0.005,
-    "thr_long": 0.75,
-    "thr_short": 0.75
+    "sl_pct": 0.007,
+    "tp_pct": 0.008,
+    "thr_long": 0.90,
+    "thr_short": 0.90
+  },
+  "regime_filter": {
+    "enabled": true,
+    "use_ema_filter": false,
+    "use_vol_filter": true,
+    "vol_spike_threshold": 0.4
+  },
+  "multi_timeframe": {
+    "enabled": true,
+    "signal_timeframe": "3m",
+    "trend_timeframe": "15m",
+    "require_both_timeframes": true
   }
 }
 

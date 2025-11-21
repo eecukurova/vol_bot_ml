@@ -1,0 +1,94 @@
+//@version=6
+
+strategy("Stable Breakout Strategy — NASDAQ Optimized",
+
+     overlay=true, commission_type=strategy.commission.percent, commission_value=0.05,
+
+     initial_capital=100000, pyramiding=0)
+
+// ───────── Inputs (Optimized for NASDAQ - More Trades)
+lenHigh   = input.int(50, "Highest Lookback (bars)", minval=2, maxval=200, group="Breakout")
+lenVol    = input.int(20,  "Volume SMA (bars)",      minval=1, group="Volume")
+minRise   = input.float(1.5, "Min Rise from Open (%)", step=0.1, minval=0.1, maxval=10.0, group="Breakout")
+volKatsay = input.float(1.2, "Volume x SMA Multiplier", step=0.1, minval=0.5, maxval=3.0, group="Volume")
+
+// Additional filters for NASDAQ
+useRSI    = input.bool(true, "Use RSI Filter", group="Filters")
+rsiLen    = input.int(14, "RSI Period", minval=2, group="Filters")
+rsiMin    = input.float(45.0, "Min RSI", step=0.5, minval=0, maxval=100, group="Filters")
+rsiMax    = input.float(75.0, "Max RSI", step=0.5, minval=0, maxval=100, group="Filters")
+
+useEMA    = input.bool(false, "Use EMA Trend Filter", group="Filters")
+emaLen    = input.int(50, "EMA Period", minval=2, group="Filters")
+
+useTP_SL  = input.bool(true, "Use TP/SL", group="Risk")
+tpPct     = input.float(3.0, "TP (%)", step=0.1, minval=0.1, group="Risk")
+slPct     = input.float(1.5, "SL (%)", step=0.1, minval=0.1, group="Risk")
+
+showHighLine = input.bool(true, "Plot Highest Line", group="Visual")
+showMarks    = input.bool(true, "Show Entry Marks & Labels", group="Visual")
+
+// ───────── Series
+c = close
+o = open
+h = high
+v = volume
+
+// Eski zirve (current bar hariç)
+highestN_raw = ta.highest(h, lenHigh)
+highestN     = highestN_raw[1]
+
+// RSI
+rsi = ta.rsi(c, rsiLen)
+
+// EMA Trend
+ema = ta.ema(c, emaLen)
+
+// ───────── Conditions
+smaVol   = ta.sma(v, lenVol)
+
+// Core breakout conditions
+cond1    = c > highestN
+cond2    = ((c - o) / math.max(o, 0.0000001)) * 100 >= minRise
+cond3    = v > smaVol * volKatsay
+
+// Additional filters
+cond4    = not useRSI or (rsi >= rsiMin and rsi <= rsiMax)
+cond5    = not useEMA or c > ema
+
+// Combined signal
+signalLong = cond1 and cond2 and cond3 and cond4 and cond5
+
+// ───────── Entries
+if signalLong and strategy.position_size <= 0
+    strategy.entry("LONG", strategy.long)
+
+// ───────── Exits
+if useTP_SL and strategy.position_size > 0
+    avg  = strategy.position_avg_price
+    slPx = avg * (1 - slPct/100.0)
+    tpPx = avg * (1 + tpPct/100.0)
+    strategy.exit("L-TP/SL", from_entry="LONG", stop=slPx, limit=tpPx)
+
+// ───────── Visuals
+plot(showHighLine ? highestN : na, title="Highest (lookback)", linewidth=2, color=color.new(color.blue, 0))
+plot(useEMA ? ema : na, title="EMA Trend", linewidth=1, color=color.new(color.orange, 0))
+
+barcolor(signalLong ? color.new(color.lime, 0) : na)
+
+// Marker (global scope)
+plotshape(showMarks and signalLong, title="LONG",
+          style=shape.triangleup, location=location.belowbar,
+          size=size.small, text="LONG", textcolor=color.white,
+          color=color.new(color.green, 0))
+
+// Label (local scope)
+if showMarks and signalLong
+    label.new(bar_index, low, "Breakout + Vol\nHighest(" + str.tostring(lenHigh) + ")", 
+              style=label.style_label_up, textcolor=color.white, 
+              color=color.new(color.green, 0))
+
+// Alerts
+alertcondition(signalLong, title="Breakout Long", 
+               message="Breakout+Volume Long: {{ticker}} @ {{close}}")
+

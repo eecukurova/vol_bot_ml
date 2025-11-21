@@ -1,0 +1,5068 @@
+{
+  "orders": {
+    "EMA-BTC-B-en-8a069051": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.00906632287170337,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-8a069051"
+      },
+      "ts": 1762028077769,
+      "exchange_id": "807251654474"
+    },
+    "EMA-BTC-S-tp-9b04775d": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 110849.79149999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "110849.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762028077993,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "807251654801"
+    },
+    "EMA-BTC-S-sl-acc26097": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 109415.9136,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-acc26097",
+        "stopPrice": "109415.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762028078220,
+      "exchange_id": "807251655057"
+    },
+    "EMA-BTC-B-en-e00ee4ff": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.00904640079897812,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-e00ee4ff"
+      },
+      "ts": 1762076497561,
+      "exchange_id": "807581287580"
+    },
+    "EMA-BTC-S-tp-5b486710": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 111093.90599999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "111093.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762076497785,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "807581292323"
+    },
+    "EMA-BTC-S-sl-41092e7d": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 109656.8704,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-41092e7d",
+        "stopPrice": "109656.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762076498014,
+      "exchange_id": "807581295608"
+    },
+    "EMA-BTC-S-en-c526ba15": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009007012860212962,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-c526ba15"
+      },
+      "ts": 1762085500389,
+      "exchange_id": "807648949246"
+    },
+    "EMA-BTC-B-tp-96241687": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 110469.477,
+      "amount": null,
+      "params": {
+        "stopPrice": "110469.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762085500616,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "807648949386"
+    },
+    "EMA-BTC-B-sl-18142d7f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 111912.79680000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-18142d7f",
+        "stopPrice": "111912.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762085500839,
+      "exchange_id": "807648949605"
+    },
+    "EMA-BTC-B-en-8407e9eb": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009344711453999724,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-8407e9eb"
+      },
+      "ts": 1762223333442,
+      "exchange_id": "809127565066"
+    },
+    "EMA-BTC-S-tp-0ceca544": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 107547.46199999998,
+      "amount": null,
+      "params": {
+        "stopPrice": "107547.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762223333667,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "809127570971"
+    },
+    "EMA-BTC-S-sl-e09d6791": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 105942.276,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-e09d6791",
+        "stopPrice": "105942.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762223333891,
+      "exchange_id": "809127575480"
+    },
+    "EMA-BTC-B-en-4a404036": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.00984425405657099,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-4a404036"
+      },
+      "ts": 1762327355683,
+      "exchange_id": "810585585709"
+    },
+    "EMA-BTC-S-tp-8b6276f5": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102090.01049999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "102090",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762327355907,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "810585586356"
+    },
+    "EMA-BTC-S-sl-0e78aea0": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100566.27900000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-0e78aea0",
+        "stopPrice": "100566.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762327356130,
+      "exchange_id": "810585593285"
+    },
+    "EMA-BTC-B-en-3bd7bfb7": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009804190703274207,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-3bd7bfb7"
+      },
+      "ts": 1762329567008,
+      "exchange_id": "810616659734"
+    },
+    "EMA-BTC-S-tp-8f2bb971": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102507.18599999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "102507.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762329567231,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "810616672025"
+    },
+    "EMA-BTC-S-sl-ba7e994d": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100977.228,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-ba7e994d",
+        "stopPrice": "100977.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762329567456,
+      "exchange_id": "810616676145"
+    },
+    "EMA-BTC-S-en-4ef21eac": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009834911180917125,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-4ef21eac"
+      },
+      "ts": 1762339309157,
+      "exchange_id": "810771778100"
+    },
+    "EMA-BTC-B-tp-00450de7": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 101170.20700000001,
+      "amount": null,
+      "params": {
+        "stopPrice": "101170.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762339309390,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "810771778806"
+    },
+    "EMA-BTC-B-sl-7e202d9f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102695.38600000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-7e202d9f",
+        "stopPrice": "102695.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762339309615,
+      "exchange_id": "810771779646"
+    },
+    "EMA-BTC-S-en-2e66878a": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.00984611506760835,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-2e66878a"
+      },
+      "ts": 1762339685116,
+      "exchange_id": "810777838486"
+    },
+    "EMA-BTC-B-tp-50c9aaac": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 101055.08549999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "101055.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762339685372,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "810777845820"
+    },
+    "EMA-BTC-B-sl-2d9ec663": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102578.529,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-2d9ec663",
+        "stopPrice": "102578.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762339685628,
+      "exchange_id": "810777854781"
+    },
+    "EMA-BTC-B-en-86aa282e": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009705468157814794,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-86aa282e"
+      },
+      "ts": 1762353822506,
+      "exchange_id": "810997061018"
+    },
+    "EMA-BTC-S-tp-7a928649": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 103549.87349999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "103549.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762353822735,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "810997067476"
+    },
+    "EMA-BTC-S-sl-52359b20": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 102004.353,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-52359b20",
+        "stopPrice": "102004.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762353822960,
+      "exchange_id": "810997072884"
+    },
+    "EMA-BTC-S-en-40b20c73": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.00970872843812773,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-40b20c73"
+      },
+      "ts": 1762355683320,
+      "exchange_id": "811028798293"
+    },
+    "EMA-BTC-B-tp-204a08f5": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 102485.09950000001,
+      "amount": null,
+      "params": {
+        "stopPrice": "102485.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762355683552,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "811028808748"
+    },
+    "EMA-BTC-B-sl-f98a44b4": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 104030.10100000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-f98a44b4",
+        "stopPrice": "104030.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762355683784,
+      "exchange_id": "811028809645"
+    },
+    "EMA-BTC-S-en-b36c9481": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009622675642698506,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-b36c9481"
+      },
+      "ts": 1762361528890,
+      "exchange_id": "811125510781"
+    },
+    "EMA-BTC-B-tp-cfb7b4b7": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 103401.594,
+      "amount": null,
+      "params": {
+        "stopPrice": "103401.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762361529122,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "811125520251"
+    },
+    "EMA-BTC-B-sl-741ac09e": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 104960.412,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-741ac09e",
+        "stopPrice": "104960.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762361529354,
+      "exchange_id": "811125529416"
+    },
+    "EMA-BTC-S-en-d86ed53e": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009628438556119353,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-d86ed53e"
+      },
+      "ts": 1762364656893,
+      "exchange_id": "811176150845"
+    },
+    "EMA-BTC-B-tp-626cf67d": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 103339.705,
+      "amount": null,
+      "params": {
+        "stopPrice": "103339.7",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762364657120,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "811176151415"
+    },
+    "EMA-BTC-B-sl-e504ac2f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 104897.59,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-e504ac2f",
+        "stopPrice": "104897.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762364657350,
+      "exchange_id": "811176151791"
+    },
+    "EMA-BTC-B-en-5a116b95": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009623527600277158,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-5a116b95"
+      },
+      "ts": 1762376218188,
+      "exchange_id": "811327707628"
+    },
+    "EMA-BTC-S-tp-69f9b712": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 104743.296,
+      "amount": null,
+      "params": {
+        "stopPrice": "104743.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762376218417,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "811327709480"
+    },
+    "EMA-BTC-S-sl-5c7c7361": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 103080.704,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-5c7c7361",
+        "stopPrice": "103080.7",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762376218648,
+      "exchange_id": "811327711272"
+    },
+    "EMA-BTC-B-en-aad3cbe1": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009669823864158314,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-aad3cbe1"
+      },
+      "ts": 1762380296425,
+      "exchange_id": "811385677130"
+    },
+    "EMA-BTC-S-tp-9fec62af": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 104241.816,
+      "amount": null,
+      "params": {
+        "stopPrice": "104241.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762380296687,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "811385677354"
+    },
+    "EMA-BTC-S-sl-cf8b4385": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 102587.184,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-cf8b4385",
+        "stopPrice": "102587.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762380296945,
+      "exchange_id": "811385677480"
+    },
+    "EMA-BTC-B-en-e2ae9dd4": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009795921566015204,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-e2ae9dd4"
+      },
+      "ts": 1762443813871,
+      "exchange_id": "812249222989"
+    },
+    "EMA-BTC-S-tp-17b0762c": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102899.9664,
+      "amount": null,
+      "params": {
+        "stopPrice": "102900",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762443814104,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812249224130"
+    },
+    "EMA-BTC-S-sl-4cf76c14": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 101266.6336,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-4cf76c14",
+        "stopPrice": "101266.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762443814330,
+      "exchange_id": "812249231857"
+    },
+    "EMA-BTC-B-en-b5d6417a": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009900999901980102,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-b5d6417a"
+      },
+      "ts": 1762447190880,
+      "exchange_id": "812298994404"
+    },
+    "EMA-BTC-S-tp-4c653dcc": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 101807.8992,
+      "amount": null,
+      "params": {
+        "stopPrice": "101807.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762447191154,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812299000820"
+    },
+    "EMA-BTC-S-sl-ef2a55cb": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100191.90079999999,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-ef2a55cb",
+        "stopPrice": "100191.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762447191401,
+      "exchange_id": "812299006613"
+    },
+    "EMA-BTC-S-en-63bd1262": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009835452873427557,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-63bd1262"
+      },
+      "ts": 1762451840606,
+      "exchange_id": "812379639717"
+    },
+    "EMA-BTC-B-tp-f7137a11": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 100859.616,
+      "amount": null,
+      "params": {
+        "stopPrice": "100859.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762451840835,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812379640373"
+    },
+    "EMA-BTC-B-sl-b408fa46": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102486.384,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-b408fa46",
+        "stopPrice": "102486.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762451841061,
+      "exchange_id": "812379641015"
+    },
+    "EMA-BTC-B-en-80939699": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009872048380934705,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-80939699"
+      },
+      "ts": 1762453689837,
+      "exchange_id": "812411392013"
+    },
+    "EMA-BTC-S-tp-1f7b4a11": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102106.4688,
+      "amount": null,
+      "params": {
+        "stopPrice": "102106.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762453690071,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812411402352"
+    },
+    "EMA-BTC-S-sl-27c187df": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100485.73120000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-27c187df",
+        "stopPrice": "100485.7",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762453690294,
+      "exchange_id": "812411410071"
+    },
+    "EMA-BTC-B-en-e8ae9cb9": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.00985478967415138,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-e8ae9cb9"
+      },
+      "ts": 1762453881110,
+      "exchange_id": "812414191655"
+    },
+    "EMA-BTC-S-tp-783ff963": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102285.288,
+      "amount": null,
+      "params": {
+        "stopPrice": "102285.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762453881340,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812414192046"
+    },
+    "EMA-BTC-S-sl-c87a42b6": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100661.712,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-c87a42b6",
+        "stopPrice": "100661.7",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762453881566,
+      "exchange_id": "812414192353"
+    },
+    "EMA-BTC-S-en-68cd88eb": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.00984047604286905,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-68cd88eb"
+      },
+      "ts": 1762454569932,
+      "exchange_id": "812424277322"
+    },
+    "EMA-BTC-B-tp-9340c6e1": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 100808.1312,
+      "amount": null,
+      "params": {
+        "stopPrice": "100808.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762454570163,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812424281668"
+    },
+    "EMA-BTC-B-sl-27883ee4": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102434.06880000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-27883ee4",
+        "stopPrice": "102434.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762454570396,
+      "exchange_id": "812424284877"
+    },
+    "EMA-BTC-S-en-984d9204": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009838646202282565,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-984d9204"
+      },
+      "ts": 1762454711279,
+      "exchange_id": "812426272099"
+    },
+    "EMA-BTC-B-tp-64b128cd": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 100826.88,
+      "amount": null,
+      "params": {
+        "stopPrice": "100826.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762454713232,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812426286991"
+    },
+    "EMA-BTC-B-sl-5ff46a8c": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102453.12,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-5ff46a8c",
+        "stopPrice": "102453.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762454713464,
+      "exchange_id": "812426287196"
+    },
+    "EMA-BTC-B-en-6abb6eba": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009910724196438481,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-6abb6eba"
+      },
+      "ts": 1762475121332,
+      "exchange_id": "812728129702"
+    },
+    "EMA-BTC-S-tp-0f0490f2": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 101708.0064,
+      "amount": null,
+      "params": {
+        "stopPrice": "101708",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762475123222,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812728153440"
+    },
+    "EMA-BTC-S-sl-0b488291": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100093.59360000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-0b488291",
+        "stopPrice": "100093.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762475123451,
+      "exchange_id": "812728165394"
+    },
+    "EMA-BTC-B-en-40cf57d5": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009822700260301557,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-40cf57d5"
+      },
+      "ts": 1762488154738,
+      "exchange_id": "812947208125"
+    },
+    "EMA-BTC-S-tp-10b2153a": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102619.44,
+      "amount": null,
+      "params": {
+        "stopPrice": "102619.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762488156631,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "812947244020"
+    },
+    "EMA-BTC-S-sl-9c8d399f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100990.56,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-9c8d399f",
+        "stopPrice": "100990.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762488156864,
+      "exchange_id": "812947246431"
+    },
+    "EMA-BTC-S-en-36d279bf": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.00990367683906327,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-36d279bf"
+      },
+      "ts": 1762507812802,
+      "exchange_id": "813200503611"
+    },
+    "EMA-BTC-B-tp-4117af46": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 100164.8192,
+      "amount": null,
+      "params": {
+        "stopPrice": "100164.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762507814703,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813200529728"
+    },
+    "EMA-BTC-B-sl-323ecf34": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 101780.38080000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-323ecf34",
+        "stopPrice": "101780.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762507814940,
+      "exchange_id": "813200534652"
+    },
+    "EMA-BTC-B-en-cc18a827": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009997690533486763,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-cc18a827"
+      },
+      "ts": 1762514663319,
+      "exchange_id": "813300818337"
+    },
+    "EMA-BTC-S-tp-9aef8252": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 100823.28480000001,
+      "amount": null,
+      "params": {
+        "stopPrice": "100823.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762514665223,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813300847961"
+    },
+    "EMA-BTC-S-sl-c0b7e913": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 99222.9152,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-c0b7e913",
+        "stopPrice": "99222.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762514665462,
+      "exchange_id": "813300853208"
+    },
+    "EMA-BTC-S-en-d9ed8690": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009946794595707562,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-d9ed8690"
+      },
+      "ts": 1762517257245,
+      "exchange_id": "813341742300"
+    },
+    "EMA-BTC-B-en-dae7aafc": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009973281578650794,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-dae7aafc"
+      },
+      "ts": 1762517816924,
+      "exchange_id": "813350490339"
+    },
+    "EMA-BTC-S-tp-56cb20f4": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 101070.0432,
+      "amount": null,
+      "params": {
+        "stopPrice": "101070",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762517818816,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813350532006"
+    },
+    "EMA-BTC-S-sl-1496292f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 99465.75679999999,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-1496292f",
+        "stopPrice": "99465.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762517819051,
+      "exchange_id": "813350533193"
+    },
+    "EMA-BTC-B-en-fd53c487": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.010060088911065796,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-fd53c487"
+      },
+      "ts": 1762519670277,
+      "exchange_id": "813383056817"
+    },
+    "EMA-BTC-S-tp-ed1f4409": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 100197.9216,
+      "amount": null,
+      "params": {
+        "stopPrice": "100197.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762519672176,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813383070127"
+    },
+    "EMA-BTC-S-sl-e3ce2f53": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 98607.47839999999,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-e3ce2f53",
+        "stopPrice": "98607.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762519672410,
+      "exchange_id": "813383075752"
+    },
+    "EMA-BTC-B-en-ee0500ba": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009999050090241428,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-ee0500ba"
+      },
+      "ts": 1762521335783,
+      "exchange_id": "813407342132"
+    },
+    "EMA-BTC-S-tp-417d3fcb": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 100809.576,
+      "amount": null,
+      "params": {
+        "stopPrice": "100809.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762521337685,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813407351511"
+    },
+    "EMA-BTC-S-sl-4e6d6e6f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 99209.424,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-4e6d6e6f",
+        "stopPrice": "99209.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762521337917,
+      "exchange_id": "813407352627"
+    },
+    "EMA-BTC-S-en-ed1ae533": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009986119294181089,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-ed1ae533"
+      },
+      "ts": 1762522450607,
+      "exchange_id": "813422907075"
+    },
+    "EMA-BTC-B-en-5c1d0c66": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009960873688152934,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-5c1d0c66"
+      },
+      "ts": 1762523377329,
+      "exchange_id": "813438989734"
+    },
+    "EMA-BTC-S-tp-019e5a0b": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 101195.9424,
+      "amount": null,
+      "params": {
+        "stopPrice": "101195.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762523379231,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813439036857"
+    },
+    "EMA-BTC-S-sl-8b5b9b0d": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 99589.6576,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-8b5b9b0d",
+        "stopPrice": "99589.7",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762523379461,
+      "exchange_id": "813439037911"
+    },
+    "EMA-BTC-S-en-b3702227": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009934107067819156,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-b3702227"
+      },
+      "ts": 1762526709972,
+      "exchange_id": "813495366441"
+    },
+    "EMA-BTC-B-tp-a1f693cd": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 99857.9936,
+      "amount": null,
+      "params": {
+        "stopPrice": "99858",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762526711920,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813495402773"
+    },
+    "EMA-BTC-B-sl-f3c25232": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 101468.6064,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-f3c25232",
+        "stopPrice": "101468.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762526712164,
+      "exchange_id": "813495409304"
+    },
+    "EMA-BTC-B-en-8d91418b": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009907876563710618,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-8d91418b"
+      },
+      "ts": 1762532444848,
+      "exchange_id": "813585266397"
+    },
+    "EMA-BTC-B-en-d3cbc0ff": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009870693909781857,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-d3cbc0ff"
+      },
+      "ts": 1762533190386,
+      "exchange_id": "813597269787"
+    },
+    "EMA-BTC-S-tp-fa1b5a1f": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102120.48,
+      "amount": null,
+      "params": {
+        "stopPrice": "102120.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762533192291,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813597333625"
+    },
+    "EMA-BTC-S-sl-2a2640b5": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100499.52,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-2a2640b5",
+        "stopPrice": "100499.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762533192526,
+      "exchange_id": "813597341124"
+    },
+    "EMA-BTC-S-en-c49a600f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0098998530861802,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-c49a600f"
+      },
+      "ts": 1762534855021,
+      "exchange_id": "813623779187"
+    },
+    "EMA-BTC-S-en-b82c027a": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.009823211659759312,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-b82c027a"
+      },
+      "ts": 1762536155283,
+      "exchange_id": "813643780699"
+    },
+    "EMA-BTC-B-tp-d7f4db71": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 100985.3024,
+      "amount": null,
+      "params": {
+        "stopPrice": "100985.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762536157205,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813643797990"
+    },
+    "EMA-BTC-B-sl-c174022c": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102614.0976,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-c174022c",
+        "stopPrice": "102614.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762536157436,
+      "exchange_id": "813643798825"
+    },
+    "EMA-BTC-B-en-1a30c44f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009766111398126274,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-1a30c44f"
+      },
+      "ts": 1762536716325,
+      "exchange_id": "813652695619"
+    },
+    "EMA-BTC-B-en-31345b22": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.009794108256237378,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-31345b22"
+      },
+      "ts": 1762537277032,
+      "exchange_id": "813662257125"
+    },
+    "EMA-BTC-S-tp-50c73100": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102919.01759999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "102919",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762537278949,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813662273649"
+    },
+    "EMA-BTC-S-sl-7e5087fc": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 101285.3824,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-7e5087fc",
+        "stopPrice": "101285.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762537279180,
+      "exchange_id": "813662274714"
+    },
+    "EMA-BTC-B-en-fc77e9eb": {
+      "status": "FAILED",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0009698530866544336,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-fc77e9eb"
+      },
+      "ts": 1762547284122,
+      "error": "binance amount of BTC/USDT:USDT must be greater than minimum amount precision of 0.001"
+    },
+    "EMA-BTC-B-en-c45e3dd1": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0019324026238162824,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-c45e3dd1"
+      },
+      "ts": 1762549430748,
+      "exchange_id": "813852214602"
+    },
+    "EMA-BTC-S-tp-d84ca92a": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 104326.08480000001,
+      "amount": null,
+      "params": {
+        "stopPrice": "104326.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762549432726,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "813852241029"
+    },
+    "EMA-BTC-S-sl-b253fcbf": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 102877.11140000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-b253fcbf",
+        "stopPrice": "102877.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762549432955,
+      "exchange_id": "813852244316"
+    },
+    "EMA-BTC-S-en-aa8c376b": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019383958417532401,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-aa8c376b"
+      },
+      "ts": 1762569289587,
+      "exchange_id": "814094535340"
+    },
+    "EMA-BTC-B-tp-6f84848d": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 102352.6752,
+      "amount": null,
+      "params": {
+        "stopPrice": "102352.7",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762569291492,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "814094542578"
+    },
+    "EMA-BTC-B-sl-e224c763": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 103797.1686,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-e224c763",
+        "stopPrice": "103797.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762569291722,
+      "exchange_id": "814094543778"
+    },
+    "EMA-BTC-B-en-31143250": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001948000085712004,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-31143250"
+      },
+      "ts": 1762573336103,
+      "exchange_id": "814151018064"
+    },
+    "EMA-BTC-B-en-6916521d": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001947463283014128,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-6916521d"
+      },
+      "ts": 1762573528531,
+      "exchange_id": "814153544156"
+    },
+    "EMA-BTC-S-tp-e6f7696a": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 103519.2816,
+      "amount": null,
+      "params": {
+        "stopPrice": "103519.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762573530435,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "814153561619"
+    },
+    "EMA-BTC-S-sl-9d8f882b": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 102081.5138,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-9d8f882b",
+        "stopPrice": "102081.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762573530666,
+      "exchange_id": "814153563172"
+    },
+    "EMA-BTC-S-en-5437aedc": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019573800077120774,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-5437aedc"
+      },
+      "ts": 1762585872675,
+      "exchange_id": "814307850280"
+    },
+    "EMA-BTC-B-tp-2fed93c9": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 101359.98079999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "101360",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762585874609,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "814307918869"
+    },
+    "EMA-BTC-B-sl-5e3421c1": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102790.4644,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-5e3421c1",
+        "stopPrice": "102790.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762585874857,
+      "exchange_id": "814307932095"
+    },
+    "EMA-BTC-B-en-f9ab2af8": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001961919149311857,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-f9ab2af8"
+      },
+      "ts": 1762586619161,
+      "exchange_id": "814317258216"
+    },
+    "EMA-BTC-B-en-b784a899": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001961276555684564,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-b784a899"
+      },
+      "ts": 1762586812003,
+      "exchange_id": "814319858245"
+    },
+    "EMA-BTC-S-tp-9d92f94f": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102790.1952,
+      "amount": null,
+      "params": {
+        "stopPrice": "102790.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762586813933,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "814319873037"
+    },
+    "EMA-BTC-S-sl-bae7e99c": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 101362.5536,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-bae7e99c",
+        "stopPrice": "101362.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762586814168,
+      "exchange_id": "814319875996"
+    },
+    "EMA-BTC-S-en-799eb107": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019642834343138707,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-799eb107"
+      },
+      "ts": 1762613883188,
+      "exchange_id": "814670146894"
+    },
+    "EMA-BTC-S-en-f82672b8": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.001963327014692558,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-f82672b8"
+      },
+      "ts": 1762614258742,
+      "exchange_id": "814674861339"
+    },
+    "EMA-BTC-B-tp-5a121a65": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 101052.9568,
+      "amount": null,
+      "params": {
+        "stopPrice": "101053",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762614260657,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "814674929650"
+    },
+    "EMA-BTC-B-sl-ce78d174": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102479.1074,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-ce78d174",
+        "stopPrice": "102479.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762614260896,
+      "exchange_id": "814674936312"
+    },
+    "EMA-BTC-B-en-353b71db": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001969230769230769,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-353b71db"
+      },
+      "ts": 1762659928732,
+      "exchange_id": "815230945116"
+    },
+    "EMA-BTC-B-en-9ea2bda2": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0019690116939604504,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-9ea2bda2"
+      },
+      "ts": 1762660121793,
+      "exchange_id": "815233786001"
+    },
+    "EMA-BTC-S-tp-ce93f45e": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 102386.3904,
+      "amount": null,
+      "params": {
+        "stopPrice": "102386.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762660123708,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815233810045"
+    },
+    "EMA-BTC-S-sl-cdb9a60f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 100964.3572,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-cdb9a60f",
+        "stopPrice": "100964.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762660123940,
+      "exchange_id": "815233811768"
+    },
+    "EMA-BTC-S-en-389cb092": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019672569749096046,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-389cb092"
+      },
+      "ts": 1762661232281,
+      "exchange_id": "815246945243"
+    },
+    "EMA-BTC-S-en-605a88c7": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019652253376502785,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-605a88c7"
+      },
+      "ts": 1762661608348,
+      "exchange_id": "815251380468"
+    },
+    "EMA-BTC-B-tp-819dd971": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 100955.344,
+      "amount": null,
+      "params": {
+        "stopPrice": "100955.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762661610245,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815251442543"
+    },
+    "EMA-BTC-B-sl-80d2d265": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102380.117,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-80d2d265",
+        "stopPrice": "102380.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762661610477,
+      "exchange_id": "815251452017"
+    },
+    "EMA-BTC-B-en-8d907f57": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001964541981771015,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-8d907f57"
+      },
+      "ts": 1762665669445,
+      "exchange_id": "815297919581"
+    },
+    "EMA-BTC-S-en-998c3d5d": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.001955374444429236,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-998c3d5d"
+      },
+      "ts": 1762691062447,
+      "exchange_id": "815603119453"
+    },
+    "EMA-BTC-B-tp-3ec35b6b": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 101463.9424,
+      "amount": null,
+      "params": {
+        "stopPrice": "101463.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762691064476,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815603164395"
+    },
+    "EMA-BTC-B-sl-cf08d334": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 102895.89319999999,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-cf08d334",
+        "stopPrice": "102895.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762691064742,
+      "exchange_id": "815603175219"
+    },
+    "EMA-BTC-B-en-2748b86d": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0019451695604305826,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-2748b86d"
+      },
+      "ts": 1762696607525,
+      "exchange_id": "815681770693"
+    },
+    "EMA-BTC-S-tp-99fa1882": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 103641.35040000001,
+      "amount": null,
+      "params": {
+        "stopPrice": "103641.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762696609441,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815681792662"
+    },
+    "EMA-BTC-S-sl-e46b3813": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 102201.8872,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-e46b3813",
+        "stopPrice": "102201.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762696609677,
+      "exchange_id": "815681793170"
+    },
+    "EMA-BTC-S-en-1ae96bb7": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019428491494206423,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-1ae96bb7"
+      },
+      "ts": 1762697902797,
+      "exchange_id": "815701056637"
+    },
+    "EMA-BTC-B-en-996c1c77": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001937982618233897,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-996c1c77"
+      },
+      "ts": 1762698279168,
+      "exchange_id": "815707152616"
+    },
+    "EMA-BTC-S-tp-37454a17": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 104025.7008,
+      "amount": null,
+      "params": {
+        "stopPrice": "104025.7",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762698281081,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815707226843"
+    },
+    "EMA-BTC-S-sl-4eea4f93": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 102580.89940000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-4eea4f93",
+        "stopPrice": "102580.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762698281329,
+      "exchange_id": "815707231471"
+    },
+    "EMA-BTC-B-en-0371b924": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0019231213027992953,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-0371b924"
+      },
+      "ts": 1762698658570,
+      "exchange_id": "815713234322"
+    },
+    "EMA-BTC-S-tp-ecb8777d": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 104829.58080000001,
+      "amount": null,
+      "params": {
+        "stopPrice": "104829.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762698660483,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815713250903"
+    },
+    "EMA-BTC-S-sl-0e8157fe": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 103373.6144,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-0e8157fe",
+        "stopPrice": "103373.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762698660799,
+      "exchange_id": "815713253728"
+    },
+    "EMA-BTC-S-en-aaf2da49": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019352447745972028,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-aaf2da49"
+      },
+      "ts": 1762699222721,
+      "exchange_id": "815723069956"
+    },
+    "EMA-BTC-B-tp-95ae5fbc": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 102519.3312,
+      "amount": null,
+      "params": {
+        "stopPrice": "102519.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762699224627,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815723109775"
+    },
+    "EMA-BTC-B-sl-695be516": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 103966.1766,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-695be516",
+        "stopPrice": "103966.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762699224880,
+      "exchange_id": "815723110977"
+    },
+    "EMA-BTC-B-en-068d3a69": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0019376258851317245,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-068d3a69"
+      },
+      "ts": 1762699601838,
+      "exchange_id": "815729589188"
+    },
+    "EMA-BTC-B-en-42d56939": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0019419606228644503,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-42d56939"
+      },
+      "ts": 1762699794288,
+      "exchange_id": "815732607686"
+    },
+    "EMA-BTC-S-tp-a6b034aa": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 103812.6096,
+      "amount": null,
+      "params": {
+        "stopPrice": "103812.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762699796193,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815732624290"
+    },
+    "EMA-BTC-S-sl-caa4ce57": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 102370.7678,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-caa4ce57",
+        "stopPrice": "102370.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762699796422,
+      "exchange_id": "815732628018"
+    },
+    "EMA-BTC-B-en-586b104e": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001928355797071406,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-586b104e"
+      },
+      "ts": 1762702762408,
+      "exchange_id": "815779973008"
+    },
+    "EMA-BTC-S-tp-dbe3546e": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 104545.0224,
+      "amount": null,
+      "params": {
+        "stopPrice": "104545",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762702764320,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815780047279"
+    },
+    "EMA-BTC-S-sl-f9b4e750": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 103093.0082,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-f9b4e750",
+        "stopPrice": "103093",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762702764553,
+      "exchange_id": "815780053842"
+    },
+    "EMA-BTC-S-en-13f5a619": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019316243608737895,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-13f5a619"
+      },
+      "ts": 1762710359094,
+      "exchange_id": "815892583455"
+    },
+    "EMA-BTC-S-en-82029026": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019296544471298803,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-82029026"
+      },
+      "ts": 1762710550984,
+      "exchange_id": "815895747285"
+    },
+    "EMA-BTC-B-tp-7ed81385": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 102816.336,
+      "amount": null,
+      "params": {
+        "stopPrice": "102816.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762710552901,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815895750605"
+    },
+    "EMA-BTC-B-sl-ead4dc53": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 104267.373,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-ead4dc53",
+        "stopPrice": "104267.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762710553135,
+      "exchange_id": "815895750880"
+    },
+    "EMA-BTC-B-en-505b8a55": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0019180954079836884,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-505b8a55"
+      },
+      "ts": 1762716044005,
+      "exchange_id": "815975681351"
+    },
+    "EMA-BTC-S-tp-cce9317c": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 105104.2608,
+      "amount": null,
+      "params": {
+        "stopPrice": "105104.3",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762716045978,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "815975682886"
+    },
+    "EMA-BTC-S-sl-6dbabc71": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 103540.2093,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-6dbabc71",
+        "stopPrice": "103540.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762716046219,
+      "exchange_id": "815975683046"
+    },
+    "EMA-BTC-S-en-d6a2bbc6": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.00190595993672213,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-d6a2bbc6"
+      },
+      "ts": 1762733679393,
+      "exchange_id": "816238320693"
+    },
+    "EMA-BTC-B-tp-09e8de73": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 104094.528,
+      "amount": null,
+      "params": {
+        "stopPrice": "104094.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762733681298,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "816238331347"
+    },
+    "EMA-BTC-B-sl-7d860693": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 105668.53799999999,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-7d860693",
+        "stopPrice": "105668.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762733681530,
+      "exchange_id": "816238332020"
+    },
+    "EMA-BTC-S-en-e7af3ea5": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0018818269152058203,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-e7af3ea5"
+      },
+      "ts": 1762736443881,
+      "exchange_id": "816285147300"
+    },
+    "EMA-BTC-B-tp-8d0dba0f": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 105429.46239999999,
+      "amount": null,
+      "params": {
+        "stopPrice": "105429.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762736445787,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "816285154129"
+    },
+    "EMA-BTC-B-sl-50d4de7b": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 107023.65789999999,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-50d4de7b",
+        "stopPrice": "107023.7",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762736446025,
+      "exchange_id": "816285154320"
+    },
+    "EMA-BTC-B-en-452adfac": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0018911277740480536,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-452adfac"
+      },
+      "ts": 1762739767327,
+      "exchange_id": "816336089365"
+    },
+    "EMA-BTC-B-en-b30c15a7": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0018939573291413745,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-b30c15a7"
+      },
+      "ts": 1762740511031,
+      "exchange_id": "816345030169"
+    },
+    "EMA-BTC-S-tp-8c2d2c1e": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 106443.792,
+      "amount": null,
+      "params": {
+        "stopPrice": "106443.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762740512937,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "816345043824"
+    },
+    "EMA-BTC-S-sl-838461a4": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 104859.807,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-838461a4",
+        "stopPrice": "104859.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762740513176,
+      "exchange_id": "816345045837"
+    },
+    "EMA-BTC-S-en-507247ca": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0018864649909826974,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-507247ca"
+      },
+      "ts": 1762744192979,
+      "exchange_id": "816388076100"
+    },
+    "EMA-BTC-B-en-5f0b3b94": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0018892127839250663,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-5f0b3b94"
+      },
+      "ts": 1762744569291,
+      "exchange_id": "816393815204"
+    },
+    "EMA-BTC-S-tp-fe0edd6e": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 106711.1136,
+      "amount": null,
+      "params": {
+        "stopPrice": "106711.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762744571195,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "816393855845"
+    },
+    "EMA-BTC-S-sl-b9f8888b": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 105123.1506,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-b9f8888b",
+        "stopPrice": "105123.2",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762744571467,
+      "exchange_id": "816393856499"
+    },
+    "EMA-BTC-S-en-a0e3cff5": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0018888256132308457,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-a0e3cff5"
+      },
+      "ts": 1762745128520,
+      "exchange_id": "816401615223"
+    },
+    "EMA-BTC-S-en-c982f931": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.001887321258881026,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-c982f931"
+      },
+      "ts": 1762745690865,
+      "exchange_id": "816408928371"
+    },
+    "EMA-BTC-B-tp-4cb37111": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 105122.5376,
+      "amount": null,
+      "params": {
+        "stopPrice": "105122.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762745692768,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "816408972628"
+    },
+    "EMA-BTC-B-sl-b9c37712": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 106712.0921,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-b9c37712",
+        "stopPrice": "106712.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762745693002,
+      "exchange_id": "816408977494"
+    },
+    "EMA-BTC-B-en-84716b21": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0018884546492337123,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-84716b21"
+      },
+      "ts": 1762749008855,
+      "exchange_id": "816449686790"
+    },
+    "EMA-BTC-B-en-938cd935": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001889925092818946,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-938cd935"
+      },
+      "ts": 1762749201352,
+      "exchange_id": "816452002002"
+    },
+    "EMA-BTC-S-tp-fc5eb6d8": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 106670.8944,
+      "amount": null,
+      "params": {
+        "stopPrice": "106670.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "FAILED",
+      "ts": 1762749203260,
+      "intent": "TP",
+      "extra": "LLM",
+      "error": "binance {\"code\":-4045,\"msg\":\"Reach max stop order limit.\"}"
+    },
+    "EMA-BTC-S-sl-981b9ae0": {
+      "status": "FAILED",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 105083.52990000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-981b9ae0",
+        "stopPrice": "105083.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762749203500,
+      "error": "binance {\"code\":-4045,\"msg\":\"Reach max stop order limit.\"}"
+    },
+    "EMA-BTC-S-en-7f75083a": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0018788022260048773,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-7f75083a"
+      },
+      "ts": 1762767845760,
+      "exchange_id": "816657973224"
+    },
+    "EMA-BTC-S-en-135cc785": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0018785075257707752,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-135cc785"
+      },
+      "ts": 1762768037426,
+      "exchange_id": "816660453142"
+    },
+    "EMA-BTC-B-tp-507b595d": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 105615.76,
+      "amount": null,
+      "params": {
+        "stopPrice": "105615.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762768039333,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "816660503008"
+    },
+    "EMA-BTC-B-sl-2c23eef3": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 107212.77249999999,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-2c23eef3",
+        "stopPrice": "107212.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762768039565,
+      "exchange_id": "816660508915"
+    },
+    "EMA-BTC-B-en-aae328e8": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001884119136621247,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-aae328e8"
+      },
+      "ts": 1762780913866,
+      "exchange_id": "816799444146"
+    },
+    "EMA-BTC-B-en-0bfd76e9": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001883592123194459,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-0bfd76e9"
+      },
+      "ts": 1762784049528,
+      "exchange_id": "816838302007"
+    },
+    "EMA-BTC-S-tp-435b73af": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 107029.5408,
+      "amount": null,
+      "params": {
+        "stopPrice": "107029.5",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762784051444,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "816838321171"
+    },
+    "EMA-BTC-S-sl-4c2656d0": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 105436.8393,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-4c2656d0",
+        "stopPrice": "105436.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762784051687,
+      "exchange_id": "816838322589"
+    },
+    "EMA-BTC-B-en-111b8d2c": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0018993442513972052,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-111b8d2c"
+      },
+      "ts": 1762786081329,
+      "exchange_id": "816865820975"
+    },
+    "EMA-BTC-S-tp-cc943c84": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 106141.89600000001,
+      "amount": null,
+      "params": {
+        "stopPrice": "106141.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762786083241,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "816865861592"
+    },
+    "EMA-BTC-S-sl-035e75f5": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 104562.4035,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-035e75f5",
+        "stopPrice": "104562.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762786083540,
+      "exchange_id": "816865865989"
+    },
+    "EMA-BTC-S-en-feaf221b": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.001898266218549288,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-feaf221b"
+      },
+      "ts": 1762795313541,
+      "exchange_id": "817000652631"
+    },
+    "EMA-BTC-S-en-9fa1aa74": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0018970472459616608,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-9fa1aa74"
+      },
+      "ts": 1762795876297,
+      "exchange_id": "817006867655"
+    },
+    "EMA-BTC-B-tp-594acec6": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 104583.584,
+      "amount": null,
+      "params": {
+        "stopPrice": "104583.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762795878209,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "817006873969"
+    },
+    "EMA-BTC-B-sl-178066b8": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 106164.98899999999,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-178066b8",
+        "stopPrice": "106165",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762795878457,
+      "exchange_id": "817006875118"
+    },
+    "EMA-BTC-B-en-efa7342d": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001863932898415657,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-efa7342d"
+      },
+      "ts": 1762824041031,
+      "exchange_id": "817359011911"
+    },
+    "EMA-BTC-S-tp-8f42e111": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 108158.4,
+      "amount": null,
+      "params": {
+        "stopPrice": "108158.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762824042953,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "817359040434"
+    },
+    "EMA-BTC-S-sl-b2bfa5a2": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 106548.9,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-b2bfa5a2",
+        "stopPrice": "106548.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762824043194,
+      "exchange_id": "817359042331"
+    },
+    "EMA-BTC-B-en-cf0ea498": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0018743088486120744,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-cf0ea498"
+      },
+      "ts": 1762824785931,
+      "exchange_id": "817371060695"
+    },
+    "EMA-BTC-S-tp-119d48c1": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 107559.648,
+      "amount": null,
+      "params": {
+        "stopPrice": "107559.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762824787847,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "817371081480"
+    },
+    "EMA-BTC-S-sl-c9ff1b29": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 105959.058,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-c9ff1b29",
+        "stopPrice": "105959.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762824788089,
+      "exchange_id": "817371089541"
+    },
+    "EMA-BTC-B-en-fd618771": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001889978671590691,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-fd618771"
+      },
+      "ts": 1762826639513,
+      "exchange_id": "817399981745"
+    },
+    "EMA-BTC-S-tp-a89997e4": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 106667.8704,
+      "amount": null,
+      "params": {
+        "stopPrice": "106667.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762826641427,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "817400018491"
+    },
+    "EMA-BTC-S-sl-160c0d2f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 105080.5509,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-160c0d2f",
+        "stopPrice": "105080.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762826641665,
+      "exchange_id": "817400020375"
+    },
+    "EMA-BTC-B-en-bbfff292": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0018761585278909726,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-bbfff292"
+      },
+      "ts": 1762828491016,
+      "exchange_id": "817429140427"
+    },
+    "EMA-BTC-S-tp-5f04de6c": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 107453.6064,
+      "amount": null,
+      "params": {
+        "stopPrice": "107453.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762828493024,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "817429156213"
+    },
+    "EMA-BTC-S-sl-5394a630": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 105854.5944,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-5394a630",
+        "stopPrice": "105854.6",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762828493258,
+      "exchange_id": "817429157415"
+    },
+    "EMA-BTC-S-en-6a870190": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "sell",
+      "amount": 0.0019043991620643686,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-en-6a870190"
+      },
+      "ts": 1762841744109,
+      "exchange_id": "817608929564"
+    },
+    "EMA-BTC-B-tp-3689cd9a": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "buy",
+      "price": 104179.84,
+      "amount": null,
+      "params": {
+        "stopPrice": "104179.8",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762841746034,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "817608935657"
+    },
+    "EMA-BTC-B-sl-f68e843f": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "buy",
+      "amount": null,
+      "price": 105755.13999999998,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-sl-f68e843f",
+        "stopPrice": "105755.1",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762841746275,
+      "exchange_id": "817608936637"
+    },
+    "EMA-BTC-B-en-a601e033": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.0019061706556464588,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-a601e033"
+      },
+      "ts": 1762854482179,
+      "exchange_id": "817767179023"
+    },
+    "EMA-BTC-B-en-dbf056d6": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "market",
+      "side": "buy",
+      "amount": 0.001902911549816797,
+      "price": null,
+      "params": {
+        "newClientOrderId": "EMA-BTC-B-en-dbf056d6"
+      },
+      "ts": 1762856148157,
+      "exchange_id": "817788796170"
+    },
+    "EMA-BTC-S-tp-a0f7f870": {
+      "symbol": "BTCUSDT",
+      "type": "TAKE_PROFIT_MARKET",
+      "side": "sell",
+      "price": 105942.9168,
+      "amount": null,
+      "params": {
+        "stopPrice": "105942.9",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "status": "SENT",
+      "ts": 1762856150061,
+      "intent": "TP",
+      "extra": "LLM",
+      "exchange_id": "817788826678"
+    },
+    "EMA-BTC-S-sl-2b0d00c4": {
+      "status": "SENT",
+      "symbol": "BTCUSDT",
+      "type": "STOP_MARKET",
+      "side": "sell",
+      "amount": null,
+      "price": 104366.38530000001,
+      "params": {
+        "newClientOrderId": "EMA-BTC-S-sl-2b0d00c4",
+        "stopPrice": "104366.4",
+        "closePosition": true,
+        "workingType": "MARK_PRICE",
+        "priceProtect": true
+      },
+      "ts": 1762856150299,
+      "exchange_id": "817788830569"
+    }
+  },
+  "last_signal": null,
+  "last_signal_time": null,
+  "intents": {
+    "entry_1761723870_sell_0.008829": {
+      "intent_id": "entry_1761723870_sell_0.008829",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.008829242450997704,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761723870,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-e9bb1cf1",
+      "exchange_order_id": "804345949497"
+    },
+    "entry_1761739496_sell_0.008838": {
+      "intent_id": "entry_1761739496_sell_0.008838",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.00883821644792081,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761739496,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-db8154f1",
+      "exchange_order_id": "804483132233"
+    },
+    "entry_1761739868_sell_0.008829": {
+      "intent_id": "entry_1761739868_sell_0.008829",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.00882892284492615,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761739868,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-c3738116",
+      "exchange_order_id": "804486077583"
+    },
+    "entry_1761740053_sell_0.008836": {
+      "intent_id": "entry_1761740053_sell_0.008836",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.008836443614211476,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761740053,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-c9d944b7",
+      "exchange_order_id": "804487882895"
+    },
+    "entry_1761741336_sell_0.008844": {
+      "intent_id": "entry_1761741336_sell_0.008844",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.008843898992060832,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761741336,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-5ea28e89",
+      "exchange_order_id": "804502612782"
+    },
+    "entry_1761741520_sell_0.008848": {
+      "intent_id": "entry_1761741520_sell_0.008848",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.008847819277982555,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761741520,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-98f544be",
+      "exchange_order_id": "804504591157"
+    },
+    "entry_1761741887_sell_0.008840": {
+      "intent_id": "entry_1761741887_sell_0.008840",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.008839614911016015,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761741887,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-3610bd75",
+      "exchange_order_id": "804509295870"
+    },
+    "entry_1761745743_buy_0.008872": {
+      "intent_id": "entry_1761745743_buy_0.008872",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.008872185520948117,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761745743,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-5d59996f",
+      "exchange_order_id": "804558391985"
+    },
+    "entry_1761745927_buy_0.008859": {
+      "intent_id": "entry_1761745927_buy_0.008859",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0088592556630577,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761745927,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-c3d6937b",
+      "exchange_order_id": "804561073250"
+    },
+    "entry_1761906196_buy_0.000910": {
+      "intent_id": "entry_1761906196_buy_0.000910",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0009098562636370394,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761906196,
+      "state": "PENDING",
+      "client_order_id": "EMA-BTC-B-en-3cf75fe0"
+    },
+    "entry_1761906471_buy_0.000910": {
+      "intent_id": "entry_1761906471_buy_0.000910",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0009098562636370394,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761906471,
+      "state": "PENDING",
+      "client_order_id": "EMA-BTC-B-en-c173dcb5"
+    },
+    "entry_1761906547_buy_0.001000": {
+      "intent_id": "entry_1761906547_buy_0.001000",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761906547,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-4013055d",
+      "exchange_order_id": "806178591870"
+    },
+    "entry_1761907373_buy_0.009083": {
+      "intent_id": "entry_1761907373_buy_0.009083",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.00908345900298864,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761907373,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-65ac2f90",
+      "exchange_order_id": "806187877565"
+    },
+    "entry_1761913032_buy_0.009071": {
+      "intent_id": "entry_1761913032_buy_0.009071",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009070907739343837,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761913032,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-379fb581",
+      "exchange_order_id": "806253249902"
+    },
+    "entry_1761917616_buy_0.009134": {
+      "intent_id": "entry_1761917616_buy_0.009134",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.00913409676114063,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761917616,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-e5ba1e1b",
+      "exchange_order_id": "806306773838"
+    },
+    "entry_1761921659_buy_0.009092": {
+      "intent_id": "entry_1761921659_buy_0.009092",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009092239864198305,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761921659,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-bbbf385d",
+      "exchange_order_id": "806359461697"
+    },
+    "entry_1761922763_buy_0.009028": {
+      "intent_id": "entry_1761922763_buy_0.009028",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009027674335676014,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761922763,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-74110a6a",
+      "exchange_order_id": "806369902104"
+    },
+    "entry_1761929036_buy_0.009119": {
+      "intent_id": "entry_1761929036_buy_0.009119",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009119103701535384,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761929036,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-46abcf63",
+      "exchange_order_id": "806454652115"
+    },
+    "entry_1761930140_buy_0.009193": {
+      "intent_id": "entry_1761930140_buy_0.009193",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009192874786610395,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761930140,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-08463aa5",
+      "exchange_order_id": "806469010178"
+    },
+    "entry_1761982927_buy_0.009085": {
+      "intent_id": "entry_1761982927_buy_0.009085",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009085177170039994,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1761982927,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-f967114c",
+      "exchange_order_id": "806940874259"
+    },
+    "entry_1762013297_sell_0.009058": {
+      "intent_id": "entry_1762013297_sell_0.009058",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009058053062074838,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762013297,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-6913ce51",
+      "exchange_order_id": "807156259803"
+    },
+    "entry_1762019784_buy_0.009077": {
+      "intent_id": "entry_1762019784_buy_0.009077",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.00907697181327943,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762019784,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-d85e2e5a",
+      "exchange_order_id": "807206279745"
+    },
+    "entry_1762021252_sell_0.009072": {
+      "intent_id": "entry_1762021252_sell_0.009072",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009071891108276648,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762021252,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-747fc30f",
+      "exchange_order_id": "807217700683"
+    },
+    "entry_1762021620_sell_0.009072": {
+      "intent_id": "entry_1762021620_sell_0.009072",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.00907192402807942,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762021620,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-c1e1d6d0",
+      "exchange_order_id": "807219696696"
+    },
+    "entry_1762021806_buy_0.009074": {
+      "intent_id": "entry_1762021806_buy_0.009074",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009073734985237034,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762021806,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-9ff8c9e6",
+      "exchange_order_id": "807221223064"
+    },
+    "entry_1762028077_buy_0.009066": {
+      "intent_id": "entry_1762028077_buy_0.009066",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.00906632287170337,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762028077,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-8a069051",
+      "exchange_order_id": "807251654474"
+    },
+    "entry_1762076497_buy_0.009046": {
+      "intent_id": "entry_1762076497_buy_0.009046",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.00904640079897812,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762076497,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-e00ee4ff",
+      "exchange_order_id": "807581287580"
+    },
+    "entry_1762085500_sell_0.009007": {
+      "intent_id": "entry_1762085500_sell_0.009007",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009007012860212962,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762085500,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-c526ba15",
+      "exchange_order_id": "807648949246"
+    },
+    "entry_1762223333_buy_0.009345": {
+      "intent_id": "entry_1762223333_buy_0.009345",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009344711453999724,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762223333,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-8407e9eb",
+      "exchange_order_id": "809127565066"
+    },
+    "entry_1762327355_buy_0.009844": {
+      "intent_id": "entry_1762327355_buy_0.009844",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.00984425405657099,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762327355,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-4a404036",
+      "exchange_order_id": "810585585709"
+    },
+    "entry_1762329567_buy_0.009804": {
+      "intent_id": "entry_1762329567_buy_0.009804",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009804190703274207,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762329567,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-3bd7bfb7",
+      "exchange_order_id": "810616659734"
+    },
+    "entry_1762339309_sell_0.009835": {
+      "intent_id": "entry_1762339309_sell_0.009835",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009834911180917125,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762339309,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-4ef21eac",
+      "exchange_order_id": "810771778100"
+    },
+    "entry_1762339685_sell_0.009846": {
+      "intent_id": "entry_1762339685_sell_0.009846",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.00984611506760835,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762339685,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-2e66878a",
+      "exchange_order_id": "810777838486"
+    },
+    "entry_1762353822_buy_0.009705": {
+      "intent_id": "entry_1762353822_buy_0.009705",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009705468157814794,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762353822,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-86aa282e",
+      "exchange_order_id": "810997061018"
+    },
+    "entry_1762355683_sell_0.009709": {
+      "intent_id": "entry_1762355683_sell_0.009709",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.00970872843812773,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762355683,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-40b20c73",
+      "exchange_order_id": "811028798293"
+    },
+    "entry_1762361528_sell_0.009623": {
+      "intent_id": "entry_1762361528_sell_0.009623",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009622675642698506,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762361528,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-b36c9481",
+      "exchange_order_id": "811125510781"
+    },
+    "entry_1762364656_sell_0.009628": {
+      "intent_id": "entry_1762364656_sell_0.009628",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009628438556119353,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762364656,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-d86ed53e",
+      "exchange_order_id": "811176150845"
+    },
+    "entry_1762376218_buy_0.009624": {
+      "intent_id": "entry_1762376218_buy_0.009624",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009623527600277158,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762376218,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-5a116b95",
+      "exchange_order_id": "811327707628"
+    },
+    "entry_1762380296_buy_0.009670": {
+      "intent_id": "entry_1762380296_buy_0.009670",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009669823864158314,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762380296,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-aad3cbe1",
+      "exchange_order_id": "811385677130"
+    },
+    "entry_1762443813_buy_0.009796": {
+      "intent_id": "entry_1762443813_buy_0.009796",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009795921566015204,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762443813,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-e2ae9dd4",
+      "exchange_order_id": "812249222989"
+    },
+    "entry_1762447190_buy_0.009901": {
+      "intent_id": "entry_1762447190_buy_0.009901",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009900999901980102,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762447190,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-b5d6417a",
+      "exchange_order_id": "812298994404"
+    },
+    "entry_1762451840_sell_0.009835": {
+      "intent_id": "entry_1762451840_sell_0.009835",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009835452873427557,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762451840,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-63bd1262",
+      "exchange_order_id": "812379639717"
+    },
+    "entry_1762453689_buy_0.009872": {
+      "intent_id": "entry_1762453689_buy_0.009872",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009872048380934705,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762453689,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-80939699",
+      "exchange_order_id": "812411392013"
+    },
+    "entry_1762453881_buy_0.009855": {
+      "intent_id": "entry_1762453881_buy_0.009855",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.00985478967415138,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762453881,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-e8ae9cb9",
+      "exchange_order_id": "812414191655"
+    },
+    "entry_1762454569_sell_0.009840": {
+      "intent_id": "entry_1762454569_sell_0.009840",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.00984047604286905,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762454569,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-68cd88eb",
+      "exchange_order_id": "812424277322"
+    },
+    "entry_1762454711_sell_0.009839": {
+      "intent_id": "entry_1762454711_sell_0.009839",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009838646202282565,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762454711,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-984d9204",
+      "exchange_order_id": "812426272099"
+    },
+    "entry_1762475121_buy_0.009911": {
+      "intent_id": "entry_1762475121_buy_0.009911",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009910724196438481,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762475121,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-6abb6eba",
+      "exchange_order_id": "812728129702"
+    },
+    "entry_1762488154_buy_0.009823": {
+      "intent_id": "entry_1762488154_buy_0.009823",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009822700260301557,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762488154,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-40cf57d5",
+      "exchange_order_id": "812947208125"
+    },
+    "entry_1762507812_sell_0.009904": {
+      "intent_id": "entry_1762507812_sell_0.009904",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.00990367683906327,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762507812,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-36d279bf",
+      "exchange_order_id": "813200503611"
+    },
+    "entry_1762514663_buy_0.009998": {
+      "intent_id": "entry_1762514663_buy_0.009998",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009997690533486763,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762514663,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-cc18a827",
+      "exchange_order_id": "813300818337"
+    },
+    "entry_1762517257_sell_0.009947": {
+      "intent_id": "entry_1762517257_sell_0.009947",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009946794595707562,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762517257,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-d9ed8690",
+      "exchange_order_id": "813341742300"
+    },
+    "entry_1762517816_buy_0.009973": {
+      "intent_id": "entry_1762517816_buy_0.009973",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009973281578650794,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762517816,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-dae7aafc",
+      "exchange_order_id": "813350490339"
+    },
+    "entry_1762519670_buy_0.010060": {
+      "intent_id": "entry_1762519670_buy_0.010060",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.010060088911065796,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762519670,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-fd53c487",
+      "exchange_order_id": "813383056817"
+    },
+    "entry_1762521335_buy_0.009999": {
+      "intent_id": "entry_1762521335_buy_0.009999",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009999050090241428,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762521335,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-ee0500ba",
+      "exchange_order_id": "813407342132"
+    },
+    "entry_1762522450_sell_0.009986": {
+      "intent_id": "entry_1762522450_sell_0.009986",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009986119294181089,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762522450,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-ed1ae533",
+      "exchange_order_id": "813422907075"
+    },
+    "entry_1762523377_buy_0.009961": {
+      "intent_id": "entry_1762523377_buy_0.009961",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009960873688152934,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762523377,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-5c1d0c66",
+      "exchange_order_id": "813438989734"
+    },
+    "entry_1762526709_sell_0.009934": {
+      "intent_id": "entry_1762526709_sell_0.009934",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009934107067819156,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762526709,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-b3702227",
+      "exchange_order_id": "813495366441"
+    },
+    "entry_1762532444_buy_0.009908": {
+      "intent_id": "entry_1762532444_buy_0.009908",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009907876563710618,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762532444,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-8d91418b",
+      "exchange_order_id": "813585266397"
+    },
+    "entry_1762533190_buy_0.009871": {
+      "intent_id": "entry_1762533190_buy_0.009871",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009870693909781857,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762533190,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-d3cbc0ff",
+      "exchange_order_id": "813597269787"
+    },
+    "entry_1762534855_sell_0.009900": {
+      "intent_id": "entry_1762534855_sell_0.009900",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0098998530861802,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762534855,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-c49a600f",
+      "exchange_order_id": "813623779187"
+    },
+    "entry_1762536155_sell_0.009823": {
+      "intent_id": "entry_1762536155_sell_0.009823",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.009823211659759312,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762536155,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-b82c027a",
+      "exchange_order_id": "813643780699"
+    },
+    "entry_1762536716_buy_0.009766": {
+      "intent_id": "entry_1762536716_buy_0.009766",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009766111398126274,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762536716,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-1a30c44f",
+      "exchange_order_id": "813652695619"
+    },
+    "entry_1762537277_buy_0.009794": {
+      "intent_id": "entry_1762537277_buy_0.009794",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.009794108256237378,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762537277,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-31345b22",
+      "exchange_order_id": "813662257125"
+    },
+    "entry_1762547284_buy_0.000970": {
+      "intent_id": "entry_1762547284_buy_0.000970",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0009698530866544336,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762547284,
+      "state": "PENDING",
+      "client_order_id": "EMA-BTC-B-en-fc77e9eb"
+    },
+    "entry_1762549430_buy_0.001932": {
+      "intent_id": "entry_1762549430_buy_0.001932",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0019324026238162824,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762549430,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-c45e3dd1",
+      "exchange_order_id": "813852214602"
+    },
+    "entry_1762569289_sell_0.001938": {
+      "intent_id": "entry_1762569289_sell_0.001938",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019383958417532401,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762569289,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-aa8c376b",
+      "exchange_order_id": "814094535340"
+    },
+    "entry_1762573336_buy_0.001948": {
+      "intent_id": "entry_1762573336_buy_0.001948",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001948000085712004,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762573336,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-31143250",
+      "exchange_order_id": "814151018064"
+    },
+    "entry_1762573528_buy_0.001947": {
+      "intent_id": "entry_1762573528_buy_0.001947",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001947463283014128,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762573528,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-6916521d",
+      "exchange_order_id": "814153544156"
+    },
+    "entry_1762585872_sell_0.001957": {
+      "intent_id": "entry_1762585872_sell_0.001957",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019573800077120774,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762585872,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-5437aedc",
+      "exchange_order_id": "814307850280"
+    },
+    "entry_1762586619_buy_0.001962": {
+      "intent_id": "entry_1762586619_buy_0.001962",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001961919149311857,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762586619,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-f9ab2af8",
+      "exchange_order_id": "814317258216"
+    },
+    "entry_1762586811_buy_0.001961": {
+      "intent_id": "entry_1762586811_buy_0.001961",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001961276555684564,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762586811,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-b784a899",
+      "exchange_order_id": "814319858245"
+    },
+    "entry_1762613883_sell_0.001964": {
+      "intent_id": "entry_1762613883_sell_0.001964",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019642834343138707,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762613883,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-799eb107",
+      "exchange_order_id": "814670146894"
+    },
+    "entry_1762614258_sell_0.001963": {
+      "intent_id": "entry_1762614258_sell_0.001963",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.001963327014692558,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762614258,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-f82672b8",
+      "exchange_order_id": "814674861339"
+    },
+    "entry_1762659928_buy_0.001969": {
+      "intent_id": "entry_1762659928_buy_0.001969",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001969230769230769,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762659928,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-353b71db",
+      "exchange_order_id": "815230945116"
+    },
+    "entry_1762660121_buy_0.001969": {
+      "intent_id": "entry_1762660121_buy_0.001969",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0019690116939604504,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762660121,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-9ea2bda2",
+      "exchange_order_id": "815233786001"
+    },
+    "entry_1762661232_sell_0.001967": {
+      "intent_id": "entry_1762661232_sell_0.001967",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019672569749096046,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762661232,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-389cb092",
+      "exchange_order_id": "815246945243"
+    },
+    "entry_1762661608_sell_0.001965": {
+      "intent_id": "entry_1762661608_sell_0.001965",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019652253376502785,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762661608,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-605a88c7",
+      "exchange_order_id": "815251380468"
+    },
+    "entry_1762665669_buy_0.001965": {
+      "intent_id": "entry_1762665669_buy_0.001965",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001964541981771015,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762665669,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-8d907f57",
+      "exchange_order_id": "815297919581"
+    },
+    "entry_1762691062_sell_0.001955": {
+      "intent_id": "entry_1762691062_sell_0.001955",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.001955374444429236,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762691062,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-998c3d5d",
+      "exchange_order_id": "815603119453"
+    },
+    "entry_1762696607_buy_0.001945": {
+      "intent_id": "entry_1762696607_buy_0.001945",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0019451695604305826,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762696607,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-2748b86d",
+      "exchange_order_id": "815681770693"
+    },
+    "entry_1762697902_sell_0.001943": {
+      "intent_id": "entry_1762697902_sell_0.001943",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019428491494206423,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762697902,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-1ae96bb7",
+      "exchange_order_id": "815701056637"
+    },
+    "entry_1762698279_buy_0.001938": {
+      "intent_id": "entry_1762698279_buy_0.001938",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001937982618233897,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762698279,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-996c1c77",
+      "exchange_order_id": "815707152616"
+    },
+    "entry_1762698658_buy_0.001923": {
+      "intent_id": "entry_1762698658_buy_0.001923",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0019231213027992953,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762698658,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-0371b924",
+      "exchange_order_id": "815713234322"
+    },
+    "entry_1762699222_sell_0.001935": {
+      "intent_id": "entry_1762699222_sell_0.001935",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019352447745972028,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762699222,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-aaf2da49",
+      "exchange_order_id": "815723069956"
+    },
+    "entry_1762699601_buy_0.001938": {
+      "intent_id": "entry_1762699601_buy_0.001938",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0019376258851317245,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762699601,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-068d3a69",
+      "exchange_order_id": "815729589188"
+    },
+    "entry_1762699794_buy_0.001942": {
+      "intent_id": "entry_1762699794_buy_0.001942",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0019419606228644503,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762699794,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-42d56939",
+      "exchange_order_id": "815732607686"
+    },
+    "entry_1762702762_buy_0.001928": {
+      "intent_id": "entry_1762702762_buy_0.001928",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001928355797071406,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762702762,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-586b104e",
+      "exchange_order_id": "815779973008"
+    },
+    "entry_1762710359_sell_0.001932": {
+      "intent_id": "entry_1762710359_sell_0.001932",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019316243608737895,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762710359,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-13f5a619",
+      "exchange_order_id": "815892583455"
+    },
+    "entry_1762710550_sell_0.001930": {
+      "intent_id": "entry_1762710550_sell_0.001930",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019296544471298803,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762710550,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-82029026",
+      "exchange_order_id": "815895747285"
+    },
+    "entry_1762716043_buy_0.001918": {
+      "intent_id": "entry_1762716043_buy_0.001918",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0019180954079836884,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762716043,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-505b8a55",
+      "exchange_order_id": "815975681351"
+    },
+    "entry_1762733679_sell_0.001906": {
+      "intent_id": "entry_1762733679_sell_0.001906",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.00190595993672213,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762733679,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-d6a2bbc6",
+      "exchange_order_id": "816238320693"
+    },
+    "entry_1762736443_sell_0.001882": {
+      "intent_id": "entry_1762736443_sell_0.001882",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0018818269152058203,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762736443,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-e7af3ea5",
+      "exchange_order_id": "816285147300"
+    },
+    "entry_1762739767_buy_0.001891": {
+      "intent_id": "entry_1762739767_buy_0.001891",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0018911277740480536,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762739767,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-452adfac",
+      "exchange_order_id": "816336089365"
+    },
+    "entry_1762740511_buy_0.001894": {
+      "intent_id": "entry_1762740511_buy_0.001894",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0018939573291413745,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762740511,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-b30c15a7",
+      "exchange_order_id": "816345030169"
+    },
+    "entry_1762744192_sell_0.001886": {
+      "intent_id": "entry_1762744192_sell_0.001886",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0018864649909826974,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762744192,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-507247ca",
+      "exchange_order_id": "816388076100"
+    },
+    "entry_1762744569_buy_0.001889": {
+      "intent_id": "entry_1762744569_buy_0.001889",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0018892127839250663,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762744569,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-5f0b3b94",
+      "exchange_order_id": "816393815204"
+    },
+    "entry_1762745128_sell_0.001889": {
+      "intent_id": "entry_1762745128_sell_0.001889",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0018888256132308457,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762745128,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-a0e3cff5",
+      "exchange_order_id": "816401615223"
+    },
+    "entry_1762745690_sell_0.001887": {
+      "intent_id": "entry_1762745690_sell_0.001887",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.001887321258881026,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762745690,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-c982f931",
+      "exchange_order_id": "816408928371"
+    },
+    "entry_1762749008_buy_0.001888": {
+      "intent_id": "entry_1762749008_buy_0.001888",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0018884546492337123,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762749008,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-84716b21",
+      "exchange_order_id": "816449686790"
+    },
+    "entry_1762749201_buy_0.001890": {
+      "intent_id": "entry_1762749201_buy_0.001890",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001889925092818946,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762749201,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-938cd935",
+      "exchange_order_id": "816452002002"
+    },
+    "entry_1762767845_sell_0.001879": {
+      "intent_id": "entry_1762767845_sell_0.001879",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0018788022260048773,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762767845,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-7f75083a",
+      "exchange_order_id": "816657973224"
+    },
+    "entry_1762768037_sell_0.001879": {
+      "intent_id": "entry_1762768037_sell_0.001879",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0018785075257707752,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762768037,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-135cc785",
+      "exchange_order_id": "816660453142"
+    },
+    "entry_1762780913_buy_0.001884": {
+      "intent_id": "entry_1762780913_buy_0.001884",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001884119136621247,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762780913,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-aae328e8",
+      "exchange_order_id": "816799444146"
+    },
+    "entry_1762784049_buy_0.001884": {
+      "intent_id": "entry_1762784049_buy_0.001884",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001883592123194459,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762784049,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-0bfd76e9",
+      "exchange_order_id": "816838302007"
+    },
+    "entry_1762786081_buy_0.001899": {
+      "intent_id": "entry_1762786081_buy_0.001899",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0018993442513972052,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762786081,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-111b8d2c",
+      "exchange_order_id": "816865820975"
+    },
+    "entry_1762795313_sell_0.001898": {
+      "intent_id": "entry_1762795313_sell_0.001898",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.001898266218549288,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762795313,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-feaf221b",
+      "exchange_order_id": "817000652631"
+    },
+    "entry_1762795876_sell_0.001897": {
+      "intent_id": "entry_1762795876_sell_0.001897",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0018970472459616608,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762795876,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-9fa1aa74",
+      "exchange_order_id": "817006867655"
+    },
+    "entry_1762824041_buy_0.001864": {
+      "intent_id": "entry_1762824041_buy_0.001864",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001863932898415657,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762824041,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-efa7342d",
+      "exchange_order_id": "817359011911"
+    },
+    "entry_1762824785_buy_0.001874": {
+      "intent_id": "entry_1762824785_buy_0.001874",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0018743088486120744,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762824785,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-cf0ea498",
+      "exchange_order_id": "817371060695"
+    },
+    "entry_1762826639_buy_0.001890": {
+      "intent_id": "entry_1762826639_buy_0.001890",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001889978671590691,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762826639,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-fd618771",
+      "exchange_order_id": "817399981745"
+    },
+    "entry_1762828491_buy_0.001876": {
+      "intent_id": "entry_1762828491_buy_0.001876",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0018761585278909726,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762828491,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-bbfff292",
+      "exchange_order_id": "817429140427"
+    },
+    "entry_1762841744_sell_0.001904": {
+      "intent_id": "entry_1762841744_sell_0.001904",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "type": "ENTRY",
+      "qty": 0.0019043991620643686,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762841744,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-S-en-6a870190",
+      "exchange_order_id": "817608929564"
+    },
+    "entry_1762854482_buy_0.001906": {
+      "intent_id": "entry_1762854482_buy_0.001906",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.0019061706556464588,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762854482,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-a601e033",
+      "exchange_order_id": "817767179023"
+    },
+    "entry_1762856148_buy_0.001903": {
+      "intent_id": "entry_1762856148_buy_0.001903",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "type": "ENTRY",
+      "qty": 0.001902911549816797,
+      "price": null,
+      "reduceOnly": false,
+      "timeInForce": "GTC",
+      "created_at": 1762856148,
+      "state": "LINKED",
+      "client_order_id": "EMA-BTC-B-en-dbf056d6",
+      "exchange_order_id": "817788796170"
+    }
+  }
+}

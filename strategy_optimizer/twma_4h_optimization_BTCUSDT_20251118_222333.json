@@ -1,0 +1,2502 @@
+[
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 70,
+      "win_rate": 44.285714285714285,
+      "profit_factor": 1.497900324201486,
+      "total_return_pct": 10.74690453675676,
+      "max_drawdown_pct": 5.50032127905848,
+      "avg_win_pct": 12.33228716918752,
+      "avg_loss_pct": -6.544218649710314,
+      "gross_profit": 382.30090224481313,
+      "gross_loss": 255.22452733870225,
+      "final_equity": 110746.90453675676
+    },
+    "score": 128.4573372862368
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 59,
+      "win_rate": 42.3728813559322,
+      "profit_factor": 1.618664444840692,
+      "total_return_pct": 7.009546879243513,
+      "max_drawdown_pct": 7.815629781591464,
+      "avg_win_pct": 9.193677906634017,
+      "avg_loss_pct": -4.17631789333276,
+      "gross_profit": 229.84194766585045,
+      "gross_loss": 141.99480837331382,
+      "final_equity": 107009.54687924351
+    },
+    "score": 123.86916076054668
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 58,
+      "win_rate": 41.37931034482759,
+      "profit_factor": 1.5821971006807072,
+      "total_return_pct": 6.592918983825453,
+      "max_drawdown_pct": 7.7012945826298225,
+      "avg_win_pct": 9.473927133830431,
+      "avg_loss_pct": -4.226703470727087,
+      "gross_profit": 227.37425121193036,
+      "gross_loss": 143.707918004721,
+      "final_equity": 106592.91898382545
+    },
+    "score": 120.86117563289676
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 35,
+      "win_rate": 40.0,
+      "profit_factor": 1.6734422113448788,
+      "total_return_pct": 7.9437950600352485,
+      "max_drawdown_pct": 7.688358332457547,
+      "avg_win_pct": 16.138108290831603,
+      "avg_loss_pct": -6.429106895724852,
+      "gross_profit": 225.9335160716425,
+      "gross_loss": 135.01124481022188,
+      "final_equity": 107943.79506003525
+    },
+    "score": 120.7844878536671
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 58,
+      "win_rate": 41.37931034482759,
+      "profit_factor": 1.5701893191483207,
+      "total_return_pct": 6.36777595881102,
+      "max_drawdown_pct": 7.6663419890595925,
+      "avg_win_pct": 9.343179690953848,
+      "avg_loss_pct": -4.200248711270041,
+      "gross_profit": 224.2363125828924,
+      "gross_loss": 142.8084561831814,
+      "final_equity": 106367.77595881102
+    },
+    "score": 120.50834247227762
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 63,
+      "win_rate": 42.857142857142854,
+      "profit_factor": 1.4592258847794026,
+      "total_return_pct": 5.290443029272414,
+      "max_drawdown_pct": 7.560670734206466,
+      "avg_win_pct": 8.566941988504562,
+      "avg_loss_pct": -4.403160989944848,
+      "gross_profit": 231.30743368962314,
+      "gross_loss": 158.5137956380145,
+      "final_equity": 105290.44302927241
+    },
+    "score": 120.15314476221256
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 61,
+      "win_rate": 42.62295081967213,
+      "profit_factor": 1.4585972709925947,
+      "total_return_pct": 5.374586544107762,
+      "max_drawdown_pct": 7.4976715802393485,
+      "avg_win_pct": 8.931124538821484,
+      "avg_loss_pct": -4.548582250462698,
+      "gross_profit": 232.20923800935861,
+      "gross_loss": 159.20037876619443,
+      "final_equity": 105374.58654410776
+    },
+    "score": 119.74722970758461
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 62,
+      "win_rate": 41.935483870967744,
+      "profit_factor": 1.4047664036242948,
+      "total_return_pct": 4.597549944642276,
+      "max_drawdown_pct": 7.489799537396694,
+      "avg_win_pct": 8.800881106715734,
+      "avg_loss_pct": -4.524732292861535,
+      "gross_profit": 228.82290877460912,
+      "gross_loss": 162.89036254301527,
+      "final_equity": 104597.54994464228
+    },
+    "score": 116.62877053349776
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 63,
+      "win_rate": 42.857142857142854,
+      "profit_factor": 1.3217535939510063,
+      "total_return_pct": 3.169355693224337,
+      "max_drawdown_pct": 7.801992776965469,
+      "avg_win_pct": 7.9479636298367815,
+      "avg_loss_pct": -4.509897116722758,
+      "gross_profit": 214.5950180055931,
+      "gross_loss": 162.35629620201928,
+      "final_equity": 103169.35569322434
+    },
+    "score": 115.24277550601256
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 58,
+      "win_rate": 41.37931034482759,
+      "profit_factor": 1.4360449568254587,
+      "total_return_pct": 4.60505916732605,
+      "max_drawdown_pct": 8.325283350800502,
+      "avg_win_pct": 8.859259995515645,
+      "avg_loss_pct": -4.354735038920024,
+      "gross_profit": 212.6222398923755,
+      "gross_loss": 148.06099132328086,
+      "final_equity": 104605.05916732605
+    },
+    "score": 115.14305620168341
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 61,
+      "win_rate": 42.62295081967213,
+      "profit_factor": 1.323924720347923,
+      "total_return_pct": 3.2937233353563933,
+      "max_drawdown_pct": 7.756312064736787,
+      "avg_win_pct": 8.31071500484162,
+      "avg_loss_pct": -4.663160909915038,
+      "gross_profit": 216.07859012588213,
+      "gross_loss": 163.21063184702632,
+      "final_equity": 103293.7233353564
+    },
+    "score": 114.90291981974804
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 70,
+      "win_rate": 41.42857142857143,
+      "profit_factor": 1.2630214811969829,
+      "total_return_pct": 5.0570284392034806,
+      "max_drawdown_pct": 5.3772070171251105,
+      "avg_win_pct": 12.307704562874902,
+      "avg_loss_pct": -6.892558597350585,
+      "gross_profit": 356.92343232337214,
+      "gross_loss": 282.594902491374,
+      "final_equity": 105057.02843920348
+    },
+    "score": 114.74338245520536
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 58,
+      "win_rate": 41.37931034482759,
+      "profit_factor": 1.4189335273555534,
+      "total_return_pct": 4.33956173193935,
+      "max_drawdown_pct": 8.31173994234373,
+      "avg_win_pct": 8.737974562794612,
+      "avg_loss_pct": -4.346914020574869,
+      "gross_profit": 209.71138950707072,
+      "gross_loss": 147.79507669954555,
+      "final_equity": 104339.56173193935
+    },
+    "score": 114.59692894319406
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 35,
+      "win_rate": 37.142857142857146,
+      "profit_factor": 1.6083217340784548,
+      "total_return_pct": 7.175333802599024,
+      "max_drawdown_pct": 7.783263017090144,
+      "avg_win_pct": 17.073277946657896,
+      "avg_loss_pct": -6.272846369310901,
+      "gross_profit": 221.95261330655268,
+      "gross_loss": 138.00262012483984,
+      "final_equity": 107175.33380259902
+    },
+    "score": 112.82053854295253
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 67,
+      "win_rate": 38.80597014925373,
+      "profit_factor": 1.347925654206392,
+      "total_return_pct": 7.77710232409324,
+      "max_drawdown_pct": 5.388924169714909,
+      "avg_win_pct": 14.878323217993604,
+      "avg_loss_pct": -6.999669608154922,
+      "gross_profit": 386.8364036678337,
+      "gross_loss": 286.98645393435174,
+      "final_equity": 107777.10232409324
+    },
+    "score": 112.5267441349455
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 62,
+      "win_rate": 41.935483870967744,
+      "profit_factor": 1.271874378897275,
+      "total_return_pct": 2.4823955614332953,
+      "max_drawdown_pct": 7.73988981609479,
+      "avg_win_pct": 8.149183646378525,
+      "avg_loss_pct": -4.627439328943228,
+      "gross_profit": 211.87877480584166,
+      "gross_loss": 166.58781584195617,
+      "final_equity": 102482.3955614333
+    },
+    "score": 111.84384349699822
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 43,
+      "win_rate": 41.86046511627907,
+      "profit_factor": 1.2588766404943186,
+      "total_return_pct": 2.652560839762096,
+      "max_drawdown_pct": 7.642375199504019,
+      "avg_win_pct": 11.196953418097472,
+      "avg_loss_pct": -6.4039685873149415,
+      "gross_profit": 201.5451615257545,
+      "gross_loss": 160.09921468287354,
+      "final_equity": 102652.5608397621
+    },
+    "score": 111.1991788160841
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 10,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 84,
+      "win_rate": 38.095238095238095,
+      "profit_factor": 1.4198741561929191,
+      "total_return_pct": 8.619460687727623,
+      "max_drawdown_pct": 7.274076321274769,
+      "avg_win_pct": 11.807272581377571,
+      "avg_loss_pct": -5.117364707668582,
+      "gross_profit": 377.83272260408233,
+      "gross_loss": 266.10296479876627,
+      "final_equity": 108619.46068772762
+    },
+    "score": 110.85947853189714
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 67,
+      "win_rate": 38.80597014925373,
+      "profit_factor": 1.2989755035471275,
+      "total_return_pct": 6.187442198443809,
+      "max_drawdown_pct": 5.465301832735749,
+      "avg_win_pct": 14.151179354895074,
+      "avg_loss_pct": -6.908458697484387,
+      "gross_profit": 367.93066322727196,
+      "gross_loss": 283.2468065968599,
+      "final_equity": 106187.44219844381
+    },
+    "score": 110.62574109550643
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 53,
+      "win_rate": 39.62264150943396,
+      "profit_factor": 1.4318584478467065,
+      "total_return_pct": 5.170364173146431,
+      "max_drawdown_pct": 9.264369089645584,
+      "avg_win_pct": 10.935977764937183,
+      "avg_loss_pct": -5.012182188143477,
+      "gross_profit": 229.65553306368088,
+      "gross_loss": 160.38983002059126,
+      "final_equity": 105170.36417314643
+    },
+    "score": 110.13355565443003
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 56,
+      "win_rate": 41.07142857142857,
+      "profit_factor": 1.277473331316437,
+      "total_return_pct": 2.8800512823414026,
+      "max_drawdown_pct": 8.183772417715431,
+      "avg_win_pct": 9.536041055538405,
+      "avg_loss_pct": -5.202716551366396,
+      "gross_profit": 219.32894427738333,
+      "gross_loss": 171.689646195091,
+      "final_equity": 102880.0512823414
+    },
+    "score": 109.60740871224539
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 53,
+      "win_rate": 39.62264150943396,
+      "profit_factor": 1.350282031152417,
+      "total_return_pct": 3.7791335588103103,
+      "max_drawdown_pct": 8.518824719512951,
+      "avg_win_pct": 10.179343313769957,
+      "avg_loss_pct": -4.947258347176723,
+      "gross_profit": 213.76620958916908,
+      "gross_loss": 158.3122671096551,
+      "final_equity": 103779.13355881031
+    },
+    "score": 108.52633358593307
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 59,
+      "win_rate": 40.67796610169492,
+      "profit_factor": 1.2816571928320397,
+      "total_return_pct": 2.275917993554787,
+      "max_drawdown_pct": 8.417493793505711,
+      "avg_win_pct": 7.974940551639446,
+      "avg_loss_pct": -4.266765477200408,
+      "gross_profit": 191.3985732393467,
+      "gross_loss": 149.3367917020143,
+      "final_equity": 102275.91799355479
+    },
+    "score": 108.51959089680344
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 55,
+      "win_rate": 43.63636363636363,
+      "profit_factor": 1.19057930036866,
+      "total_return_pct": 2.081890110754248,
+      "max_drawdown_pct": 10.579496261882378,
+      "avg_win_pct": 10.475582861018601,
+      "avg_loss_pct": -6.811918083981272,
+      "gross_profit": 251.4139886644464,
+      "gross_loss": 211.16946060341942,
+      "final_equity": 102081.89011075425
+    },
+    "score": 108.36223991311435
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 37,
+      "win_rate": 37.83783783783784,
+      "profit_factor": 1.4234941308975642,
+      "total_return_pct": 4.608188737560588,
+      "max_drawdown_pct": 7.688358332457547,
+      "avg_win_pct": 14.360290199343634,
+      "avg_loss_pct": -6.140556549245891,
+      "gross_profit": 201.04406279081087,
+      "gross_loss": 141.23280063265548,
+      "final_equity": 104608.18873756059
+    },
+    "score": 108.32459985142842
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 55,
+      "win_rate": 40.0,
+      "profit_factor": 1.3429560873124715,
+      "total_return_pct": 4.132882882176287,
+      "max_drawdown_pct": 9.098617875084173,
+      "avg_win_pct": 10.640566303142935,
+      "avg_loss_pct": -5.282161446513055,
+      "gross_profit": 234.0924586691446,
+      "gross_loss": 174.31132773493084,
+      "final_equity": 104132.88288217629
+    },
+    "score": 108.29233238318314
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 63,
+      "win_rate": 42.857142857142854,
+      "profit_factor": 1.1618569377683015,
+      "total_return_pct": 0.4907989793974411,
+      "max_drawdown_pct": 9.016752918122993,
+      "avg_win_pct": 6.782139984324452,
+      "avg_loss_pct": -4.37799596739828,
+      "gross_profit": 183.11777957676017,
+      "gross_loss": 157.60785482633807,
+      "final_equity": 100490.79897939744
+    },
+    "score": 108.08802426602975
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 32,
+      "win_rate": 34.375,
+      "profit_factor": 1.6258289630481637,
+      "total_return_pct": 6.616095230076084,
+      "max_drawdown_pct": 7.503754625315969,
+      "avg_win_pct": 18.483166111913135,
+      "avg_loss_pct": -5.95490587240002,
+      "gross_profit": 203.3148272310445,
+      "gross_loss": 125.05302332040044,
+      "final_equity": 106616.09523007608
+    },
+    "score": 108.07245599948617
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 32,
+      "win_rate": 34.375,
+      "profit_factor": 1.6258289630481637,
+      "total_return_pct": 6.616095230076084,
+      "max_drawdown_pct": 7.503754625315969,
+      "avg_win_pct": 18.483166111913135,
+      "avg_loss_pct": -5.95490587240002,
+      "gross_profit": 203.3148272310445,
+      "gross_loss": 125.05302332040044,
+      "final_equity": 106616.09523007608
+    },
+    "score": 108.07245599948617
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 61,
+      "win_rate": 42.62295081967213,
+      "profit_factor": 1.1618738770819903,
+      "total_return_pct": 0.5632271555879852,
+      "max_drawdown_pct": 8.954164244190293,
+      "avg_win_pct": 7.076123869568614,
+      "avg_loss_pct": -4.524199453948157,
+      "gross_profit": 183.97922060878395,
+      "gross_loss": 158.34698088818553,
+      "final_equity": 100563.22715558799
+    },
+    "score": 107.69851701663613
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 20,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 78,
+      "win_rate": 37.17948717948718,
+      "profit_factor": 1.2673710929400244,
+      "total_return_pct": 4.76074416820801,
+      "max_drawdown_pct": 4.847358415568335,
+      "avg_win_pct": 12.01918815405086,
+      "avg_loss_pct": -5.612718414038675,
+      "gross_profit": 348.55645646747496,
+      "gross_loss": 275.02320228789506,
+      "final_equity": 104760.74416820801
+    },
+    "score": 107.2312183574642
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 33,
+      "win_rate": 36.36363636363637,
+      "profit_factor": 1.4761204151856329,
+      "total_return_pct": 5.2553003834495176,
+      "max_drawdown_pct": 7.618520479461384,
+      "avg_win_pct": 16.79819021959143,
+      "avg_loss_pct": -6.502833875215655,
+      "gross_profit": 201.57828263509717,
+      "gross_loss": 136.55951137952877,
+      "final_equity": 105255.30038344952
+    },
+    "score": 107.12916454033956
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 64,
+      "win_rate": 37.5,
+      "profit_factor": 1.2474013839608769,
+      "total_return_pct": 5.1410900190390825,
+      "max_drawdown_pct": 4.9397297879414195,
+      "avg_win_pct": 15.628152533586885,
+      "avg_loss_pct": -7.517140545714054,
+      "gross_profit": 375.07566080608524,
+      "gross_loss": 300.68562182856215,
+      "final_equity": 105141.09001903908
+    },
+    "score": 107.000664840722
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 53,
+      "win_rate": 37.735849056603776,
+      "profit_factor": 1.4523298706995877,
+      "total_return_pct": 5.5291157120621355,
+      "max_drawdown_pct": 9.37521218938543,
+      "avg_win_pct": 11.704863083236393,
+      "avg_loss_pct": -4.884466371724179,
+      "gross_profit": 234.09726166472785,
+      "gross_loss": 161.18739026689792,
+      "final_equity": 105529.11571206214
+    },
+    "score": 106.87959909252947
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 67,
+      "win_rate": 40.298507462686565,
+      "profit_factor": 1.159095166202777,
+      "total_return_pct": 2.3859142408092593,
+      "max_drawdown_pct": 6.877111326330778,
+      "avg_win_pct": 12.965825916006576,
+      "avg_loss_pct": -7.550659124889611,
+      "gross_profit": 350.0772997321776,
+      "gross_loss": 302.02636499558446,
+      "final_equity": 102385.91424080926
+    },
+    "score": 106.53638577012212
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 58,
+      "win_rate": 39.6551724137931,
+      "profit_factor": 1.3406780059226437,
+      "total_return_pct": 3.7691762099381743,
+      "max_drawdown_pct": 9.77051301866554,
+      "avg_win_pct": 9.757448888801813,
+      "avg_loss_pct": -4.782682950631316,
+      "gross_profit": 224.4213244424417,
+      "gross_loss": 167.39390327209608,
+      "final_equity": 103769.17620993817
+    },
+    "score": 106.49875071925484
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 68,
+      "win_rate": 36.76470588235294,
+      "profit_factor": 1.2941244030898977,
+      "total_return_pct": 6.266551723153069,
+      "max_drawdown_pct": 5.430123390800159,
+      "avg_win_pct": 15.149133001842943,
+      "avg_loss_pct": -6.805864602474331,
+      "gross_profit": 378.72832504607356,
+      "gross_loss": 292.6521779063962,
+      "final_equity": 106266.55172315307
+    },
+    "score": 106.48126911583319
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 30,
+      "win_rate": 33.33333333333333,
+      "profit_factor": 1.63286989240177,
+      "total_return_pct": 6.404430347312824,
+      "max_drawdown_pct": 7.548849596958716,
+      "avg_win_pct": 19.422840161134612,
+      "avg_loss_pct": -5.947454923235119,
+      "gross_profit": 194.22840161134616,
+      "gross_loss": 118.9490984647024,
+      "final_equity": 106404.43034731282
+    },
+    "score": 106.06037511274424
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 30,
+      "win_rate": 33.33333333333333,
+      "profit_factor": 1.63286989240177,
+      "total_return_pct": 6.404430347312824,
+      "max_drawdown_pct": 7.548849596958716,
+      "avg_win_pct": 19.422840161134612,
+      "avg_loss_pct": -5.947454923235119,
+      "gross_profit": 194.22840161134616,
+      "gross_loss": 118.9490984647024,
+      "final_equity": 106404.43034731282
+    },
+    "score": 106.06037511274424
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 39,
+      "win_rate": 38.46153846153847,
+      "profit_factor": 1.3340570352045877,
+      "total_return_pct": 4.139724102849228,
+      "max_drawdown_pct": 8.706973237105817,
+      "avg_win_pct": 14.872469301192933,
+      "avg_loss_pct": -6.967688088253348,
+      "gross_profit": 223.087039517894,
+      "gross_loss": 167.22451411808035,
+      "final_equity": 104139.72410284923
+    },
+    "score": 105.29727294412568
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 56,
+      "win_rate": 41.07142857142857,
+      "profit_factor": 1.1571929630807851,
+      "total_return_pct": 0.8584965234080154,
+      "max_drawdown_pct": 8.423467791692786,
+      "avg_win_pct": 8.831502827134317,
+      "avg_loss_pct": -5.319155962396843,
+      "gross_profit": 203.1245650240893,
+      "gross_loss": 175.5321467590958,
+      "final_equity": 100858.49652340802
+    },
+    "score": 105.23514365242312
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 55,
+      "win_rate": 38.18181818181819,
+      "profit_factor": 1.352826334064381,
+      "total_return_pct": 4.337155062702804,
+      "max_drawdown_pct": 9.167552791449369,
+      "avg_win_pct": 11.296861723760516,
+      "avg_loss_pct": -5.1577007646309845,
+      "gross_profit": 237.23409619897083,
+      "gross_loss": 175.36182599745348,
+      "final_equity": 104337.1550627028
+    },
+    "score": 104.88952821093432
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 33,
+      "win_rate": 36.36363636363637,
+      "profit_factor": 1.406233808060138,
+      "total_return_pct": 4.276407485194606,
+      "max_drawdown_pct": 7.618520479461384,
+      "avg_win_pct": 16.002883476172208,
+      "avg_loss_pct": -6.502833875215655,
+      "gross_profit": 192.0346017140665,
+      "gross_loss": 136.55951137952877,
+      "final_equity": 104276.4074851946
+    },
+    "score": 104.83678774692372
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 53,
+      "win_rate": 39.62264150943396,
+      "profit_factor": 1.2982819716404348,
+      "total_return_pct": 3.1039652398795003,
+      "max_drawdown_pct": 9.898597081268717,
+      "avg_win_pct": 10.16385388543047,
+      "avg_loss_pct": -5.137581248152031,
+      "gross_profit": 213.44093159403985,
+      "gross_loss": 164.402599940865,
+      "final_equity": 103103.9652398795
+    },
+    "score": 104.76163959415379
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 64,
+      "win_rate": 37.5,
+      "profit_factor": 1.181964131557228,
+      "total_return_pct": 3.1579076197182734,
+      "max_drawdown_pct": 5.157384212570381,
+      "avg_win_pct": 14.91471331960625,
+      "avg_loss_pct": -7.571150217539804,
+      "gross_profit": 357.95311967055005,
+      "gross_loss": 302.8460087015921,
+      "final_equity": 103157.90761971827
+    },
+    "score": 104.31442915180492
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 55,
+      "win_rate": 40.0,
+      "profit_factor": 1.218506130520649,
+      "total_return_pct": 2.011508857953202,
+      "max_drawdown_pct": 9.352782044958804,
+      "avg_win_pct": 9.876633610370012,
+      "avg_loss_pct": -5.403684267144325,
+      "gross_profit": 217.28593942814027,
+      "gross_loss": 178.32158081576276,
+      "final_equity": 102011.5088579532
+    },
+    "score": 103.7533126197719
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 10,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 85,
+      "win_rate": 35.294117647058826,
+      "profit_factor": 1.3870948747853884,
+      "total_return_pct": 8.730933900414486,
+      "max_drawdown_pct": 7.706182364708579,
+      "avg_win_pct": 13.617491159639656,
+      "avg_loss_pct": -5.3548770064208915,
+      "gross_profit": 408.5247347891898,
+      "gross_loss": 294.518235353149,
+      "final_equity": 108730.93390041449
+    },
+    "score": 103.66299477069933
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 48,
+      "win_rate": 37.5,
+      "profit_factor": 1.273826630173724,
+      "total_return_pct": 3.4071047285081293,
+      "max_drawdown_pct": 7.305066698725074,
+      "avg_win_pct": 13.55040419194716,
+      "avg_loss_pct": -6.382534579340282,
+      "gross_profit": 243.9072754550489,
+      "gross_loss": 191.47603738020842,
+      "final_equity": 103407.10472850813
+    },
+    "score": 103.65861980282574
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 14,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 81,
+      "win_rate": 37.03703703703704,
+      "profit_factor": 1.239668026585949,
+      "total_return_pct": 3.8231178999011024,
+      "max_drawdown_pct": 6.441822004190678,
+      "avg_win_pct": 11.243601173242919,
+      "avg_loss_pct": -5.33520499137074,
+      "gross_profit": 337.30803519728755,
+      "gross_loss": 272.0954545599077,
+      "final_equity": 103823.1178999011
+    },
+    "score": 103.58100544534675
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 62,
+      "win_rate": 38.70967741935484,
+      "profit_factor": 1.2887615278152482,
+      "total_return_pct": 2.820288817221881,
+      "max_drawdown_pct": 9.557905113994417,
+      "avg_win_pct": 9.106118815792039,
+      "avg_loss_pct": -4.4626044556430795,
+      "gross_profit": 218.54685157900892,
+      "gross_loss": 169.578969314437,
+      "final_equity": 102820.28881722188
+    },
+    "score": 103.2394007656199
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 57,
+      "win_rate": 38.59649122807017,
+      "profit_factor": 1.300678676897694,
+      "total_return_pct": 3.2173311797695057,
+      "max_drawdown_pct": 9.708379266295864,
+      "avg_win_pct": 10.112784360158455,
+      "avg_loss_pct": -4.8871465527989,
+      "gross_profit": 222.481255923486,
+      "gross_loss": 171.05012934796153,
+      "final_equity": 103217.3311797695
+    },
+    "score": 103.14924009958126
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 29,
+      "win_rate": 31.03448275862069,
+      "profit_factor": 1.6860585477772532,
+      "total_return_pct": 6.83449945188401,
+      "max_drawdown_pct": 7.545647670758718,
+      "avg_win_pct": 21.61740151191096,
+      "avg_loss_pct": -5.769568733650574,
+      "gross_profit": 194.55661360719864,
+      "gross_loss": 115.39137467301147,
+      "final_equity": 106834.49945188401
+    },
+    "score": 103.1341503347977
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 29,
+      "win_rate": 31.03448275862069,
+      "profit_factor": 1.6860585477772532,
+      "total_return_pct": 6.83449945188401,
+      "max_drawdown_pct": 7.545647670758718,
+      "avg_win_pct": 21.61740151191096,
+      "avg_loss_pct": -5.769568733650574,
+      "gross_profit": 194.55661360719864,
+      "gross_loss": 115.39137467301147,
+      "final_equity": 106834.49945188401
+    },
+    "score": 103.1341503347977
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 57,
+      "win_rate": 38.59649122807017,
+      "profit_factor": 1.2961451861822098,
+      "total_return_pct": 3.0979221977130074,
+      "max_drawdown_pct": 9.71884475606963,
+      "avg_win_pct": 9.981865628840062,
+      "avg_loss_pct": -4.840750561755361,
+      "gross_profit": 219.60104383448135,
+      "gross_loss": 169.42626966143763,
+      "final_equity": 103097.92219771301
+    },
+    "score": 102.9736553470448
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 40,
+      "win_rate": 37.5,
+      "profit_factor": 1.2645259498343633,
+      "total_return_pct": 2.9796359891223254,
+      "max_drawdown_pct": 7.495115576004988,
+      "avg_win_pct": 14.188708553606721,
+      "avg_loss_pct": -6.732345139519799,
+      "gross_profit": 212.83062830410083,
+      "gross_loss": 168.30862848799498,
+      "final_equity": 102979.63598912233
+    },
+    "score": 102.88903232884786
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 35,
+      "win_rate": 31.428571428571427,
+      "profit_factor": 1.6143219193063716,
+      "total_return_pct": 6.015499638905414,
+      "max_drawdown_pct": 6.840068608532077,
+      "avg_win_pct": 17.516266730982306,
+      "avg_loss_pct": -4.973164783524973,
+      "gross_profit": 192.67893404080536,
+      "gross_loss": 119.35595480459935,
+      "final_equity": 106015.49963890541
+    },
+    "score": 102.75479745131697
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 35,
+      "win_rate": 31.428571428571427,
+      "profit_factor": 1.6143219193063716,
+      "total_return_pct": 6.015499638905414,
+      "max_drawdown_pct": 6.840068608532077,
+      "avg_win_pct": 17.516266730982306,
+      "avg_loss_pct": -4.973164783524973,
+      "gross_profit": 192.67893404080536,
+      "gross_loss": 119.35595480459935,
+      "final_equity": 106015.49963890541
+    },
+    "score": 102.75479745131697
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 58,
+      "win_rate": 39.6551724137931,
+      "profit_factor": 1.229855174313613,
+      "total_return_pct": 1.9324517109063744,
+      "max_drawdown_pct": 9.874394128628841,
+      "avg_win_pct": 9.051247509314297,
+      "avg_loss_pct": -4.83631143992019,
+      "gross_profit": 208.17869271422884,
+      "gross_loss": 169.27090039720667,
+      "final_equity": 101932.45171090637
+    },
+    "score": 102.65089920623262
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 47,
+      "win_rate": 40.42553191489361,
+      "profit_factor": 1.2312774486490643,
+      "total_return_pct": 3.0153863753598853,
+      "max_drawdown_pct": 11.132875473737048,
+      "avg_win_pct": 13.218906173365909,
+      "avg_loss_pct": -7.285094075307135,
+      "gross_profit": 251.15921729395234,
+      "gross_loss": 203.9826341085998,
+      "final_equity": 103015.38637535989
+    },
+    "score": 102.39815135372557
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 58,
+      "win_rate": 39.6551724137931,
+      "profit_factor": 1.2158848324001936,
+      "total_return_pct": 1.7672072672659416,
+      "max_drawdown_pct": 9.91643711868869,
+      "avg_win_pct": 9.145911449704352,
+      "avg_loss_pct": -4.9430424832013315,
+      "gross_profit": 210.35596334320007,
+      "gross_loss": 173.0064869120466,
+      "final_equity": 101767.20726726594
+    },
+    "score": 102.13567557501217
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 59,
+      "win_rate": 37.28813559322034,
+      "profit_factor": 1.2321931681798985,
+      "total_return_pct": 2.0233925208127332,
+      "max_drawdown_pct": 7.139710677015936,
+      "avg_win_pct": 9.687664373149442,
+      "avg_loss_pct": -4.674780723731706,
+      "gross_profit": 213.1286162092877,
+      "gross_loss": 172.9668867780731,
+      "final_equity": 102023.39252081273
+    },
+    "score": 102.12217872047628
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 43,
+      "win_rate": 34.883720930232556,
+      "profit_factor": 1.392853354893257,
+      "total_return_pct": 4.544908442929286,
+      "max_drawdown_pct": 7.586135036526151,
+      "avg_win_pct": 14.34705382248848,
+      "avg_loss_pct": -5.518112630893471,
+      "gross_profit": 215.20580733732723,
+      "gross_loss": 154.50715366501723,
+      "final_equity": 104544.90844292929
+    },
+    "score": 101.72782164105944
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 62,
+      "win_rate": 40.32258064516129,
+      "profit_factor": 1.1159140589169076,
+      "total_return_pct": -0.1662999256151379,
+      "max_drawdown_pct": 8.94649394884019,
+      "avg_win_pct": 7.180193278067538,
+      "avg_loss_pct": -4.347540839613596,
+      "gross_profit": 179.50483195168843,
+      "gross_loss": 160.85901106570304,
+      "final_equity": 99833.70007438486
+    },
+    "score": 101.59958214944652
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 53,
+      "win_rate": 37.735849056603776,
+      "profit_factor": 1.320425291875325,
+      "total_return_pct": 3.4620834684395523,
+      "max_drawdown_pct": 9.987884376454197,
+      "avg_win_pct": 10.855007878871145,
+      "avg_loss_pct": -4.982328568182614,
+      "gross_profit": 217.1001575774229,
+      "gross_loss": 164.4168427500263,
+      "final_equity": 103462.08346843955
+    },
+    "score": 101.59004699847392
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 59,
+      "win_rate": 37.28813559322034,
+      "profit_factor": 1.2848425507861168,
+      "total_return_pct": 2.9393927994907716,
+      "max_drawdown_pct": 8.74658571216855,
+      "avg_win_pct": 10.120228021912807,
+      "avg_loss_pct": -4.683400992761643,
+      "gross_profit": 222.64501648208176,
+      "gross_loss": 173.2858367321808,
+      "final_equity": 102939.39279949077
+    },
+    "score": 101.47454770166951
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 61,
+      "win_rate": 37.704918032786885,
+      "profit_factor": 1.2698917273346846,
+      "total_return_pct": 2.5940708956389718,
+      "max_drawdown_pct": 9.03136952949639,
+      "avg_win_pct": 9.525163569417082,
+      "avg_loss_pct": -4.539938687205762,
+      "gross_profit": 219.0787620965928,
+      "gross_loss": 172.51767011381892,
+      "final_equity": 102594.07089563897
+    },
+    "score": 101.39334777049753
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 38,
+      "win_rate": 36.84210526315789,
+      "profit_factor": 1.294511895084656,
+      "total_return_pct": 3.4606374460181395,
+      "max_drawdown_pct": 8.45646632772993,
+      "avg_win_pct": 15.234468053559285,
+      "avg_loss_pct": -6.864960503635817,
+      "gross_profit": 213.28255274983,
+      "gross_loss": 164.75905208725962,
+      "final_equity": 103460.63744601814
+    },
+    "score": 101.09699537646418
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 43,
+      "win_rate": 34.883720930232556,
+      "profit_factor": 1.3452565418085902,
+      "total_return_pct": 3.7867982647946192,
+      "max_drawdown_pct": 7.0353210936440425,
+      "avg_win_pct": 13.767703625000802,
+      "avg_loss_pct": -5.482638652310466,
+      "gross_profit": 206.51555437501204,
+      "gross_loss": 153.51388226469305,
+      "final_equity": 103786.79826479462
+    },
+    "score": 100.97451612721568
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 55,
+      "win_rate": 43.63636363636363,
+      "profit_factor": 1.0126134947566163,
+      "total_return_pct": -1.6450335441458446,
+      "max_drawdown_pct": 11.49893160087496,
+      "avg_win_pct": 9.455890611315063,
+      "avg_loss_pct": -7.229500242137091,
+      "gross_profit": 226.94137467156153,
+      "gross_loss": 224.11450750624982,
+      "final_equity": 98354.96645585416
+    },
+    "score": 100.89872800528416
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 35,
+      "win_rate": 34.285714285714285,
+      "profit_factor": 1.417086270123213,
+      "total_return_pct": 4.729723645385937,
+      "max_drawdown_pct": 7.783263017090144,
+      "avg_win_pct": 17.174745889412318,
+      "avg_loss_pct": -6.32335318935891,
+      "gross_profit": 206.09695067294783,
+      "gross_loss": 145.43712335525493,
+      "final_equity": 104729.72364538594
+    },
+    "score": 100.88006687856694
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 41,
+      "win_rate": 34.146341463414636,
+      "profit_factor": 1.382096320717187,
+      "total_return_pct": 5.296510424671098,
+      "max_drawdown_pct": 7.154261414280115,
+      "avg_win_pct": 17.8609216433626,
+      "avg_loss_pct": -6.700848914123407,
+      "gross_profit": 250.05290300707642,
+      "gross_loss": 180.92292068133202,
+      "final_equity": 105296.5104246711
+    },
+    "score": 100.69848251185891
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 43,
+      "win_rate": 39.53488372093023,
+      "profit_factor": 1.1426075198777677,
+      "total_return_pct": 0.7694932933136879,
+      "max_drawdown_pct": 9.098627654131564,
+      "avg_win_pct": 10.689485480355298,
+      "avg_loss_pct": -6.116955162934957,
+      "gross_profit": 181.7212531660401,
+      "gross_loss": 159.0408342363089,
+      "final_equity": 100769.49329331369
+    },
+    "score": 100.49895021565888
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 55,
+      "win_rate": 38.18181818181819,
+      "profit_factor": 1.2257841877269702,
+      "total_return_pct": 2.150812718854242,
+      "max_drawdown_pct": 9.413107464594786,
+      "avg_win_pct": 10.451811106062264,
+      "avg_loss_pct": -5.266449391070423,
+      "gross_profit": 219.48803322730748,
+      "gross_loss": 179.05927929639438,
+      "final_equity": 102150.81271885424
+    },
+    "score": 100.27266334232415
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 63,
+      "win_rate": 41.269841269841265,
+      "profit_factor": 1.0317065272440888,
+      "total_return_pct": -1.5229210177746573,
+      "max_drawdown_pct": 9.255728455208967,
+      "avg_win_pct": 6.409032562308515,
+      "avg_loss_pct": -4.3652379667249255,
+      "gross_profit": 166.63484662002136,
+      "gross_loss": 161.51380476882224,
+      "final_equity": 98477.07898222534
+    },
+    "score": 100.2477014706368
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 61,
+      "win_rate": 40.98360655737705,
+      "profit_factor": 1.0350107672657431,
+      "total_return_pct": -1.4103944943032694,
+      "max_drawdown_pct": 9.210302855463942,
+      "avg_win_pct": 6.711847000110714,
+      "avg_loss_pct": -4.5033394903719515,
+      "gross_profit": 167.79617500276785,
+      "gross_loss": 162.1202216533903,
+      "final_equity": 98589.60550569673
+    },
+    "score": 99.83500295066985
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 45,
+      "win_rate": 37.77777777777778,
+      "profit_factor": 1.273401162532082,
+      "total_return_pct": 3.8027250564803396,
+      "max_drawdown_pct": 10.75870839015035,
+      "avg_win_pct": 14.956632192369542,
+      "avg_loss_pct": -7.131148195634931,
+      "gross_profit": 254.2627472702822,
+      "gross_loss": 199.67214947777805,
+      "final_equity": 103802.72505648034
+    },
+    "score": 99.05507285758857
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 60,
+      "win_rate": 36.666666666666664,
+      "profit_factor": 1.1767387451857534,
+      "total_return_pct": 1.100885599105517,
+      "max_drawdown_pct": 7.214573365194083,
+      "avg_win_pct": 9.498960832455545,
+      "avg_loss_pct": -4.673423390862077,
+      "gross_profit": 208.977138314022,
+      "gross_loss": 177.59008885275892,
+      "final_equity": 101100.88559910552
+    },
+    "score": 98.93381276093592
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 57,
+      "win_rate": 38.59649122807017,
+      "profit_factor": 1.1793675580645333,
+      "total_return_pct": 1.2171507120617608,
+      "max_drawdown_pct": 9.856526620816528,
+      "avg_win_pct": 9.461649024028974,
+      "avg_loss_pct": -5.042806377882345,
+      "gross_profit": 208.15627852863744,
+      "gross_loss": 176.49822322588207,
+      "final_equity": 101217.15071206176
+    },
+    "score": 98.8876494092639
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 39,
+      "win_rate": 38.46153846153847,
+      "profit_factor": 1.0859534452467803,
+      "total_return_pct": -0.0077335469105019004,
+      "max_drawdown_pct": 7.4917681358473045,
+      "avg_win_pct": 11.727199093540657,
+      "avg_loss_pct": -6.749368000575107,
+      "gross_profit": 175.90798640310985,
+      "gross_loss": 161.98483201380256,
+      "final_equity": 99992.2664530895
+    },
+    "score": 98.84748136732729
+  },
+  {
+    "params": {
+      "twma_len": 15,
+      "atr_len": 10,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 70,
+      "win_rate": 37.142857142857146,
+      "profit_factor": 1.1816551822898986,
+      "total_return_pct": 2.7608722796778893,
+      "max_drawdown_pct": 8.513501294960951,
+      "avg_win_pct": 13.06499054397935,
+      "avg_loss_pct": -6.533396375512772,
+      "gross_profit": 339.6897541434631,
+      "gross_loss": 287.46944052256197,
+      "final_equity": 102760.87227967789
+    },
+    "score": 98.56729226790539
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 37,
+      "win_rate": 35.13513513513514,
+      "profit_factor": 1.2808222143628671,
+      "total_return_pct": 3.10141955631545,
+      "max_drawdown_pct": 7.549156558056258,
+      "avg_win_pct": 15.650861546750324,
+      "avg_loss_pct": -6.618834299892928,
+      "gross_profit": 203.46120010775422,
+      "gross_loss": 158.8520231974303,
+      "final_equity": 103101.41955631545
+    },
+    "score": 98.54648577533499
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 56,
+      "win_rate": 41.07142857142857,
+      "profit_factor": 1.0023819213064646,
+      "total_return_pct": -1.8047223428760333,
+      "max_drawdown_pct": 9.630039653088506,
+      "avg_win_pct": 7.443065162176708,
+      "avg_loss_pct": -5.175263799497412,
+      "gross_profit": 171.1904987300643,
+      "gross_loss": 170.78370538341457,
+      "final_equity": 98195.27765712397
+    },
+    "score": 98.2483108338431
+  },
+  {
+    "params": {
+      "twma_len": 10,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 63,
+      "win_rate": 41.269841269841265,
+      "profit_factor": 1.0248867449965353,
+      "total_return_pct": -1.567914356719877,
+      "max_drawdown_pct": 10.654114215786581,
+      "avg_win_pct": 13.119090287692188,
+      "avg_loss_pct": -8.99496480676335,
+      "gross_profit": 341.0963474799969,
+      "gross_loss": 332.81369785024395,
+      "final_equity": 98432.08564328012
+    },
+    "score": 97.93653069455472
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 34,
+      "win_rate": 35.294117647058826,
+      "profit_factor": 1.2587324286735238,
+      "total_return_pct": 2.539933550030459,
+      "max_drawdown_pct": 7.735456094642321,
+      "avg_win_pct": 15.952893555734628,
+      "avg_loss_pct": -6.912969035284067,
+      "gross_profit": 191.43472266881554,
+      "gross_loss": 152.08531877624947,
+      "final_equity": 102539.93355003046
+    },
+    "score": 97.76501072236597
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 42,
+      "win_rate": 38.095238095238095,
+      "profit_factor": 1.0857583812405898,
+      "total_return_pct": -0.02097066268575145,
+      "max_drawdown_pct": 7.7842788003811965,
+      "avg_win_pct": 11.717351352356026,
+      "avg_loss_pct": -6.641143996564946,
+      "gross_profit": 187.47762163769644,
+      "gross_loss": 172.6697439106886,
+      "final_equity": 99979.02933731425
+    },
+    "score": 97.71261529458494
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 44,
+      "win_rate": 36.36363636363637,
+      "profit_factor": 1.232934120409224,
+      "total_return_pct": 2.115240544546425,
+      "max_drawdown_pct": 8.753146654797288,
+      "avg_win_pct": 12.6016109343166,
+      "avg_loss_pct": -5.840474697468132,
+      "gross_profit": 201.62577494906557,
+      "gross_loss": 163.5332915291077,
+      "final_equity": 102115.24054454642
+    },
+    "score": 97.6686244662628
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 60,
+      "win_rate": 36.666666666666664,
+      "profit_factor": 1.2216770430848438,
+      "total_return_pct": 1.8575943896893876,
+      "max_drawdown_pct": 9.116984994418171,
+      "avg_win_pct": 9.792081269935682,
+      "avg_loss_pct": -4.640424173216317,
+      "gross_profit": 215.42578793858502,
+      "gross_loss": 176.33611858222008,
+      "final_equity": 101857.59438968939
+    },
+    "score": 97.57968601218926
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 40,
+      "win_rate": 37.5,
+      "profit_factor": 1.1547805209339272,
+      "total_return_pct": 1.0999829129215069,
+      "max_drawdown_pct": 8.589260052426878,
+      "avg_win_pct": 12.810859257159628,
+      "avg_loss_pct": -6.6562566781775265,
+      "gross_profit": 192.16288885739442,
+      "gross_loss": 166.40641695443819,
+      "final_equity": 101099.9829129215
+    },
+    "score": 97.5795221319618
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 32,
+      "win_rate": 34.375,
+      "profit_factor": 1.302281557563597,
+      "total_return_pct": 2.8063290857589163,
+      "max_drawdown_pct": 7.669255674834746,
+      "avg_win_pct": 16.144872785704035,
+      "avg_loss_pct": -6.4938630795529635,
+      "gross_profit": 177.59360064274438,
+      "gross_loss": 136.37112467061223,
+      "final_equity": 102806.32908575892
+    },
+    "score": 97.35582903180759
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 32,
+      "win_rate": 34.375,
+      "profit_factor": 1.302281557563597,
+      "total_return_pct": 2.8063290857589163,
+      "max_drawdown_pct": 7.669255674834746,
+      "avg_win_pct": 16.144872785704035,
+      "avg_loss_pct": -6.4938630795529635,
+      "gross_profit": 177.59360064274438,
+      "gross_loss": 136.37112467061223,
+      "final_equity": 102806.32908575892
+    },
+    "score": 97.35582903180759
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 64,
+      "win_rate": 39.0625,
+      "profit_factor": 1.0960235974354986,
+      "total_return_pct": -0.36248366843533586,
+      "max_drawdown_pct": 9.77051301866554,
+      "avg_win_pct": 8.18375995351638,
+      "avg_loss_pct": -4.786393269704704,
+      "gross_profit": 204.5939988379095,
+      "gross_loss": 186.66933751848345,
+      "final_equity": 99637.51633156466
+    },
+    "score": 97.23744166137958
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.5,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 55,
+      "win_rate": 40.0,
+      "profit_factor": 1.0715130834426536,
+      "total_return_pct": -0.6217808383698575,
+      "max_drawdown_pct": 10.529902886712787,
+      "avg_win_pct": 8.448292784934997,
+      "avg_loss_pct": -5.256300904755208,
+      "gross_profit": 185.86244126856994,
+      "gross_loss": 173.4579298569219,
+      "final_equity": 99378.21916163014
+    },
+    "score": 97.05118200553646
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 14,
+      "sl_atr_mult": 0.3,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 62,
+      "win_rate": 40.32258064516129,
+      "profit_factor": 0.9889457530500746,
+      "total_return_pct": -2.1753263067659137,
+      "max_drawdown_pct": 9.19420166662926,
+      "avg_win_pct": 6.545578258200039,
+      "avg_loss_pct": -4.472123975108861,
+      "gross_profit": 163.63945645500104,
+      "gross_loss": 165.46858707902786,
+      "final_equity": 97824.67369323409
+    },
+    "score": 97.01716612052775
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 10,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 47,
+      "win_rate": 34.04255319148936,
+      "profit_factor": 1.3201521919433905,
+      "total_return_pct": 3.5527889683737888,
+      "max_drawdown_pct": 8.185573537270686,
+      "avg_win_pct": 13.343946550428292,
+      "avg_loss_pct": -5.2169729078260865,
+      "gross_profit": 213.50314480685267,
+      "gross_loss": 161.7261601426087,
+      "final_equity": 103552.78896837379
+    },
+    "score": 96.82686962904916
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 1.0,
+      "pivot_len": 10,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 43,
+      "win_rate": 34.883720930232556,
+      "profit_factor": 1.293663797271068,
+      "total_return_pct": 3.136976909018762,
+      "max_drawdown_pct": 8.68597058562233,
+      "avg_win_pct": 14.101040698302569,
+      "avg_loss_pct": -5.839329323008316,
+      "gross_profit": 211.51561047453853,
+      "gross_loss": 163.50122104423286,
+      "final_equity": 103136.97690901876
+    },
+    "score": 96.8207952819674
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 0.7,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 49,
+      "win_rate": 36.734693877551024,
+      "profit_factor": 1.2134299562142272,
+      "total_return_pct": 1.929064405301513,
+      "max_drawdown_pct": 9.489137138905319,
+      "avg_win_pct": 11.608679459650109,
+      "avg_loss_pct": -5.554934195168472,
+      "gross_profit": 208.95623027370195,
+      "gross_loss": 172.20296005022263,
+      "final_equity": 101929.06440530151
+    },
+    "score": 96.7593936142312
+  },
+  {
+    "params": {
+      "twma_len": 30,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 2.0,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 37,
+      "win_rate": 35.13513513513514,
+      "profit_factor": 1.300834487613803,
+      "total_return_pct": 3.580349783877056,
+      "max_drawdown_pct": 9.208967781456009,
+      "avg_win_pct": 16.514663301248852,
+      "avg_loss_pct": -6.8766954648619025,
+      "gross_profit": 214.6906229162351,
+      "gross_loss": 165.04069115668568,
+      "final_equity": 103580.34978387706
+    },
+    "score": 96.75292318327577
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 0.8,
+      "pivot_len": 3,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 52,
+      "win_rate": 44.230769230769226,
+      "profit_factor": 0.8692939805726771,
+      "total_return_pct": -4.584122773950061,
+      "max_drawdown_pct": 11.892915202079093,
+      "avg_win_pct": 8.341172236691008,
+      "avg_loss_pct": -7.610098092735434,
+      "gross_profit": 191.84696144389318,
+      "gross_loss": 220.6928446893276,
+      "final_equity": 95415.87722604994
+    },
+    "score": 96.56416052081012
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 20,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 5,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 47,
+      "win_rate": 38.297872340425535,
+      "profit_factor": 1.1506412570166258,
+      "total_return_pct": 1.4964754585554039,
+      "max_drawdown_pct": 10.587973031412853,
+      "avg_win_pct": 13.826320134090757,
+      "avg_loss_pct": -7.458322760460687,
+      "gross_profit": 248.87376241363364,
+      "gross_loss": 216.2913600533599,
+      "final_equity": 101496.4754585554
+    },
+    "score": 96.23731793594165
+  },
+  {
+    "params": {
+      "twma_len": 25,
+      "atr_len": 14,
+      "sl_atr_mult": 1.0,
+      "tp_atr_mult": 1.5,
+      "pivot_len": 7,
+      "leverage": 5.0,
+      "commission": 0.0005,
+      "slippage": 0.0002
+    },
+    "results": {
+      "total_trades": 39,
+      "win_rate": 30.76923076923077,
+      "profit_factor": 1.453537769903259,
+      "total_return_pct": 5.856019773572131,
+      "max_drawdown_pct": 7.527716728093714,
+      "avg_win_pct": 19.70314585421355,
+      "avg_loss_pct": -6.024579405024077,
+      "gross_profit": 236.43775025056257,
+      "gross_loss": 162.66364393565007,
+      "final_equity": 105856.01977357213
+    },
+    "score": 95.60922349813316
+  }
+]

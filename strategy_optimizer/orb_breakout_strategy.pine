@@ -1,0 +1,733 @@
+//@version=6
+// ORB Breakout Strategy - Clean Trading Strategy
+// Opening Range Breakout with Multi-Stage Detection (5/15/30/60 min)
+// Long/Short entry logic preserved - Ready for backtesting
+
+strategy("ORB Breakout Strategy", 
+    overlay = true,
+    initial_capital = 10000,
+    commission_type = strategy.commission.percent,
+    commission_value = 0.04,
+    pyramiding = 0,
+    default_qty_type = strategy.percent_of_equity,
+    default_qty_value = 100,
+    calc_on_order_fills = true,
+    process_orders_on_close = true)
+
+// ============================================ INPUTS ============================================
+
+// Session Settings
+grp_session = "⏰ SESSION SETTINGS"
+sessionMode = input.string("Auto-Detect", "Session Mode", options=["Auto-Detect", "New-York", "London", "Tokyo", "Sydney", "Frankfurt", "Custom"], group=grp_session)
+customSession = input.session("0930-1600", "Custom Session Hours", group=grp_session)
+enableExtendedHours = input.bool(false, "Include Extended Hours", group=grp_session)
+
+// ORB Stages
+grp_orb = "📊 ORB STAGES"
+enableORB5 = input.bool(true, "Enable ORB 5", group=grp_orb)
+enableORB15 = input.bool(true, "Enable ORB15", group=grp_orb)
+enableORB30 = input.bool(true, "Enable ORB30", group=grp_orb)
+enableORB60 = input.bool(true, "Enable ORB60", group=grp_orb)
+
+// Breakout Detection
+grp_breakout = "⚡ BREAKOUT DETECTION"
+breakoutBuffer = input.float(0.2, "Breakout Buffer (%)", minval=0, maxval=5, step=0.1, group=grp_breakout)
+minBarsOutside = input.int(2, "Min Bars Outside ORB", minval=1, maxval=10, group=grp_breakout)
+signalMode = input.string("Track Cycles", "Signal Mode", options=["First Only", "Track Cycles"], group=grp_breakout)
+maxCycles = input.int(6, "Max Cycles", minval=1, maxval=10, group=grp_breakout)
+
+// Filters
+grp_filters = "🔍 FILTERS"
+enableVolumeFilter = input.bool(false, "Enable Volume Filter", group=grp_filters)
+volumeMaLength = input.int(20, "Volume MA Length", minval=1, group=grp_filters)
+volumeMultiplier = input.float(1.5, "Min Volume ×", minval=0.5, step=0.1, group=grp_filters)
+strongVolumeMultiplier = input.float(2.0, "Strong ×", minval=1.0, step=0.1, group=grp_filters)
+
+enableTrendFilter = input.bool(false, "Enable Trend Filter", group=grp_filters)
+trendMode = input.string("VWAP", "Trend Mode", options=["VWAP", "EMA", "Custom EMA", "SuperTrend", "VWAP+EMA", "VWAP+SuperTrend"], group=grp_filters)
+customEmaLength = input.int(50, "Custom EMA Length", minval=1, group=grp_filters)
+supertrendPeriod = input.int(10, "SuperTrend Period", minval=1, group=grp_filters)
+supertrendMult = input.float(3.0, "SuperTrend Mult", minval=0.1, step=0.1, group=grp_filters)
+
+enableHTF = input.bool(false, "Check Daily Trend", group=grp_filters)
+htfTF = input.string("D", "HTF Timeframe", options=["15", "30", "60", "120", "240", "D", "W", "M"], group=grp_filters)
+htfMethod = input.string("Price vs MA", "HTF Method", options=["Price vs MA", "Candle Direction"], group=grp_filters)
+htfEMA = input.int(20, "HTF EMA", minval=5, maxval=200, group=grp_filters)
+htfMinStrength = input.float(2.0, "HTF Min Distance %", minval=0.0, maxval=10.0, step=0.5, group=grp_filters)
+
+enableFVGFilter = input.bool(false, "Enable FVG Filter", group=grp_filters)
+fvgProximity = input.float(2.0, "FVG Proximity", minval=0.5, maxval=5.0, step=0.5, group=grp_filters)
+
+enablePullbackFilter = input.bool(false, "Enable Pullback Filter", group=grp_filters)
+pullbackPercent = input.float(0.3, "Pullback Required (%)", minval=0.1, maxval=2.0, step=0.1, group=grp_filters)
+pullbackTimeout = input.int(10, "Pullback Timeout (bars)", minval=3, maxval=30, group=grp_filters)
+
+// Exit Parameters
+grp_exit = "🎯 EXIT PARAMETERS"
+stopMode = input.string("Smart Adaptive", "Stop Method", options=["ATR", "ORB %", "Swing", "Safer", "Scaled ATR", "% Based", "Smart Adaptive"], group=grp_exit)
+atrLength = input.int(14, "ATR Length", minval=5, maxval=50, group=grp_exit)
+atrMultiplier = input.float(1.5, "ATR Multiplier", minval=0.5, maxval=3, step=0.1, group=grp_exit)
+percentBasedStop = input.float(1.0, "% Based Stop", minval=0.1, maxval=5.0, step=0.1, group=grp_exit)
+stopOrbFraction = input.float(20, "ORB Stop %", minval=10, maxval=50, step=5, group=grp_exit)
+swingBars = input.int(3, "Swing Bars", minval=1, maxval=10, group=grp_exit)
+
+tp1_pct = input.float(1.0, "TP1 (1R) %", minval=0.1, step=0.1, group=grp_exit)
+tp2_pct = input.float(2.0, "TP2 (2R) %", minval=0.1, step=0.1, group=grp_exit)
+tp3_pct = input.float(3.0, "TP3 (3R) %", minval=0.1, step=0.1, group=grp_exit)
+
+// ============================================ TYPE DEFINITIONS ============================================
+
+type ORBData
+    string name
+    int    minutes
+    float  high
+    float  low
+    float  mid
+    float  orbRange
+    bool   isEnabled
+    bool   isBuilding
+    bool   isComplete
+    int    completionBar
+    bool   breakoutUp
+    bool   breakoutDown
+    int    breakoutBar
+    float  breakoutLevel
+    int    cyclesUp
+    int    cyclesDown
+
+// ============================================ SESSION SETUP ============================================
+
+string tradingSession = "0930-1600:23456"
+var int sessionStartHour = na
+var int sessionStartMinute = na
+var int sessionEndHour = na
+var int sessionEndMinute = na
+
+if sessionMode == "Auto-Detect"
+    if syminfo.type == "stock" or syminfo.type == "fund" or syminfo.type == "index"
+        if enableExtendedHours
+            string preMarketStart = str.split("0400-0930", "-").get(0)
+            string afterHoursEnd = str.split("1600-2000", "-").get(1)
+            tradingSession := preMarketStart + "-" + afterHoursEnd + ":23456"
+        else
+            tradingSession := "0930-1600:23456"
+    else if syminfo.type == "crypto"
+        tradingSession := "0000-2359:1234567"
+    else
+        tradingSession := "0000-2359:1234567"
+else if sessionMode == "New-York"
+    if enableExtendedHours
+        tradingSession := "0400-2000:23456"
+    else
+        tradingSession := "0930-1600:23456"
+else if sessionMode == "London"
+    tradingSession := "0800-1630:23456"
+else if sessionMode == "Tokyo"
+    tradingSession := "0900-1500:23456"
+else if sessionMode == "Sydney"
+    tradingSession := "1000-1600:23456"
+else if sessionMode == "Frankfurt"
+    tradingSession := "0900-1730:23456"
+else if sessionMode == "Custom"
+    if str.contains(customSession, ":")
+        tradingSession := customSession
+    else
+        tradingSession := customSession + ":23456"
+
+string sessionTimeOnly = str.contains(tradingSession, ":") ? str.split(tradingSession, ":").get(0) : tradingSession
+array<string> sessionParts = str.split(sessionTimeOnly, "-")
+if array.size(sessionParts) == 2
+    string startTime = array.get(sessionParts, 0)
+    string endTime = array.get(sessionParts, 1)
+    if str.length(startTime) == 4
+        sessionStartHour := int(str.tonumber(str.substring(startTime, 0, 2)))
+        sessionStartMinute := int(str.tonumber(str.substring(startTime, 2, 4)))
+    if str.length(endTime) == 4
+        sessionEndHour := int(str.tonumber(str.substring(endTime, 0, 2)))
+        sessionEndMinute := int(str.tonumber(str.substring(endTime, 2, 4)))
+
+bool is24_7Market = syminfo.type == "crypto" and tradingSession == "0000-2359:1234567"
+inSession = false
+if syminfo.type == "stock" or syminfo.type == "fund" or syminfo.type == "index"
+    inSession := not na(time(timeframe.period, tradingSession))
+else if syminfo.type == "crypto"
+    if is24_7Market
+        inSession := true
+    else
+        inSession := not na(time(timeframe.period, tradingSession))
+else
+    inSession := not na(time(timeframe.period, tradingSession))
+
+isNewSession = false
+isNewDay = false
+if is24_7Market
+    currentDay = dayofmonth(time)
+    prevDay = dayofmonth(time[1])
+    isNewDay := currentDay != prevDay
+    isNewSession := false
+else
+    isNewSession := inSession and not inSession[1]
+    isNewDay := ta.change(dayofweek) != 0
+
+shouldReset = isNewSession or isNewDay
+
+// ============================================ ORB OBJECTS ============================================
+
+var ORBData orb5Obj = ORBData.new(name = "ORB5", minutes = 5, high = na, low = na, mid = na, orbRange = na,
+    isEnabled = false, isBuilding = false, isComplete = false, completionBar = 0,
+    breakoutUp = false, breakoutDown = false, breakoutBar = 0, breakoutLevel = na, cyclesUp = 0, cyclesDown = 0)
+
+var ORBData orb15Obj = ORBData.new(name = "ORB15", minutes = 15, high = na, low = na, mid = na, orbRange = na,
+    isEnabled = false, isBuilding = false, isComplete = false, completionBar = 0,
+    breakoutUp = false, breakoutDown = false, breakoutBar = 0, breakoutLevel = na, cyclesUp = 0, cyclesDown = 0)
+
+var ORBData orb30Obj = ORBData.new(name = "ORB30", minutes = 30, high = na, low = na, mid = na, orbRange = na,
+    isEnabled = false, isBuilding = false, isComplete = false, completionBar = 0,
+    breakoutUp = false, breakoutDown = false, breakoutBar = 0, breakoutLevel = na, cyclesUp = 0, cyclesDown = 0)
+
+var ORBData orb60Obj = ORBData.new(name = "ORB60", minutes = 60, high = na, low = na, mid = na, orbRange = na,
+    isEnabled = false, isBuilding = false, isComplete = false, completionBar = 0,
+    breakoutUp = false, breakoutDown = false, breakoutBar = 0, breakoutLevel = na, cyclesUp = 0, cyclesDown = 0)
+
+var ORBData activeORB = na
+var array<ORBData> allORBs = array.from(orb5Obj, orb15Obj, orb30Obj, orb60Obj)
+
+if barstate.isfirst
+    orb5Obj.isEnabled := enableORB5
+    orb15Obj.isEnabled := enableORB15
+    orb30Obj.isEnabled := enableORB30
+    orb60Obj.isEnabled := enableORB60
+
+// ============================================ SESSION RESET ============================================
+
+var float sessionFirstBarTime = na
+var int sessionStartBar = na
+
+if shouldReset
+    for i = 0 to array.size(allORBs) - 1
+        orbObj = array.get(allORBs, i)
+        if orbObj.minutes == 5
+            orbObj.high := high
+            orbObj.low := low
+            orbObj.mid := hl2
+            orbObj.orbRange := 0
+        else
+            orbObj.high := na
+            orbObj.low := na
+            orbObj.mid := na
+            orbObj.orbRange := 0
+        orbObj.isBuilding := true
+        orbObj.isComplete := false
+        orbObj.completionBar := 0
+        orbObj.breakoutUp := false
+        orbObj.breakoutDown := false
+        orbObj.breakoutBar := 0
+        orbObj.breakoutLevel := na
+        orbObj.cyclesUp := 0
+        orbObj.cyclesDown := 0
+    activeORB := na
+    sessionStartBar := bar_index
+    sessionFirstBarTime := time
+
+if inSession and na(sessionFirstBarTime)
+    sessionStartBar := bar_index
+    sessionFirstBarTime := time
+
+float minsFromOpen = -1.0
+if not na(sessionFirstBarTime) and inSession
+    minsFromOpen := (time - sessionFirstBarTime) / 60000
+    if minsFromOpen > 480
+        minsFromOpen := 480
+    if minsFromOpen < 0
+        minsFromOpen := 0
+
+// ============================================ ORB BUILDING ============================================
+
+float currentTF_minutes = timeframe.in_seconds() / 60
+bool isHTF = currentTF_minutes >= 86400
+
+if not isHTF and minsFromOpen >= 0 and (barstate.isconfirmed or barstate.islast) and inSession
+    for i = 0 to array.size(allORBs) - 1
+        orbObj = array.get(allORBs, i)
+        if orbObj.isEnabled and orbObj.isBuilding
+            if minsFromOpen > orbObj.minutes
+                orbObj.isBuilding := false
+                orbObj.isComplete := true
+                orbObj.completionBar := bar_index
+                if na(activeORB) or orbObj.minutes > activeORB.minutes
+                    activeORB := orbObj
+            else
+                if na(orbObj.high)
+                    // Get previous ORB if exists
+                    ORBData prevOrb = na
+                    for j = 0 to array.size(allORBs) - 1
+                        checkOrb = array.get(allORBs, j)
+                        if checkOrb.isEnabled and checkOrb.minutes < orbObj.minutes
+                            if na(prevOrb) or checkOrb.minutes > prevOrb.minutes
+                                prevOrb := checkOrb
+                    if not na(prevOrb) and prevOrb.isComplete
+                        orbObj.high := prevOrb.high
+                        orbObj.low := prevOrb.low
+                        orbObj.mid := prevOrb.mid
+                        orbObj.orbRange := prevOrb.orbRange
+                if minsFromOpen <= orbObj.minutes
+                    orbObj.high := math.max(nz(orbObj.high, high), high)
+                    orbObj.low := math.min(nz(orbObj.low, low), low)
+                    orbObj.mid := (orbObj.high + orbObj.low) / 2
+                    orbObj.orbRange := orbObj.high - orbObj.low
+                    if minsFromOpen >= orbObj.minutes - 1 and not orbObj.isComplete
+                        orbObj.isBuilding := false
+                        orbObj.isComplete := true
+                        orbObj.completionBar := bar_index
+                        activeORB := orbObj
+
+// ============================================ INDICATORS ============================================
+
+// Volume
+volumeMA = ta.sma(volume, volumeMaLength)
+
+// Trend
+var float trendVWAP = na
+var float trendEMA12 = na
+var float trendEMACustom = na
+var float trendSTUp = na
+var float trendSTDown = na
+var int trendSTDirection = 0
+
+if enableTrendFilter
+    if str.contains(trendMode, "VWAP")
+        trendVWAP := ta.vwap(close)
+    if trendMode == "EMA" or trendMode == "VWAP+EMA"
+        trendEMA12 := ta.ema(close, 12)
+    if trendMode == "Custom EMA"
+        trendEMACustom := ta.ema(close, customEmaLength)
+    if str.contains(trendMode, "SuperTrend")
+        atr = ta.atr(supertrendPeriod)
+        hl2Val = hl2
+        basicUpperBand = hl2Val + supertrendMult * atr
+        basicLowerBand = hl2Val - supertrendMult * atr
+        var float finalUpperBand = na
+        var float finalLowerBand = na
+        var int trendDir = 1
+        finalUpperBand := na(finalUpperBand[1]) or basicUpperBand < finalUpperBand[1] or close[1] > finalUpperBand[1] ? basicUpperBand : finalUpperBand[1]
+        finalLowerBand := na(finalLowerBand[1]) or basicLowerBand > finalLowerBand[1] or close[1] < finalLowerBand[1] ? basicLowerBand : finalLowerBand[1]
+        trendDir := na(trendDir[1]) ? 1 : close > finalUpperBand[1] ? 1 : close < finalLowerBand[1] ? -1 : trendDir[1]
+        trendSTUp := finalLowerBand
+        trendSTDown := finalUpperBand
+        trendSTDirection := trendDir
+
+// HTF Bias
+checkHTFBias() =>
+    bool bullish = false
+    bool bearish = false
+    if enableHTF
+        [htfClose, htfOpen, htfMA] = request.security(syminfo.tickerid, htfTF, [close, open, ta.ema(close, htfEMA)], barmerge.gaps_off, barmerge.lookahead_off)
+        if htfMethod == "Price vs MA"
+            float distancePct = htfMA > 0 ? ((htfClose - htfMA) / htfMA) * 100 : 0
+            bool strongEnough = math.abs(distancePct) >= htfMinStrength
+            bullish := htfClose > htfMA and strongEnough
+            bearish := htfClose < htfMA and strongEnough
+        else if htfMethod == "Candle Direction"
+            bullish := htfClose > htfOpen
+            bearish := htfClose < htfOpen
+    [bullish, bearish]
+
+[htfBullish, htfBearish] = checkHTFBias()
+
+// FVG Detection
+detectBullishFVG() =>
+    bool hasFVG = false
+    float fvgTop = na
+    float fvgBottom = na
+    if bar_index >= 2
+        if high[2] < low[0]
+            hasFVG := true
+            fvgTop := low[0]
+            fvgBottom := high[2]
+    [hasFVG, fvgTop, fvgBottom]
+
+detectBearishFVG() =>
+    bool hasFVG = false
+    float fvgTop = na
+    float fvgBottom = na
+    if bar_index >= 2
+        if low[2] > high[0]
+            hasFVG := true
+            fvgTop := low[2]
+            fvgBottom := high[0]
+    [hasFVG, fvgTop, fvgBottom]
+
+// ============================================ FILTER FUNCTIONS ============================================
+
+hasVolumeConfirmation(volMA, mult, strongMult) =>
+    if na(volMA) or volMA == 0
+        true
+    else
+        currentVol = volume
+        isStrongVolume = strongMult > 0 and currentVol >= volMA * strongMult
+        isNormalVolume = currentVol >= volMA * mult
+        isStrongVolume or isNormalVolume
+
+isTrendUp(mode, closePrice, vwapVal, ema12Val, emaCustomVal, stDir) =>
+    switch mode
+        "VWAP" => closePrice > vwapVal
+        "EMA" => closePrice > ema12Val
+        "Custom EMA" => closePrice > emaCustomVal
+        "SuperTrend" => stDir == 1
+        "VWAP+EMA" => closePrice > vwapVal and closePrice > ema12Val
+        "VWAP+SuperTrend" => closePrice > vwapVal and stDir == 1
+        => true
+
+isTrendDown(mode, closePrice, vwapVal, ema12Val, emaCustomVal, stDir) =>
+    switch mode
+        "VWAP" => closePrice < vwapVal
+        "EMA" => closePrice < ema12Val
+        "Custom EMA" => closePrice < emaCustomVal
+        "SuperTrend" => stDir == -1
+        "VWAP+EMA" => closePrice < vwapVal and closePrice < ema12Val
+        "VWAP+SuperTrend" => closePrice < vwapVal and stDir == -1
+        => true
+
+hasValidFVGNearLevel(level, isBullish) =>
+    bool foundFVG = false
+    if enableFVGFilter
+        [bullFVG, bullTop, bullBottom] = detectBullishFVG()
+        [bearFVG, bearTop, bearBottom] = detectBearishFVG()
+        if isBullish and bullFVG
+            fvgSize = bullTop - bullBottom
+            expandedTop = bullTop + (fvgSize * fvgProximity)
+            expandedBottom = bullBottom - (fvgSize * fvgProximity)
+            if level >= expandedBottom and level <= expandedTop
+                foundFVG := true
+        else if not isBullish and bearFVG
+            fvgSize = bearTop - bearBottom
+            expandedTop = bearTop + (fvgSize * fvgProximity)
+            expandedBottom = bearBottom - (fvgSize * fvgProximity)
+            if level >= expandedBottom and level <= expandedTop
+                foundFVG := true
+    else
+        foundFVG := true
+    foundFVG
+
+// ============================================ BREAKOUT DETECTION ============================================
+
+var int barsOutsideAfterBreakUp = 0
+var int barsOutsideAfterBreakDown = 0
+var bool wentFarEnoughUp = false
+var bool wentFarEnoughDown = false
+var float minRetestDistancePct = 0.5
+
+getBuffer(level, pct) => level * (pct / 100)
+
+if not na(activeORB) and activeORB.isComplete and inSession and barstate.isconfirmed
+    activeHigh = activeORB.high
+    activeLow = activeORB.low
+    activeBufferUp = getBuffer(activeHigh, breakoutBuffer)
+    activeBufferDown = getBuffer(activeLow, breakoutBuffer)
+    
+    volumeOK = not enableVolumeFilter or hasVolumeConfirmation(volumeMA, volumeMultiplier, strongVolumeMultiplier)
+    trendOK_Up = not enableTrendFilter or isTrendUp(trendMode, close, trendVWAP, trendEMA12, trendEMACustom, trendSTDirection)
+    trendOK_Down = not enableTrendFilter or isTrendDown(trendMode, close, trendVWAP, trendEMA12, trendEMACustom, trendSTDirection)
+    htfOK_Up = not enableHTF or htfBullish
+    htfOK_Down = not enableHTF or htfBearish
+    
+    crossedAbove = close > activeHigh + activeBufferUp and close[1] <= activeHigh + activeBufferUp
+    crossedBelow = close < activeLow - activeBufferDown and close[1] >= activeLow - activeBufferDown
+    
+    // LONG ENTRY: Breakout UP
+    if crossedAbove and volumeOK and trendOK_Up and htfOK_Up and not activeORB.breakoutUp
+        fvgOK = hasValidFVGNearLevel(activeHigh, true)
+        if fvgOK
+            activeORB.breakoutUp := true
+            activeORB.breakoutBar := bar_index
+            activeORB.breakoutLevel := activeHigh
+            activeORB.cyclesUp := activeORB.cyclesUp + 1
+            barsOutsideAfterBreakUp := 0
+            wentFarEnoughUp := false
+    
+    // SHORT ENTRY: Breakout DOWN
+    if crossedBelow and volumeOK and trendOK_Down and htfOK_Down and not activeORB.breakoutDown
+        fvgOK = hasValidFVGNearLevel(activeLow, false)
+        if fvgOK
+            activeORB.breakoutDown := true
+            activeORB.breakoutBar := bar_index
+            activeORB.breakoutLevel := activeLow
+            activeORB.cyclesDown := activeORB.cyclesDown + 1
+            barsOutsideAfterBreakDown := 0
+            wentFarEnoughDown := false
+
+// Track bars outside ORB
+if not isHTF and barstate.isconfirmed and not na(activeORB)
+    if activeORB.breakoutUp and bar_index > activeORB.breakoutBar
+        if close > activeORB.high
+            barsOutsideAfterBreakUp += 1
+            minRetestDistance = activeORB.high * (minRetestDistancePct / 100)
+            if close > activeORB.high + minRetestDistance
+                wentFarEnoughUp := true
+        else
+            barsOutsideAfterBreakUp := 0
+    
+    if activeORB.breakoutDown and bar_index > activeORB.breakoutBar
+        if close < activeORB.low
+            barsOutsideAfterBreakDown += 1
+            minRetestDistance = activeORB.low * (minRetestDistancePct / 100)
+            if close < activeORB.low - minRetestDistance
+                wentFarEnoughDown := true
+        else
+            barsOutsideAfterBreakDown := 0
+
+// ============================================ STOP LOSS CALCULATION ============================================
+
+calculateStopLoss(entry, orbHigh, orbLow, orbRange, atr, mode, isBullish) =>
+    float sl = na
+    float orbFraction = stopOrbFraction / 100
+    float validATR = na(atr) or atr == 0 ? orbRange * 0.5 : atr
+    float atrPercent = (validATR / entry) * 100
+    
+    // Maksimum stop loss %2.5 - NE OLURSA OLSUN
+    float maxStopLossPct = 2.5
+    float maxStopLossLong = entry * (1 - maxStopLossPct / 100)  // LONG için maksimum %2.5 kayıp
+    float maxStopLossShort = entry * (1 + maxStopLossPct / 100)  // SHORT için maksimum %2.5 kayıp
+    
+    if isBullish
+        if mode == "ATR"
+            sl := entry - (validATR * atrMultiplier)
+        else if mode == "ORB %"
+            sl := orbLow - (orbRange * orbFraction)
+        else if mode == "Swing"
+            sl := ta.lowest(low, swingBars)
+        else if mode == "Safer"
+            float atrSL = entry - (validATR * atrMultiplier * 2)
+            float swingSL = ta.lowest(low, swingBars)
+            float orbSL = orbLow - (orbRange * orbFraction * 1.5)
+            sl := math.min(swingSL, math.min(atrSL, orbSL))
+        else if mode == "% Based"
+            sl := entry * (1 - percentBasedStop / 100)
+        else if mode == "Smart Adaptive"
+            float smartMultiplier = atrPercent > 3 ? 1.5 : atrPercent > 1.5 ? 1.0 : 0.7
+            sl := entry - (validATR * smartMultiplier)
+        else if mode == "Scaled ATR"
+            float scaledMult = atrPercent > 5 ? 2.5 :
+                              atrPercent > 3 ? 2.0 :
+                              atrPercent > 1.5 ? 1.5 : 1.2
+            sl := entry - (validATR * scaledMult)
+        
+        // LONG: Stop loss entry'den aşağıda olmalı, maksimum %2.5 kayıp
+        // Eğer hesaplanan SL çok uzaksa, %2.5'e sınırla (daha sıkı yap)
+        if sl < maxStopLossLong
+            sl := maxStopLossLong  // Stop loss entry'den en fazla %2.5 aşağıda
+    else
+        if mode == "ATR"
+            sl := entry + (validATR * atrMultiplier)
+        else if mode == "ORB %"
+            sl := orbHigh + (orbRange * orbFraction)
+        else if mode == "Swing"
+            sl := ta.highest(high, swingBars)
+        else if mode == "Safer"
+            float atrSL = entry + (validATR * atrMultiplier * 2)
+            float swingSL = ta.highest(high, swingBars)
+            float orbSL = orbHigh + (orbRange * orbFraction * 1.5)
+            sl := math.max(swingSL, math.max(atrSL, orbSL))
+        else if mode == "% Based"
+            sl := entry * (1 + percentBasedStop / 100)
+        else if mode == "Smart Adaptive"
+            float smartMultiplier = atrPercent > 3 ? 1.5 : atrPercent > 1.5 ? 1.0 : 0.7
+            sl := entry + (validATR * smartMultiplier)
+        else if mode == "Scaled ATR"
+            float scaledMult = atrPercent > 5 ? 2.5 :
+                              atrPercent > 3 ? 2.0 :
+                              atrPercent > 1.5 ? 1.5 : 1.2
+            sl := entry + (validATR * scaledMult)
+        
+        // SHORT: Stop loss entry'den yukarıda olmalı, maksimum %2.5 kayıp
+        // Eğer hesaplanan SL çok uzaksa, %2.5'e sınırla (daha sıkı yap)
+        if sl > maxStopLossShort
+            sl := maxStopLossShort  // Stop loss entry'den en fazla %2.5 yukarıda
+    
+    sl
+
+// ============================================ STRATEGY LOGIC ============================================
+
+// Entry Variables
+var float entryPrice = na
+var float stopLoss = na
+var float tp1 = na
+var float tp2 = na
+var float tp3 = na
+var bool pendingLong = false
+var bool pendingShort = false
+var int pendingBar = na
+var bool exitOrdersSet = false
+
+// Pullback Filter Variables
+var float pullbackHigh = na
+var float pullbackLow = na
+var int pullbackStartBar = na
+var bool waitingForPullback = false
+var bool pullbackConfirmed = false
+
+// LONG ENTRY: When breakout UP detected
+if not na(activeORB) and activeORB.breakoutUp and strategy.position_size == 0 and not pendingLong and not waitingForPullback
+    bool shouldProcess = true
+    if signalMode == "First Only" and activeORB.cyclesUp > 1
+        shouldProcess := false  // Skip - already had first breakout
+    else if signalMode == "Track Cycles" and activeORB.cyclesUp > maxCycles
+        shouldProcess := false  // Skip - max cycles reached
+    
+    if shouldProcess
+        // Check if committed breakout
+        isCommitted = barsOutsideAfterBreakUp >= minBarsOutside
+        if isCommitted
+            if enablePullbackFilter
+                // Wait for pullback
+                waitingForPullback := true
+                pullbackHigh := high
+                pullbackLow := low
+                pullbackStartBar := bar_index
+                pullbackConfirmed := false
+            else
+                // Direct entry
+                entryPrice := close
+                float atr = ta.atr(atrLength)
+                stopLoss := calculateStopLoss(entryPrice, activeORB.high, activeORB.low, activeORB.orbRange, atr, stopMode, true)
+                tp1 := entryPrice * (1 + tp1_pct / 100)
+                tp2 := entryPrice * (1 + tp2_pct / 100)
+                tp3 := entryPrice * (1 + tp3_pct / 100)
+                pendingLong := true
+                pendingBar := bar_index
+
+// LONG Pullback Detection
+if waitingForPullback and not na(activeORB) and activeORB.breakoutUp
+    // Check for pullback
+    pullbackAmount = (pullbackHigh - low) / pullbackHigh * 100
+    if pullbackAmount >= pullbackPercent
+        pullbackConfirmed := true
+    // Check if price continues up after pullback
+    if pullbackConfirmed and close > pullbackHigh
+        entryPrice := close
+        float atr = ta.atr(atrLength)
+        stopLoss := calculateStopLoss(entryPrice, activeORB.high, activeORB.low, activeORB.orbRange, atr, stopMode, true)
+        tp1 := entryPrice * (1 + tp1_pct / 100)
+        tp2 := entryPrice * (1 + tp2_pct / 100)
+        tp3 := entryPrice * (1 + tp3_pct / 100)
+        pendingLong := true
+        pendingBar := bar_index
+        waitingForPullback := false
+        pullbackConfirmed := false
+    // Timeout - enter anyway
+    if bar_index - pullbackStartBar >= pullbackTimeout
+        entryPrice := close
+        float atr = ta.atr(atrLength)
+        stopLoss := calculateStopLoss(entryPrice, activeORB.high, activeORB.low, activeORB.orbRange, atr, stopMode, true)
+        tp1 := entryPrice * (1 + tp1_pct / 100)
+        tp2 := entryPrice * (1 + tp2_pct / 100)
+        tp3 := entryPrice * (1 + tp3_pct / 100)
+        pendingLong := true
+        pendingBar := bar_index
+        waitingForPullback := false
+        pullbackConfirmed := false
+
+// SHORT ENTRY: When breakout DOWN detected
+if not na(activeORB) and activeORB.breakoutDown and strategy.position_size == 0 and not pendingShort and not waitingForPullback
+    bool shouldProcess = true
+    if signalMode == "First Only" and activeORB.cyclesDown > 1
+        shouldProcess := false  // Skip - already had first breakout
+    else if signalMode == "Track Cycles" and activeORB.cyclesDown > maxCycles
+        shouldProcess := false  // Skip - max cycles reached
+    
+    if shouldProcess
+        // Check if committed breakout
+        isCommitted = barsOutsideAfterBreakDown >= minBarsOutside
+        if isCommitted
+            if enablePullbackFilter
+                // Wait for pullback
+                waitingForPullback := true
+                pullbackHigh := high
+                pullbackLow := low
+                pullbackStartBar := bar_index
+                pullbackConfirmed := false
+            else
+                // Direct entry
+                entryPrice := close
+                float atr = ta.atr(atrLength)
+                stopLoss := calculateStopLoss(entryPrice, activeORB.high, activeORB.low, activeORB.orbRange, atr, stopMode, false)
+                tp1 := entryPrice * (1 - tp1_pct / 100)
+                tp2 := entryPrice * (1 - tp2_pct / 100)
+                tp3 := entryPrice * (1 - tp3_pct / 100)
+                pendingShort := true
+                pendingBar := bar_index
+
+// SHORT Pullback Detection
+if waitingForPullback and not na(activeORB) and activeORB.breakoutDown
+    // Check for pullback
+    pullbackAmount = (high - pullbackLow) / pullbackLow * 100
+    if pullbackAmount >= pullbackPercent
+        pullbackConfirmed := true
+    // Check if price continues down after pullback
+    if pullbackConfirmed and close < pullbackLow
+        entryPrice := close
+        float atr = ta.atr(atrLength)
+        stopLoss := calculateStopLoss(entryPrice, activeORB.high, activeORB.low, activeORB.orbRange, atr, stopMode, false)
+        tp1 := entryPrice * (1 - tp1_pct / 100)
+        tp2 := entryPrice * (1 - tp2_pct / 100)
+        tp3 := entryPrice * (1 - tp3_pct / 100)
+        pendingShort := true
+        pendingBar := bar_index
+        waitingForPullback := false
+        pullbackConfirmed := false
+    // Timeout - enter anyway
+    if bar_index - pullbackStartBar >= pullbackTimeout
+        entryPrice := close
+        float atr = ta.atr(atrLength)
+        stopLoss := calculateStopLoss(entryPrice, activeORB.high, activeORB.low, activeORB.orbRange, atr, stopMode, false)
+        tp1 := entryPrice * (1 - tp1_pct / 100)
+        tp2 := entryPrice * (1 - tp2_pct / 100)
+        tp3 := entryPrice * (1 - tp3_pct / 100)
+        pendingShort := true
+        pendingBar := bar_index
+        waitingForPullback := false
+        pullbackConfirmed := false
+
+// Execute entries on next bar
+if pendingLong and bar_index > pendingBar
+    strategy.entry("LONG", strategy.long, comment="ORB Breakout UP")
+    pendingLong := false
+    pendingBar := na
+    exitOrdersSet := false
+
+if pendingShort and bar_index > pendingBar
+    strategy.entry("SHORT", strategy.short, comment="ORB Breakout DOWN")
+    pendingShort := false
+    pendingBar := na
+    exitOrdersSet := false
+
+// Reset exit orders flag when position closes
+if strategy.position_size == 0
+    exitOrdersSet := false
+
+// Exit Logic - Set TP/SL orders once when position opens
+if strategy.position_size > 0 and not exitOrdersSet  // LONG position
+    if not na(entryPrice) and not na(stopLoss) and not na(tp1) and not na(tp2) and not na(tp3)
+        strategy.exit("TP1", "LONG", limit=tp1, qty_percent=33, comment="TP1")
+        strategy.exit("TP2", "LONG", limit=tp2, qty_percent=33, comment="TP2")
+        strategy.exit("TP3", "LONG", limit=tp3, qty_percent=34, comment="TP3")
+        strategy.exit("SL", "LONG", stop=stopLoss, comment="Stop Loss")
+        exitOrdersSet := true
+
+if strategy.position_size < 0 and not exitOrdersSet  // SHORT position
+    if not na(entryPrice) and not na(stopLoss) and not na(tp1) and not na(tp2) and not na(tp3)
+        strategy.exit("TP1", "SHORT", limit=tp1, qty_percent=33, comment="TP1")
+        strategy.exit("TP2", "SHORT", limit=tp2, qty_percent=33, comment="TP2")
+        strategy.exit("TP3", "SHORT", limit=tp3, qty_percent=34, comment="TP3")
+        strategy.exit("SL", "SHORT", stop=stopLoss, comment="Stop Loss")
+        exitOrdersSet := true
+
+// ============================================ PLOTS ============================================
+
+plot(not na(activeORB) and activeORB.isComplete ? activeORB.high : na, "ORB High", color=color.new(color.green, 0), linewidth=1)
+plot(not na(activeORB) and activeORB.isComplete ? activeORB.low : na, "ORB Low", color=color.new(color.red, 0), linewidth=1)
+plot(not na(activeORB) and activeORB.isComplete ? activeORB.mid : na, "ORB Mid", color=color.new(color.gray, 0), linewidth=1, style=plot.style_cross)
+
+bgcolor(pendingLong ? color.new(color.green, 90) : na, title="Long Signal")
+bgcolor(pendingShort ? color.new(color.red, 90) : na, title="Short Signal")
+

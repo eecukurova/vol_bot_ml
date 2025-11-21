@@ -74,64 +74,71 @@ class VolensyMacdStrategy:
         self.atr_len = config.get('atr_len', 14)
         
     def calculate_indicators(self, df):
-        """Indicators hesapla"""
-        # Heikin Ashi kullan
-        ha_data = HeikinAshiCalculator.calculate_heikin_ashi(df)
+        """Indicators hesapla - Pine Script'te normal close kullanılıyor, Heikin Ashi değil!"""
+        # Pine Script: emaTrend = ta.ema(close, emaLen) - NORMAL close kullanıyor
+        df['ema_trend'] = df['close'].ewm(span=self.ema_len, adjust=False).mean()
         
-        # EMA Trend
-        ha_data['ema_trend'] = ha_data['ha_close'].ewm(span=self.ema_len).mean()
+        # Pine Script: macd = ta.ema(close, macdFast) - ta.ema(close, macdSlow) - NORMAL close
+        ema_fast = df['close'].ewm(span=self.macd_fast, adjust=False).mean()
+        ema_slow = df['close'].ewm(span=self.macd_slow, adjust=False).mean()
+        df['macd'] = ema_fast - ema_slow
+        # Pine Script: macdSig = ta.ema(macd, macdSignal)
+        df['macd_signal'] = df['macd'].ewm(span=self.macd_signal, adjust=False).mean()
+        df['macd_hist'] = df['macd'] - df['macd_signal']
         
-        # MACD
-        ema_fast = ha_data['ha_close'].ewm(span=self.macd_fast).mean()
-        ema_slow = ha_data['ha_close'].ewm(span=self.macd_slow).mean()
-        ha_data['macd'] = ema_fast - ema_slow
-        ha_data['macd_signal'] = ha_data['macd'].ewm(span=self.macd_signal).mean()
-        ha_data['macd_hist'] = ha_data['macd'] - ha_data['macd_signal']
-        
-        # RSI
-        delta = ha_data['ha_close'].diff()
+        # Pine Script: rsi = ta.rsi(close, rsiLen) - NORMAL close
+        delta = df['close'].diff()
         gain = (delta.where(delta > 0, 0)).rolling(window=self.rsi_len).mean()
         loss = (-delta.where(delta < 0, 0)).rolling(window=self.rsi_len).mean()
         rs = gain / loss
-        ha_data['rsi'] = 100 - (100 / (1 + rs))
+        df['rsi'] = 100 - (100 / (1 + rs))
         
-        # ATR
-        high_low = ha_data['high'] - ha_data['low']
-        high_close = np.abs(ha_data['high'] - ha_data['close'].shift())
-        low_close = np.abs(ha_data['low'] - ha_data['close'].shift())
+        # Pine Script: atr = ta.atr(atrLen) - NORMAL high/low/close
+        high_low = df['high'] - df['low']
+        high_close = np.abs(df['high'] - df['close'].shift())
+        low_close = np.abs(df['low'] - df['close'].shift())
         ranges = pd.concat([high_low, high_close, low_close], axis=1)
         true_range = ranges.max(axis=1)
-        ha_data['atr'] = true_range.rolling(window=self.atr_len).mean()
+        df['atr'] = true_range.rolling(window=self.atr_len).mean()
         
-        return ha_data
+        return df
     
     def generate_signals(self, df):
-        """Sinyaller üret"""
-        # Bileşen koşulları
-        df['is_bull_trend'] = df['ha_close'] > df['ema_trend']
-        df['is_bear_trend'] = df['ha_close'] < df['ema_trend']
+        """Sinyaller üret - Pine Script'te normal close kullanılıyor"""
+        # Pine Script: isBullTrend = close > emaTrend - NORMAL close
+        df['is_bull_trend'] = df['close'] > df['ema_trend']
+        # Pine Script: isBearTrend = close < emaTrend - NORMAL close
+        df['is_bear_trend'] = df['close'] < df['ema_trend']
+        # Pine: isBullMomentum = rsi > 50
         df['is_bull_momentum'] = df['rsi'] > 50
+        # Pine: isBearMomentum = rsi < 50
         df['is_bear_momentum'] = df['rsi'] < 50
+        # Pine: isBullPower = macd > macdSig
         df['is_bull_power'] = df['macd'] > df['macd_signal']
+        # Pine: isBearPower = macd < macdSig
         df['is_bear_power'] = df['macd'] < df['macd_signal']
         
         # RSI filtreleri
+        # Pine: notOverbought = rsi < rsiOB
         df['not_overbought'] = df['rsi'] < self.rsi_ob
+        # Pine: notOversold = rsi > rsiOS
         df['not_oversold'] = df['rsi'] > self.rsi_os
         
-        # Skorlar
+        # Skorlar - Pine: bullScore = (isBullTrend ? 1 : 0) + (isBullMomentum ? 1 : 0) + (isBullPower ? 1 : 0)
         df['bull_score'] = (df['is_bull_trend'].astype(int) + 
                            df['is_bull_momentum'].astype(int) + 
                            df['is_bull_power'].astype(int))
+        # Pine: bearScore = (isBearTrend ? 1 : 0) + (isBearMomentum ? 1 : 0) + (isBearPower ? 1 : 0)
         df['bear_score'] = (df['is_bear_trend'].astype(int) + 
                            df['is_bear_momentum'].astype(int) + 
                            df['is_bear_power'].astype(int))
         
-        # Ham sinyaller
+        # Ham sinyaller - Pine: rawBuy = (bullScore == 3) and notOverbought
         df['raw_buy'] = (df['bull_score'] == 3) & df['not_overbought']
+        # Pine: rawSell = (bearScore == 3) and notOversold
         df['raw_sell'] = (df['bear_score'] == 3) & df['not_oversold']
         
-        # Sinyal filtreleme (yinelenen sinyalleri engelle)
+        # Sinyal filtreleme (yinelenen sinyalleri engelle) - Pine: buyOK = canSignal and rawBuy and (lastDir != 1)
         df['buy_signal'] = False
         df['sell_signal'] = False
         
@@ -264,7 +271,40 @@ class SolMacdTrader:
             # Veri çek
             df = self.get_historical_data(symbol, timeframe, limit=200)
             if df is None or len(df) < 50:
+                self.logger.warning(f"⚠️ Veri yetersiz: df={df is not None}, len={len(df) if df is not None else 0}")
                 return None
+            
+            # require_confirmed_candle kontrolü
+            timeframe_validation = self.config.get('signal_management', {}).get('timeframe_validation', {})
+            if timeframe_validation.get('require_confirmed_candle', False):
+                from datetime import datetime, timezone, timedelta
+                import pandas as pd
+                
+                last_candle_time = df.index[-1]
+                # Pandas Timestamp'i datetime'a çevir
+                if isinstance(last_candle_time, pd.Timestamp):
+                    last_candle_time = last_candle_time.to_pydatetime()
+                    if last_candle_time.tzinfo is None:
+                        last_candle_time = last_candle_time.replace(tzinfo=timezone.utc)
+                
+                current_time_utc = datetime.now(timezone.utc)
+                
+                # Timeframe'e göre bir sonraki mumun başlangıç zamanını hesapla
+                if timeframe == '4h':
+                    # 4h mumlar 00:00, 04:00, 08:00, 12:00, 16:00, 20:00 UTC'de kapanır
+                    # Son mumun başlangıç zamanını bul (4h boundary'ye yuvarla)
+                    last_candle_start = last_candle_time.replace(minute=0, second=0, microsecond=0)
+                    last_candle_start = last_candle_start.replace(hour=(last_candle_start.hour // 4) * 4)
+                    
+                    # Bir sonraki mumun başlangıcı = son mum + 4 saat
+                    next_candle_start = last_candle_start + timedelta(hours=4)
+                    
+                    # Eğer son mum henüz kapanmamışsa (şu anki zaman < bir sonraki mumun başlangıcı)
+                    if current_time_utc < next_candle_start:
+                        self.logger.debug(f"⏸️ Son 4h mum henüz kapanmadı: {last_candle_start} → {next_candle_start}, şu an: {current_time_utc}")
+                        return None
+                    else:
+                        self.logger.debug(f"✅ Son 4h mum kapanmış: {last_candle_start} → {next_candle_start}, şu an: {current_time_utc}")
             
             # Indicators hesapla
             df_with_indicators = self.strategy.calculate_indicators(df)
@@ -274,6 +314,15 @@ class SolMacdTrader:
             
             # Son mumu kontrol et
             last_row = df_with_signals.iloc[-1]
+            
+            # Detaylı loglama
+            self.logger.debug(f"📊 Sinyal kontrolü: {symbol} {timeframe}")
+            self.logger.debug(f"   buy_signal: {last_row['buy_signal']}, sell_signal: {last_row['sell_signal']}")
+            self.logger.debug(f"   raw_buy: {last_row['raw_buy']}, raw_sell: {last_row['raw_sell']}")
+            self.logger.debug(f"   bull_score: {last_row['bull_score']}, bear_score: {last_row['bear_score']}")
+            self.logger.debug(f"   RSI: {last_row['rsi']:.2f}, not_overbought: {last_row.get('not_overbought', 'N/A')}, not_oversold: {last_row.get('not_oversold', 'N/A')}")
+            self.logger.debug(f"   is_bull_trend: {last_row.get('is_bull_trend', 'N/A')}, is_bull_momentum: {last_row.get('is_bull_momentum', 'N/A')}, is_bull_power: {last_row.get('is_bull_power', 'N/A')}")
+            self.logger.debug(f"   is_bear_trend: {last_row.get('is_bear_trend', 'N/A')}, is_bear_momentum: {last_row.get('is_bear_momentum', 'N/A')}, is_bear_power: {last_row.get('is_bear_power', 'N/A')}")
             
             signal = None
             if last_row['buy_signal']:
@@ -292,6 +341,7 @@ class SolMacdTrader:
                         'bear_score': last_row['bear_score']
                     }
                 }
+                self.logger.info(f"✅ BUY sinyali tespit edildi: {symbol} @ {signal['price']:.4f}")
             elif last_row['sell_signal']:
                 signal = {
                     'type': 'sell',
@@ -308,11 +358,20 @@ class SolMacdTrader:
                         'bear_score': last_row['bear_score']
                     }
                 }
+                self.logger.info(f"✅ SELL sinyali tespit edildi: {symbol} @ {signal['price']:.4f}")
+            else:
+                # Sinyal yok ama neden yok, detaylı log
+                if last_row.get('raw_buy', False) and not last_row['buy_signal']:
+                    self.logger.debug(f"⚠️ raw_buy=True ama buy_signal=False (muhtemelen yinelenen sinyal engellendi)")
+                elif last_row.get('raw_sell', False) and not last_row['sell_signal']:
+                    self.logger.debug(f"⚠️ raw_sell=True ama sell_signal=False (muhtemelen yinelenen sinyal engellendi)")
+                else:
+                    self.logger.debug(f"ℹ️ Sinyal yok: bull_score={last_row['bull_score']}, bear_score={last_row['bear_score']}, RSI={last_row['rsi']:.2f}")
             
             return signal
             
         except Exception as e:
-            self.logger.error(f"Sinyal kontrol hatası: {e}")
+            self.logger.error(f"Sinyal kontrol hatası: {e}", exc_info=True)
             return None
     
     def open_position(self, signal):

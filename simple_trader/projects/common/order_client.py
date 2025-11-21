@@ -899,3 +899,112 @@ class IdempotentOrderClient:
             self.state['last_signal_time'] = datetime.now().isoformat()
         self._save_state()
         self.log.info(f"📊 Signal state updated: {signal} @ {self.state['last_signal_time']}")
+    
+    def cancel_tp_sl_orders(self, symbol: str, order_type: Optional[str] = None) -> int:
+        """
+        Cancel TP/SL orders for a symbol.
+        
+        Args:
+            symbol: Trading symbol
+            order_type: "TP" or "SL" or None for both
+            
+        Returns:
+            Number of orders cancelled
+        """
+        try:
+            # Get all open orders from exchange
+            open_orders = self.exchange.fetch_open_orders(symbol)
+            
+            cancelled_count = 0
+            
+            for order in open_orders:
+                order_info = order.get('info', {})
+                order_type_exchange = order_info.get('type', '').upper()
+                
+                # Check if this is a TP or SL order
+                is_tp = 'TAKE_PROFIT' in order_type_exchange
+                is_sl = 'STOP_MARKET' in order_type_exchange and 'TAKE_PROFIT' not in order_type_exchange
+                
+                should_cancel = False
+                if order_type is None:
+                    should_cancel = is_tp or is_sl
+                elif order_type.upper() == "TP":
+                    should_cancel = is_tp
+                elif order_type.upper() == "SL":
+                    should_cancel = is_sl
+                
+                if should_cancel:
+                    try:
+                        self.exchange.cancel_order(order['id'], symbol)
+                        cancelled_count += 1
+                        self.log.info(f"🔄 Cancelled {order_type or 'TP/SL'} order: {order['id']}")
+                    except Exception as e:
+                        self.log.warning(f"⚠️ Failed to cancel order {order['id']}: {e}")
+            
+            # Also remove from state
+            if cancelled_count > 0:
+                orders_to_remove = []
+                for client_id, order_data in self.state['orders'].items():
+                    if order_data.get('symbol') == symbol:
+                        order_intent = order_data.get('params', {}).get('intent', '')
+                        if order_type is None:
+                            if order_intent in ('TP', 'SL'):
+                                orders_to_remove.append(client_id)
+                        elif order_type.upper() == order_intent:
+                            orders_to_remove.append(client_id)
+                
+                for client_id in orders_to_remove:
+                    del self.state['orders'][client_id]
+                
+                if orders_to_remove:
+                    self._save_state()
+            
+            return cancelled_count
+            
+        except Exception as e:
+            self.log.error(f"❌ Failed to cancel TP/SL orders: {e}")
+            return 0
+    
+    def update_sl_order(
+        self,
+        symbol: str,
+        new_sl_price: float,
+        side: str,
+        position_side: Optional[str] = None,
+        extra: str = "",
+        reason: str = "TRAILING_STOP_UPDATE"
+    ) -> Dict[str, Any]:
+        """
+        Update stop loss order by cancelling old and placing new.
+        
+        Args:
+            symbol: Trading symbol
+            new_sl_price: New stop loss price
+            side: "buy" to close LONG, "sell" to close SHORT
+            position_side: LONG/SHORT (for hedge mode)
+            extra: Additional data for uniqueness
+            reason: Update reason
+            
+        Returns:
+            Order result dict for new SL order
+        """
+        try:
+            # First, cancel existing SL orders
+            sl_cancelled = self.cancel_tp_sl_orders(symbol, order_type="SL")
+            
+            if sl_cancelled > 0:
+                self.log.info(f"🔄 Cancelled {sl_cancelled} old SL order(s), placing new one")
+            
+            # Place new SL order
+            return self.place_stop_market_close(
+                symbol=symbol,
+                side=side,
+                stop_price=new_sl_price,
+                position_side=position_side,
+                intent="SL",
+                extra=extra
+            )
+            
+        except Exception as e:
+            self.log.error(f"❌ Failed to update SL order: {e}")
+            raise
