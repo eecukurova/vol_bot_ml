@@ -6,6 +6,7 @@ import pandas as pd
 import json
 import sys
 from pathlib import Path
+from datetime import datetime, timedelta
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -140,6 +141,13 @@ def main():
     
     last_bar_time = None
     
+    # Calculate timeframe in seconds for precise timing
+    timeframe_seconds = {"1m": 60, "3m": 180, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600}.get(timeframe, 900)
+    # Check more frequently (every 5-10 seconds) to catch bar close immediately
+    check_interval = min(5, max(1, timeframe_seconds // 20))  # Check every 5 seconds or 1/20 of timeframe (minimum 1 second)
+    
+    logger.info(f"⏱️ Bar check interval: {check_interval} seconds (timeframe: {timeframe})")
+    
     while True:
         try:
             # Fetch latest data
@@ -148,8 +156,16 @@ def main():
             # Check if new bar
             current_bar_time = df.index[-1]
             
+            # CRITICAL FIX: Check if a bar just closed (new bar appeared)
+            # This happens when current_bar_time != last_bar_time
+            # At this moment, the previous bar has just closed and signal should be generated IMMEDIATELY
             if last_bar_time is None or current_bar_time != last_bar_time:
-                logger.info(f"\n🔄 New bar: {current_bar_time}")
+                if last_bar_time is not None:
+                    # Previous bar just closed - this is the moment signal should be generated
+                    logger.info(f"\n🔄 BAR CLOSED: {last_bar_time} -> New bar started: {current_bar_time}")
+                    logger.info(f"⏰ Signal check triggered at bar close (immediate processing)")
+                else:
+                    logger.info(f"\n🔄 Initial bar: {current_bar_time}")
                 
                 # Check trend following exit for existing positions (BEFORE checking new signals)
                 if trend_exit_enabled:
@@ -559,11 +575,17 @@ def main():
                     else:
                         logger.info(f"⚪ No signal (ATR + Super Trend)")
                 
+                # Update last_bar_time for next iteration
                 last_bar_time = current_bar_time
+            else:
+                # Same bar still forming - no action needed
+                # We'll check again in check_interval seconds
+                pass
             
-            # Wait for next bar (timeframe'e göre)
-            timeframe_seconds = {"1m": 60, "3m": 180, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600}.get(timeframe, 900)
-            time.sleep(timeframe_seconds)
+            # CRITICAL FIX: Sleep for shorter intervals to catch bar close immediately
+            # Instead of sleeping for entire bar duration, check frequently
+            # This ensures we detect bar close within 5-10 seconds instead of waiting full bar duration
+            time.sleep(check_interval)
             
         except KeyboardInterrupt:
             logger.info("Stopping live loop...")

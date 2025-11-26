@@ -1,0 +1,132 @@
+//@version=6
+strategy("Volensy – Regresyon Kanalları (Optimized for BTCUSDT)", overlay = true,
+     initial_capital = 100000,
+     commission_type = strategy.commission.percent,
+     commission_value = 0.05,
+     default_qty_type = strategy.percent_of_equity,
+     default_qty_value = 10,
+     pyramiding = 0)
+
+//═══════════════════════════════════════════════
+// OPTIMIZED PARAMETERS FOR BTCUSDT
+//═══════════════════════════════════════════════
+// Optimized on: 2025-11-23 14:10:40
+// Win Rate: N/A%
+// Profit Factor: N/A
+
+// Regresyon Kanalı
+regLen      = input.int(100, "Regresyon Periyodu", minval = 10, group = "Regresyon Kanalı")
+innerMult   = input.float(1.0, "İç Bant StdDev Katsayısı", step = 0.1, group = "Regresyon Kanalı")
+outerMultK  = input.float(1.5, "Dış Bant StdDev (KRIPTO)", step = 0.1, group = "Regresyon Kanalı")
+
+// Trend Filtresi
+useTrendFilterInput = input.bool(false, "Trend Filtresi (SMA) Kullan", group = "Trend Filtresi")
+smaLen              = input.int(14, "SMA Uzunluğu", minval = 1, group = "Trend Filtresi")
+
+// Volatilite Osilatörü
+stochLen    = input.int(10, "Volatilite Osilatörü Periyodu", minval = 3, group = "Volatilite Osilatörü")
+smoothK     = input.int(2,  "K Yumuşatma", minval = 1, group = "Volatilite Osilatörü")
+smoothD     = input.int(2,  "D Yumuşatma", minval = 1, group = "Volatilite Osilatörü")
+obLevelK    = input.float(75, "Aşırı Alım (KRIPTO)", minval = 50, maxval = 100, step = 1, group = "Volatilite Osilatörü")
+osLevelK    = input.float(20, "Aşırı Satım (KRIPTO)", minval = 0,  maxval = 50,  step = 1, group = "Volatilite Osilatörü")
+
+// Sinyal Ayarları
+showBgZones = input.bool(true, "Aşırı ALIM/SATIM Bölgelerini Boya", group = "Görsellik")
+showLabels  = input.bool(true, "AL / SAT Şekillerini Göster", group = "Görsellik")
+
+// Mod parametreleri (KRIPTO)
+outerMult   = outerMultK
+obLevel     = obLevelK
+osLevel     = osLevelK
+useTrendFilter = useTrendFilterInput
+
+//═══════════════════════════════════════════════
+// REGRESYON KANALI HESAPLARI
+//═══════════════════════════════════════════════
+regressionLine = ta.linreg(close, regLen, 0)
+regDev = ta.stdev(close, regLen)
+
+upperInner = regressionLine + regDev * innerMult
+lowerInner = regressionLine - regDev * innerMult
+upperOuter = regressionLine + regDev * outerMult
+lowerOuter = regressionLine - regDev * outerMult
+
+//═══════════════════════════════════════════════
+// TREND FİLTRESİ (SMA)
+//═══════════════════════════════════════════════
+sma = ta.sma(close, smaLen)
+bullTrend = not useTrendFilter or close > sma
+bearTrend = not useTrendFilter or close < sma
+
+//═══════════════════════════════════════════════
+// VOLATİLİTE OSİLATÖRÜ
+//═══════════════════════════════════════════════
+kRaw = ta.stoch(high, low, close, stochLen)
+k    = ta.sma(kRaw, smoothK)
+d    = ta.sma(k, smoothD)
+
+plot(k, title = "Volatilite Osilatörü %K", linewidth = 2)
+plot(d, title = "Volatilite Osilatörü %D", linewidth = 1)
+hline(obLevel, "Aşırı Alım",  linestyle = hline.style_dotted)
+hline(osLevel, "Aşırı Satım", linestyle = hline.style_dotted)
+
+//═══════════════════════════════════════════════
+// GÖRSELLİK
+//═══════════════════════════════════════════════
+bgCol = showBgZones ? (close > upperOuter ? color.new(color.red, 85) : close < lowerOuter ? color.new(color.green, 85) : na) : na
+bgcolor(bgCol)
+
+plot(regressionLine, title = "Regresyon Orta Hat", color = color.new(color.gray, 0), linewidth = 2)
+plot(sma, title = "SMA", color = color.new(color.orange, 0), linewidth = 2)
+plot(upperInner, title = "İç Üst Bant", color = color.new(color.red, 60), linewidth = 1)
+plot(lowerInner, title = "İç Alt Bant", color = color.new(color.green, 60), linewidth = 1)
+plot(upperOuter, title = "Dış Üst Bant", color = color.new(color.red, 0), linewidth = 1, style = plot.style_linebr)
+plot(lowerOuter, title = "Dış Alt Bant", color = color.new(color.green, 0), linewidth = 1, style = plot.style_linebr)
+
+//═══════════════════════════════════════════════
+// SİNYAL KOŞULLARI (KRIPTO MODU)
+//═══════════════════════════════════════════════
+inExtremeLow  = close <= lowerOuter
+inExtremeHigh = close >= upperOuter
+
+// KRIPTO → K ve D kesişimi, seviye yalnızca filtre
+volBuyK  = k < osLevel and ta.crossover(k, d)
+volSellK = k > obLevel and ta.crossunder(k, d)
+
+volBuy  = volBuyK
+volSell = volSellK
+
+buyCond  = inExtremeLow  and bullTrend and volBuy
+sellCond = inExtremeHigh and bearTrend and volSell
+
+//═══════════════════════════════════════════════
+// STRATEJİ EMİRLERİ
+//═══════════════════════════════════════════════
+if buyCond and barstate.isconfirmed
+    if strategy.position_size < 0
+        strategy.close("Short")
+    strategy.entry("Long", strategy.long)
+
+if sellCond and barstate.isconfirmed
+    if strategy.position_size > 0
+        strategy.close("Long")
+    strategy.entry("Short", strategy.short)
+
+//═══════════════════════════════════════════════
+// GRAFİKTE İŞARETLER
+//═══════════════════════════════════════════════
+plotshape(showLabels and buyCond,
+     title = "AL",
+     text = "AL",
+     style = shape.triangleup,
+     location = location.belowbar,
+     color = color.lime,
+     size = size.large)
+
+plotshape(showLabels and sellCond,
+     title = "SAT",
+     text = "SAT",
+     style = shape.triangledown,
+     location = location.abovebar,
+     color = color.red,
+     size = size.large)

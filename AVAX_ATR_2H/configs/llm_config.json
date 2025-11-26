@@ -35,7 +35,7 @@
     "state_file": "runs/shadow_mode_state.json"
   },
   "trading_params": {
-    "sl_pct": 0.012,
+    "sl_pct": 0.03,
     "tp_pct": 0.005,
     "thr_long": 0.90,
     "thr_short": 0.90,
