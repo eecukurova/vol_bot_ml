@@ -42,21 +42,53 @@ logger = logging.getLogger(__name__)
 
 def fetch_latest_bars(symbol="XRPUSDT", timeframe="15m", limit=200):
     """Fetch latest bars from Binance."""
-    exchange = ccxt.binance({'options': {'defaultType': 'future'}})
-    ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
-    df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
-    df['time'] = pd.to_datetime(df['timestamp'], unit='ms')
-    df.set_index('time', inplace=True)
-    return df
+    exchange = ccxt.binance({
+        'options': {'defaultType': 'future'},
+        'timeout': 30000,  # 30 seconds timeout
+        'enableRateLimit': True,
+        'rateLimit': 1200,
+    })
+    # Retry logic for timeout errors
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
+            df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
+            df['time'] = pd.to_datetime(df['timestamp'], unit='ms')
+            df.set_index('time', inplace=True)
+            return df
+        except (ccxt.RequestTimeout, ccxt.ExchangeNotAvailable, ccxt.NetworkError) as e:
+            if attempt < max_retries - 1:
+                logger.warning(f"⚠️ Fetch attempt {attempt + 1} failed, retrying... Error: {e}")
+                time.sleep(2 ** attempt)  # Exponential backoff
+            else:
+                logger.error(f"❌ Failed to fetch bars after {max_retries} attempts: {e}")
+                raise
 
 def fetch_trend_bars(symbol="XRPUSDT", timeframe="1h", limit=200):
     """Fetch bars for trend analysis (longer timeframe)."""
-    exchange = ccxt.binance({'options': {'defaultType': 'future'}})
-    ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
-    df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
-    df['time'] = pd.to_datetime(df['timestamp'], unit='ms')
-    df.set_index('time', inplace=True)
-    return df
+    exchange = ccxt.binance({
+        'options': {'defaultType': 'future'},
+        'timeout': 30000,  # 30 seconds timeout
+        'enableRateLimit': True,
+        'rateLimit': 1200,
+    })
+    # Retry logic for timeout errors
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
+            df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
+            df['time'] = pd.to_datetime(df['timestamp'], unit='ms')
+            df.set_index('time', inplace=True)
+            return df
+        except (ccxt.RequestTimeout, ccxt.ExchangeNotAvailable, ccxt.NetworkError) as e:
+            if attempt < max_retries - 1:
+                logger.warning(f"⚠️ Fetch attempt {attempt + 1} failed, retrying... Error: {e}")
+                time.sleep(2 ** attempt)  # Exponential backoff
+            else:
+                logger.error(f"❌ Failed to fetch bars after {max_retries} attempts: {e}")
+                raise
 
 def main():
     logger.info("🚀 Starting XRP ATR Live Signal Generator (ATR + Super Trend Strategy)")

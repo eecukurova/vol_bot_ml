@@ -3,8 +3,8 @@
   "secret": "HZRMeUvbKkbONjXsbZrD2WFuPPXARPTM2oM0TnTOaRsIBKoNdLUsCLVCQLnpZB3u",
   "sandbox": false,
   "symbol": "XRPUSDT",
-  "trade_amount_usd": 100,
-  "leverage": 5,
+  "trade_amount_usd": 1400,
+  "leverage": 7,
   
   "idempotency": {
     "enabled": true,
