@@ -3,8 +3,8 @@
   "secret": "HZRMeUvbKkbONjXsbZrD2WFuPPXARPTM2oM0TnTOaRsIBKoNdLUsCLVCQLnpZB3u",
   "sandbox": false,
   "symbol": "AVAXUSDT",
-  "trade_amount_usd": 100,
-  "leverage": 5,
+  "trade_amount_usd": 4000,
+  "leverage": 10,
   
   "idempotency": {
     "enabled": true,
