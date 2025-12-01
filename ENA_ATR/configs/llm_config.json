@@ -3,8 +3,8 @@
   "secret": "acG6DWoiNrngDEUK2Jexnn0ol2WT5uvwSWCCJz5luiGLMGNeQXtNMB8YmTbhwApa",
   "sandbox": false,
   "symbol": "ENAUSDT",
-  "trade_amount_usd": 1400,
-  "leverage": 7,
+  "trade_amount_usd": 4000,
+  "leverage": 10,
   
   "idempotency": {
     "enabled": true,
