@@ -691,7 +691,6 @@ def main():
                                     
                                     # Entry time kaydet (minimum bar kontrolü için)
                                     try:
-                                        from datetime import datetime
                                         entry_time = datetime.now().isoformat()
                                         entry_times_file = Path("runs/entry_times.json")
                                         entry_times_file.parent.mkdir(parents=True, exist_ok=True)
