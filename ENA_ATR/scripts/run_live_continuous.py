@@ -155,6 +155,11 @@ def main():
     trend_tf = multi_tf_config.get("trend_timeframe", "1h")
     require_both = multi_tf_config.get("require_both_timeframes", True)
     
+    # Get intra-bar signal config
+    intra_bar_config = llm_cfg.get("intra_bar_signal", {})
+    intra_bar_enabled = intra_bar_config.get("enabled", True)
+    confirmation_delay = intra_bar_config.get("confirmation_delay_seconds", 60)
+    
     logger.info("✅ All systems ready. Starting live loop...")
     logger.info(f"📊 Monitoring: {symbol} {timeframe}")
     logger.info(f"🎯 TP: {tp_pct*100}%, SL: {sl_pct*100}%")
@@ -166,12 +171,22 @@ def main():
     logger.info(f"📊 Multi-Timeframe: {'ENABLED' if multi_tf_enabled else 'DISABLED'}")
     if multi_tf_enabled:
         logger.info(f"   Signal TF: {signal_tf}, Trend TF: {trend_tf}, Require Both: {require_both}")
+    logger.info(f"🔄 Intra-Bar Signal: {'ENABLED' if intra_bar_enabled else 'DISABLED'}")
+    if intra_bar_enabled:
+        logger.info(f"   Confirmation Delay: {confirmation_delay} seconds")
     if shadow_mode.is_active():
         logger.info(f"👻 Shadow mode ACTIVE (will not place real orders for {shadow_config.get('duration_days', 7)} days)")
     else:
         logger.info(f"✅ Shadow mode INACTIVE (real orders will be placed)")
     
     last_bar_time = None
+    # Pending signal state for intra-bar signal confirmation
+    pending_signal = {
+        'side': None,
+        'detected_time': None,
+        'signal_info': None,
+        'last_price': None
+    }
     
     # Calculate timeframe in seconds for precise timing
     timeframe_seconds = {"1m": 60, "3m": 180, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600}.get(timeframe, 900)
@@ -188,10 +203,19 @@ def main():
             # Check if new bar
             current_bar_time = df.index[-1]
             
-            # CRITICAL FIX: Check if a bar just closed (new bar appeared)
-            # This happens when current_bar_time != last_bar_time
-            # At this moment, the previous bar has just closed and signal should be generated IMMEDIATELY
-            if last_bar_time is None or current_bar_time != last_bar_time:
+            # Check if new bar started - clear pending signal if bar changed
+            if last_bar_time is not None and current_bar_time != last_bar_time:
+                if pending_signal['side']:
+                    logger.info(f"🔄 New bar started: {current_bar_time}, clearing pending signal: {pending_signal['side']}")
+                    pending_signal = {'side': None, 'detected_time': None, 'signal_info': None, 'last_price': None}
+                logger.info(f"\n🔄 BAR CLOSED: {last_bar_time} -> New bar started: {current_bar_time}")
+                last_bar_time = current_bar_time
+            elif last_bar_time is None:
+                logger.info(f"\n🔄 Initial bar: {current_bar_time}")
+                last_bar_time = current_bar_time
+            
+            # Check trend following exit for existing positions (ALWAYS check, not just on bar close)
+            if trend_exit_enabled:
                 if last_bar_time is not None:
                     # Previous bar just closed - this is the moment signal should be generated
                     logger.info(f"\n🔄 BAR CLOSED: {last_bar_time} -> New bar started: {current_bar_time}")
@@ -370,7 +394,133 @@ def main():
                                     logger.warning("⚠️ Order client not available - cannot place close order")
                                     # Remove from tracking anyway
                                     trend_exit.close_position(symbol)
-                
+            
+            # INTRABAR SIGNAL LOGIC: Check for signals during bar formation
+            if intra_bar_enabled:
+                # Check if we have a pending signal waiting for confirmation
+                if pending_signal['side']:
+                    elapsed = (datetime.now() - pending_signal['detected_time']).total_seconds()
+                    
+                    if elapsed >= confirmation_delay:
+                        # 1 minute passed - re-check signal
+                        logger.info(f"⏰ Confirmation delay elapsed ({elapsed:.0f}s), re-checking signal...")
+                        
+                        if len(df) >= max(atr_period, 2):
+                            # Re-check signal with current bar data
+                            side, signal_info = get_atr_supertrend_signals(
+                                df=df,
+                                atr_period=atr_period,
+                                key_value=key_value,
+                                super_trend_factor=super_trend_factor,
+                                use_heikin_ashi=use_heikin_ashi,
+                                use_previous_bar=False  # Check current bar
+                            )
+                            
+                            # Get current price
+                            if use_heikin_ashi:
+                                ha_df = calculate_heikin_ashi(df)
+                                current_price = float(ha_df['ha_close'].iloc[-1])
+                            else:
+                                current_price = float(df["close"].iloc[-1])
+                            
+                            # Multi-timeframe check (if enabled)
+                            if side and multi_tf_enabled:
+                                try:
+                                    trend_df = fetch_trend_bars(symbol=symbol, timeframe=trend_tf, limit=200)
+                                    trend_side, trend_signal_info = get_atr_supertrend_signals(
+                                        df=trend_df,
+                                        atr_period=atr_period,
+                                        key_value=key_value,
+                                        super_trend_factor=super_trend_factor,
+                                        use_heikin_ashi=use_heikin_ashi
+                                    )
+                                    
+                                    if require_both:
+                                        if trend_side != side:
+                                            logger.warning(f"🚫 MULTI-TIMEFRAME FILTER: Signal rejected after confirmation")
+                                            side = None
+                                except Exception as e:
+                                    logger.error(f"❌ Multi-timeframe check failed: {e}")
+                                    if require_both:
+                                        side = None
+                            
+                            if side == pending_signal['side']:
+                                # Signal still valid - proceed with order
+                                logger.info(f"✅ Signal confirmed after {confirmation_delay}s: {side}")
+                                last_price = current_price
+                                
+                                # Clear pending signal
+                                confirmed_side = pending_signal['side']
+                                confirmed_signal_info = pending_signal['signal_info']
+                                pending_signal = {'side': None, 'detected_time': None, 'signal_info': None, 'last_price': None}
+                                
+                                # Proceed with order placement (use existing logic below)
+                                # This will be handled by the signal processing code below
+                                side = confirmed_side
+                                signal_info = confirmed_signal_info
+                            else:
+                                # Signal no longer valid
+                                logger.info(f"❌ Signal invalidated after {confirmation_delay}s: {pending_signal['side']} -> {side if side else 'FLAT'}")
+                                pending_signal = {'side': None, 'detected_time': None, 'signal_info': None, 'last_price': None}
+                                side = None
+                    else:
+                        # Still waiting for confirmation
+                        remaining = confirmation_delay - elapsed
+                        logger.debug(f"⏳ Waiting for signal confirmation: {remaining:.0f}s remaining ({pending_signal['side']})")
+                        side = None  # Don't process signal yet
+                else:
+                    # No pending signal - check for new signals during bar formation
+                    if len(df) >= max(atr_period, 2):
+                        side, signal_info = get_atr_supertrend_signals(
+                            df=df,
+                            atr_period=atr_period,
+                            key_value=key_value,
+                            super_trend_factor=super_trend_factor,
+                            use_heikin_ashi=use_heikin_ashi,
+                            use_previous_bar=False  # Check current bar (intra-bar)
+                        )
+                        
+                        # Get current price
+                        if use_heikin_ashi:
+                            ha_df = calculate_heikin_ashi(df)
+                            current_price = float(ha_df['ha_close'].iloc[-1])
+                        else:
+                            current_price = float(df["close"].iloc[-1])
+                        
+                        # Multi-timeframe check (if enabled)
+                        if side and multi_tf_enabled:
+                            try:
+                                trend_df = fetch_trend_bars(symbol=symbol, timeframe=trend_tf, limit=200)
+                                trend_side, trend_signal_info = get_atr_supertrend_signals(
+                                    df=trend_df,
+                                    atr_period=atr_period,
+                                    key_value=key_value,
+                                    super_trend_factor=super_trend_factor,
+                                    use_heikin_ashi=use_heikin_ashi
+                                )
+                                
+                                if require_both:
+                                    if trend_side != side:
+                                        logger.warning(f"🚫 MULTI-TIMEFRAME FILTER: Signal rejected")
+                                        side = None
+                            except Exception as e:
+                                logger.error(f"❌ Multi-timeframe check failed: {e}")
+                                if require_both:
+                                    side = None
+                        
+                        if side:
+                            # New signal detected - store in pending state
+                            logger.info(f"🎯 Signal detected during bar: {side} @ ${current_price:.4f}")
+                            logger.info(f"⏳ Waiting {confirmation_delay} seconds for confirmation...")
+                            pending_signal = {
+                                'side': side,
+                                'detected_time': datetime.now(),
+                                'signal_info': signal_info,
+                                'last_price': current_price
+                            }
+                            side = None  # Don't process yet, wait for confirmation
+            else:
+                # OLD LOGIC: Bar close only (intra_bar_enabled = False)
                 # Get ATR + Super Trend signals
                 # Pine Script: onlyOnClose = true -> signal generated at bar close
                 # We check the PREVIOUS bar (that just closed) for signals, not the current forming bar
@@ -441,8 +591,9 @@ def main():
                             if require_both:
                                 logger.warning(f"🚫 MULTI-TIMEFRAME FILTER: Check failed, rejecting signal (require_both=True)")
                                 side = None
-                    
-                    if side:
+            
+            # Process signal if we have one (either from intra-bar confirmation or bar-close logic)
+            if side:
                         # Log ATR + Super Trend signal
                         logger.info(f"📊 ATR + Super Trend Signal: {side}")
                         logger.info(f"   ATR Trailing Stop: ${signal_info.get('atr_trailing_stop', 0):.4f}")
@@ -604,15 +755,10 @@ def main():
                                 "super_trend": signal_info.get('super_trend', 0),
                             }
                             send_telegram_alert(payload)
-                    else:
-                        logger.info(f"⚪ No signal (ATR + Super Trend)")
-                
-                # Update last_bar_time for next iteration
-                last_bar_time = current_bar_time
             else:
-                # Same bar still forming - no action needed
-                # We'll check again in check_interval seconds
-                pass
+                # No signal to process
+                if not intra_bar_enabled or not pending_signal['side']:
+                    logger.debug(f"⚪ No signal (ATR + Super Trend)")
             
             # CRITICAL FIX: Sleep for shorter intervals to catch bar close immediately
             # Instead of sleeping for entire bar duration, check frequently

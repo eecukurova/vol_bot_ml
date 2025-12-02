@@ -67,6 +67,10 @@
     "signal_timeframe": "15m",
     "trend_timeframe": "1h",
     "require_both_timeframes": true
+  },
+  "intra_bar_signal": {
+    "enabled": true,
+    "confirmation_delay_seconds": 60
   }
 }
 
