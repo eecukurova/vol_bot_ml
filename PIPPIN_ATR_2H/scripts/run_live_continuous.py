@@ -143,9 +143,9 @@ def main():
                 # Check if 5 minutes (300 seconds) have passed since last partial exit check
                 if last_partial_exit_check is None or (current_time - last_partial_exit_check) >= 300:
                     last_partial_exit_check = current_time
-                trend_exit = get_trend_following_exit()
-                
-                if symbol in trend_exit.positions:
+                    trend_exit = get_trend_following_exit()
+                    
+                    if symbol in trend_exit.positions:
                     # First, verify that position actually exists on exchange
                     from src.live_loop import check_active_position
                     real_position = check_active_position(symbol)
