@@ -1,0 +1,72 @@
+{
+  "api_key": "o9m9CWJsKFixP1ubHTQqHFqcUloHxMYiPmDqSdG7gdnEeZneRh8fxWfWARAVDMPN",
+  "secret": "acG6DWoiNrngDEUK2Jexnn0ol2WT5uvwSWCCJz5luiGLMGNeQXtNMB8YmTbhwApa",
+  "sandbox": false,
+  "symbol": "PIPPINUSDT",
+  "trade_amount_usd": 5000,
+  "leverage": 10,
+  
+  "idempotency": {
+    "enabled": true,
+    "state_file": "runs/pippin_atr_state.json",
+    "retry_attempts": 3,
+    "retry_delay": 1.0
+  },
+  
+  "sl_tp": {
+    "trigger_source": "MARK_PRICE",
+    "hedge_mode": false
+  },
+  
+  "telegram": {
+    "bot_token": "7956697051:AAErScGMFGVxOyt3dGiw0jrFoakBELRdtm4",
+    "chat_id": "-1002699769366",
+    "enabled": true
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "file": "runs/pippin_atr_live.log",
+    "detailed_signals": true
+  },
+  "shadow_mode": {
+    "enabled": false,
+    "duration_days": 7,
+    "state_file": "runs/shadow_mode_state.json"
+  },
+  "trading_params": {
+    "sl_pct": 0.03,
+    "tp_pct": 0.005,
+    "thr_long": 0.90,
+    "thr_short": 0.90,
+    "min_prob_ratio": 5.0
+  },
+  "atr_supertrend": {
+    "atr_period": 11,
+    "key_value": 3.0,
+    "super_trend_factor": 1.5,
+    "use_heikin_ashi": true,
+    "timeframe": "2h"
+  },
+  "trend_following_exit": {
+    "enabled": true,
+    "trailing_activation_pct": 0.6,
+    "trailing_distance_pct": 2.0,
+    "partial_exit_trigger_pct": 1.0,
+    "partial_exit_pct": 75.0,
+    "use_trend_reversal_exit": true,
+    "trend_reversal_min_bars": 12,
+    "trend_reversal_min_profit_pct": 0.25,
+    "use_volume_exit": true,
+    "volume_exit_threshold": 5.0,
+    "volume_exit_min_profit_pct": 0.3,
+    "volume_exit_min_bars": 5
+  },
+  "multi_timeframe": {
+    "enabled": true,
+    "signal_timeframe": "2h",
+    "trend_timeframe": "6h",
+    "require_both_timeframes": true
+  }
+}
+
