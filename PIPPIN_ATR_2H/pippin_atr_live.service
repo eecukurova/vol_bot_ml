@@ -1,0 +1,17 @@
+[Unit]
+Description=PIPPIN ATR Live Trading Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/volensy_quik_gain/PIPPIN_ATR_2H
+Environment="PATH=/root/volensy_quik_gain/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ExecStart=/root/volensy_quik_gain/venv/bin/python3 /root/volensy_quik_gain/PIPPIN_ATR_2H/scripts/run_live_continuous.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/root/volensy_quik_gain/PIPPIN_ATR_2H/runs/pippin_live.log
+StandardError=append:/root/volensy_quik_gain/PIPPIN_ATR_2H/runs/pippin_live.log
+
+[Install]
+WantedBy=multi-user.target
