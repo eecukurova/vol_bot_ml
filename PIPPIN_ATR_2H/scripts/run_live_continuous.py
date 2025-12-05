@@ -129,15 +129,20 @@ def main():
         logger.info(f"✅ Shadow mode INACTIVE (real orders will be placed)")
     
     last_bar_time = None
+    last_partial_exit_check = None  # Track last partial exit check time
     
     while True:
         try:
             # Fetch latest data
             df = fetch_latest_bars(symbol=symbol, timeframe=timeframe, limit=200)
             
-            # Check trend following exit for partial exit (check every iteration, not just on bar close)
-            # This allows partial exit to trigger immediately when profit threshold is reached
+            # Check trend following exit for partial exit (check every 5 minutes)
+            # This allows partial exit to trigger within 5 minutes when profit threshold is reached
+            current_time = time.time()
             if trend_exit_enabled:
+                # Check if 5 minutes (300 seconds) have passed since last partial exit check
+                if last_partial_exit_check is None or (current_time - last_partial_exit_check) >= 300:
+                    last_partial_exit_check = current_time
                 trend_exit = get_trend_following_exit()
                 
                 if symbol in trend_exit.positions:

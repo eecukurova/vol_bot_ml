@@ -53,7 +53,7 @@
     "trailing_activation_pct": 0.6,
     "trailing_distance_pct": 2.0,
     "partial_exit_trigger_pct": 1.0,
-    "partial_exit_pct": 75.0,
+    "partial_exit_pct": 60.0,
     "use_trend_reversal_exit": true,
     "trend_reversal_min_bars": 12,
     "trend_reversal_min_profit_pct": 0.25,
