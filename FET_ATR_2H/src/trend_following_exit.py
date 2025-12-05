@@ -184,15 +184,10 @@ class TrendFollowingExit:
                 if pos['trailing_stop_price'] is None or new_trailing < pos['trailing_stop_price']:
                     pos['trailing_stop_price'] = new_trailing
         
-        # Check partial exit
-        if not pos['partial_exit_done'] and current_profit_pct >= self.partial_exit_trigger_pct:
-            pos['partial_exit_done'] = True
-            pos['partial_exit_price'] = current_price
-            pos['remaining_position_pct'] = 100.0 - self.partial_exit_pct
-            self._save_state()
-            
-            logger.info(f"💰 Partial exit triggered: {self.partial_exit_pct}% @ ${current_price:.2f}")
-            return "PARTIAL_EXIT", current_price, "CLOSE_PARTIAL"
+        # Check partial exit (now handled in main loop, not here)
+        # Partial exit is checked every iteration in run_live_continuous.py
+        # This allows immediate triggering when profit threshold is reached
+        # We skip partial exit check here to avoid duplicate checks
         
         # Check trailing stop hit
         if pos['trailing_stop_price'] is not None:
