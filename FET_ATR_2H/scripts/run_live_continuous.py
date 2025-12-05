@@ -146,67 +146,67 @@ def main():
                     trend_exit = get_trend_following_exit()
                     
                     if symbol in trend_exit.positions:
-                    # First, verify that position actually exists on exchange
-                    from src.live_loop import check_active_position
-                    real_position = check_active_position(symbol)
-                    pos = trend_exit.positions[symbol]
-                    tracked_side = pos['side']
-                    
-                    # If real position doesn't exist or doesn't match tracked position, clean up state
-                    if real_position is None:
-                        logger.warning(f"⚠️ Position mismatch: Tracked={tracked_side}, Real=None (position closed)")
-                        logger.warning(f"🧹 Cleaning up trend following exit state for {symbol}")
-                        trend_exit.close_position(symbol)
-                    elif real_position != tracked_side:
-                        logger.warning(f"⚠️ Position side mismatch: Tracked={tracked_side}, Real={real_position}")
-                        logger.warning(f"🧹 Cleaning up trend following exit state for {symbol}")
-                        trend_exit.close_position(symbol)
-                    else:
-                        # Get current price for partial exit check (use latest price, not bar close)
-                        current_bar = df.iloc[-1]
-                        current_price = float(current_bar["close"])
+                        # First, verify that position actually exists on exchange
+                        from src.live_loop import check_active_position
+                        real_position = check_active_position(symbol)
+                        pos = trend_exit.positions[symbol]
+                        tracked_side = pos['side']
                         
-                        # Calculate current profit for partial exit check
-                        entry_price = pos['entry_price']
-                        if tracked_side == "LONG":
-                            current_profit_pct = ((current_price - entry_price) / entry_price) * 100
+                        # If real position doesn't exist or doesn't match tracked position, clean up state
+                        if real_position is None:
+                            logger.warning(f"⚠️ Position mismatch: Tracked={tracked_side}, Real=None (position closed)")
+                            logger.warning(f"🧹 Cleaning up trend following exit state for {symbol}")
+                            trend_exit.close_position(symbol)
+                        elif real_position != tracked_side:
+                            logger.warning(f"⚠️ Position side mismatch: Tracked={tracked_side}, Real={real_position}")
+                            logger.warning(f"🧹 Cleaning up trend following exit state for {symbol}")
+                            trend_exit.close_position(symbol)
                         else:
-                            current_profit_pct = ((entry_price - current_price) / entry_price) * 100
-                        
-                        # Check if partial exit should trigger (only if not already done)
-                        if not pos.get('partial_exit_done', False) and current_profit_pct >= trend_config.get("partial_exit_trigger_pct", 1.0):
-                            # Trigger partial exit immediately
-                            partial_pct = trend_config.get("partial_exit_pct", 75.0)
-                            logger.info(f"💰 Partial exit triggered: {partial_pct}% @ ${current_price:.2f} (Profit: {current_profit_pct:.2f}%)")
+                            # Get current price for partial exit check (use latest price, not bar close)
+                            current_bar = df.iloc[-1]
+                            current_price = float(current_bar["close"])
                             
-                            # Mark as done
-                            pos['partial_exit_done'] = True
-                            pos['partial_exit_price'] = current_price
-                            pos['remaining_position_pct'] = 100.0 - partial_pct
-                            trend_exit._save_state()
-                            
-                            # Place partial close order
+                            # Calculate current profit for partial exit check
+                            entry_price = pos['entry_price']
                             if tracked_side == "LONG":
-                                close_side = "sell"
+                                current_profit_pct = ((current_price - entry_price) / entry_price) * 100
                             else:
-                                close_side = "buy"
+                                current_profit_pct = ((entry_price - current_price) / entry_price) * 100
                             
-                            order_client = get_order_client()
-                            if order_client:
-                                try:
-                                    close_result = order_client.partial_close_position(
-                                        symbol=symbol,
-                                        side=close_side,
-                                        close_pct=partial_pct,
-                                        position_side=tracked_side,
-                                        extra="TREND_FOLLOWING",
-                                        reason="PARTIAL_EXIT"
-                                    )
-                                    logger.info(f"✅ Partial close order placed: {close_result.get('id')}")
-                                except Exception as e:
-                                    logger.error(f"❌ Failed to place partial close order: {e}")
-                            else:
-                                logger.warning("⚠️ Order client not available - cannot place partial close order")
+                            # Check if partial exit should trigger (only if not already done)
+                            if not pos.get('partial_exit_done', False) and current_profit_pct >= trend_config.get("partial_exit_trigger_pct", 1.0):
+                                # Trigger partial exit immediately
+                                partial_pct = trend_config.get("partial_exit_pct", 75.0)
+                                logger.info(f"💰 Partial exit triggered: {partial_pct}% @ ${current_price:.2f} (Profit: {current_profit_pct:.2f}%)")
+                                
+                                # Mark as done
+                                pos['partial_exit_done'] = True
+                                pos['partial_exit_price'] = current_price
+                                pos['remaining_position_pct'] = 100.0 - partial_pct
+                                trend_exit._save_state()
+                                
+                                # Place partial close order
+                                if tracked_side == "LONG":
+                                    close_side = "sell"
+                                else:
+                                    close_side = "buy"
+                                
+                                order_client = get_order_client()
+                                if order_client:
+                                    try:
+                                        close_result = order_client.partial_close_position(
+                                            symbol=symbol,
+                                            side=close_side,
+                                            close_pct=partial_pct,
+                                            position_side=tracked_side,
+                                            extra="TREND_FOLLOWING",
+                                            reason="PARTIAL_EXIT"
+                                        )
+                                        logger.info(f"✅ Partial close order placed: {close_result.get('id')}")
+                                    except Exception as e:
+                                        logger.error(f"❌ Failed to place partial close order: {e}")
+                                else:
+                                    logger.warning("⚠️ Order client not available - cannot place partial close order")
             
             # Check if new bar
             current_bar_time = df.index[-1]
