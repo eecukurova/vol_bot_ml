@@ -606,179 +606,178 @@ def main():
             
             # Process signal if we have one (either from intra-bar confirmation or bar-close logic)
             if side:
-                        # Log ATR + Super Trend signal
-                        logger.info(f"📊 ATR + Super Trend Signal: {side}")
-                        logger.info(f"   ATR Trailing Stop: ${signal_info.get('atr_trailing_stop', 0):.4f}")
-                        logger.info(f"   Current Price: ${last_price:.4f}")
-                        logger.info(f"   Super Trend: ${signal_info.get('super_trend', 0):.4f}")
-                        logger.info(f"   Position: {signal_info.get('position', 0)}")
-                        logger.info(f"   Buy Signal: {signal_info.get('buy_signal', False)}")
-                        logger.info(f"   Sell Signal: {signal_info.get('sell_signal', False)}")
-                        logger.info(f"   Buy Super Trend: {signal_info.get('buy_super_trend', False)}")
-                        logger.info(f"   Sell Super Trend: {signal_info.get('sell_super_trend', False)}")
+                # Log ATR + Super Trend signal
+                logger.info(f"   ATR Trailing Stop: ${signal_info.get('atr_trailing_stop', 0):.4f}")
+                logger.info(f"   Current Price: ${last_price:.4f}")
+                logger.info(f"   Super Trend: ${signal_info.get('super_trend', 0):.4f}")
+                logger.info(f"   Position: {signal_info.get('position', 0)}")
+                logger.info(f"   Buy Signal: {signal_info.get('buy_signal', False)}")
+                logger.info(f"   Sell Signal: {signal_info.get('sell_signal', False)}")
+                logger.info(f"   Buy Super Trend: {signal_info.get('buy_super_trend', False)}")
+                logger.info(f"   Sell Super Trend: {signal_info.get('sell_super_trend', False)}")
+                
+                # MINIMUM BAR KONTROLÜ - Hızlı ardışık sinyalleri engelle
+                min_bars_after_entry = 1  # 2h timeframe için 1 bar ≈ 2 saat
+                try:
+                    entry_times_file = Path("runs/entry_times.json")
+                    if entry_times_file.exists():
+                        with open(entry_times_file, 'r') as f:
+                            entry_times = json.load(f)
                         
-                        # MINIMUM BAR KONTROLÜ - Hızlı ardışık sinyalleri engelle
-                        min_bars_after_entry = 1  # 2h timeframe için 1 bar ≈ 2 saat
-                        try:
-                            from datetime import datetime
-                            entry_times_file = Path("runs/entry_times.json")
-                            if entry_times_file.exists():
-                                with open(entry_times_file, 'r') as f:
-                                    entry_times = json.load(f)
-                                
-                                # Aktif pozisyon var mı kontrol et
-                                active_position_side = entry_times.get(side)
-                                if active_position_side:
-                                    # Entry zamanından bu yana kaç bar geçti?
-                                    entry_dt = datetime.fromisoformat(active_position_side)
-                                    current_dt = datetime.now()
-                                    
-                                    # Timeframe'e göre bar süresi hesapla
-                                    timeframe_seconds = {
-                                        "1m": 60,
-                                        "3m": 180,
-                                        "5m": 300,
-                                        "15m": 900,
-                                        "30m": 1800,
-                                        "1h": 3600,
-                                        "2h": 7200,
-                                        "4h": 14400,
-                                        "6h": 21600
-                                    }.get(timeframe, 7200)
-                                    bars_passed = int((current_dt - entry_dt).total_seconds() / timeframe_seconds)
-                                    
-                                    if bars_passed < min_bars_after_entry:
-                                        logger.warning(f"🚫 MINIMUM BAR FİLTER: {side} pozisyonu {bars_passed} bar önce açıldı (< {min_bars_after_entry} bar) - Çok hızlı yeni sinyal, reddedildi")
-                                        logger.warning(f"   Entry: {entry_dt.strftime('%Y-%m-%d %H:%M:%S')}, Şimdi: {current_dt.strftime('%Y-%m-%d %H:%M:%S')}")
-                                        continue
-                        except Exception as e:
-                            logger.debug(f"Minimum bar check error: {e}")
-                        
-                        # TP/SL hesapla (mevcut yapı korunuyor)
-                        tp, sl = tp_sl_from_pct(last_price, tp_pct, sl_pct, side)
-                        
-                        # Log signal
-                        logger.info(f"🎯 SIGNAL: {side} @ ${last_price:.4f}")
-                        logger.info(f"   TP: ${tp:.4f}, SL: ${sl:.4f}")
-                        logger.info(f"   ATR Trailing Stop: ${signal_info.get('atr_trailing_stop', 0):.4f}")
-                        logger.info(f"   Super Trend: ${signal_info.get('super_trend', 0):.4f}")
-                        
-                        # Shadow mode check
-                        if shadow_mode.is_active():
-                            logger.info("👻 Shadow mode: Signal recorded (order not placed)")
+                        # Aktif pozisyon var mı kontrol et
+                        active_position_side = entry_times.get(side)
+                        if active_position_side:
+                            # Entry zamanından bu yana kaç bar geçti?
+                            entry_dt = datetime.fromisoformat(active_position_side)
+                            current_dt = datetime.now()
                             
-                            # Telegram alert with shadow mode indicator
-                            payload = {
-                                "symbol": symbol,
-                                "side": side,
-                                "entry": last_price,
-                                "tp": tp,
-                                "sl": sl,
-                                "confidence": 1.0,  # ATR strategy doesn't use confidence
-                                "leverage": leverage,
-                                "qty_usd": trade_amount_usd,
-                                "shadow_mode": True,
-                                "strategy": "ATR + Super Trend",
-                                "atr_trailing_stop": signal_info.get('atr_trailing_stop', 0),
-                                "super_trend": signal_info.get('super_trend', 0),
+                            # Timeframe'e göre bar süresi hesapla
+                            timeframe_seconds_map = {
+                                "1m": 60,
+                                "3m": 180,
+                                "5m": 300,
+                                "15m": 900,
+                                "30m": 1800,
+                                "1h": 3600,
+                                "2h": 7200,
+                                "4h": 14400,
+                                "6h": 21600
                             }
-                            send_telegram_alert(payload)
-                        else:
-                            # Production mode: send real orders (use config values)
-                            order_result = send_order(
-                                side=side,
-                                entry=last_price,
-                                tp=tp,
-                                sl=sl,
-                                leverage=leverage,
-                                qty=trade_amount_usd,
-                                symbol=symbol,
-                                trend_following_exit_enabled=trend_exit_enabled
-                            )
+                            bar_duration = timeframe_seconds_map.get(timeframe, 7200)
+                            bars_passed = int((current_dt - entry_dt).total_seconds() / bar_duration)
                             
-                            # Log order result for debugging
-                            logger.info(f"📊 Order result: {order_result} (type: {type(order_result).__name__})")
-                            
-                            # Determine if position was opened
-                            # order_result is dict with "status": "success" if position opened successfully
-                            # order_result is dict with "status": "skipped" if position was skipped (already exists)
-                            # order_result is None if there was an error
-                            position_opened = False
-                            active_position = None
-                            
-                            if order_result and isinstance(order_result, dict):
-                                if order_result.get("status") == "success":
-                                    position_opened = True
-                                    
-                                    # Entry time kaydet (minimum bar kontrolü için)
-                                    try:
-                                        from datetime import datetime
-                                        entry_time = datetime.now().isoformat()
-                                        entry_times_file = Path("runs/entry_times.json")
-                                        entry_times_file.parent.mkdir(parents=True, exist_ok=True)
-                                        
-                                        # Load existing entry times
-                                        entry_times = {}
-                                        if entry_times_file.exists():
-                                            try:
-                                                with open(entry_times_file, 'r') as f:
-                                                    entry_times = json.load(f)
-                                            except:
-                                                entry_times = {}
-                                        
-                                        # Save entry time for this position
-                                        entry_times[side] = entry_time
-                                        
-                                        # Save
-                                        with open(entry_times_file, 'w') as f:
-                                            json.dump(entry_times, f, indent=2)
-                                        
-                                        logger.info(f"💾 Entry time saved: {side} @ {entry_time}")
-                                    except Exception as e:
-                                        logger.debug(f"Entry time save error: {e}")
-                                    
-                                    # Register position for trend following exit tracking
-                                    if trend_exit_enabled:
-                                        trend_exit = get_trend_following_exit()
-                                        position_id = order_result.get("order_id", "unknown")
-                                        trend_exit.register_position(
-                                            symbol=symbol,
-                                            side=side,
-                                            entry_price=last_price,
-                                            position_id=position_id
-                                        )
-                                        logger.info(f"📝 Position registered for trend following exit tracking")
-                                elif order_result.get("status") == "skipped":
-                                    position_opened = False
-                                    active_position = order_result.get("active_position")
-                                    logger.info(f"⏸️ Position skipped: {active_position} position already exists")
-                            elif order_result is None:
-                                logger.warning("⚠️ Order result is None - order may have failed")
-                                position_opened = False
-                            
-                            logger.info(f"📊 Position opened: {position_opened}, Active position: {active_position}")
-                            
-                            # Telegram alert
-                            payload = {
-                                "symbol": symbol,
-                                "side": side,
-                                "entry": last_price,
-                                "tp": tp,
-                                "sl": sl,
-                                "confidence": 1.0,  # ATR strategy doesn't use confidence
-                                "leverage": leverage,
-                                "qty_usd": trade_amount_usd,
-                                "shadow_mode": False,
-                                "position_opened": position_opened,
-                                "active_position": active_position if active_position and not position_opened else None,
-                                "strategy": "ATR + Super Trend",
-                                "atr_trailing_stop": signal_info.get('atr_trailing_stop', 0),
-                                "super_trend": signal_info.get('super_trend', 0),
-                            }
-                            send_telegram_alert(payload)
+                            if bars_passed < min_bars_after_entry:
+                                logger.warning(f"🚫 MINIMUM BAR FİLTER: {side} pozisyonu {bars_passed} bar önce açıldı (< {min_bars_after_entry} bar) - Çok hızlı yeni sinyal, reddedildi")
+                                logger.warning(f"   Entry: {entry_dt.strftime('%Y-%m-%d %H:%M:%S')}, Şimdi: {current_dt.strftime('%Y-%m-%d %H:%M:%S')}")
+                                side = None  # Reject signal instead of continue
+                except Exception as e:
+                    logger.debug(f"Minimum bar check error: {e}")
+                
+                if side:  # Only proceed if signal still valid after minimum bar check
+                    # TP/SL hesapla (mevcut yapı korunuyor)
+                    tp, sl = tp_sl_from_pct(last_price, tp_pct, sl_pct, side)
+                    
+                    # Log signal
+                    logger.info(f"🎯 SIGNAL: {side} @ ${last_price:.4f}")
+                    logger.info(f"   TP: ${tp:.4f}, SL: ${sl:.4f}")
+                    logger.info(f"   ATR Trailing Stop: ${signal_info.get('atr_trailing_stop', 0):.4f}")
+                    logger.info(f"   Super Trend: ${signal_info.get('super_trend', 0):.4f}")
+                    
+                    # Shadow mode check
+                    if shadow_mode.is_active():
+                        logger.info("👻 Shadow mode: Signal recorded (order not placed)")
+                        
+                        # Telegram alert with shadow mode indicator
+                        payload = {
+                            "symbol": symbol,
+                            "side": side,
+                            "entry": last_price,
+                            "tp": tp,
+                            "sl": sl,
+                            "confidence": 1.0,  # ATR strategy doesn't use confidence
+                            "leverage": leverage,
+                            "qty_usd": trade_amount_usd,
+                            "shadow_mode": True,
+                            "strategy": "ATR + Super Trend",
+                            "atr_trailing_stop": signal_info.get('atr_trailing_stop', 0),
+                            "super_trend": signal_info.get('super_trend', 0),
+                        }
+                        send_telegram_alert(payload)
                     else:
-                        if not intra_bar_enabled or not pending_signal['side']:
-                            logger.info(f"⚪ No signal (ATR + Super Trend)")
+                        # Production mode: send real orders (use config values)
+                        order_result = send_order(
+                            side=side,
+                            entry=last_price,
+                            tp=tp,
+                            sl=sl,
+                            leverage=leverage,
+                            qty=trade_amount_usd,
+                            symbol=symbol,
+                            trend_following_exit_enabled=trend_exit_enabled
+                        )
+                        
+                        # Log order result for debugging
+                        logger.info(f"📊 Order result: {order_result} (type: {type(order_result).__name__})")
+                        
+                        # Determine if position was opened
+                        # order_result is dict with "status": "success" if position opened successfully
+                        # order_result is dict with "status": "skipped" if position was skipped (already exists)
+                        # order_result is None if there was an error
+                        position_opened = False
+                        active_position = None
+                        
+                        if order_result and isinstance(order_result, dict):
+                            if order_result.get("status") == "success":
+                                position_opened = True
+                                
+                                # Entry time kaydet (minimum bar kontrolü için)
+                                try:
+                                    entry_time = datetime.now().isoformat()
+                                    entry_times_file = Path("runs/entry_times.json")
+                                    entry_times_file.parent.mkdir(parents=True, exist_ok=True)
+                                    
+                                    # Load existing entry times
+                                    entry_times = {}
+                                    if entry_times_file.exists():
+                                        try:
+                                            with open(entry_times_file, 'r') as f:
+                                                entry_times = json.load(f)
+                                        except:
+                                            entry_times = {}
+                                    
+                                    # Save entry time for this position
+                                    entry_times[side] = entry_time
+                                    
+                                    # Save
+                                    with open(entry_times_file, 'w') as f:
+                                        json.dump(entry_times, f, indent=2)
+                                    
+                                    logger.info(f"💾 Entry time saved: {side} @ {entry_time}")
+                                except Exception as e:
+                                    logger.debug(f"Entry time save error: {e}")
+                                
+                                # Register position for trend following exit tracking
+                                if trend_exit_enabled:
+                                    trend_exit = get_trend_following_exit()
+                                    position_id = order_result.get("order_id", "unknown")
+                                    trend_exit.register_position(
+                                        symbol=symbol,
+                                        side=side,
+                                        entry_price=last_price,
+                                        position_id=position_id
+                                    )
+                                    logger.info(f"📝 Position registered for trend following exit tracking")
+                            elif order_result.get("status") == "skipped":
+                                position_opened = False
+                                active_position = order_result.get("active_position")
+                                logger.info(f"⏸️ Position skipped: {active_position} position already exists")
+                        elif order_result is None:
+                            logger.warning("⚠️ Order result is None - order may have failed")
+                            position_opened = False
+                        
+                        logger.info(f"📊 Position opened: {position_opened}, Active position: {active_position}")
+                        
+                        # Telegram alert
+                        payload = {
+                            "symbol": symbol,
+                            "side": side,
+                            "entry": last_price,
+                            "tp": tp,
+                            "sl": sl,
+                            "confidence": 1.0,  # ATR strategy doesn't use confidence
+                            "leverage": leverage,
+                            "qty_usd": trade_amount_usd,
+                            "shadow_mode": False,
+                            "position_opened": position_opened,
+                            "active_position": active_position if active_position and not position_opened else None,
+                            "strategy": "ATR + Super Trend",
+                            "atr_trailing_stop": signal_info.get('atr_trailing_stop', 0),
+                            "super_trend": signal_info.get('super_trend', 0),
+                        }
+                        send_telegram_alert(payload)
+            else:
+                if not intra_bar_enabled or not pending_signal['side']:
+                    logger.info(f"⚪ No signal (ATR + Super Trend)")
             
             # Wait for next check (use check_interval for intra-bar signals, or full timeframe for bar-close only)
             if intra_bar_enabled:
