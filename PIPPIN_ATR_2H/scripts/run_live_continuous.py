@@ -445,26 +445,10 @@ def main():
                                 else:
                                     current_price = float(df["close"].iloc[-1])
                                 
-                                # Multi-timeframe check (if enabled)
-                                if side and multi_tf_enabled:
-                                    try:
-                                        trend_df = fetch_trend_bars(symbol=symbol, timeframe=trend_tf, limit=200)
-                                        trend_side, trend_signal_info = get_atr_supertrend_signals(
-                                            df=trend_df,
-                                            atr_period=atr_period,
-                                            key_value=key_value,
-                                            super_trend_factor=super_trend_factor,
-                                            use_heikin_ashi=use_heikin_ashi
-                                        )
-                                        
-                                        if require_both:
-                                            if trend_side != side:
-                                                logger.warning(f"🚫 MULTI-TIMEFRAME FILTER: Signal rejected after confirmation")
-                                                side = None
-                                    except Exception as e:
-                                        logger.error(f"❌ Multi-timeframe check failed: {e}")
-                                        if require_both:
-                                            side = None
+                                # After confirmation delay: Only check signal timeframe (2h), NOT trend timeframe (6h)
+                                # Multi-timeframe check is only done at initial signal detection
+                                # Here we just verify the signal is still valid on the signal timeframe
+                                logger.info(f"✅ Confirmation check: Only verifying signal on {signal_tf} timeframe (trend timeframe {trend_tf} check skipped)")
                                 
                                 if side == pending_signal['side']:
                                     # Signal still valid - proceed with order
