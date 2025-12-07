@@ -491,27 +491,7 @@ def main():
                             else:
                                 current_price = float(df["close"].iloc[-1])
                             
-                            # Multi-timeframe check (if enabled)
-                            if side and multi_tf_enabled:
-                                try:
-                                    trend_df = fetch_trend_bars(symbol=symbol, timeframe=trend_tf, limit=200)
-                                    trend_side, trend_signal_info = get_atr_supertrend_signals(
-                                        df=trend_df,
-                                        atr_period=atr_period,
-                                        key_value=key_value,
-                                        super_trend_factor=super_trend_factor,
-                                        use_heikin_ashi=use_heikin_ashi
-                                    )
-                                    
-                                    if require_both:
-                                        if trend_side != side:
-                                            logger.warning(f"🚫 MULTI-TIMEFRAME FILTER: Signal rejected")
-                                            side = None
-                                except Exception as e:
-                                    logger.error(f"❌ Multi-timeframe check failed: {e}")
-                                    if require_both:
-                                        side = None
-                            
+                            # No multi-timeframe check - only 2h timeframe is used
                             if side:
                                 # New signal detected - store in pending state
                                 logger.info(f"🎯 Signal detected during bar: {side} @ ${current_price:.4f}")
@@ -549,44 +529,7 @@ def main():
                             else:
                                 last_price = float(df["close"].iloc[-1])
                         
-                        # Multi-timeframe check (if enabled)
-                        if side and multi_tf_enabled:
-                            try:
-                                # Fetch trend timeframe data
-                                trend_df = fetch_trend_bars(symbol=symbol, timeframe=trend_tf, limit=200)
-                                
-                                # Get trend signal from higher timeframe
-                                trend_side, trend_signal_info = get_atr_supertrend_signals(
-                                    df=trend_df,
-                                    atr_period=atr_period,
-                                    key_value=key_value,
-                                    super_trend_factor=super_trend_factor,
-                                    use_heikin_ashi=use_heikin_ashi
-                                )
-                                
-                                logger.info(f"📊 Multi-Timeframe Check:")
-                                logger.info(f"   Signal TF ({signal_tf}): {side}")
-                                logger.info(f"   Trend TF ({trend_tf}): {trend_side if trend_side else 'FLAT'}")
-                                
-                                # Check if both timeframes agree
-                                if require_both:
-                                    if trend_side != side:
-                                        logger.warning(f"🚫 MULTI-TIMEFRAME FILTER: Signal TF ({signal_tf}) = {side}, but Trend TF ({trend_tf}) = {trend_side if trend_side else 'FLAT'} - Signal REJECTED")
-                                        side = None  # Reject signal
-                                    else:
-                                        logger.info(f"✅ Multi-Timeframe: Both timeframes agree ({side})")
-                                else:
-                                    # If not requiring both, just log the trend
-                                    if trend_side:
-                                        logger.info(f"📊 Trend TF ({trend_tf}): {trend_side} (not required, but noted)")
-                            except Exception as e:
-                                logger.error(f"❌ Multi-timeframe check failed: {e}")
-                                import traceback
-                                logger.error(traceback.format_exc())
-                                # If multi-timeframe check fails and require_both is True, reject signal
-                                if require_both:
-                                    logger.warning(f"🚫 MULTI-TIMEFRAME FILTER: Check failed, rejecting signal (require_both=True)")
-                                    side = None
+                        # No multi-timeframe check - only 2h timeframe is used
             
             # Process signal if we have one (either from intra-bar confirmation or bar-close logic)
             if side:
